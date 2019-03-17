@@ -1,6 +1,6 @@
 <?php
-            include('../../core/helpers/navbaradmin.php');
-            include('../../core/helpers/footeradmin.php');
+            include('../../core/helpers/dashboard/navbaradmin.php');
+            include('../../core/helpers/dashboard/footeradmin.php');
 ?>
 
 <!DOCTYPE html>

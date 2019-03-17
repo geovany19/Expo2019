@@ -1,5 +1,4 @@
 <?php
-
     class navbar{
       function nav() {
         return '

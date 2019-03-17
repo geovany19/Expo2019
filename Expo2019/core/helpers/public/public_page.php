@@ -17,11 +17,11 @@ class Public_page{
         <body>
         <div class="navbar-fixed">
             <nav>
-                <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo">Logo</a>
+                <div class="nav-wrapper blue darken-1">
+                    <a href="#!" class="brand-logo">Clínica Dra. Alma Rocío</a>
                     <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="sass.html">Link 1</a></li>
+                    <li><a href="badges.html">Link 2</a></li>
                     </ul>
                 </div>
             </nav>
@@ -31,7 +31,7 @@ class Public_page{
 
     public static function footer(){
         print('
-                <footer class="page-footer green">
+                <footer class="page-footer blue darken-1">
                 <div class="container">
                 <div class="row">
                     <div class="col l6 s12">

@@ -1,5 +1,6 @@
 <?php
 include "../../core/helpers/public/public_page.php";
+include "../../core/helpers/dashboard/footeradmin.php";
 Public_page::header("Principal");
 ?>
 <body class="text-center">
@@ -21,6 +22,8 @@ Public_page::header("Principal");
         </form>
     </div>
 </body>
-<?php
-Public_page::footer();
-?>
+<footer>
+    <?php
+    footer::footerbody();
+    ?>
+</footer>

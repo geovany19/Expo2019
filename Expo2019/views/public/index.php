@@ -1,5 +1,5 @@
 <?php
-include "../../core/helpers/public_page.php";
+include "../../core/helpers/dashboard/public_page.php";
 Public_page::header("Principal");
 ?>
 <body class="text-center">

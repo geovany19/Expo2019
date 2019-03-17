@@ -4,21 +4,31 @@ include "../../core/helpers/dashboard/footeradmin.php";
 Public_page::header("Principal");
 ?>
 <body class="text-center">
-    <div class="container">
+<div class="container">
         <form class="form-signin">
             <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
-            <label for="inputEmail" class="sr-only">Correo eletrónico</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required="" autofocus="">
-            <label for="inputPassword" class="sr-only">Contraseña</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
-            <div class="checkbox mb-3">
-                <label>
-                <input type="checkbox" value="remember-me"> Remember me
-                </label>
+            <h1 class="h3 center-align">Iniciar sesión</h1>
+            <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="icon_prefix" type="text" class="validate">
+            <label for="icon_prefix">Usuario</label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesion</button>
-            <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+            <div class="input-field col s6">
+            <i class="material-icons prefix">lock</i>
+            <input id="icon_lock" type="tel" class="validate">
+            <label for="icon_lock">Contraseña</label>
+            </div>
+            <p class="center-align">
+                <label>
+                    <input type="checkbox" />
+                    <span>Recuerdame</span>
+                </label>
+            </p>
+            <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
+            <a class="waves-effect waves-light btn blue darken-4" href="">Iniciar sesión</a>
+        </div>
         </form>
     </div>
 </body>

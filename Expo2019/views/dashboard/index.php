@@ -1,27 +1,40 @@
 <?php
-            include('../../core/helpers/navbaradmin.php');
-            include('../../core/helpers/footeradmin.php');
+include "../../core/helpers/public/public_page.php";
+include "../../core/helpers/dashboard/footeradmin.php";
+Public_page::header("Principal");
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" href="../../resources/img/jardin-iso.png">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
-    <link rel="stylesheet" href="../../resources/css/materialize.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Administrador</title>
-</head>
-<body class="has-fixed-sidenav">
-    <header>
-        <?php
-            echo navbar :: nav();
-            echo navbar :: sidenav();
-
-        ?>
-    </header>
+<body class="text-center">
+<div class="container">
+        <form class="form-signin">
+            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h1 class="h3 center-align">Iniciar sesión</h1>
+            <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="icon_prefix" type="text" class="validate">
+            <label for="icon_prefix">Usuario</label>
+            </div>
+            <div class="input-field col s6">
+            <i class="material-icons prefix">lock</i>
+            <input id="icon_lock" type="tel" class="validate">
+            <label for="icon_lock">Contraseña</label>
+            </div>
+            <p class="center-align">
+                <label>
+                    <input type="checkbox" />
+                    <span>Recuerdame</span>
+                </label>
+            </p>
+            <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
+            <a class="waves-effect waves-light btn blue darken-4" href="pagina.php">Iniciar sesión</a>
+        </div>
+        </form>
+    </div>
 </body>
-</html>
+<footer>
+    <?php
+    
+    echo footer::footerbody();
+    ?>
+</footer>

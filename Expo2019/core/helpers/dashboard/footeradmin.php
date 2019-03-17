@@ -5,7 +5,7 @@
                 <div class="fullscreen">
                     <div class="row">
                         <div class="col l4 s12" style="margin-top: 25px;">
-                            <img class="responsive-img" src="../../resources/img/jardin-logo.png" alt="empresa-logo">
+                            <img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt="empresa-logo">
                         </div>
 
                         <div class="col l8 s12">

@@ -24,6 +24,7 @@ Public_page::header("Principal");
 </body>
 <footer>
     <?php
-    footer::footerbody();
+    
+    echo footer::footerbody();
     ?>
 </footer>

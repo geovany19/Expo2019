@@ -11,22 +11,32 @@ class Public_page{
             <!--Import Google Icon Font-->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <!--Import materialize.css-->
-            <link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css"  media="screen,projection"/>
+            <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap.css"  media="screen,projection"/>
             <title>'.$title.'</title>
         </head>
         <body>
-        <nav class="green">
-            <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Clínica Dra. Alma Rocío</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
-            </ul>
-            </div>
-        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
         ');
     }
 
@@ -59,7 +69,7 @@ class Public_page{
             </footer>
             <!--JavaScript at end of body for optimized loading-->
             <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
-            <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
+            <script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="../../resources/js/public.js"></script>
         </body>
         </html>

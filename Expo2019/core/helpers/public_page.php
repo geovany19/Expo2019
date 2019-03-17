@@ -17,7 +17,7 @@ class Public_page{
         <body>
         <nav class="green">
             <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Logo</a>
+            <a href="#!" class="brand-logo">Clínica Dra. Alma Rocío</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="sass.html">Sass</a></li>
@@ -27,7 +27,6 @@ class Public_page{
             </ul>
             </div>
         </nav>
-         
         ');
     }
 
@@ -53,7 +52,7 @@ class Public_page{
                 </div>
                 <div class="footer-copyright">
                 <div class="container">
-                © 2014 Copyright Text
+                © 2019 Los 4 Fantásticos
                 <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
                 </div>
                 </div>

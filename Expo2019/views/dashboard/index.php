@@ -1,27 +1,26 @@
 <?php
-            include('../../core/helpers/navbaradmin.php');
-            include('../../core/helpers/footeradmin.php');
+include "../../core/helpers/public/public_page.php";
+Public_page::header("Principal");
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" href="../../resources/img/jardin-iso.png">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
-    <link rel="stylesheet" href="../../resources/css/materialize.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Administrador</title>
-</head>
-<body class="has-fixed-sidenav">
-    <header>
-        <?php
-            echo navbar :: nav();
-            echo navbar :: sidenav();
-
-        ?>
-    </header>
+<body class="text-center">
+    <div class="container">
+        <form class="form-signin">
+            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
+            <label for="inputEmail" class="sr-only">Correo eletrónico</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Contraseña</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
+            <div class="checkbox mb-3">
+                <label>
+                <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesion</button>
+            <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+        </form>
+    </div>
 </body>
-</html>
+<?php
+Public_page::footer();
+?>

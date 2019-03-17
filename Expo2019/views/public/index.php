@@ -1,5 +1,5 @@
 <?php
-include "../../core/helpers/dashboard/public_page.php";
+include "../../core/helpers/public/public_page.php";
 Public_page::header("Principal");
 ?>
 <body class="text-center">
@@ -16,7 +16,7 @@ Public_page::header("Principal");
                 <input type="checkbox" value="remember-me"> Remember me
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
             <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
         </form>
     </div>

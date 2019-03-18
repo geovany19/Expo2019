@@ -585,6 +585,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+    <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
 </footer>
 
 </html> 

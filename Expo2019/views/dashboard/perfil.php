@@ -36,24 +36,24 @@ include('../../core/helpers/dashboard/footeradmin.php');
                     <h3>Perfil</h3>
                     <form class="col s12">
                         <div class="input-field">
-                            <i class="material-icons prefix">account_circle</i>
+                            <i class="material-icons prefix">person</i>
                             <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" required>
+                            <input value="Lana" type="text" name="nombre" required>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <label for="apellido">Apellido</label>
-                            <input type="text" name="nombre" required>
+                            <input value="del Rey" type="text" name="nombre" required>
                         </div>
                         <div class="input-field">
-                            <i class="material-icons prefix">people</i>
+                            <i class="material-icons prefix">account_circle</i>
                             <label for="usuario">Usuario</label>
-                            <input type="text" name="nombre" required>
+                            <input value="lana_delrey123" type="text" name="nombre" required>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
                             <i class="material-icons prefix">vpn_key</i>
-                                <input id="password" type="password" class="validate">
+                                <input value="lana123" id="password" type="password" class="validate">
                                 <label for="password">Contraseña</label>
                             </div>
                         </div>

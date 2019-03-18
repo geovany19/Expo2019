@@ -15,7 +15,7 @@ Public_page::header("Principal");
 		<div class="row">
 		<h3 class="center-align">Registrarse</h3>
 			<article class="col s6 offset-s3">
-				<form method="POST" action="formulario-contacto.php">
+				<form method="POST" action="form">
 					<div class="input-field">
 						<i class="material-icons prefix">perm_identity</i>
 						<label for="nombre">Nombre</label>

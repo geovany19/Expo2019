@@ -31,7 +31,7 @@ class navbar
                 <img src="../../resources/img/dashboard/img1.jpg" class="responsive-img">
               </div>
               
-              <a href="#user"><img class="circle" src="../../resources/img/dashboard/img3.jpg"></a>
+              <a href="../../views/dashboard/perfil.php"><img class="circle" src="../../resources/img/dashboard/img3.jpg"></a>
               <a href="#name"><span class="white-text name">Lana del Rey</span></a>
               <a href="#email"><span class="white-text email">lanadelrey@gmail.com</span></a>
             </div>

@@ -27,6 +27,7 @@ Public_page::header("Principal");
                 </label>
             </p>
             <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
+            <a class="btn blue darken-3 white-text waves-effect waves-light"href="registrarse.php">Registrarse</a>
             <a class="btn blue darken-3 white-text waves-effect waves-light" href="pagina.php">Iniciar sesión</a>
         </div>
         </form>

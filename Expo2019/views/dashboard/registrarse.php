@@ -3,7 +3,7 @@ include "../../core/helpers/public/public_page.php";
 include "../../core/helpers/dashboard/footeradmin.php";
 Public_page::header("Principal");
 ?>
-
+<div class="center">
 <div class="card-panel indigo container offset-l2" class="" >
 <div class="row">
     <form class="col s12">
@@ -46,5 +46,7 @@ Public_page::header("Principal");
     </form>
   </div>
 </div>
+</div>
+
  
         

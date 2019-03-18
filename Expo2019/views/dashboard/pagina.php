@@ -358,6 +358,8 @@ include('../../core/helpers/dashboard/footeradmin.php');
                     <div class="col s0 m4 l3">
                         <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
                     </div>
+                    <br>
+                    <h3>Doctores</h3>
                     <div class="col s12 m4 l9">
                         <table class="striped responsive-table">
                             <thead>
@@ -377,7 +379,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                     <td>1</td>
                                     <td>Juan Pérez</td>
                                     <td>Medicina general</td>
-                                    <td>24/05/16</td>
+                                    <td>24/05/19</td>
                                     <td>Entregado</td>
                                     <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
                                     <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
@@ -413,6 +415,136 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             </tbody>
                         </table>
                     </div>
+                    <br>
+                    <div class="col s0 m4 l3">
+                        <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
+                    </div>
+                    <h3>Pacientes</h3>
+                    <div class="col s12 m4 l9">
+                        <table class="striped responsive-table">
+                            <thead>
+                                <!--Agregando los campos fijos a la tabla-->
+                                <tr>
+                                    <th>Código del paciente</th>
+                                    <th>Nombre del paciente</th>
+                                    <th>Especialidad</th>
+                                    <th>Fecha de la cita</th>
+                                    <th>Peso</th>
+                                    <th>Altura</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <!--Agregando registros a la tabla-->
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Juan Pérez</td>
+                                    <td>Medicina general</td>
+                                    <td>24/05/19</td>
+                                    <td>67 kg</td>
+                                    <td>1.82 m</td>
+                                    <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alberto Laínez</td>
+                                    <td>Pediatría</td>
+                                    <td>02/11/18</td>
+                                    <td>67 kg</td>
+                                    <td>1.82 m</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Pedro Andrade</td>
+                                    <td>Cardiología</td>
+                                    <td>07/02/19</td>
+                                    <td>67 kg</td>
+                                    <td>1.82 m</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Benjamin Contreras</td>
+                                    <td>benja@gmail.com</td>
+                                    <td>09/02/19</td>
+                                    <td>67 kg</td>
+                                    <td>1.82 m</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="col s0 m4 l3">
+                        <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
+                    </div>
+                    <h3>Citas</h3>
+                    <div class="col s12 m4 l9">
+                        <table class="striped responsive-table">
+                            <thead>
+                                <!--Agregando los campos fijos a la tabla-->
+                                <tr>
+                                    <th>Código de la cita</th>
+                                    <th>Nombre del paciente</th>
+                                    <th>Nombre del doctor</th>
+                                    <th>Especialidad</th>
+                                    <th>Fecha de la cita</th>
+                                    <th>Hora de la cita</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <!--Agregando registros a la tabla-->
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Juan Pérez</td>
+                                    <td>Juan Pérez</td>
+                                    <td>Medicina general</td>
+                                    <td>24/05/19</td>
+                                    <td>8:30 AM</td>
+                                    <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alberto Laínez</td>
+                                    <td>Alberto Laínez</td>
+                                    <td>Pediatría</td>
+                                    <td>24/05/19</td>
+                                    <td>8:30 AM</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Pedro Andrade</td>
+                                    <td>Pedro Andrade</td>
+                                    <td>Cardiología</td>
+                                    <td>24/05/19</td>
+                                    <td>8:30 AM</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Benjamin Contreras</td>
+                                    <td>Pedro Andrade</td>
+                                    <td>Cardiología</td>
+                                    <td>24/05/19</td>
+                                    <td>8:30 AM</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -424,6 +556,9 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <?php
     echo footer::footerbody();
     ?>
+    
+    <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
+    <script type="text/javascript" src="../../resources/js/Chart.js"></script>
+    <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 </footer>
-
 </html> 

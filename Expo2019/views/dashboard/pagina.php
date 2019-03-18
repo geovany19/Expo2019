@@ -20,7 +20,6 @@
         <?php
             echo navbar :: nav();
             echo navbar :: sidenav();
-
         ?>
     </header>
 </body>

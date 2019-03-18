@@ -1,36 +1,35 @@
-<?php
-include "../../core/helpers/public/public_page.php";
-Public_page::header("Principal");
-?>
-<body>
-    <div class="container">
-        <form class="form-signin">
-            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 center-align">Iniciar sesión</h1>
-            <form class="col s12">
-        <div class="row">
-            <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">Usuario</label>
-            </div>
-            <div class="input-field col s6">
-            <i class="material-icons prefix">lock</i>
-            <input id="icon_lock" type="tel" class="validate">
-            <label for="icon_lock">Contraseña</label>
-            </div>
-            <p class="center-align">
-                <label>
-                    <input type="checkbox" />
-                    <span>Recuerdame</span>
-                </label>
-            </p>
-            <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
-            <a class="waves-effect waves-light btn blue darken-4" href="">Iniciar sesión</a>
-        </div>
-        </form>
-    </div>
-</body>
-<?php
-Public_page::footer();
-?>
+<!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <!--Import Google Icon Font-->
+            <link href="../../resources/css/material_icons.css" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link type="text/css" rel="stylesheet" href="../../resources/css/materialize.css"  media="screen,projection"/>
+            <link type="text/css" rel="stylesheet" href="../../resources/css/public/estilos_paciente.css"/>
+            <title>Iniciar sesión</title>
+        </head>
+        <body>
+            <!--El login no posee nav-->
+            <header>
+            </header>
+
+
+            <main>
+                <div class="main">
+                    <div class="row">
+                        <div class="col l6 m6 s6 offset-l3">
+                            <div class="z-depht-2 card-panel white panelSesion">
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!--El login no posee footer-->
+            <footer>
+            </footer>
+        </body>

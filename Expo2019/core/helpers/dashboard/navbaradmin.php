@@ -7,9 +7,7 @@ class navbar
         <div class="navbar-fixed">
           <nav class="navbar blue">
             <div class="nav-wrapper container">
-              <a href="index.php" class="brand-logo responsive-img" style="width: 267px; height: 64px;"> 
-                <p class="flow-text">Clínica Dra. Alma Rocío Díaz</p>
-              </a>
+              <a href="index.php" class="brand-logo responsive-img" style="width: 267px; height: 64px;"></a>
               <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
               <a href="index.php" class="right-align"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>
             </div>
@@ -40,7 +38,7 @@ class navbar
           </li>
         
           <li>
-            <a href="index.php" class="waves-effect blue hoverable" style="background-color: #33c065;"><i class="material-icons">dashboard</i>Tablero</a>
+            <a href="pagina.php" class="waves-effect blue hoverable" style="background-color: #33c065;"><i class="material-icons">dashboard</i>Tablero</a>
           </li>
           
           <!--MANAGEMENT-->

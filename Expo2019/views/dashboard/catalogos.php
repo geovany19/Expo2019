@@ -18,6 +18,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/chart.min.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
     <title>Administrador</title>
 </head>
@@ -32,10 +33,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <main>
         <div class="container">
             <div class="row">
-                <div class="col s0 m4 l3">
-                    <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
-                </div>
-                <div class="col s12 m8 l9">
+                <div class="col s12 m8 l12">
                     <div id="highcharts-8af0f14d-1b1c-4dcf-ac5f-c27650922349"></div>
                     <script>
                         (function() {
@@ -190,21 +188,19 @@ include('../../core/helpers/dashboard/footeradmin.php');
                         })();
                     </script>
                 </div>
-                <div class="col s0 m4 l3">
-                    <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
-                </div>
                 <br>
+                <div class="col s12 m4 l12">
                 <h3>Doctores</h3>
-                <div class="col s12 m4 l9">
+                <h3>Doctores</h3>
                     <table class="striped responsive-table">
                         <thead>
                             <!--Agregando los campos fijos a la tabla-->
                             <tr>
                                 <th>Código del doctor</th>
                                 <th>Nombre del doctor</th>
+                                <th>Foto</th>
                                 <th>Especialidad</th>
-                                <th>Fecha</th>
-                                <th>Estado</th>
+                                <th>Disponibilidad</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -213,9 +209,16 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <td>1</td>
                                 <td>Juan Pérez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>Medicina general</td>
-                                <td>24/05/19</td>
-                                <td>Entregado</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" disabled="disabled" />
+                                            <span>Disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
                                 <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
@@ -223,27 +226,48 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <td>2</td>
                                 <td>Alberto Laínez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>Pediatría</td>
-                                <td>02/11/18</td>
-                                <td>Entregado</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" disabled="disabled" />
+                                            <span>Disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Pedro Andrade</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>Cardiología</td>
-                                <td>07/02/19</td>
-                                <td>En proceso</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" disabled="disabled" />
+                                            <span>Disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Benjamin Contreras</td>
-                                <td>benja@gmail.com</td>
-                                <td>09/02/19</td>
-                                <td>En proceso</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Ortodoncia</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" disabled="disabled"/>
+                                            <span>No disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
@@ -251,11 +275,8 @@ include('../../core/helpers/dashboard/footeradmin.php');
                     </table>
                 </div>
                 <br>
-                <div class="col s0 m4 l3">
-                    <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
-                </div>
+                <div class="col s12 m4 l12">
                 <h3>Pacientes</h3>
-                <div class="col s12 m4 l9">
                     <table class="striped responsive-table">
                         <thead>
                             <!--Agregando los campos fijos a la tabla-->
@@ -316,11 +337,8 @@ include('../../core/helpers/dashboard/footeradmin.php');
                     </table>
                 </div>
                 <br>
-                <div class="col s0 m4 l3">
-                    <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
-                </div>
+                <div class="col s12 m4 l12">
                 <h3>Citas</h3>
-                <div class="col s12 m4 l9">
                     <table class="striped responsive-table">
                         <thead>
                             <!--Agregando los campos fijos a la tabla-->

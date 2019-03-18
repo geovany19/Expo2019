@@ -16,13 +16,15 @@ class Public_page{
         </head>
         <body>
         <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper blue darken-1">
-                    <a href="#!" class="brand-logo">Clínica Dra. Alma Rocío</a>
-                    <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Link 1</a></li>
-                    <li><a href="badges.html">Link 2</a></li>
-                    </ul>
+            <nav class="blue darken-1">
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <a href="../../views/dashboard/index.php" class="brand-logo">Clínica Dra. Alma Rocío</a>
+                        <ul class="right hide-on-med-and-down">
+                        <li><a href="sass.html">Link 1</a></li>
+                        <li><a href="badges.html">Link 2</a></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>

@@ -1,36 +1,91 @@
-<?php
-include "../../core/helpers/public/public_page.php";
-Public_page::header("Principal");
-?>
-<body>
-    <div class="container">
-        <form class="form-signin">
-            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 center-align">Iniciar sesión</h1>
-            <form class="col s12">
-        <div class="row">
-            <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">Usuario</label>
-            </div>
-            <div class="input-field col s6">
-            <i class="material-icons prefix">lock</i>
-            <input id="icon_lock" type="tel" class="validate">
-            <label for="icon_lock">Contraseña</label>
-            </div>
-            <p class="center-align">
-                <label>
-                    <input type="checkbox" />
-                    <span>Recuerdame</span>
-                </label>
-            </p>
-            <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
-            <a class="waves-effect waves-light btn blue darken-4" href="">Iniciar sesión</a>
-        </div>
-        </form>
-    </div>
-</body>
-<?php
-Public_page::footer();
-?>
+<!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <!--Import Google Icon Font-->
+            <link href="../../resources/css/material-icons.css" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link type="text/css" rel="stylesheet" href="../../resources/css/materialize.css"  media="screen,projection"/>
+            <link type="text/css" rel="stylesheet" href="../../resources/css/public/estilos_paciente.css"/>
+            <title>Iniciar sesión</title>
+        </head>
+        <body>
+            <!--El login no posee nav-->
+            <header>
+            </header>
+
+
+            <main>
+                <div class="main fondo">
+                    <div class="row">
+                        <div class="col l6 m8 s12 offset-l3 offset-m2">
+                            <div class="z-depht-2 card-panel white panelSesion">
+                                
+                                <div class="row">
+                                    <div class="col l12 m12 12">
+                                        <h3 class="grey-text center">Iniciar sesión</h3>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col l4 m4 s12">
+                                        <img class="responsive-img logoSesion" src="../../resources/img/public/logo_clinica.png" alt="empresa-logo">
+                                    </div>
+
+                                    <div class="col l8 m8 s12">
+                                        <div class="row">
+                                            <form class="col l10 m10 s12 offset-l1 offset-m1">
+                                                <div class="row">
+                                                    <div class="input-field">
+                                                        <i class="material-icons prefix grey-text">account_circle</i>
+                                                        <input id="usuario" type="text" class="validate">
+                                                        <label for="usuario">Introduce tu nombre de usuario o correo electrónico</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="row">
+                                            <form class="col l10 m10 s12 offset-l1 offset-m1">
+                                                <div class="row">
+                                                    <div class="input-field">
+                                                        <i class="material-icons prefix grey-text">lock</i>
+                                                        <input id="contra" type="password" class="validate">
+                                                        <label for="contra">Introduce tu contraseña</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col l4 m4 s12">
+                                        <a href="" class="grey-text right">¿Has olvidado tu contraseña?</a>
+                                    </div>
+
+                                    <div class="col l8 m8 s12">
+                                        <a class="waves-effect waves-light btn blue-darken-1 right">button</a>
+                                    </div>
+                                </div>                            
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </main>
+
+            <!--El login no posee footer-->
+            <footer>
+            </footer>
+
+            <script src="../../resources/js/jquery.js"></script>
+            <script src="../../resources/js/materialize.min.js"></script>
+            <script src="../../resources/js/init.js"></script>
+        </body>
+</html>

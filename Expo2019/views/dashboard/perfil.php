@@ -52,6 +52,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
+                            <i class="material-icons prefix">perm_identity</i>
                                 <input value="123"id="password" type="password" class="validate">
                                 <label for="password">Password</label>
                             </div>

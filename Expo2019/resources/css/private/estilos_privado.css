@@ -1,0 +1,9 @@
+div#menudesplegable{
+    width: 50% !important;
+    height: 350% !important;
+    background-color: #F5F5F5 !important;
+    margin-top: 200% !important;
+}
+div.collection-item{
+    float: right !important;
+}

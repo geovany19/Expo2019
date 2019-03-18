@@ -2,27 +2,24 @@
     class navbar{
       function nav() {
         return '
-        <div id="dropdown1" class="dropdown-content notifications blue">
-            <div class="notifications-title red">notifications</div>
+        <div id="menudesplegable" class="dropdown-content notifications">
+            <div class="notifications-title black-text">NOTIFICACIONES</div>
                 <div class="card">
-            <div class="card-content green"><span class="card-title">Joe Smith made a purchase</span>
-            <p>Content</p>
+            <div class="card-content" id="card-content1">
+            <span class="card-title black-text">Joe Smith</span>
+            <p class="black-text">Mensaje de la notificación</p>
           </div>
-          <div class="card-action black"><a href="#!">view</a><a href="#!">dismiss</a></div>
-        </div>
         </div>
         </div>
       </div>
-      </div>
-    
-        
+      
         <div class="navbar-fixed">
-        <nav class="navbar" style="width: 78%; margin-left: 22%;">
+        <nav class="navbar">
           <div class="nav-wrapper blue"><a href="#!" class="brand-logo white-text text-darken-4">AGENDA</a>
             <ul id="nav-mobile" class="right">
-              <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1" class="dropdown-trigger waves-effect"><i class="material-icons">notifications</i></a></li>
+              <li class="hide-on-med-and-down"><a href="#!" data-target="menudesplegable" class="dropdown-trigger waves-effect"><i class="material-icons">notifications</i></a></li>
               <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger waves-effect"><i class="material-icons">exit_to_app</i>
-            </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
+            </ul><a href="#!" data-target="mobile-demo" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
           </div>
         </nav>
       </div>';
@@ -77,6 +74,12 @@
               
           </li>
         </ul>
+        <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
         ';
       }
     }

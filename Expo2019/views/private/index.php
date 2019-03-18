@@ -1,7 +1,3 @@
-<?php
-            include('../../core/helpers/private/navbarprivate.php');
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,19 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" href="">
     <link rel="stylesheet" href="../../resources/css/materialize.css">
+    <link rel="stylesheet" href="../../resources/css/private/estilos_privado.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Administrador</title>
+    <title>Doctor</title>
 </head>
-<body class="has-fixed-sidenav">
-    <header>
-        <?php
-            echo navbar :: nav();
-            echo navbar :: sidenav();
-
-        ?>
-    </header>
-    <main>
-    </main>
+<body>
     <footer>
     </footer>
 

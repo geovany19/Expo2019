@@ -6,7 +6,7 @@
           <nav class="navbar blue">
             <div class="nav-wrapper container">
               <a href="index.php" class="brand-logo responsive-img" style="width: 267px; height: 64px;"> 
-                <img class="responsive-img" src="../../resources/img/jardin-logo.png" alt="logo">
+                <img class="responsive-img" src="../../resources/img/dashboard/img1.jpg" alt="logo">
               </a>
               <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
               <a href="index.php" class="right-align"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>

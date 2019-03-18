@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="../../resources/img/jardin-iso.png">
     <link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
     <link rel="stylesheet" href="../../resources/css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/material_icons.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
     <title>Administrador</title>
 </head>
 <body class="has-fixed-sidenav">

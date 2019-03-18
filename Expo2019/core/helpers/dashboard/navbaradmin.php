@@ -1,7 +1,9 @@
 <?php
-    class navbar{
-      function nav() {
-        return '
+class navbar
+{
+  function nav()
+  {
+    return '
         <div class="navbar-fixed">
           <nav class="navbar blue">
             <div class="nav-wrapper container">
@@ -13,10 +15,17 @@
             </div>
           </nav>
         </div>';
-      }
+  }
 
-      function sidenav() {
-        return '
+  function sidenav()
+  {
+    return '
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+    <li><a href="#!">First Sidebar Link</a></li>
+    <li><a href="#!">Second Sidebar Link</a></li>
+  </ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+   
         <ul id="sidenav-left" class="sidenav sidenav-fixed">
           <li>
             <div class="user-view" style="margin-bottom: 0px;">
@@ -50,6 +59,6 @@
           </li>
         </ul>
         ';
-      }
-    }
-?>
+  }
+}
+ 

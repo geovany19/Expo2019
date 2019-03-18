@@ -9,7 +9,7 @@
                 <img class="responsive-img" src="../../resources/img/jardin-logo.png" alt="logo">
               </a>
               <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
-              <a href="index.php" class="right-align tooltipped" data-position="bottom" data-tooltip="Cerrar sesión"><i class="material-icons white-text tooltipped" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>
+              <a href="index.php" class="right-align"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>
             </div>
           </nav>
         </div>';

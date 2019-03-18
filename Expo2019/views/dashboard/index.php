@@ -3,38 +3,60 @@ include "../../core/helpers/public/public_page.php";
 include "../../core/helpers/dashboard/footeradmin.php";
 Public_page::header("Principal");
 ?>
-<body class="text-center">
-<div class="container">
-    <div class="row">
-    <form class="col s12">
-            <img class="mb-4" src="../../resources/img/dashboard/img1.jpg" alt="" width="72" height="72">
-            <h1 class="h3 center-align">Iniciar sesión</h1>
-            <form class="col s12">
-        <div class="row">
-        <div class="input-field col s6">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label for="icon_prefix">First Name</label>
-        </div>
-            <div class="input-field col s6">
-            <i class="material-icons prefix">lock</i>
-            <input id="icon_lock" type="tel" class="validate">
-            <label for="icon_lock">Contraseña</label>
-            </div>
-            <p class="center-align">
-                <label>
-                    <input type="checkbox" />
-                    <span>Recuerdame</span>
-                </label>
-            </p>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario de registrarse</title>
+	<link rel="stylesheet" href="../../resources/css/materialize.min.css">
+	 <link href="../../resources/css/fonts.css" rel="stylesheet">
+</head>
+<body>
+	<section class="container">
+		<div class="row">
+		<h3 class="center-align">Iniciar Sesión</h3>
+			<article class="col s6 offset-s3">
+				<form method="POST" action="pagina.php">
+                    <div class="input-field">
+						<i class="material-icons prefix">people</i>
+						<label for="usuario">Usuario</label>
+						<input type="text" name="usuario" required>
+					</div>
+					<div class="input-field">
+						<i class="material-icons prefix">vpn_key</i>
+						<label for="contraseña">Contraseña</label>
+						<textarea name="contraseña" id="" rows="10" class="materialize-textarea"  length="140" required></textarea>
+					</div>
+                    <p class="center-align">
+                        <label>
+                            <input type="checkbox" />
+                            <span>Recuerdame</span>
+                        </label>
+                    </p>
+					<p class="center-align">
+						<button class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Iniciar Sesión</button>
+					</p>
+
+				</form>
+
+			</article>
+		</div>
+	</section>
+
             <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
-            <a class="btn blue darken-3 white-text waves-effect waves-light"href="registrarse.php">Registrarse</a>
-            <a class="btn blue darken-3 white-text waves-effect waves-light" href="pagina.php">Iniciar sesión</a>
+            <p class="center-align">
+				<a href="registrarse.php"><button class="waves-effect waves-light btn" type="submit" ><i class="material-icons right">supervisor_account</i>Registrarse</button></a>
+		    </p>
         </div>
         </form>
     </div>        
 </div>
+
+	<script src="../../resources/js/jquery.js"></script>
+	<script src="../../resources/js/materialize.min.js"></script>
 </body>
+</html>
+
+
 <footer>
     <?php
     echo footer::footerbody();

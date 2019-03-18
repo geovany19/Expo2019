@@ -43,7 +43,7 @@ class navbar
           
           <!--MANAGEMENT-->
             <li><a href="../../views/dashboard/catalogos.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
-            <li><a href="admin_arreglos.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
+            <li><a href="../../views/dashboard/perfil.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
           <!--Account-->
           <li>
             <a class="waves-effect blue hoverable" href="admin_configuracion.php"><i class="material-icons" style="margin-right:16px;">settings</i>Configuración</a>

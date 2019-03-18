@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col l6 m6 s6 offset-l3">
                             <div class="z-depht-2 card-panel white panelSesion">
-                            
+                                <img class="responsive-img" src="../../resources/img/jardin-logo.png" alt="empresa-logo">
                             </div>
                         </div>
                     </div>

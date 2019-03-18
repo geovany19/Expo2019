@@ -191,7 +191,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                 <br>
                 <div class="col s12 m4 l12">
                 <h3>Doctores</h3>
-                <h3>Doctores</h3>
+                    <h3>Doctores</h3>
                     <table class="striped responsive-table">
                         <thead>
                             <!--Agregando los campos fijos a la tabla-->

@@ -15,6 +15,10 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" href="../../resources/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/chart.min.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
     <title>Administrador</title>
 </head>
 
@@ -29,202 +33,397 @@ include('../../core/helpers/dashboard/footeradmin.php');
         <div class="container">
             <div id="chart-dashboard">
                 <div class="row">
-                    <div class="col s12 m6 l6">
-                        <canvas id="myChart" width="400" height="400"></canvas>
+                    <div class="col s0 m2 l2">
+                        <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
+                    </div>
+                    <div class="col s12 m5 l5">
+                        <div id="highcharts-117b751e-2302-4fb5-bca1-a47be71d51e3"></div>
                         <script>
-                            var ctx = document.getElementById('myChart');
-                            var myChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                                    datasets: [{
-                                        label: '# of Votes',
-                                        data: [12, 19, 3, 5, 2, 3],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(54, 162, 235, 0.2)',
-                                            'rgba(255, 206, 86, 0.2)',
-                                            'rgba(75, 192, 192, 0.2)',
-                                            'rgba(153, 102, 255, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(54, 162, 235, 1)',
-                                            'rgba(255, 206, 86, 1)',
-                                            'rgba(75, 192, 192, 1)',
-                                            'rgba(153, 102, 255, 1)',
-                                            'rgba(255, 159, 64, 1)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                        }]
+                            (function() {
+                                var files = ["https://code.highcharts.com/stock/highstock.js", "https://code.highcharts.com/highcharts-more.js", "https://code.highcharts.com/highcharts-3d.js", "https://code.highcharts.com/modules/data.js", "https://code.highcharts.com/modules/exporting.js", "https://code.highcharts.com/modules/funnel.js", "https://code.highcharts.com/modules/annotations.js", "https://code.highcharts.com/modules/solid-gauge.js"],
+                                    loaded = 0;
+                                if (typeof window["HighchartsEditor"] === "undefined") {
+                                    window.HighchartsEditor = {
+                                        ondone: [cl],
+                                        hasWrapped: false,
+                                        hasLoaded: false
+                                    };
+                                    include(files[0]);
+                                } else {
+                                    if (window.HighchartsEditor.hasLoaded) {
+                                        cl();
+                                    } else {
+                                        window.HighchartsEditor.ondone.push(cl);
                                     }
                                 }
-                            });
-                        </script>
-                        <!--<div class="card">
-                            <div class="card-move-up waves-effect waves-block waves-light">
-                                <div class="move-up cyan darken-1">
-                                    <div>
-                                        <span class="chart-title white-text">Revenue</span>
-                                        <div class="chart-revenue cyan darken-2 white-text">
-                                            <p class="chart-revenue-total">$4,500.85</p>
-                                            <p class="chart-revenue-per"><i class="mdi-navigation-arrow-drop-up"></i> 21.80 %</p>
-                                        </div>
-                                        <div class="switch chart-revenue-switch right">
-                                            <label class="cyan-text text-lighten-5">
-                                                Month
-                                                <input type="checkbox">
-                                                <span class="lever"></span> Year
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="trending-line-chart-wrapper">
-                                        <canvas id="trending-line-chart" height="284" width="1224" style="width: 612px; height: 142px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                                <div class="col s12 m3 l3">
-                                    <div id="doughnut-chart-wrapper">
-                                        <canvas id="doughnut-chart" height="178" width="268" style="width: 134px; height: 89px;"></canvas>
-                                        <div class="doughnut-chart-status">4500
-                                            <p class="ultra-small center-align">Sold</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m2 l2">
-                                    <ul class="doughnut-chart-legend">
-                                        <li class="mobile ultra-small"><span class="legend-color"></span>Mobile</li>
-                                        <li class="kitchen ultra-small"><span class="legend-color"></span> Kitchen</li>
-                                        <li class="home ultra-small"><span class="legend-color"></span> Home</li>
-                                    </ul>
-                                </div>
-                                <div class="col s12 m5 l6">
-                                    <div class="trending-bar-chart-wrapper">
-                                        <canvas id="trending-bar-chart" height="174" width="580" style="width: 290px; height: 87px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>
-                                <table class="responsive-table">
-                                    <thead>
-                                        <tr>
-                                            <th data-field="id">ID</th>
-                                            <th data-field="month">Month</th>
-                                            <th data-field="item-sold">Item Sold</th>
-                                            <th data-field="item-price">Item Price</th>
-                                            <th data-field="total-profit">Total Profit</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>January</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>February</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>March</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>April</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>May</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>June</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>July</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>August</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>Septmber</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>Octomber</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>November</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>December</td>
-                                            <td>122</td>
-                                            <td>100</td>
-                                            <td>$122,00.00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>-->
+                                function isScriptAlreadyIncluded(src) {
+                                    var scripts = document.getElementsByTagName("script");
+                                    for (var i = 0; i < scripts.length; i++) {
+                                        if (scripts[i].hasAttribute("src")) {
+                                            if ((scripts[i].getAttribute("src") || "").indexOf(src) >= 0 || (scripts[i].getAttribute("src") === "http://code.highcharts.com/highcharts.js" && src === "https://code.highcharts.com/stock/highstock.js")) {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                    return false;
+                                }
+
+                                function check() {
+                                    if (loaded === files.length) {
+                                        for (var i = 0; i < window.HighchartsEditor.ondone.length; i++) {
+                                            try {
+                                                window.HighchartsEditor.ondone[i]();
+                                            } catch (e) {
+                                                console.error(e);
+                                            }
+                                        }
+                                        window.HighchartsEditor.hasLoaded = true;
+                                    }
+                                }
+
+                                function include(script) {
+                                    function next() {
+                                        ++loaded;
+                                        if (loaded < files.length) {
+                                            include(files[loaded]);
+                                        }
+                                        check();
+                                    }
+                                    if (isScriptAlreadyIncluded(script)) {
+                                        return next();
+                                    }
+                                    var sc = document.createElement("script");
+                                    sc.src = script;
+                                    sc.type = "text/javascript";
+                                    sc.onload = function() {
+                                        next();
+                                    };
+                                    document.head.appendChild(sc);
+                                }
+
+                                function each(a, fn) {
+                                    if (typeof a.forEach !== "undefined") {
+                                        a.forEach(fn);
+                                    } else {
+                                        for (var i = 0; i < a.length; i++) {
+                                            if (fn) {
+                                                fn(a[i]);
+                                            }
+                                        }
+                                    }
+                                }
+                                var inc = {},
+                                    incl = [];
+                                each(document.querySelectorAll("script"), function(t) {
+                                    inc[t.src.substr(0, t.src.indexOf("?"))] = 1;
+                                });
+
+                                function cl() {
+                                    if (typeof window["Highcharts"] !== "undefined") {
+                                        var options = {
+                                            "title": {
+                                                "text": "Citas por especialidad"
+                                            },
+                                            "subtitle": {
+                                                "text": ""
+                                            },
+                                            "exporting": {},
+                                            "chart": {
+                                                "plotBackgroundColor": null,
+                                                "plotBorderWidth": null,
+                                                "plotShadow": false,
+                                                "type": "pie"
+                                            },
+                                            "tooltip": {
+                                                "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"
+                                            },
+                                            "plotOptions": {
+                                                "pie": {
+                                                    "allowPointSelect": true,
+                                                    "cursor": "pointer",
+                                                    "dataLabels": {
+                                                        "enabled": false
+                                                    },
+                                                    "showInLegend": true
+                                                },
+                                                "series": {
+                                                    "animation": false
+                                                }
+                                            },
+                                            "series": [{
+                                                "name": "Brands",
+                                                "turboThreshold": 0,
+                                                "colorByPoint": true
+                                            }],
+                                            "data": {
+                                                "csv": "\"Category\";\"Porcentaje\"\n\"Medicina general\";61.41\n\"Ortopedia\";11.84\n\"Pediatría\";10.85\n\"Nutrición\";4.67\n\"Cardiología\";4.18\n\"Otros\";7.05",
+                                                "googleSpreadsheetKey": false,
+                                                "googleSpreadsheetWorksheet": false
+                                            },
+                                            "yAxis": [{
+                                                "title": {}
+                                            }],
+                                            "legend": {}
+                                        };
+                                        /*
+                                        // Sample of extending options:
+                                        Highcharts.merge(true, options, {
+                                            chart: {
+                                                backgroundColor: "#bada55"
+                                            },
+                                            plotOptions: {
+                                                series: {
+                                                    cursor: "pointer",
+                                                    events: {
+                                                        click: function(event) {
+                                                            alert(this.name + " clicked\n" +
+                                                                  "Alt: " + event.altKey + "\n" +
+                                                                  "Control: " + event.ctrlKey + "\n" +
+                                                                  "Shift: " + event.shiftKey + "\n");
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                        */
+                                        new Highcharts.Chart("highcharts-117b751e-2302-4fb5-bca1-a47be71d51e3", options);
+                                    }
+                                }
+                            })();
+                        </script>
+                    </div>
+                    <div class="col s12 m5 l5">
+                        <div id="highcharts-ab7518ab-2f32-418c-9fdd-b600afde09cf"></div>
+                        <script>
+                            (function() {
+                                var files = ["https://code.highcharts.com/stock/highstock.js", "https://code.highcharts.com/highcharts-more.js", "https://code.highcharts.com/highcharts-3d.js", "https://code.highcharts.com/modules/data.js", "https://code.highcharts.com/modules/exporting.js", "https://code.highcharts.com/modules/funnel.js", "https://code.highcharts.com/modules/annotations.js", "https://code.highcharts.com/modules/solid-gauge.js"],
+                                    loaded = 0;
+                                if (typeof window["HighchartsEditor"] === "undefined") {
+                                    window.HighchartsEditor = {
+                                        ondone: [cl],
+                                        hasWrapped: false,
+                                        hasLoaded: false
+                                    };
+                                    include(files[0]);
+                                } else {
+                                    if (window.HighchartsEditor.hasLoaded) {
+                                        cl();
+                                    } else {
+                                        window.HighchartsEditor.ondone.push(cl);
+                                    }
+                                }
+
+                                function isScriptAlreadyIncluded(src) {
+                                    var scripts = document.getElementsByTagName("script");
+                                    for (var i = 0; i < scripts.length; i++) {
+                                        if (scripts[i].hasAttribute("src")) {
+                                            if ((scripts[i].getAttribute("src") || "").indexOf(src) >= 0 || (scripts[i].getAttribute("src") === "http://code.highcharts.com/highcharts.js" && src === "https://code.highcharts.com/stock/highstock.js")) {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                    return false;
+                                }
+
+                                function check() {
+                                    if (loaded === files.length) {
+                                        for (var i = 0; i < window.HighchartsEditor.ondone.length; i++) {
+                                            try {
+                                                window.HighchartsEditor.ondone[i]();
+                                            } catch (e) {
+                                                console.error(e);
+                                            }
+                                        }
+                                        window.HighchartsEditor.hasLoaded = true;
+                                    }
+                                }
+
+                                function include(script) {
+                                    function next() {
+                                        ++loaded;
+                                        if (loaded < files.length) {
+                                            include(files[loaded]);
+                                        }
+                                        check();
+                                    }
+                                    if (isScriptAlreadyIncluded(script)) {
+                                        return next();
+                                    }
+                                    var sc = document.createElement("script");
+                                    sc.src = script;
+                                    sc.type = "text/javascript";
+                                    sc.onload = function() {
+                                        next();
+                                    };
+                                    document.head.appendChild(sc);
+                                }
+
+                                function each(a, fn) {
+                                    if (typeof a.forEach !== "undefined") {
+                                        a.forEach(fn);
+                                    } else {
+                                        for (var i = 0; i < a.length; i++) {
+                                            if (fn) {
+                                                fn(a[i]);
+                                            }
+                                        }
+                                    }
+                                }
+                                var inc = {},
+                                    incl = [];
+                                each(document.querySelectorAll("script"), function(t) {
+                                    inc[t.src.substr(0, t.src.indexOf("?"))] = 1;
+                                });
+
+                                function cl() {
+                                    if (typeof window["Highcharts"] !== "undefined") {
+                                        var options = {
+                                            "title": {
+                                                "text": "Doctores por especialidad"
+                                            },
+                                            "subtitle": {
+                                                "text": ""
+                                            },
+                                            "exporting": {},
+                                            "chart": {
+                                                "plotBackgroundColor": null,
+                                                "plotBorderWidth": null,
+                                                "plotShadow": false,
+                                                "type": "pie"
+                                            },
+                                            "tooltip": {
+                                                "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"
+                                            },
+                                            "plotOptions": {
+                                                "pie": {
+                                                    "allowPointSelect": true,
+                                                    "cursor": "pointer",
+                                                    "dataLabels": {
+                                                        "enabled": false
+                                                    },
+                                                    "showInLegend": true
+                                                },
+                                                "series": {
+                                                    "animation": false
+                                                }
+                                            },
+                                            "series": [{
+                                                "name": "Brands",
+                                                "turboThreshold": 0,
+                                                "colorByPoint": true
+                                            }],
+                                            "data": {
+                                                "csv": "\"Category\";\"Porcentaje\"\n\"Medicina general\";61.41\n\"Ortopedia\";11.84\n\"Pediatría\";10.85\n\"Nutrición\";4.67\n\"Cardiología\";4.18\n\"Otros\";7.05",
+                                                "googleSpreadsheetKey": false,
+                                                "googleSpreadsheetWorksheet": false
+                                            },
+                                            "legend": {},
+                                            "xAxis": [{
+                                                "title": {},
+                                                "labels": {}
+                                            }],
+                                            "yAxis": [{
+                                                "title": {},
+                                                "labels": {}
+                                            }]
+                                        };
+                                        /*
+                                        // Sample of extending options:
+                                        Highcharts.merge(true, options, {
+                                            chart: {
+                                                backgroundColor: "#bada55"
+                                            },
+                                            plotOptions: {
+                                                series: {
+                                                    cursor: "pointer",
+                                                    events: {
+                                                        click: function(event) {
+                                                            alert(this.name + " clicked\n" +
+                                                                  "Alt: " + event.altKey + "\n" +
+                                                                  "Control: " + event.ctrlKey + "\n" +
+                                                                  "Shift: " + event.shiftKey + "\n");
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                        */
+                                        new Highcharts.Chart("highcharts-ab7518ab-2f32-418c-9fdd-b600afde09cf", options);
+                                    }
+                                }
+                            })();
+                        </script>
+                    </div>
+                    <div class="col s0 m4 l3">
+                        <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
+                    </div>
+                    <div class="col s12 m4 l9">
+                        <table class="striped responsive-table">
+                            <thead>
+                                <!--Agregando los campos fijos a la tabla-->
+                                <tr>
+                                    <th>Código del doctor</th>
+                                    <th>Nombre del doctor</th>
+                                    <th>Especialidad</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <!--Agregando registros a la tabla-->
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Juan Pérez</td>
+                                    <td>Medicina general</td>
+                                    <td>24/05/16</td>
+                                    <td>Entregado</td>
+                                    <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alberto Laínez</td>
+                                    <td>Pediatría</td>
+                                    <td>02/11/18</td>
+                                    <td>Entregado</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Pedro Andrade</td>
+                                    <td>Cardiología</td>
+                                    <td>07/02/19</td>
+                                    <td>En proceso</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Benjamin Contreras</td>
+                                    <td>benja@gmail.com</td>
+                                    <td>09/02/19</td>
+                                    <td>En proceso</td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="sample-chart-wrapper">
-            <canvas id="line-chart-sample" height="588" width="1472" style="width: 736px; height: 294px;"></canvas>
+        </div>
         </div>
     </main>
 </body>
+<footer>
+    <?php
+    echo footer::footerbody();
+    ?>
+</footer>
 
 </html> 

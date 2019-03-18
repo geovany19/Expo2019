@@ -35,7 +35,7 @@
           </li>
           
           <!--MANAGEMENT-->
-            <li><a href="admin_arboles.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
+            <li><a href="../../views/dashboard/catalogo.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
             <li><a href="admin_arreglos.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
           <!--Account-->
           <li>

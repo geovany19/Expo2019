@@ -20,7 +20,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
-    <title>Administrador</title>
+    <title>Tablero</title>
 </head>
 
 <body class="has-fixed-sidenav">

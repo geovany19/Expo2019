@@ -8,7 +8,7 @@ class navbar
           <nav class="navbar blue">
             <div class="nav-wrapper container">
               <a href="index.php" class="brand-logo responsive-img" style="width: 267px; height: 64px;"></a>
-              <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
+              <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons white-text">menu</i></a>
               <a href="index.php" class="right-align"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>
             </div>
           </nav>
@@ -43,7 +43,7 @@ class navbar
           
           <!--MANAGEMENT-->
             <li><a href="../../views/dashboard/catalogos.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
-            <li><a href="admin_arreglos.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
+            <li><a href="../../views/dashboard/perfil.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
           <!--Account-->
           <li>
             <a class="waves-effect blue hoverable" href="admin_configuracion.php"><i class="material-icons" style="margin-right:16px;">settings</i>Configuración</a>

@@ -20,7 +20,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
-    <title>Administrador</title>
+    <title>Catalogo</title>
 </head>
 
 <body class="has-fixed-sidenav">
@@ -191,7 +191,6 @@ include('../../core/helpers/dashboard/footeradmin.php');
                 <br>
                 <div class="col s12 m4 l12">
                 <h3>Doctores</h3>
-                <h3>Doctores</h3>
                     <table class="striped responsive-table">
                         <thead>
                             <!--Agregando los campos fijos a la tabla-->
@@ -283,6 +282,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <th>Código del paciente</th>
                                 <th>Nombre del paciente</th>
+                                <th>Foto</th>
                                 <th>Especialidad</th>
                                 <th>Fecha de la cita</th>
                                 <th>Peso</th>
@@ -295,6 +295,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <td>1</td>
                                 <td>Juan Pérez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>Medicina general</td>
                                 <td>24/05/19</td>
                                 <td>67 kg</td>
@@ -306,8 +307,9 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <td>2</td>
                                 <td>Alberto Laínez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>Pediatría</td>
-                                <td>02/11/18</td>
+                                <td>02/11/19</td>
                                 <td>67 kg</td>
                                 <td>1.82 m</td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
@@ -316,6 +318,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <td>3</td>
                                 <td>Pedro Andrade</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>Cardiología</td>
                                 <td>07/02/19</td>
                                 <td>67 kg</td>
@@ -326,6 +329,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <tr>
                                 <td>4</td>
                                 <td>Benjamin Contreras</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
                                 <td>benja@gmail.com</td>
                                 <td>09/02/19</td>
                                 <td>67 kg</td>

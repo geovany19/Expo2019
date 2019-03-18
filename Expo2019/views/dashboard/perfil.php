@@ -41,20 +41,20 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <input type="text" name="nombre" required>
                         </div>
                         <div class="input-field">
-                            <i class="material-icons prefix">perm_identity</i>
+                            <i class="material-icons prefix">person</i>
                             <label for="apellido">Apellido</label>
-                            <input value="del Rey" type="text" name="nombre" required>
+                            <input type="text" name="nombre" required>
                         </div>
                         <div class="input-field">
-                            <i class="material-icons prefix">perm_identity</i>
+                            <i class="material-icons prefix">people</i>
                             <label for="usuario">Usuario</label>
                             <input type="text" name="nombre" required>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                            <i class="material-icons prefix">perm_identity</i>
-                                <input value="123"id="password" type="password" class="validate">
-                                <label for="password">Password</label>
+                            <i class="material-icons prefix">vpn_key</i>
+                                <input id="password" type="password" class="validate">
+                                <label for="password">Contraseña</label>
                             </div>
                         </div>
                         <div class="file-field input-field">
@@ -72,6 +72,8 @@ include('../../core/helpers/dashboard/footeradmin.php');
             </div>
         </div>
     </main>
+    <script src="../../resources/js/jquery.js"></script>
+	<script src="../../resources/js/materialize.min.js"></script>
 </body>
 
 </html> 

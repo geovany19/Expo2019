@@ -39,8 +39,8 @@ Public_page::header("Principal");
 					</div>
 					<div class="input-field">
 						<i class="material-icons prefix">vpn_key</i>
+                        <input id="password" type="password" class="validate">
 						<label for="contraseña">Contraseña</label>
-						<textarea name="contraseña" id="" rows="10" class="materialize-textarea"  length="140" required></textarea>
 					</div>
 					
 					<p class="center-align">

@@ -23,8 +23,9 @@ Public_page::header("Principal");
 					</div>
 					<div class="input-field">
 						<i class="material-icons prefix">vpn_key</i>
-						<label for="contraseña">Contraseña</label>
-						<textarea name="contraseña" id="" rows="10" class="materialize-textarea"  length="140" required></textarea>
+                        <input id="password" type="password" class="validate">
+						<label for="contraseña" >Contraseña</label>
+					
 					</div>
                     <p class="center-align">
                         <label>
@@ -44,7 +45,7 @@ Public_page::header("Principal");
 
             <p class="text-center center-align blue-text text-darken-3">Olvidé mi contraseña</p>
             <p class="center-align">
-				<a href="registrarse.php"><button class="waves-effect waves-light btn" type="submit" ><i class="material-icons right">supervisor_account</i>Registrarse</button></a>
+				<a href="registrarse.php"><button class="waves-effect waves-light btn" type="submit" ><i class="material-icons right">person_add</i>Registrarse</button></a>
 		    </p>
         </div>
         </form>

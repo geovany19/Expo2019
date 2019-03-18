@@ -1,6 +1,5 @@
 <?php
-            include('../../core/helpers/dashboard/navbaradmin.php');
-            include('../../core/helpers/dashboard/footeradmin.php');
+            include('../../core/helpers/private/navbarprivate.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,10 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" href="../../resources/img/jardin-iso.png">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
+    <link rel="icon" type="image/png" href="">
     <link rel="stylesheet" href="../../resources/css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Administrador</title>
 </head>
 <body class="has-fixed-sidenav">
@@ -20,7 +18,16 @@
         <?php
             echo navbar :: nav();
             echo navbar :: sidenav();
+
         ?>
     </header>
+    <main>
+    </main>
+    <footer>
+    </footer>
+
+    <script src="../../resources/js/jquery.js"></script>
+    <script src="../../resources/js/materialize.min.js"></script>
+    <script src="../../resources/js/init.js"></script>
 </body>
 </html>

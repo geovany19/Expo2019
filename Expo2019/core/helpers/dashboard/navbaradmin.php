@@ -38,22 +38,25 @@ class navbar
           </li>
         
           <li>
-            <a href="pagina.php" class="waves-effect blue hoverable" style="background-color: #33c065;"><i class="material-icons">dashboard</i>Tablero</a>
+            <a href="pagina.php" class="waves-effect blue hoverable white-text" style="background-color: #33c065;"><i class="material-icons white-text">dashboard</i>Tablero</a>
           </li>
           
           <!--MANAGEMENT-->
-            <li><a href="../../views/dashboard/catalogos.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
-            <li><a href="../../views/dashboard/perfil.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
+            <li><a href="../../views/dashboard/catalogos.php" class="waves-effect blue hoverable white-text"><i class="material-icons white-text" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
+            <li><a href="../../views/dashboard/perfil.php" class="waves-effect blue hoverable white-text"><i class="material-icons white-text" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
           <!--Account-->
           <li>
-            <a class="waves-effect blue hoverable" href="admin_configuracion.php"><i class="material-icons" style="margin-right:16px;">settings</i>Configuración</a>
+            <a class="waves-effect blue hoverable white-text" href="admin_configuracion.php"><i class="material-icons white-text" style="margin-right:16px;">settings</i>Configuración</a>
           </li>
           <li>
-            <a class="waves-effect blue hoverable"  href="index.php"><i class="material-icons" style="margin-right:16px;">input</i>Cerrar sesión</a>
+            <a class="waves-effect blue hoverable white-text"  href="index.php"><i class="material-icons white-text" style="margin-right:16px;">access_time</i>Disponibilidad de horarios</a>
+          </li>
+          <li>
+            <a class="waves-effect blue hoverable white-text"  href="index.php"><i class="material-icons white-text" style="margin-right:16px;">input</i>Cerrar sesión</a>
           </li>
         <!--Footer-->
           <li>
-            <a class="subheader" style="background-color: #1B99C9;"><i class="material-icons" style="margin-right:16px;">copyright</i> 2019 Copyright F4</a>
+            <a class="subheader" style="background-color: #1B99C9;"><i class="material-icons " style="margin-right:16px;">copyright</i> 2019 Copyright F4</a>
           </li>
         </ul>
         ';

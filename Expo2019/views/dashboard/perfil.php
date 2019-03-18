@@ -16,7 +16,6 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/chart.min.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
@@ -33,24 +32,29 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <main>
         <div class="container">
             <div class="row center-align">
-            <a href="../../views/dashboard/perfil.php"><img class="center-align circle col s6" src="../../resources/img/dashboard/img3.jpg"></a>
                 <div class="col s12">
                     <h3>Perfil</h3>
-                    <form action="" method="get">
+                    <form class="col s12">
                         <div class="input-field">
-                            <i class="material-icons prefix">perm_identity</i>
+                            <i class="material-icons prefix">account_circle</i>
                             <label for="nombre">Nombre</label>
                             <input type="text" name="nombre" required>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">perm_identity</i>
-                            <label for="nombre">Apellido</label>
-                            <input type="text" name="nombre" required>
+                            <label for="apellido">Apellido</label>
+                            <input value="del Rey" type="text" name="nombre" required>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">perm_identity</i>
-                            <label for="nombre">Usuario</label>
+                            <label for="usuario">Usuario</label>
                             <input type="text" name="nombre" required>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input value="123"id="password" type="password" class="validate">
+                                <label for="password">Password</label>
+                            </div>
                         </div>
                         <div class="file-field input-field">
                             <div class="btn">

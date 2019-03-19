@@ -42,7 +42,29 @@ Public_page::header("Principal");
                         <input id="password" type="password" class="validate">
 						<label for="contraseña">Contraseña</label>
 					</div>
-					
+                    <div class="row">
+                            <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s7">
+                                <i class="material-icons prefix">comment</i>
+                                <select>
+                                
+                                    <option value="" disabled selected>Escoge tu pregunta</option>
+                                    <option value="1">¿Color favorito?</option>
+                                    <option value="2">¿Nombre de la mascota?</option>
+                                    <option value="3">¿Apodo favorito?</option>
+                                    <option value="3">¿Cuál fue tu última mascota?</option>
+                                    </select>
+                                    <label>Pregunta</label>
+                                </div>
+                                <div class="input-field col s5">
+                                <i class="material-icons prefix">description</i>
+                                <input id="respuesta" type="tel" class="validate">
+                                <label for="respuesta">Respuesta</label>
+                                </div>
+                            </div>
+                            </form>
+                    </div>
 					<p class="center-align">
 						<button class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Registrarse</button>
 					</p>
@@ -55,6 +77,7 @@ Public_page::header("Principal");
 
 
 	<script src="../../resources/js/jquery.js"></script>
+    <script src="../../resources/js/inicializacion.js"></script>
 	<script src="../../resources/js/materialize.min.js"></script>
 </body>
 </html>

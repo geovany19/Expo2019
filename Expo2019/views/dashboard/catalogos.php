@@ -31,6 +31,46 @@ include('../../core/helpers/dashboard/footeradmin.php');
         ?>
     </header>
     <main>
+    <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Editar</h4>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input value="Juan" id="icon_prefix" type="text" class="validate">
+                                <label for="icon_prefix">Nombre</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input value="Pérez" id="first_name2" type="text" class="validate">
+                                <label class="active" for="first_name2">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">local_hospital</i>
+                            <input value="Medicina general" id="first_name2" type="text" class="validate">
+                            <label class="active" for="first_name2">Especialidad</label>
+                        </div>
+                    </form>
+                </div>
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span><i class="material-icons left white-text">camera_alt</i>Seleccionar foto</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn red darken-2">Cancelar</a>
+                <a href="#!" class="modal-close waves-effect waves-green btn">Modificar</a>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col s12 m8 l12">
@@ -219,7 +259,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                     </p>
                                 </td>
                                 <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -235,7 +275,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                         </label>
                                     </p>
                                 </td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -251,7 +291,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                         </label>
                                     </p>
                                 </td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -267,7 +307,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                         </label>
                                     </p>
                                 </td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                         </tbody>
@@ -301,7 +341,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>67 kg</td>
                                 <td>1.82 m</td>
                                 <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -312,7 +352,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>02/11/19</td>
                                 <td>67 kg</td>
                                 <td>1.82 m</td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -323,7 +363,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>07/02/19</td>
                                 <td>67 kg</td>
                                 <td>1.82 m</td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -334,7 +374,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>09/02/19</td>
                                 <td>67 kg</td>
                                 <td>1.82 m</td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                         </tbody>
@@ -366,7 +406,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>24/05/19</td>
                                 <td>8:30 AM</td>
                                 <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -376,7 +416,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>Pediatría</td>
                                 <td>24/05/19</td>
                                 <td>8:30 AM</td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -386,7 +426,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>Cardiología</td>
                                 <td>24/05/19</td>
                                 <td>8:30 AM</td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                             <tr>
@@ -396,7 +436,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <td>Cardiología</td>
                                 <td>24/05/19</td>
                                 <td>8:30 AM</td>
-                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal1">border_color</a></i></td>
                                 <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
                             </tr>
                         </tbody>

@@ -52,7 +52,14 @@ include('../../core/helpers/dashboard/footeradmin.php');
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                            <i class="material-icons prefix">vpn_key</i>
+                                <i class="material-icons prefix">mail</i>
+                                <input value="lanadelrey@gmail.com" id="email" type="email" class="validate" disabled="disabled">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">vpn_key</i>
                                 <input value="lana123" id="password" type="password" class="validate">
                                 <label for="password">Contraseña</label>
                             </div>
@@ -67,26 +74,27 @@ include('../../core/helpers/dashboard/footeradmin.php');
                                 <input class="file-path validate" type="text">
                             </div>
                         </div>
+                        <button class="waves-effect waves-light btn" href="#modal1"><a href="#modal1" class="white-text"><i class="material-icons left white-text" href="#modal1">edit</i>Modificar</a></button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-    <?php
-    echo footer::footerbody();
-    ?>
-    <script>
-        var instance = M.Tooltip.getInstance(elem);
-    </script>
-    <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
-    <script type="text/javascript" src="../../resources/js/Chart.js"></script>
-    <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
-    <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
-</footer>
+        <?php
+        echo footer::footerbody();
+        ?>
+        <script>
+            var instance = M.Tooltip.getInstance(elem);
+        </script>
+        <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
+        <script type="text/javascript" src="../../resources/js/Chart.js"></script>
+        <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+        <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
+        <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
+    </footer>
     <script src="../../resources/js/jquery.js"></script>
-	<script src="../../resources/js/materialize.min.js"></script>
+    <script src="../../resources/js/materialize.min.js"></script>
 </body>
 
 </html> 

@@ -33,10 +33,41 @@ include('../../core/helpers/dashboard/footeradmin.php');
         <div id="modal1" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <h4>Editar</h4>
-                
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input value="Juan" id="icon_prefix" type="text" class="validate">
+                                <label for="icon_prefix">Nombre</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input value="Pérez" id="first_name2" type="text" class="validate">
+                                <label class="active" for="first_name2">Apellido</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">local_hospital</i>
+                            <input value="Medicina general" id="first_name2" type="text" class="validate">
+                            <label class="active" for="first_name2">Especialidad</label>
+                        </div>
+                    </form>
+                </div>
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span><i class="material-icons left white-text">camera_alt</i>Seleccionar foto</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                <a href="#!" class="modal-close waves-effect waves-green btn red darken-2">Cancelar</a>
+                <a href="#!" class="modal-close waves-effect waves-green btn">Modificar</a>
             </div>
         </div>
         <div id="modal15" class="modal modal-fixed-footer">
@@ -53,6 +84,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
             <div id="chart-dashboard">
                 <div class="row">
                     <div class="col s12 m5 l5">
+                    <!--Creación de gráficos de especialidad y citas -->
                         <div id="highcharts-117b751e-2302-4fb5-bca1-a47be71d51e3"></div>
                         <script>
                             (function() {
@@ -605,7 +637,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
     <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
 
-   
+
 </footer>
 
 </html> 

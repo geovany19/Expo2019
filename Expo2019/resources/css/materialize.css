@@ -4303,10 +4303,10 @@ nav i.material-icons {
   height: 56px;
   line-height: 56px;
 }
-
+/*madifique el tamaño del nav y le quite la propiedad de posicion absoluta*/
 nav .nav-wrapper {
-  position: relative;
   height: 100%;
+  width: 1050px !important;
 }
 
 @media only screen and (min-width: 993px) {

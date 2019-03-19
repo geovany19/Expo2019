@@ -3,6 +3,8 @@ $(document).ready(function(){
             fullWidth: true
           });;
     $('.dropdown-trigger').dropdown();
+    $('.datepicker').datepicker();
+    $('.timepicker').timepicker();
     $('.collapsible').collapsible();
     $('.sidenav').sidenav();
     $('.modal').modal();

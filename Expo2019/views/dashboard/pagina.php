@@ -39,6 +39,16 @@ include('../../core/helpers/dashboard/footeradmin.php');
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
+        <div id="modal15" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h5 class="black-text darker-2 center-align"><b>¿Estás seguro que deseas eliminar el registro?</b></h5>
+            </div>
+            <!-- Creando las opciones para el modal -->
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sí</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
+            </div>
+        </div>
         <div class="container">
             <div id="chart-dashboard">
                 <div class="row">
@@ -589,14 +599,13 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <?php
     echo footer::footerbody();
     ?>
-    <script>
-        var instance = M.Tooltip.getInstance(elem);
-    </script>
-    <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
+    <script src="../../resources/js/inicializacion.js"></script>
+    <script src="../../resources/js/jquery.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
     <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
+
+   
 </footer>
 
 </html> 

@@ -33,6 +33,7 @@
                     </div>
                 </div>
                 <script type="text/javascript" src="../../resources/js/jquery.js"></script>
+                
             ';
         }
     }

@@ -9,7 +9,7 @@ class navbar
             <div class="nav-wrapper container">
               <a href="index.php" class="brand-logo responsive-img" style="width: 267px; height: 64px;"></a>
               <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons white-text">menu</i></a>
-              <a href="index.php" class="right-align"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>
+              <a href="index.php"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión">exit_to_app</i></a>
             </div>
           </nav>
         </div>';

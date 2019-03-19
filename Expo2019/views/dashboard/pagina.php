@@ -16,7 +16,6 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/chart.min.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
@@ -590,7 +589,9 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <?php
     echo footer::footerbody();
     ?>
-
+    <script>
+        var instance = M.Tooltip.getInstance(elem);
+    </script>
     <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>

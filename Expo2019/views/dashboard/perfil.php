@@ -54,7 +54,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">mail</i>
                                 <input value="lanadelrey@gmail.com" id="email" type="email" class="validate" disabled="disabled">
-                                <label for="email">Email</label>
+                                <label for="email">Correo electrónico</label>
                             </div>
                         </div>
                         <div class="row">

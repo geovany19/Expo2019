@@ -14,8 +14,8 @@
       </div>
       
         <div class="navbar-fixed">
-        <nav class="navbar blue">
-          <div class="nav-wrapper"><a href="#!" class="brand-logo white-text text-darken-4">AGENDA</a>
+        <nav class="navbar blue z-depth-0">
+          <div class="nav-wrapper">
             <ul id="nav-mobile blue" class="right">
               <li class="hide-on-med-and-down"><a href="#!" data-target="menudesplegable" class="dropdown-trigger waves-effect"><i class="material-icons">notifications</i></a></li>
               <li class="hide-on-med-and-down"><a href="#!"><i class="material-icons">exit_to_app</i></a></li>
@@ -123,10 +123,10 @@
           </li>
           
           <!--MANAGEMENT-->
-          <li><a href="#" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">content_paste</i>Agenda</a></li>
-          <li><a href="#" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">wc</i>Pacientes</a></li>
-          <li><a href="#" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">enhanced_encryption</i>Consultas</a></li>
-          <li><a href="#" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">event</i>Citas</a></li>
+          <li><a href="agenda.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">content_paste</i>Agenda</a></li>
+          <li><a href="pacientes.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">wc</i>Pacientes</a></li>
+          <li><a href="consultas.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">enhanced_encryption</i>Consultas</a></li>
+          <li><a href="citas.php" class="waves-effect blue hoverable"><i class="material-icons" style="margin-right:16px;">event</i>Citas</a></li>
 
        
         <!--Footer-->

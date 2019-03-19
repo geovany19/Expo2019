@@ -33,6 +33,9 @@
                                     </div>
 
                                     <div class="row">
+                                        <div class="col l4 m4 s12">
+                                            <img class="responsive-img logoSesion" src="../../resources/img/public/logo_clinica.png" alt="empresa-logo">
+                                        </div>
 
                                         <div class="col l8 m8 s12">
                                             <div class="row">
@@ -59,12 +62,6 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        
-                                        <div class="col l4 m4 s12">
-                                            <img class="responsive-img logoSesion" src="../../resources/img/public/logo_clinica.png" alt="empresa-logo">
-                                        </div>
-
-
                                     </div>
 
                                     <div class="row">

@@ -32,7 +32,11 @@ include('../../core/helpers/private/navbarprivate.php');
 
                                 <div class="row">
                                     <div class="center">
-                                    <div class="input-field col s6">
+                                    <div class="input-field col s10">
+<div class="input-field col s10">
+          <input placeholder="Comentario sobre el paciente" id="comentario" type="text" class="validate">
+          <label for="comentario">Comentario</label>
+        </div>
         <form>
   <p class="clasificacion">
     <input id="radio1" type="radio" name="estrellas" value="5"><!--
@@ -62,43 +66,38 @@ include('../../core/helpers/private/navbarprivate.php');
             <div class="card white col l12 m12s12">
                 <div class="card-content">
                 <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+          <input placeholder="" id="first_name" type="text" class="validate">
           <label for="first_name">First Name</label>
         </div>
 
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+          <input placeholder="" id="apellido" type="text" class="validate">
+          <label for="apellido">Apellido</label>
+        </div>
+
+        <div class="input-field col s4">
+          <input placeholder="" id="peso" type="text" class="validate">
+          <label for="peso">peso</label>
+        </div>
+
+        <div class="input-field col s4">
+          <input placeholder="" id="edad" type="text" class="validate">
+          <label for="edad">edad</label>
+        </div>
+
+        <div class="input-field col s4">
+          <input placeholder="" id="estatura" type="text" class="validate">
+          <label for="estatura">Estatura</label>
         </div>
 
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+          <input placeholder="" id="padecimientos" type="text" class="validate">
+          <label for="padecimientos">padecimientos</label>
         </div>
 
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+          <input placeholder="" id="receta" type="text" class="validate">
+          <label for="receta">receta</label>
         </div>
         <a class="waves-effect waves-light btn-small modal-trigger" data-target="calificar">Finalizar</a>
                 </div>

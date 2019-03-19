@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  $('.tooltipped').tooltip();
-});
-
+    $('select').formSelect();
+  });
   $(document).ready(function(){
     $('.modal').modal();
   });
+       

@@ -9,7 +9,7 @@ class navbar
             <div class="nav-wrapper container">
               <a href="index.php" class="brand-logo responsive-img" style="width: 267px; height: 64px;"></a>
               <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons white-text">menu</i></a>
-              <a href="index.php" class="right-align"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión"">exit_to_app</i></a>
+              <a href="index.php"><i class="material-icons tooltipped white-text" data-position="bottom" data-tooltip="Cerrar sesión">exit_to_app</i></a>
             </div>
           </nav>
         </div>';
@@ -43,13 +43,10 @@ class navbar
           
           <!--MANAGEMENT-->
             <li><a href="../../views/dashboard/catalogos.php" class="waves-effect blue hoverable white-text"><i class="material-icons white-text" style="margin-right:16px;">recent_actors</i>Catálogo</a></li>
-            <li><a href="../../views/dashboard/perfil.php" class="waves-effect blue hoverable white-text"><i class="material-icons white-text" style="margin-right:16px;">account_circle</i>Cuenta</a></li>
           <!--Account-->
+            <li><a href="../../views/dashboard/perfil.php" class="waves-effect blue hoverable white-text"><i class="material-icons white-text" style="margin-right:16px;">account_circle</i>Configuración de la cuenta</a></li>
           <li>
-            <a class="waves-effect blue hoverable white-text" href="admin_configuracion.php"><i class="material-icons white-text" style="margin-right:16px;">settings</i>Configuración</a>
-          </li>
-          <li>
-            <a class="waves-effect blue hoverable white-text"  href="index.php"><i class="material-icons white-text" style="margin-right:16px;">access_time</i>Disponibilidad de horarios</a>
+            <a class="waves-effect blue hoverable white-text"  href="disponibilidad.php"><i class="material-icons white-text" style="margin-right:16px;">access_time</i>Disponibilidad de horarios</a>
           </li>
           <li>
             <a class="waves-effect blue hoverable white-text"  href="index.php"><i class="material-icons white-text" style="margin-right:16px;">input</i>Cerrar sesión</a>

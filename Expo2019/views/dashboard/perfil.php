@@ -72,6 +72,19 @@ include('../../core/helpers/dashboard/footeradmin.php');
             </div>
         </div>
     </main>
+    <footer>
+    <?php
+    echo footer::footerbody();
+    ?>
+    <script>
+        var instance = M.Tooltip.getInstance(elem);
+    </script>
+    <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
+    <script type="text/javascript" src="../../resources/js/Chart.js"></script>
+    <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+    <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
+</footer>
     <script src="../../resources/js/jquery.js"></script>
 	<script src="../../resources/js/materialize.min.js"></script>
 </body>

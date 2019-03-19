@@ -8,7 +8,7 @@
             <link href="../../resources/css/material-icons.css" rel="stylesheet">
             <!--Import materialize.css-->
             <link type="text/css" rel="stylesheet" href="../../resources/css/materialize.css"  media="screen,projection"/>
-            <link type="text/css" rel="stylesheet" href="../../resources/css/public/estilos_paciente.css"/>
+            <link type="text/css" rel="stylesheet" href="../../resources/css/public/estilos_loginpaciente.css"/>
             <title>Iniciar sesión</title>
         </head>
         <body>
@@ -66,13 +66,21 @@
 
                                     <div class="row">
                                         <div class="col l4 m4 s12">
-                                            <a href="" class="grey-text right">¿Has olvidado tu contraseña?</a>
+                                            <a href="" class="grey-text right recuperarContra">¿Has olvidado tu contraseña?</a>
                                         </div>
 
                                         <div class="col l8 m8 s12">
                                             <a class="waves-effect waves-light btn blue-darken-1 right" href="">siguiente</a>
                                         </div>
-                                    </div>                            
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col l12 m12 s12 center">
+                                            <span class="grey-text">¿No tienes una cuenta?</span>
+                                            <a href="" class="grey-text crearCuenta">Creala</a>
+                                        </div>
+                                    
+                                    </div>
 
                                 </div>
                             </div>

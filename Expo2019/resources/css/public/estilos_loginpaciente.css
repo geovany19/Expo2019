@@ -54,5 +54,25 @@ a.enlacesExtra {
     padding-right: 1%;
     padding-left: 1%;
     background: white;
+    border-radius: 5%;
+}
+
+a.crearCuenta {
+    padding: 1%;
     border-radius: 10%;
+}
+
+a.crearCuenta:hover {
+    background: #1e88e5;
+    color: white !important;
+}
+
+a.recuperarContra{
+    padding: 3%;
+    border-radius: 2.5%;
+}
+
+a.recuperarContra:hover{
+    background: #1e88e5;
+    color: white !important;
 }

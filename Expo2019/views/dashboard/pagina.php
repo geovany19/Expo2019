@@ -32,8 +32,8 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <main>
         <div id="modal1" class="modal modal-fixed-footer">
             <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
+                <h4>Editar</h4>
+                
             </div>
             <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
@@ -461,7 +461,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                     </table>
                 </div>
                 <br>
-                <div class="col s12 m4 l12">
+                <div class="col s12">
                     <h3>Pacientes</h3>
                     <table class="striped responsive-table">
                         <thead>
@@ -528,7 +528,7 @@ include('../../core/helpers/dashboard/footeradmin.php');
                     </table>
                 </div>
                 <br>
-                <div class="col s12 m4 l12">
+                <div class="col s12">
                     <h3>Citas</h3>
                     <table class="striped responsive-table">
                         <thead>

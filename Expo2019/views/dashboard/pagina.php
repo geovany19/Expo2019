@@ -19,7 +19,8 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <link rel="stylesheet" type="text/css" href="../../resources/css/chart.min.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
-    <title>Administrador</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
+    <title>Tablero</title>
 </head>
 
 <body class="has-fixed-sidenav">
@@ -33,9 +34,6 @@ include('../../core/helpers/dashboard/footeradmin.php');
         <div class="container">
             <div id="chart-dashboard">
                 <div class="row">
-                    <div class="col s0 m2 l2">
-                        <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
-                    </div>
                     <div class="col s12 m5 l5">
                         <div id="highcharts-117b751e-2302-4fb5-bca1-a47be71d51e3"></div>
                         <script>
@@ -355,64 +353,223 @@ include('../../core/helpers/dashboard/footeradmin.php');
                             })();
                         </script>
                     </div>
-                    <div class="col s0 m4 l3">
-                        <p class="white-text">A line chart is a way of plotting data points on a line. Often, it is used to show trend data, and the comparison of two data sets.</p>
-                    </div>
-                    <div class="col s12 m4 l9">
-                        <table class="striped responsive-table">
-                            <thead>
-                                <!--Agregando los campos fijos a la tabla-->
-                                <tr>
-                                    <th>Código del doctor</th>
-                                    <th>Nombre del doctor</th>
-                                    <th>Especialidad</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <!--Agregando registros a la tabla-->
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Juan Pérez</td>
-                                    <td>Medicina general</td>
-                                    <td>24/05/16</td>
-                                    <td>Entregado</td>
-                                    <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Alberto Laínez</td>
-                                    <td>Pediatría</td>
-                                    <td>02/11/18</td>
-                                    <td>Entregado</td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Pedro Andrade</td>
-                                    <td>Cardiología</td>
-                                    <td>07/02/19</td>
-                                    <td>En proceso</td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Benjamin Contreras</td>
-                                    <td>benja@gmail.com</td>
-                                    <td>09/02/19</td>
-                                    <td>En proceso</td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
-                                    <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h3>Doctores</h3>
+                    <table class="striped responsive-table">
+                        <thead>
+                            <!--Agregando los campos fijos a la tabla-->
+                            <tr>
+                                <th>Código del doctor</th>
+                                <th>Nombre del doctor</th>
+                                <th>Foto</th>
+                                <th>Especialidad</th>
+                                <th>Disponibilidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <!--Agregando registros a la tabla-->
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Juan Pérez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Medicina general</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" disabled="disabled" />
+                                            <span>Disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Alberto Laínez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Pediatría</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" disabled="disabled" />
+                                            <span>Disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Pedro Andrade</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Cardiología</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" disabled="disabled" />
+                                            <span>Disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Benjamin Contreras</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Ortodoncia</td>
+                                <td>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" disabled="disabled"/>
+                                            <span>No disponible</span>
+                                        </label>
+                                    </p>
+                                </td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="col s12 m4 l12">
+                    <h3>Pacientes</h3>
+                    <table class="striped responsive-table">
+                        <thead>
+                            <!--Agregando los campos fijos a la tabla-->
+                            <tr>
+                                <th>Código del paciente</th>
+                                <th>Nombre del paciente</th>
+                                <th>Foto</th>
+                                <th>Especialidad</th>
+                                <th>Fecha de la cita</th>
+                                <th>Peso</th>
+                                <th>Altura</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <!--Agregando registros a la tabla-->
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Juan Pérez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Medicina general</td>
+                                <td>24/05/19</td>
+                                <td>67 kg</td>
+                                <td>1.82 m</td>
+                                <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Alberto Laínez</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Pediatría</td>
+                                <td>02/11/18</td>
+                                <td>67 kg</td>
+                                <td>1.82 m</td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Pedro Andrade</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Cardiología</td>
+                                <td>07/02/19</td>
+                                <td>67 kg</td>
+                                <td>1.82 m</td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Benjamin Contreras</td>
+                                <td><img class="responsive-img" src="../../resources/img/dashboard/img2.jpg" alt=""></td>
+                                <td>Ortodoncia</td>
+                                <td>09/02/19</td>
+                                <td>67 kg</td>
+                                <td>1.82 m</td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="col s12 m4 l12">
+                    <h3>Citas</h3>
+                    <table class="striped responsive-table">
+                        <thead>
+                            <!--Agregando los campos fijos a la tabla-->
+                            <tr>
+                                <th>Código de la cita</th>
+                                <th>Nombre del paciente</th>
+                                <th>Nombre del doctor</th>
+                                <th>Especialidad</th>
+                                <th>Fecha de la cita</th>
+                                <th>Hora de la cita</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <!--Agregando registros a la tabla-->
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Juan Pérez</td>
+                                <td>Juan Pérez</td>
+                                <td>Medicina general</td>
+                                <td>24/05/19</td>
+                                <td>8:30 AM</td>
+                                <!--Declarando que al interactuar con el icono "delete" activará un modal que sirve para borrar o uno un registro-->
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Alberto Laínez</td>
+                                <td>Alberto Laínez</td>
+                                <td>Pediatría</td>
+                                <td>24/05/19</td>
+                                <td>8:30 AM</td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Pedro Andrade</td>
+                                <td>Pedro Andrade</td>
+                                <td>Cardiología</td>
+                                <td>24/05/19</td>
+                                <td>8:30 AM</td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Benjamin Contreras</td>
+                                <td>Pedro Andrade</td>
+                                <td>Cardiología</td>
+                                <td>24/05/19</td>
+                                <td>8:30 AM</td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal18">border_color</a></i></td>
+                                <td><i class="material-icons"><a class="modal-trigger" href="#modal15">delete</a></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -424,6 +581,11 @@ include('../../core/helpers/dashboard/footeradmin.php');
     <?php
     echo footer::footerbody();
     ?>
+
+    <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
+    <script type="text/javascript" src="../../resources/js/Chart.js"></script>
+    <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+    <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
 </footer>
 
 </html> 

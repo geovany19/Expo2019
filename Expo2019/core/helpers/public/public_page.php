@@ -19,7 +19,7 @@ class Public_page{
             <nav class="blue darken-1">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a href="#!" class="brand-logo">Clínica Dra. Alma Rocío</a>
+                        <a href="../../views/dashboard/index.php" class="brand-logo">Clínica Dra. Alma Rocío</a>
                         <ul class="right hide-on-med-and-down">
                         <li><a href="sass.html">Link 1</a></li>
                         <li><a href="badges.html">Link 2</a></li>

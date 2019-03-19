@@ -33,13 +33,6 @@
                     </div>
                 </div>
                 <script type="text/javascript" src="../../resources/js/jquery.js"></script>
-                <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
-                <script type="text/javascript" src="../../resources/js/Chart.js"></script>
-                <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
-                <script type="text/javascript" src="../../resources/js/chart.min.js"></script>
-                <script type="text/javascript" src="../../resources/js/chartlist.min.js"></script>
-                <script type="text/javascript" src="../../resources/js/chartjs-sample-chart.js"></script>
-                <script type="text/javascript" src="../../resources/js/plugins.js"></script>
             ';
         }
     }

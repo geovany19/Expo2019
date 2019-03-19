@@ -77,7 +77,7 @@
                                     <div class="row">
                                         <div class="col l12 m12 s12 center">
                                             <span class="grey-text">¿No tienes una cuenta?</span>
-                                            <a href="" class="grey-text crearCuenta">Creala</a>
+                                            <a href="registro.php" class="grey-text crearCuenta">Creala</a>
                                         </div>
                                     
                                     </div>

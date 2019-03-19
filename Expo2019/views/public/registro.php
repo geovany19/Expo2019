@@ -100,7 +100,7 @@
                                                 </div>
 
                                                 <div class="row">
-                                                    <form class="col l4 m4 s12 offset-l1 offset-m1">
+                                                    <form class="col l5 m5 s12 offset-l1 offset-m1">
                                                         <div class="row">
                                                             <div class="input-field">
                                                             <i class="material-icons prefix grey-text">event</i>
@@ -109,18 +109,36 @@
                                                             </div>
                                                         </div>
                                                     </form>
-
-                                                    <form action="#" class="col l6 m6 s12">
-                                                        <div class="file-field input-field">
-                                                            <div class="btn">
-                                                                <span><i class="material-icons prefix white-text center">add_a_photo</i></span>
-                                                                <input type="file">
-                                                            </div>
-                                                            <div class="file-path-wrapper">
-                                                                <input class="file-path validate" type="text">
-                                                            </div>
-                                                        </div>
+                                                    
+                                                    <form action="#" class="col l5 m5 s12">
+                                                        <p class="grey-text">
+                                                        <i class="material-icons grey-text">wc</i> Género:
+                                                            <label>
+                                                                <input name="group1" type="radio" class="blue-darken-1 right-align"/>
+                                                                <span>Hombre</span>
+                                                            </label>
+                                                            <label>
+                                                                <input name="group1" type="radio" class="blue-darken-1 right-align"/>
+                                                                <span>Mujer</span>
+                                                            </label>
+                                                        </p>
                                                     </form>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col s12 l10 m10 offset-l1 offset-m1">
+                                                        <form action="#">
+                                                            <div class="file-field input-field">
+                                                                <div class="btn">
+                                                                    <span><i class="material-icons white-text medium">add_a_photo</i></span>
+                                                                    <input type="file">
+                                                                </div>
+                                                                <div class="file-path-wrapper">
+                                                                    <input class="file-path validate" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -133,21 +151,10 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col l4 m4 s12">
-                                                <a href="" class="grey-text right recuperarContra">¿Has olvidado tu contraseña?</a>
-                                            </div>
 
-                                            <div class="col l8 m8 s12">
-                                                <a class="waves-effect waves-light btn blue-darken-1 right" href="">siguiente</a>
+                                            <div class="col l12 m12 s12">
+                                                <a class="waves-effect waves-light btn blue-darken-1 right" href="">Crear cuenta</a>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div class="col l12 m12 s12 center">
-                                                <span class="grey-text">¿No tienes una cuenta?</span>
-                                                <a href="" class="grey-text crearCuenta">Creala</a>
-                                            </div>
-                                        
                                         </div>
 
                                     </div>

@@ -44,15 +44,15 @@ div.panelSesion {
 }
 
 div.principal {
-   margin-bottom: 14.35%;
-   margin-top: 14.35%;
+   margin-bottom: 5%;
+   margin-top: 5%;
 }
 
 img.logoSesion {
    width: 100%;
    height: 100%;
    display: block;
-   margin: auto;
+   margin-top:40%;
 }
 
 div.row {

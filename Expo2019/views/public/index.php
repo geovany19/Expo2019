@@ -20,7 +20,7 @@
             <main>
                 <div class="main fondo">
                     <div class="row">
-                        <div class="col l6 m8 s12 offset-l3 offset-m2">
+                        <div class="col l6 m8 s12 offset-l3 offset-m2 principal">
                             <div class="z-depht-2 card-panel white panelSesion">
                                 
                                 <div class="row">
@@ -68,7 +68,7 @@
                                     </div>
 
                                     <div class="col l8 m8 s12">
-                                        <a class="waves-effect waves-light btn blue-darken-1 right">button</a>
+                                        <a class="waves-effect waves-light btn blue-darken-1 right">siguiente</a>
                                     </div>
                                 </div>                            
 

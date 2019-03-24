@@ -70,7 +70,7 @@
                                         </div>
 
                                         <div class="col l8 m8 s12">
-                                            <a class="waves-effect waves-light btn blue-darken-1 right" href="">siguiente</a>
+                                            <a class="waves-effect waves-light btn blue-darken-1 right" href="perfil.php">siguiente</a>
                                         </div>
                                     </div>
                                     

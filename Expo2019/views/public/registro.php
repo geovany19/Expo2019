@@ -153,7 +153,7 @@
                                         <div class="row">
 
                                             <div class="col l12 m12 s12">
-                                                <a class="waves-effect waves-light btn blue-darken-1 right" href="">Crear cuenta</a>
+                                                <a class="waves-effect waves-light btn blue-darken-1 right" href="perfil.php">Crear cuenta</a>
                                             </div>
                                         </div>
 

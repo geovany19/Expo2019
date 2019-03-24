@@ -11,15 +11,17 @@ class dashboard_helper
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/mdb.css">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
-                <title>' . $title . '</title>
+				<link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
+				<!-- Font Awesome JS -->
+				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+                <title>'.$title.'</title>
             </head>
         ');
 	}
@@ -28,97 +30,103 @@ class dashboard_helper
 	{
 		print('
             <body>
-				<nav>
-					<!-- SideNav slide-out button -->
-						<a href="#" data-activates="slide-out" class="btn btn-primary p-3 button-collapse"><i class="fas fa-bars"></i></a>
-						<!-- Sidebar navigation -->
-						<div id="slide-out" class="side-nav fixed wide sn-bg-1">
-						<ul class="custom-scrollbar">
-							<!-- Logo -->
+			<div class="wrapper">
+			<!-- Sidebar  -->
+			<nav id="sidebar">
+				<div class="sidebar-header">
+					<h3>Bootstrap Sidebar</h3>
+					<strong>BS</strong>
+				</div>
+	
+				<ul class="list-unstyled components">
+					<li class="active">
+						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+							<i class="fas fa-home"></i>
+							Inicio
+						</a>
+						<ul class="collapse list-unstyled" id="homeSubmenu">
 							<li>
-							<div class="logo-wrapper sn-ad-avatar-wrapper">
-								<a href="#"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg" class="rounded-circle"><span>Anna
-									Deynah</span></a>
-							</div>
+								<a href="#">Home 1</a>
 							</li>
-							<!--/. Logo -->
-							<!-- Side navigation links -->
 							<li>
-							<ul class="collapsible collapsible-accordion">
-								<li><a class="collapsible-header waves-effect arrow-r active"><i class="sv-slim-icon fas fa-chevron-right"></i>
-									Submit blog<i class="fas fa-angle-down rotate-icon"></i></a>
-								<div class="collapsible-body">
-									<ul>
-									<li><a href="#" class="waves-effect active">
-										<span class="sv-slim"> SL </span>
-										<span class="sv-normal">Submit listing</span></a>
-									</li>
-									<li><a href="#" class="waves-effect">
-										<span class="sv-slim"> RF </span>
-										<span class="sv-normal">Registration form</span></a>
-									</li>
-									</ul>
-								</div>
+								<a href="#">Home 2</a>
+							</li>
+							<li>
+								<a href="#">Home 3</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fas fa-briefcase"></i>
+							About
+						</a>
+						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+							<i class="fas fa-copy"></i>
+							Pages
+						</a>
+						<ul class="collapse list-unstyled" id="pageSubmenu">
+							<li>
+								<a href="#">Page 1</a>
+							</li>
+							<li>
+								<a href="#">Page 2</a>
+							</li>
+							<li>
+								<a href="#">Page 3</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fas fa-image"></i>
+							Portfolio
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fas fa-question"></i>
+							FAQ
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fas fa-paper-plane"></i>
+							Contact
+						</a>
+					</li>
+				</ul>
+			</nav>
+	
+			<!-- Page Content  -->
+			<div id="content" class="container">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="container-fluid">
+						<button type="button" id="sidebarCollapse" class="btn btn-info">
+							<i class="fas fa-align-left"></i>
+							<span>Ocultar menú</span>
+						</button>
+						<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<i class="fas fa-align-justify"></i>
+						</button>
+	
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="nav navbar-nav ml-auto">
+								<li class="nav-item active">
+									<a class="nav-link" href="#">Page</a>
 								</li>
-								<li><a class="collapsible-header waves-effect arrow-r"><i class="sv-slim-icon far fa-hand-point-right"></i>
-									Instruction<i class="fas fa-angle-down rotate-icon"></i></a>
-								<div class="collapsible-body">
-									<ul>
-									<li><a href="#" class="waves-effect">
-										<span class="sv-slim"> FB </span>
-										<span class="sv-normal">For bloggers</span></a>
-									</li>
-									<li><a href="#" class="waves-effect">
-										<span class="sv-slim"> FA </span>
-										<span class="sv-normal">For authors</span></a>
-									</li>
-									</ul>
-								</div>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Page</a>
 								</li>
-								<li><a class="collapsible-header waves-effect arrow-r"><i class="sv-slim-icon fas fa-eye"></i> About<i
-									class="fas fa-angle-down rotate-icon"></i></a>
-								<div class="collapsible-body">
-									<ul>
-									<li><a href="#" class="waves-effect">
-										<span class="sv-slim"> I </span>
-										<span class="sv-normal">Introduction</span></a>
-									</li>
-									<li><a href="#" class="waves-effect">
-										<span class="sv-slim"> MM </span>
-										<span class="sv-normal">Monthly meetings</span></a>
-									</li>
-									</ul>
-								</div>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Page</a>
 								</li>
-								<li><a class="collapsible-header waves-effect arrow-r"><i class="sv-slim-icon far fa-envelope"></i>
-									Contact me<i class="fas fa-angle-down rotate-icon"></i></a>
-								<div class="collapsible-body">
-									<ul>
-									<li>
-										<a href="#" class="waves-effect">
-										<span class="sv-slim"> F </span>
-										<span class="sv-normal">FAQ</span>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="waves-effect">
-										<span class="sv-slim"> W </span>
-										<span class="sv-normal">Write a message</span>
-										</a>
-									</li>
-									</ul>
-								</div>
-								</li>
-								<li><a id="toggle" class="waves-effect"><i class="sv-slim-icon fas fa-angle-double-left"></i>Minimize
-									menu</a>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Page</a>
 								</li>
 							</ul>
-							</li>
-							<!--/. Side navigation links -->
-						</ul>
-						<div class="sidenav-bg rgba-blue-strong"></div>
 						</div>
-						<!--/. Sidebar navigation -->
+					</div>
 				</nav>
         ');
 	}
@@ -130,8 +138,8 @@ class dashboard_helper
 
 				</footer>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/mdb.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>

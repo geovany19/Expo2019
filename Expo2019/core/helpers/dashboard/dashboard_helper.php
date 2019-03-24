@@ -30,7 +30,7 @@ class dashboard_helper
 	public static function nav()
 	{
 		print('
-            <body>
+            <body class="has-fixed-sidenav">
 			<div class="wrapper">
 			<!-- Sidebar  -->
 			<nav id="sidebar" class="text-white">

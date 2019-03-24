@@ -16,7 +16,8 @@ class dashboard_helper
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/jquery.CustomScrollbar.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -32,7 +33,7 @@ class dashboard_helper
             <body>
 			<div class="wrapper">
 			<!-- Sidebar  -->
-			<nav id="sidebar" class="bg-primary text-white">
+			<nav id="sidebar" class="text-white">
 				<div class="sidebar-header">
 					<h3>Bootstrap Sidebar</h3>
 					<strong>BS</strong>
@@ -134,8 +135,8 @@ class dashboard_helper
 	public static function footer()
 	{
 		print('
-				<footer class="container bg-primary text-white">
-					<div class="row bg-primary text-white">
+				<footer>
+					<div class="row">
 						<div class="col col-sm-12">
 							<h1>Prueba</h1>
 						</div>
@@ -147,6 +148,7 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+				<script type="text/javascript" src="../../resources/js/jquery.CustomScrollbar.min.js"></script>
             </body>
             </html>
         ');

@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('.datepicker').datepicker();
     $('.carousel.carousel-slider').carousel({
             fullWidth: true
-          });;
+		  });;
     $('.dropdown-trigger').dropdown();
     $('.datepicker').datepicker();
     $('.timepicker').timepicker();
@@ -11,4 +11,5 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.trigger-modal').modal();
     $('select').formSelect();
+	$('.tooltipped').tooltip();
 });

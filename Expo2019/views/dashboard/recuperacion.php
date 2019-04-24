@@ -63,8 +63,6 @@ Public_page::header("Principal");
 		</div>
 	</section>
 
-
-
 	<script src="../../resources/js/jquery.js"></script>
     <script src="../../resources/js/inicializacion.js"></script>
 	<script src="../../resources/js/materialize.min.js"></script>

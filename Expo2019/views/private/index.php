@@ -12,11 +12,6 @@
             <title>Iniciar sesión</title>
         </head>
         <body>
-            <!--El login no posee nav-->
-            <header>
-            </header>
-
-            
             <main>
                 <div class="main fondo">
                     <div class="row">
@@ -90,19 +85,14 @@
                                  <a href="" class="grey-text right enlacesExtra z-depth-2">Privacidad</a>
                                  <a href="" class="grey-text right enlacesExtra z-depth-2">Ayuda</a>
                             </div>
-
                         </div>
-
                     </div>
-                    
                 </div>
             </main>
-
             <!--El login no posee footer-->
             <footer>
             </footer>
-
-            <script src="../../resources/js/jquery.js"></script>
+            <script src="../../resources/js/jquery-3.3.1.min.js"></script>
             <script src="../../resources/js/materialize.min.js"></script>
             <script src="../../resources/js/init.js"></script>
         </body>

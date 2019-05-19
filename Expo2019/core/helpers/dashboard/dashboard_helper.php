@@ -21,7 +21,7 @@ class dashboard_helper
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-                <title>'.$title.'</title>
+                <title>SISMED - '.$title.'</title>
             </head>
         ');
 	}
@@ -32,7 +32,7 @@ class dashboard_helper
 			<nav class="navbar navbar-light bg-light">
 				<a class="navbar-brand" href="#">
 				<img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-				Medic-Partner
+				Sismed
 				</a>
 			</nav>
 		');
@@ -46,35 +46,32 @@ class dashboard_helper
 					<!-- Sidebar  -->
 					<nav id="sidebar">
 						<div class="sidebar-header">
-							<h3>Medic-Partner</h3>
-							<strong>MP</strong>
+							<h3>Sismed</h3>
+							<strong>SM</strong>
 						</div>
 						<ul class="list-unstyled components">
-							<li class="active">
-								<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+							<li>
+								<a href="pagina.php">
 									<i class="fas fa-home"></i>
 									Inicio
 								</a>
+							</li>
+							<li class="active">
+								<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+									<i class="fas fa-book"></i> Catálogos
+								</a>
 								<ul class="collapse list-unstyled" id="homeSubmenu">
-									<li>
-										<a href="#">Home 1</a>
-									</li>
-									<li>
-										<a href="#">Home 2</a>
-									</li>
-									<li>
-										<a href="#">Home 3</a>
-									</li>
+									<li><a href="doctores.php">Doctores</a></li>
+									<li><a href="#">Pacientes</a></li>
+									<li><a href="disponibilidad.php">Horarios de disponibilidad</a></li>
 								</ul>
 							</li>
 							<li>
 								<a href="#">
-									<i class="fas fa-briefcase"></i>
-									About
+									<i class="fas fa-user"></i> Perfil
 								</a>
-								<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-									<i class="fas fa-copy"></i>
-									Pages
+								<!--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+									<i class="fas fa-copy"></i>Pages
 								</a>
 								<ul class="collapse list-unstyled" id="pageSubmenu">
 									<li>
@@ -86,26 +83,9 @@ class dashboard_helper
 									<li>
 										<a href="#">Page 3</a>
 									</li>
-								</ul>
+								</ul>-->
 							</li>
-							<li>
-								<a href="#">
-									<i class="fas fa-image"></i>
-									Portfolio
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fas fa-question"></i>
-									FAQ
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fas fa-paper-plane"></i>
-									Contact
-								</a>
-							</li>
+							<li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
 						</ul>
 					</nav>
 				<!-- Page Content  -->
@@ -114,14 +94,14 @@ class dashboard_helper
 						<div class="container-fluid">
 							<button type="button" id="sidebarCollapse" class="btn btn-info">
 								<i class="fas fa-align-left"></i>
-								<span>Ocultar menú</span>
+								<span>Minimizar menú</span>
 							</button>
 							<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<i class="fas fa-align-justify"></i>
 							</button>
 							<div class="collapse navbar-collapse" id="navbarSupportedContent">
 								<ul class="nav navbar-nav ml-auto">
-									<li class="nav-item active">
+										<li class="nav-item active">
 										<a class="nav-link" href="#">Page</a>
 									</li>
 									<li class="nav-item">
@@ -151,8 +131,8 @@ class dashboard_helper
 					</div>
 				</footer>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>

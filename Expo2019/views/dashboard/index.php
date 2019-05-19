@@ -7,7 +7,7 @@ dashboard_helper::navIndex();
 <body>
 	<main id="main">
 		<div class="login-form">
-			<form action="/examples/actions/confirmation.php" method="post">
+			<form action="../../views/dashboard/pagina.php" method="post">
 				<div class="avatar">
 					<img src="/examples/images/avatar.png" alt="Avatar">
 				</div>

@@ -78,3 +78,10 @@
 .login-form form a:hover {
     text-decoration: underline;
 }
+
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}

@@ -1,7 +1,7 @@
 <?php
-class dashboard_helper
+class Private_helper
 {
-	public static function head($title)
+    public static function head($title)
 	{
 		print('
             <!DOCTYPE html>
@@ -21,24 +21,13 @@ class dashboard_helper
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-                <title>SISMED - ' . $title . '</title>
+                <title>SISMED - '.$title.'</title>
             </head>
         ');
-	}
-
-	public static function navIndex()
-	{
-		print('
-			<nav class="navbar navbar-light bg-light">
-				<a class="navbar-brand" href="#">
-				<img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-				Sismed
-				</a>
-			</nav>
-		');
-	}
-
-	public static function nav()
+    }
+    
+    //Método que contiene el navbar, tiene color azul, las opciones del navbar se pueden adaptar
+    public static function navbar()
 	{
 		print('
             <body>
@@ -50,42 +39,10 @@ class dashboard_helper
 							<strong>SM</strong>
 						</div>
 						<ul class="list-unstyled components">
-							<li>
-								<a href="pagina.php">
-									<i class="fas fa-home"></i>
-									Inicio
-								</a>
-							</li>
-							<li class="active">
-								<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-									<i class="fas fa-book"></i> Catálogos
-								</a>
-								<ul class="collapse list-unstyled" id="homeSubmenu">
-									<li><a href="doctores.php">Doctores</a></li>
-									<li><a href="#">Pacientes</a></li>
-									<li><a href="disponibilidad.php">Horarios de disponibilidad</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fas fa-user"></i> Perfil
-								</a>
-								<!--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-									<i class="fas fa-copy"></i>Pages
-								</a>
-								<ul class="collapse list-unstyled" id="pageSubmenu">
-									<li>
-										<a href="#">Page 1</a>
-									</li>
-									<li>
-										<a href="#">Page 2</a>
-									</li>
-									<li>
-										<a href="#">Page 3</a>
-									</li>
-								</ul>-->
-							</li>
-							<li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+							<li><a href="agenda.php"><i class="fas fa-home"></i> Agenda</a></li>
+							<li><a href="pacientes.php"><i class="fas fa-user"></i> Pacientes</a></li>
+							<li><a href="consultas.php"><i class="fas fa-sign-out-alt"></i> Consultas</a></li>
+							<li><a href="citas.php"><i class="fas fa-sign-out-alt"></i> Citas</a></li>
 						</ul>
 					</nav>
 				<!-- Page Content  -->
@@ -128,7 +85,7 @@ class dashboard_helper
 				<footer>
 					<div class="row">
 						<div class="col col-sm-12">
-							<h1>Prueba</h1>
+							<h1>Footer de prueba</h1>
 						</div>
 					</div>
 				</footer>

@@ -1,7 +1,6 @@
 <?php
-include "../../core/helpers/private/private_helper.php";
+include "../../core/helpers/private_helper.php";
 private_helper::head("Pacientes");
-private_helper::navbar();
 ?>
 <main class="main grey lighten-3">
     <div class="row">

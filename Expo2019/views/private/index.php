@@ -1,99 +1,37 @@
-<!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <!--Import Google Icon Font-->
-            <link href="../../resources/css/material-icons.css" rel="stylesheet">
-            <!--Import materialize.css-->
-            <link type="text/css" rel="stylesheet" href="../../resources/css/materialize.css"  media="screen,projection"/>
-            <link type="text/css" rel="stylesheet" href="../../resources/css/public/estilos_loginpaciente.css"/>
-            <title>Iniciar sesión</title>
-        </head>
-        <body>
-            <main>
-                <div class="main fondo">
-                    <div class="row">
-                        <div class="col l6 m8 s12 offset-l3 offset-m2 principal">
+<?php
+include "../../core/helpers/private_helper.php";
+private_helper::head("Iniciar sesión");
+?>
 
-                            <div class="row">
-                                <div class="z-depht-2 card-panel white panelSesion">
-                                    
-                                    <div class="row">
-                                        <div class="col l12 m12 12">
-                                            <h3 class="grey-text center">Iniciar sesión</h3>
-                                        </div>
-                                        
-                                    </div>
+<body id="body">
+	<main id="main">
+		<div class="row">
+			<div class="col col-sm-12">
+				<div class="login-form">
+					<form action="../../views/private/pacientes.php" method="post">
+						<div class="avatar">
+							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
+						</div>
+						<h2 class="text-center">Iniciar sesión</h2>
+						<div class="form-group">
+							<input type="text" class="form-control" name="username" placeholder="Nombre de usuario" required="required">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" placeholder="Contraseña" required="required">
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
+						</div>
+						<div class="clearfix">
+							<label class="pull-left checkbox-inline"><input type="checkbox"> Recuerdame</label>
+							<a href="#" class="pull-right">¿Olvidaste tu contraseña?</a>
+						</div>
+					</form>
+					<p class="text-center small">¿No estás registrado? <a href="#">¡Registrate aquí!</a></p>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
 
-                                    <div class="row">
-                                        <div class="col l4 m4 s12">
-                                            <img class="responsive-img logoSesion" src="../../resources/img/public/logo_clinica.png" alt="empresa-logo">
-                                        </div>
-
-                                        <div class="col l8 m8 s12">
-                                            <div class="row">
-                                                <form class="col l10 m10 s12 offset-l1 offset-m1">
-                                                    <div class="row">
-                                                        <div class="input-field">
-                                                            <i class="material-icons prefix grey-text">account_circle</i>
-                                                            <input id="usuario" type="text" class="validate">
-                                                            <label for="usuario">Introduce tu nombre de usuario o correo electrónico</label>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                            <div class="row">
-                                                <form class="col l10 m10 s12 offset-l1 offset-m1">
-                                                    <div class="row">
-                                                        <div class="input-field">
-                                                            <i class="material-icons prefix grey-text">lock</i>
-                                                            <input id="contra" type="password" class="validate">
-                                                            <label for="contra">Introduce tu contraseña</label>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col l4 m4 s12">
-                                            <a href="" class="grey-text right recuperarContra">¿Has olvidado tu contraseña?</a>
-                                        </div>
-
-                                        <div class="col l8 m8 s12">
-                                            <a class="waves-effect waves-light btn blue-darken-1 right" href="agenda.php">siguiente</a>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col l12 m12 s12 center">
-                                            <span class="grey-text">¿No tienes una cuenta?</span>
-                                            <a href="registro.php" class="grey-text crearCuenta">Creala</a>
-                                        </div>
-                                    
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                 <a href="" class="grey-text right enlacesExtra z-depth-2">Terminos</a>
-                                 <a href="" class="grey-text right enlacesExtra z-depth-2">Privacidad</a>
-                                 <a href="" class="grey-text right enlacesExtra z-depth-2">Ayuda</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <!--El login no posee footer-->
-            <footer>
-            </footer>
-            <script src="../../resources/js/jquery-3.3.1.min.js"></script>
-            <script src="../../resources/js/materialize.min.js"></script>
-            <script src="../../resources/js/init.js"></script>
-        </body>
 </html>

@@ -1,6 +1,3 @@
-/*
-    DEMO STYLE
-*/
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
@@ -51,10 +48,6 @@ span {
     display: inline-block;
 }
 
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
-
 .wrapper {
     display: flex;
     align-items: stretch;
@@ -63,7 +56,7 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: rgb(19, 140, 201);
     color: #fff;
     transition: all 0.3s;
 }
@@ -115,7 +108,7 @@ span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: rgb(19, 140, 201);
 }
 
 #sidebar .sidebar-header strong {
@@ -125,7 +118,7 @@ span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid rgb(19, 140, 201);
 }
 
 #sidebar ul li a {
@@ -135,7 +128,7 @@ span {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: rgb(19, 140, 201);
     background: #fff;
 }
 
@@ -146,7 +139,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: rgb(17, 137, 197);
 }
 
 a[data-toggle="collapse"] {
@@ -164,7 +157,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: rgb(17, 157, 226);
 }
 
 ul.CTAs {
@@ -181,12 +174,12 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #7386D5;
+    color: rgb(17, 157, 226);
 }
 
 a.article,
 a.article:hover {
-    background: #6d7fcc !important;
+    background: rgb(17, 157, 226) !important;
     color: #fff !important;
 }
 

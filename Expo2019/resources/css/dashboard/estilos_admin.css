@@ -1,7 +1,13 @@
+#body {
+    background: #8EDAF7;
+    height: 100%;
+}
+
 #main {
     color: #fff;
-    background: #8EDAF7;
+    background: #8edaf7;
 }
+
 .form-control {
     min-height: 41px;
     background: #fff;
@@ -84,4 +90,9 @@
 }
 .btn.active span.glyphicon {				
 	opacity: 1;				
+}
+
+.page-footer{
+    background-color: #69C6F4;
+    color: #e3e3e3;
 }

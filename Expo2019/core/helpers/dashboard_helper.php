@@ -1,7 +1,7 @@
 <?php
-class Public_page
+class dashboard_helper
 {
-    public static function head($title)
+	public static function head($title)
 	{
 		print('
             <!DOCTYPE html>
@@ -21,13 +21,21 @@ class Public_page
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-                <title>SISMED - '.$title.'</title>
+                <title>SISMED - ' . $title . '</title>
             </head>
         ');
-    }
-    
-    //Método que contiene el navbar, tiene color azul, las opciones del navbar se pueden adaptar
-    public static function navbar()
+	}
+
+	public static function navIndex()
+	{
+		print('
+			<nav class="navbar navbar-light bg-light">
+				<a class="navbar-brand mb-0  h1"><img src="../../resources/img/dashboard/img4.jpg" width="30" height="30" class="d-inline-block align-top" alt="">    Sismed</a>
+			</nav>
+		');
+	}
+
+	public static function nav()
 	{
 		print('
             <body>
@@ -108,5 +116,88 @@ class Public_page
 					</nav>
         ');
 	}
+
+	public static function footer()
+	{
+		print('
+					</div>		
+				</div>
+				<!--<footer class="navbar navbar-light bg-light">
+					<div class="row">
+						<div class="col col-sm-12">
+							<h1>Prueba</h1>
+						</div>
+						<div class="col col-sm-12 col-md-6">
+							<h3 class="text-center">Técnicos de mantenimiento</h3>
+							<ul>
+								<li>Bryan Amaya - bryan_amaya@gmail.com</li>
+								<li>María Campos - maria_campos@gmail.com</li>
+								<li>Geovany Pineda - geovany_pineda@gmail.com</li>
+								<li>Carlos Ramírez - carlos_ramirez@gmail.com</li>
+							</ul>
+						</div>
+					</div>
+				</footer>-->
+				<footer class="page-footer">
+					<div class="container-fluid text-center text-md-left">
+						<div class="row">
+						<div class="col-md-6 mt-md-0 mt-3">
+							<h5 class="text-uppercase">Footer Content</h5>
+							<p>Here you can use rows and columns to organize your footer content.</p>
+						</div>
+						<hr class="clearfix w-100 d-md-none pb-3">
+						<div class="col-md-3 mb-md-0 mb-3">
+							<h5 class="text-uppercase">Links</h5>
+							<ul class="list-unstyled">
+							<li>
+								<a href="#!">Link 1</a>
+							</li>
+							<li>
+								<a href="#!">Link 2</a>
+							</li>
+							<li>
+								<a href="#!">Link 3</a>
+							</li>
+							<li>
+								<a href="#!">Link 4</a>
+							</li>
+							</ul>
+						</div>
+						<!-- Grid column -->
+						<!-- Grid column -->
+						<div class="col-md-3 mb-md-0 mb-3">
+							<!-- Links -->
+							<h5 class="text-uppercase">Links</h5>
+							<ul class="list-unstyled">
+							<li>
+								<a href="#!">Link 1</a>
+							</li>
+							<li>
+								<a href="#!">Link 2</a>
+							</li>
+							<li>
+								<a href="#!">Link 3</a>
+							</li>
+							<li>
+								<a href="#!">Link 4</a>
+							</li>
+							</ul>
+						</div>
+						</div>
+					</div>
+					<!-- Copyright -->
+					<div class="footer-copyright text-center py-3">© 2018 Copyright:
+						<a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+					</div>
+				</footer>
+				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
+				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
+				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+            </body>
+            </html>
+        ');
+	}
 }
-?>

@@ -21,10 +21,17 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sismed`
 --
+CREATE DATABASE IF NOT EXISTS `sismed`;
+
+USE `sismed`;
 
 DELIMITER $$
---CREATE DATABASE IF NOT EXIST 
-USE `sismed`-- Procedimientos
+--
+CREATE DATABASE IF NOT EXISTS `sismed`;
+
+USE `sismed`;
+
+-- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `agregar_calificacion` (IN `id_calificacion` INT, IN `puntuacion` DOUBLE, IN `resena` VARCHAR(100), IN `usuario_calificador` INT, IN `usuario_calificado` INT, IN `id_tipousuario` INT)  NO SQL
 INSERT INTO calificacion VALUES(`id_calificacion`, `puntuacion`, `resena`, `usuario_calificador`, `usuario_calificado`, `id_tipousuario`)$$

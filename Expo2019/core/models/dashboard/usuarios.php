@@ -136,5 +136,5 @@ class Usuarios extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	
+	public 
 }

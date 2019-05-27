@@ -136,8 +136,47 @@ class Usuarios extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
+	//Métodos para manejar el CRUD
 	public function readUsuarios()
 	{
-		$sql = 'SELECT';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario FROM usuarios_a ORDER BY apellido_usuario';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
+
+	public function searchUsuario()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario FROM usuarios_a WHERE apellido_usuario LIKE ? OR nombre_usuario LIKE ? ORDER BY apellido_usuario';
+		$params = array("%$value%", "%$value%");
+		return Database::getRows($sql, $params);
+	}
+
+	public function createUsuario()
+	{
+		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario) VALUES(?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getUsuario()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario FROM usuarios_a WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::getRow($sql, $params);
+	}
+
+	public function updateUsuario()
+	{
+		$sql = 'UPDATE usuarios_a SET nombre_usuario = ?, apellido_usuario = ?, correo_usuario = ?, usuario_usuario = ?, fecha_nacimiento = ?, foto_usuario = ? WHERE id_usuario = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idusuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteUsuario()
+	{
+		$sql = 'DELETE FROM usuarios_a WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::executeRow($sql, $params);
 	}
 }

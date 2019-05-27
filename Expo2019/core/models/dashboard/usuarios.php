@@ -106,7 +106,7 @@ class Usuarios extends Validator
 	public function checkUser()
 	{
 		$sql = 'SELECT id_usuario FROM usuarios_a WHERE usuario_usuario = ?';
-		$params = array($this->alias);
+		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->idusuario = $data['id_usuario'];

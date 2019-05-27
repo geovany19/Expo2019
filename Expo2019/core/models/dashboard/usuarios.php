@@ -1,33 +1,33 @@
 <?php
 class Usuarios extends Validator
 {
-    //Declaración de variables a utilizar
-    private $idusuario = null;
-    private $nombre = null;
-    private $apellido = null;
-    private $correo = null;
-    private $usuario = null;
-    private $clave = null;
-    private $fecha = null;
-    private $foto = null;
+	//Declaración de variables a utilizar
+	private $idusuario = null;
+	private $nombre = null;
+	private $apellido = null;
+	private $correo = null;
+	private $usuario = null;
+	private $clave = null;
+	private $fecha = null;
+	private $foto = null;
 
-    //Métodos para la sobre carga de propiedades
-    public function setId($value)
-    {
-        if ($this->validateId($value)) {
+	//Métodos para la sobre carga de propiedades
+	public function setId($value)
+	{
+		if ($this->validateId($value)) {
 			$this->idusuario = $value;
 			return true;
 		} else {
 			return false;
 		}
-    }
+	}
 
-    public function getId()
+	public function getId()
 	{
 		return $this->idusuario;
-    }
-    
-    public function setNombre($value)
+	}
+
+	public function setNombre($value)
 	{
 		if ($this->validateAlphabetic($value, 1, 50)) {
 			$this->nombre = $value;
@@ -55,9 +55,9 @@ class Usuarios extends Validator
 	public function getApellido()
 	{
 		return $this->apellido;
-    }
-    
-    public function setCorreo($value)
+	}
+
+	public function setCorreo($value)
 	{
 		if ($this->validateEmail($value)) {
 			$this->correo = $value;
@@ -70,9 +70,9 @@ class Usuarios extends Validator
 	public function getCorreo()
 	{
 		return $this->correo;
-    }
-    
-    public function setUsuario($value)
+	}
+
+	public function setUsuario($value)
 	{
 		if ($this->validateAlphanumeric($value, 1, 50)) {
 			$this->usuario = $value;
@@ -85,9 +85,9 @@ class Usuarios extends Validator
 	public function getUsuario()
 	{
 		return $this->usuario;
-    }
-    
-    public function setClave($value)
+	}
+
+	public function setClave($value)
 	{
 		if ($this->validatePassword($value)) {
 			$this->clave = $value;
@@ -100,9 +100,9 @@ class Usuarios extends Validator
 	public function getClave()
 	{
 		return $this->clave;
-    }
-    
-    // Métodos para manejar la sesión del usuario
+	}
+
+	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
 		$sql = 'SELECT id_usuario FROM usuarios_a WHERE usuario_usuario = ?';
@@ -135,6 +135,4 @@ class Usuarios extends Validator
 		$params = array($hash, $this->idusuario);
 		return Database::executeRow($sql, $params);
 	}
-
-	
 }

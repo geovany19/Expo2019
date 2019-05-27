@@ -135,4 +135,10 @@ class Usuarios extends Validator
 		$params = array($hash, $this->idusuario);
 		return Database::executeRow($sql, $params);
 	}
+<<<<<<< HEAD
 }
+=======
+
+	public 
+}
+>>>>>>> 7e09f6b1cd3f449c9cdca7befdf59ed2d5f02a55

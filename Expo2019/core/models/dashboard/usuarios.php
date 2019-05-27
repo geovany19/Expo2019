@@ -10,6 +10,7 @@ class Usuarios extends Validator
 	private $clave = null;
 	private $fecha = null;
 	private $foto = null;
+	private $ruta = '../../resources/img/usuarios/';
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -100,6 +101,36 @@ class Usuarios extends Validator
 	public function getClave()
 	{
 		return $this->clave;
+	}
+
+	public function setFecha()
+	{
+		if ($this->validateDate($value)) {
+			$this->fecha = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function getFecha()
+	{
+		return $this->fecha;
+	}
+
+	public function setFoto($file, $name)
+	{
+		if ($this->validateImageFile($file, $this->ruta, $name, 500, 500)) {
+			$this->foto = $this->getImageName();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFoto()
+	{
+		return $this->foto;
 	}
 
 	// Métodos para manejar la sesión del usuario

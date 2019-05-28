@@ -14,6 +14,7 @@ function fillTable(rows)
     rows.forEach(function(row){
         content += `
             <tr>
+                <td>${row.id_usuario}</td>
                 <td>${row.nombre_usuario}</td>
                 <td>${row.apellido_usuario}</td> 
                 <td>${row.correo_usuario}</td>

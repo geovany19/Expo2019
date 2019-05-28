@@ -65,6 +65,7 @@ class dashboard_helper
 								<ul class="collapse list-unstyled" id="homeSubmenu">
 									<li><a href="doctores.php">Doctores</a></li>
 									<li><a href="#">Pacientes</a></li>
+									<li><a href="usuarios.php">Usuarios</a></li>
 									<li><a href="disponibilidad.php">Horarios de disponibilidad</a></li>
 								</ul>
 							</li>

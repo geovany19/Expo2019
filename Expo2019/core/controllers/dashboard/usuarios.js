@@ -14,10 +14,13 @@ function fillTable(rows)
     rows.forEach(function(row){
         content += `
             <tr>
-                <td>${row.apellidos_usuario}</td>
-                <td>${row.nombres_usuario}</td>
+                <td>${row.nombre_usuario}</td>
+                <td>${row.apellido_usuario}</td> 
                 <td>${row.correo_usuario}</td>
-                <td>${row.alias_usuario}</td>
+                <td>${row.usuario_usuario}</td>
+                <td>${row.fecha_nacimiento}</td>
+                <td>${row.foto_usuario}</td>
+                <td>${row.id_estado}</td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_usuario})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>

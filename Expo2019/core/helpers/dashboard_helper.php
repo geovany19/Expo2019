@@ -205,9 +205,10 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/dataTables.responsive.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.js"></script>
+				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/'.$controller.'"></script>
+				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
+				<script type="text/javascript" src="../../core/controllers/dashboard/'.$controller.'"></script>
             </body>
             </html>
         ');

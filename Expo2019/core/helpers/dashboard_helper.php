@@ -18,6 +18,11 @@ class dashboard_helper
                 <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.dataTables.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/colReorder.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/scroller.bootstrap4.min.css">
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -196,6 +201,12 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
+				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
+				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/dataTables.responsive.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.js"></script>
+				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
             </body>
             </html>
         ');

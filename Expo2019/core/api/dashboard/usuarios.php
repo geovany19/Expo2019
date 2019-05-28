@@ -282,9 +282,24 @@ if (isset($_GET['action'])) {
                                         if ($usuario->setFecha($_POST['fecha'])) {
                                             if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
                                                 if ($usuario->setFoto($_FILES['create_archivo'], null)) {
-                                                    $archivo = true;
+                                                    if ($usuario->createUsuario()) {
+                                                        $result['status'] = 1;
+                                                        if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
+                                                            $result['message'] = 'Usuario registrado correctamente';
+                                                        } else {
+                                                            $result['message'] = 'Usuario registrado. No se creó el archivo';
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Operación fallida';
+                                                    }
+                                                } else {
+                                                    $result['exception'] = $usuario->getImageError();
                                                 }
+                                            } else {
+                                                $result['exception'] = 'Seleccione una imagen.';
                                             }
+                                        } else {
+                                            $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
                                         $result['exception'] = 'Clave menor a 6 caracteres';

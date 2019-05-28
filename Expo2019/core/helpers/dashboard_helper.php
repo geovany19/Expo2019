@@ -122,7 +122,7 @@ class dashboard_helper
         ');
 	}
 
-	public static function footer()
+	public static function footer($controller)
 	{
 		print('
 					</div>		
@@ -207,6 +207,7 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/'.$controller.'"></script>
             </body>
             </html>
         ');

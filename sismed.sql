@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
@@ -19,6 +19,10 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sismed`
 --
+
+CREATE DATABASE IF NOT EXISTS `sismed`;
+
+USE `sismed`;
 
 DELIMITER $$
 --

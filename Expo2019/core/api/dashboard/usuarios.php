@@ -20,7 +20,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $usuario->getUsuario()) {
+                    if ($result['dataset'] = $usuario->getUser()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -31,7 +31,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'editProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($usuario->getUsuario()) {
+                    if ($usuario->getUser()) {
                         $_POST = $usuario->validateForm($_POST);
                         if ($usuario->setNombre($_POST['profile_nombres'])) {
                             if ($usuario->setApellido($_POST['profile_apellidos'])) {
@@ -134,10 +134,22 @@ if (isset($_GET['action'])) {
                                                 if ($usuario->setFoto($_FILES['create_archivo'], null)) {
                                                     if ($usuario->createUsuario()) {
                                                         $result['status'] = 1;
-                                                        if ($usuario->saveFile())
+                                                        if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
+                                                            $result['message'] = 'Usuario creado correctamente';
+                                                        } else {
+                                                            $result['message'] = 'Usuario no creado. No se guardó el archivo';
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Operación fallida';
                                                     }
+                                                } else {
+                                                    $result['exception'] = $usuario->getImageError();
                                                 }
+                                            } else {
+                                                $result['exception'] = 'Seleccione una imagen';
                                             }
+                                        } else {
+                                            $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
                                         $result['exception'] = 'Clave menor a 6 caracteres';
@@ -160,7 +172,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'get':
                 if ($usuario->setId($_POST['id_usuario'])) {
-                    if ($result['dataset'] = $usuario->getUsuario()) {
+                    if ($result['dataset'] = $usuario->getUser()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -172,18 +184,44 @@ if (isset($_GET['action'])) {
             case 'update':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setId($_POST['id_usuario'])) {
-                    if ($usuario->getUsuario()) {
+                    if ($usuario->getUser()) {
                         if ($usuario->setNombres($_POST['update_nombres'])) {
                             if ($usuario->setApellidos($_POST['update_apellidos'])) {
                                 if ($usuario->setCorreo($_POST['update_correo'])) {
-                                    if ($usuario->setAlias($_POST['update_alias'])) {
-                                        if ($usuario->updateUsuario()) {
-                                            $result['status'] = 1;
+                                    if ($usuario->setUsuario($_POST['update_usuario'])) {
+                                        if ($usuario->setFecha($_POST['update_fecha'])) {
+                                            if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
+                                                if ($usuario->setFoto($_FILES['update_archivo'], $_POST['imagen_producto'])) {
+                                                    $archivo = true;
+                                                } else {
+                                                    $result['exception'] = $producto->getImageError();
+                                                    $archivo = false;
+                                                }
+                                            } else {
+                                                if (!$usuario->setFoto(null, $_POST['imagen_producto'])) {
+                                                    $result['exception'] = $usuario->getImageError();
+                                                }
+                                                $archivo = false;
+                                            }
+                                            if ($usuario->updateUsuario()) {
+                                                $result['status'] = 1;
+                                                if ($archivo) {
+                                                    if ($usuario->saveFile($_FILES['update_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
+                                                        $result['message'] = 'Usuario modificado correctamente';
+                                                    } else {
+                                                        $result['message'] = 'Usuario modificado. No se guardó el archivo';
+                                                    }
+                                                } else {
+                                                    $result['message'] = 'Usuario modificado. No se subió ningún archivo';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Operación fallida';
+                                            $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Alias incorrecto';
+                                        $result['exception'] = 'Nombre de usuario incorrecto';
                                     }
                                 } else {
                                     $result['exception'] = 'Correo incorrecto';
@@ -204,7 +242,7 @@ if (isset($_GET['action'])) {
             case 'delete':
                 if ($_POST['id_usuario'] != $_SESSION['idUsuario']) {
                     if ($usuario->setId($_POST['id_usuario'])) {
-                        if ($usuario->getUsuario()) {
+                        if ($usuario->getUser()) {
                             if ($usuario->deleteUsuario()) {
                                 $result['status'] = 1;
                             } else {
@@ -235,17 +273,18 @@ if (isset($_GET['action'])) {
                 break;
             case 'register':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['nombres'])) {
-                    if ($usuario->setApellidos($_POST['apellidos'])) {
+                if ($usuario->setNombre($_POST['nombres'])) {
+                    if ($usuario->setApellido($_POST['apellidos'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
-                            if ($usuario->setAlias($_POST['alias'])) {
+                            if ($usuario->setUsuario($_POST['alias'])) {
                                 if ($_POST['clave1'] == $_POST['clave2']) {
                                     if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->createUsuario()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Usuario registrado correctamente';
-                                        } else {
-                                            $result['exception'] = 'Operación fallida';
+                                        if ($usuario->setFecha($_POST['fecha'])) {
+                                            if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
+                                                if ($usuario->setFoto($_FILES['create_archivo'], null)) {
+                                                    $archivo = true;
+                                                }
+                                            }
                                         }
                                     } else {
                                         $result['exception'] = 'Clave menor a 6 caracteres';
@@ -297,4 +336,3 @@ if (isset($_GET['action'])) {
 } else {
 	exit('Recurso denegado');
 }
-?>

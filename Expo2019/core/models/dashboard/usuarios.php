@@ -133,6 +133,11 @@ class Usuarios extends Validator
 		return $this->foto;
 	}
 
+	public function getRuta()
+	{
+		return $this->ruta;
+	}
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{

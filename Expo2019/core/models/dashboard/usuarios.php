@@ -10,6 +10,7 @@ class Usuarios extends Validator
 	private $clave = null;
 	private $fecha = null;
 	private $foto = null;
+	private $ruta = '../../resources/img/usuarios/';
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -102,11 +103,41 @@ class Usuarios extends Validator
 		return $this->clave;
 	}
 
+	public function setFecha($value)
+	{
+		if ($this->validateDate($value)) {
+			$this->fecha = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function getFecha()
+	{
+		return $this->fecha;
+	}
+
+	public function setFoto($file, $name)
+	{
+		if ($this->validateImageFile($file, $this->ruta, $name, 500, 500)) {
+			$this->foto = $this->getImageName();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFoto()
+	{
+		return $this->foto;
+	}
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
 		$sql = 'SELECT id_usuario FROM usuarios_a WHERE usuario_usuario = ?';
-		$params = array($this->alias);
+		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->idusuario = $data['id_usuario'];
@@ -136,8 +167,47 @@ class Usuarios extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function readUsuario()
+	//Métodos para manejar el CRUD
+	public function readUsuarios()
 	{
-		
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario FROM usuarios_a ORDER BY apellido_usuario';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
+
+	public function searchUsuario($value)
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario FROM usuarios_a WHERE apellido_usuario LIKE ? OR nombre_usuario LIKE ? ORDER BY apellido_usuario';
+		$params = array("%$value%", "%$value%");
+		return Database::getRows($sql, $params);
+	}
+
+	public function createUsuario()
+	{
+		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario) VALUES(?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getUser()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario FROM usuarios_a WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::getRow($sql, $params);
+	}
+
+	public function updateUsuario()
+	{
+		$sql = 'UPDATE usuarios_a SET nombre_usuario = ?, apellido_usuario = ?, correo_usuario = ?, usuario_usuario = ?, fecha_nacimiento = ?, foto_usuario = ? WHERE id_usuario = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idusuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteUsuario()
+	{
+		$sql = 'DELETE FROM usuarios_a WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::executeRow($sql, $params);
 	}
 }

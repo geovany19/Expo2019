@@ -1,7 +1,7 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/dashboard/usuarios.php');
+require_once('../../models/dashboard/doctores.php');
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $doctor = new Doctores;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idDoctor'])) {
+    if (isset($_SESSION['idDoctor']) || true) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {

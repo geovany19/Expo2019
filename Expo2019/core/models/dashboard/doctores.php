@@ -1,5 +1,5 @@
 <?php
-class Doctores extends Validators
+class Doctores extends Validator
 {
     //Declaración de variables a utilizar
     private $iddoctor = null;
@@ -13,7 +13,7 @@ class Doctores extends Validators
     private $idespecialidad = null;
     private $idestado = null;
     private $ruta = '../../resources/img/doctores/';
-}
+
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
 	{
@@ -128,15 +128,6 @@ class Doctores extends Validators
 			return false;
 		}
 	}
-    public function setFoto($file, $name)
-	{
-		if ($this->validateImageFile($file, $this->ruta, $name, 500, 500)) {
-			$this->foto = $this->getImageName();
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public function getFoto()
 	{
@@ -181,7 +172,7 @@ class Doctores extends Validators
 	//Métodos para manejar el CRUD
 	public function readDoctores()
 	{
-		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor FROM doctores ORDER BY apellido_doctor';
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, fecha_nacimiento, foto_doctor, id_estado FROM doctores WHERE id_estado = 1 ORDER BY apellido_doctor';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -204,7 +195,7 @@ class Doctores extends Validators
 	public function getDoctor()
 	{
 		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor FROM doctores WHERE id_doctor = ?';
-		$params = array($this->iddoctor;
+		$params = array($this->iddoctor);
 		return Database::getRow($sql, $params);
 	}
 

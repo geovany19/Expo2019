@@ -1,15 +1,13 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2019 a las 01:30:26
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.0
+-- Tiempo de generación: 28-05-2019 a las 16:14:06
+-- Versión del servidor: 10.1.9-MariaDB
+-- Versión de PHP: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -21,9 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sismed`
 --
-CREATE DATABASE IF NOT EXISTS `sismed`;
-
-USE `sismed`;
 
 DELIMITER $$
 --
@@ -112,25 +107,30 @@ INSERT INTO `bitacora` (`id_bitacora`, `operacion`, `usuario`, `host`, `modifica
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `calificacion`
+-- Estructura de tabla para la tabla `calificacion_doctor`
 --
 
-CREATE TABLE `calificacion` (
+CREATE TABLE `calificacion_doctor` (
   `id_calificacion` int(11) NOT NULL,
-  `puntuacion` double DEFAULT NULL,
-  `resena` varchar(100) DEFAULT NULL,
-  `usuario_calificador` int(11) DEFAULT NULL,
-  `usuario_calificado` int(11) DEFAULT NULL,
-  `id_tipousuario` int(11) DEFAULT NULL
+  `id_doctor` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `calificacion_doctor` int(11) NOT NULL,
+  `comentario` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `calificacion`
+-- Estructura de tabla para la tabla `calificacion_paciente`
 --
 
-INSERT INTO `calificacion` (`id_calificacion`, `puntuacion`, `resena`, `usuario_calificador`, `usuario_calificado`, `id_tipousuario`) VALUES
-(1, 8.9, 'El servicio fue muy lento', 2, 3, 2),
-(2, 10, 'Excelente', 2, 3, 2);
+CREATE TABLE `calificacion_paciente` (
+  `id_calificacion` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `id_doctor` int(11) NOT NULL,
+  `calificacion_paciente` int(11) NOT NULL,
+  `comentario` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -261,7 +261,6 @@ CREATE TABLE `doctores` (
   `contrasena_doctor` varchar(100) NOT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `foto_doctor` varchar(150) DEFAULT NULL,
-  `calificacion_doctor` double DEFAULT NULL,
   `id_especialidad` int(11) DEFAULT NULL,
   `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -270,17 +269,17 @@ CREATE TABLE `doctores` (
 -- Volcado de datos para la tabla `doctores`
 --
 
-INSERT INTO `doctores` (`id_doctor`, `nombre_doctor`, `apellido_doctor`, `correo_doctor`, `usuario_doctor`, `contrasena_doctor`, `fecha_nacimiento`, `foto_doctor`, `calificacion_doctor`, `id_especialidad`, `id_estado`) VALUES
-(1, 'Ainsley', 'Rojas', 'eu.odio.tristique@nunc.or', 'GDF07JJX5AG', 'LJZ91DBJ9KZ', '1999-04-29', 'Neque Corporation', 9, 6, NULL),
-(2, 'Faith', 'Ware', 'augue@diamluctus.ca', 'RYS95ZHC2RY', 'KLV27NRB4FC', '1999-04-03', 'Porttitor Eros Nec LLC', 5, 8, NULL),
-(3, 'Marsden', 'Melendez', 'In.condimentum@convallisl', 'CTH86YOU4XP', 'DIM73LAI5QT', '2000-08-29', 'Lectus Nullam Suscipit Inc.', 3, 7, NULL),
-(4, 'Callum', 'Richards', 'molestie@Sedeu.org', 'OSD32HFP5YS', 'PSK42IEG0PQ', '2001-08-16', 'Sem Company', 8, 8, NULL),
-(5, 'Isabelle', 'Hicks', 'sem.consequat@quam.org', 'UGG00RZI7UR', 'PLL22AND5QU', '2000-06-04', 'Adipiscing Ligula Associates', 8, 9, NULL),
-(6, 'Keane', 'Sandoval', 'natoque@dolorFuscefeugiat', 'SIN45XBP6HD', 'DJT89QNC4YO', '2000-09-04', 'Adipiscing Fringilla Associates', 3, 8, NULL),
-(7, 'Ciara', 'Torres', 'eu@adlitora.com', 'EWT16TLE3OH', 'OGN81XJD2MG', '1980-06-13', 'Habitant Morbi Tristique Company', 3, 6, NULL),
-(8, 'Dillon', 'Wood', 'ut.ipsum@dolorsitamet.edu', 'OMG23HBL5SS', 'KWL29SPP6JH', '1995-02-27', 'Eu Eleifend Nec Incorporated', 10, 6, NULL),
-(9, 'Dalton', 'Wyatt', 'fringilla@mienim.com', 'XPA32DZC5AS', 'ZFQ29HFO8WC', '1984-09-20', 'Turpis Company', 3, 1, NULL),
-(10, 'Perry', 'Garner', 'non.lobortis@vulputatelac', 'ZJP43QHA2UU', 'DMV29SXT8NH', '1997-11-02', 'Elit Etiam LLC', 6, 4, NULL);
+INSERT INTO `doctores` (`id_doctor`, `nombre_doctor`, `apellido_doctor`, `correo_doctor`, `usuario_doctor`, `contrasena_doctor`, `fecha_nacimiento`, `foto_doctor`, `id_especialidad`, `id_estado`) VALUES
+(1, 'Ainsley', 'Rojas', 'eu.odio.tristique@nunc.or', 'GDF07JJX5AG', 'LJZ91DBJ9KZ', '1999-04-29', 'Neque Corporation', 6, 1),
+(2, 'Faith', 'Ware', 'augue@diamluctus.ca', 'RYS95ZHC2RY', 'KLV27NRB4FC', '1999-04-03', 'Porttitor Eros Nec LLC', 8, 1),
+(3, 'Marsden', 'Melendez', 'In.condimentum@convallisl', 'CTH86YOU4XP', 'DIM73LAI5QT', '2000-08-29', 'Lectus Nullam Suscipit Inc.', 7, 1),
+(4, 'Callum', 'Richards', 'molestie@Sedeu.org', 'OSD32HFP5YS', 'PSK42IEG0PQ', '2001-08-16', 'Sem Company', 8, 1),
+(5, 'Isabelle', 'Hicks', 'sem.consequat@quam.org', 'UGG00RZI7UR', 'PLL22AND5QU', '2000-06-04', 'Adipiscing Ligula Associates', 9, 1),
+(6, 'Keane', 'Sandoval', 'natoque@dolorFuscefeugiat', 'SIN45XBP6HD', 'DJT89QNC4YO', '2000-09-04', 'Adipiscing Fringilla Associates', 8, 1),
+(7, 'Ciara', 'Torres', 'eu@adlitora.com', 'EWT16TLE3OH', 'OGN81XJD2MG', '1980-06-13', 'Habitant Morbi Tristique Company', 6, 1),
+(8, 'Dillon', 'Wood', 'ut.ipsum@dolorsitamet.edu', 'OMG23HBL5SS', 'KWL29SPP6JH', '1995-02-27', 'Eu Eleifend Nec Incorporated', 6, 1),
+(9, 'Dalton', 'Wyatt', 'fringilla@mienim.com', 'XPA32DZC5AS', 'ZFQ29HFO8WC', '1984-09-20', 'Turpis Company', 1, 1),
+(10, 'Perry', 'Garner', 'non.lobortis@vulputatelac', 'ZJP43QHA2UU', 'DMV29SXT8NH', '1997-11-02', 'Elit Etiam LLC', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -394,24 +393,24 @@ CREATE TABLE `pacientes` (
   `foto_paciente` varchar(150) DEFAULT NULL,
   `peso_paciente` double DEFAULT NULL,
   `estatura_paciente` double DEFAULT NULL,
-  `calificacion_paciente` double DEFAULT NULL
+  `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id_paciente`, `nombre_paciente`, `apellido_paciente`, `correo_paciente`, `usuario_paciente`, `contrasena_paciente`, `fecha_nacimiento`, `foto_paciente`, `peso_paciente`, `estatura_paciente`, `calificacion_paciente`) VALUES
-(1, 'Cleo', 'Pearson', 'placerat@ametmassaQuisque', 'D6D 5B3', 'SCS92OZU3EL', '2030-08-18', '1695081685299', 105, 154, 4),
-(2, 'Sybil', 'Cabrera', 'elit.Etiam.laoreet@semper', 'J8N 8G6', 'ZFY77LQB8LF', '2003-06-18', '1646081225699', 142, 181, 8),
-(3, 'Neville', 'Serrano', 'cursus.purus.Nullam@erosn', 'U3R 4F9', 'PCJ16YYS6IR', '2001-04-20', '1644030558399', 142, 158, 5),
-(4, 'Libby', 'Holland', 'lorem.semper@mauris.co.uk', 'T8M 9H4', 'WQZ35JTU5SE', '2009-10-18', '1667122120599', 188, 116, 6),
-(5, 'Britanni', 'Gates', 'dui.Cras.pellentesque@cur', 'T3H 1Z2', 'XLY79FHB2SK', '2007-04-19', '1660051016199', 161, 173, 9),
-(6, 'Daryl', 'Stuart', 'lorem.sit@Donecluctusaliq', 'H9P 3B0', 'BYY72UMF7PZ', '2004-10-19', '1653102207499', 132, 106, 3),
-(7, 'Grant', 'Cantu', 'ligula@tempusscelerisquel', 'P0V 7U2', 'WDH96CRE4TO', '2022-02-20', '1686072856999', 110, 121, 3),
-(8, 'Julian', 'Bates', 'enim.non.nisi@sagittisDui', 'L8V 0S9', 'CDX20IMZ6SA', '2028-02-20', '1635111358599', 173, 150, 7),
-(9, 'Roanna', 'Joyce', 'non.enim.Mauris@tortor.ne', 'K1S 8K7', 'YQP93RVM6OB', '2024-08-18', '1614081366899', 181, 152, 9),
-(10, 'Benedict', 'Hart', 'non@aliquam.com', 'V4A 2Z7', 'AUG68JWB5YH', '2007-12-18', '1697102623899', 124, 123, 1);
+INSERT INTO `pacientes` (`id_paciente`, `nombre_paciente`, `apellido_paciente`, `correo_paciente`, `usuario_paciente`, `contrasena_paciente`, `fecha_nacimiento`, `foto_paciente`, `peso_paciente`, `estatura_paciente`, `id_estado`) VALUES
+(1, 'Cleo', 'Pearson', 'placerat@ametmassaQuisque', 'D6D 5B3', 'SCS92OZU3EL', '2030-08-18', '1695081685299', 105, 154, NULL),
+(2, 'Sybil', 'Cabrera', 'elit.Etiam.laoreet@semper', 'J8N 8G6', 'ZFY77LQB8LF', '2003-06-18', '1646081225699', 142, 181, NULL),
+(3, 'Neville', 'Serrano', 'cursus.purus.Nullam@erosn', 'U3R 4F9', 'PCJ16YYS6IR', '2001-04-20', '1644030558399', 142, 158, NULL),
+(4, 'Libby', 'Holland', 'lorem.semper@mauris.co.uk', 'T8M 9H4', 'WQZ35JTU5SE', '2009-10-18', '1667122120599', 188, 116, NULL),
+(5, 'Britanni', 'Gates', 'dui.Cras.pellentesque@cur', 'T3H 1Z2', 'XLY79FHB2SK', '2007-04-19', '1660051016199', 161, 173, NULL),
+(6, 'Daryl', 'Stuart', 'lorem.sit@Donecluctusaliq', 'H9P 3B0', 'BYY72UMF7PZ', '2004-10-19', '1653102207499', 132, 106, NULL),
+(7, 'Grant', 'Cantu', 'ligula@tempusscelerisquel', 'P0V 7U2', 'WDH96CRE4TO', '2022-02-20', '1686072856999', 110, 121, NULL),
+(8, 'Julian', 'Bates', 'enim.non.nisi@sagittisDui', 'L8V 0S9', 'CDX20IMZ6SA', '2028-02-20', '1635111358599', 173, 150, NULL),
+(9, 'Roanna', 'Joyce', 'non.enim.Mauris@tortor.ne', 'K1S 8K7', 'YQP93RVM6OB', '2024-08-18', '1614081366899', 181, 152, NULL),
+(10, 'Benedict', 'Hart', 'non@aliquam.com', 'V4A 2Z7', 'AUG68JWB5YH', '2007-12-18', '1697102623899', 124, 123, NULL);
 
 -- --------------------------------------------------------
 
@@ -447,35 +446,45 @@ CREATE TABLE `usuarios_a` (
   `usuario_usuario` varchar(25) NOT NULL,
   `contrasena_usuario` varchar(100) NOT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `foto_usuario` varchar(150) DEFAULT NULL
+  `foto_usuario` varchar(150) DEFAULT NULL,
+  `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios_a`
 --
 
-INSERT INTO `usuarios_a` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `correo_usuario`, `usuario_usuario`, `contrasena_usuario`, `fecha_nacimiento`, `foto_usuario`) VALUES
-(1, 'MacKenzie', 'Andrews', 'nec.cursus@maurissapiencu', 'N3P 4X9', 'OBC22TVM6NY', '1985-02-10', '8311'),
-(2, 'Cassandra', 'Church', 'ut@hendreritid.org', 'A0U 2U1', 'RQM10TIO1ZK', '2019-04-29', '7343'),
-(3, 'Len', 'Miranda', 'aptent@Maurisnondui.org', 'Z1G 3W5', 'NKI94ECW5SF', '2004-04-05', '2170'),
-(4, 'Lucas', 'Hines', 'diam.Sed@ultrices.org', 'X8B 2E1', 'OWA64LOP2RG', '1999-08-13', '4951'),
-(5, 'Zane', 'Hanson', 'nunc@mollisPhasellusliber', 'V7E 3W9', 'BNW75OPE0DY', '1989-01-28', '9987'),
-(6, 'Xyla', 'Forbes', 'consectetuer@quis.org', 'H7V 7K6', 'TEI35GVS6IJ', '2006-06-06', '6237'),
-(7, 'Kaitlin', 'Johnson', 'vulputate.nisi@lectus.ca', 'H6V 3C6', 'QKS06AWJ6BH', '2000-08-21', '4806'),
-(8, 'Thane', 'Bauer', 'ligula@diam.co.uk', 'N4H 2R5', 'PLT45IMB2HR', '2001-04-10', '1209'),
-(9, 'Alden', 'Willis', 'ligula.Donec@Quisquepurus', 'X9D 6N3', 'ARV39VRR0FN', '2005-03-05', '7304'),
-(10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691');
+INSERT INTO `usuarios_a` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `correo_usuario`, `usuario_usuario`, `contrasena_usuario`, `fecha_nacimiento`, `foto_usuario`, `id_estado`) VALUES
+(1, 'MacKenzie', 'Andrews', 'nec.cursus@maurissapiencu', 'N3P 4X9', 'OBC22TVM6NY', '1985-02-10', '8311', NULL),
+(2, 'Cassandra', 'Church', 'ut@hendreritid.org', 'A0U 2U1', 'RQM10TIO1ZK', '2019-04-29', '7343', NULL),
+(3, 'Len', 'Miranda', 'aptent@Maurisnondui.org', 'Z1G 3W5', 'NKI94ECW5SF', '2004-04-05', '2170', NULL),
+(4, 'Lucas', 'Hines', 'diam.Sed@ultrices.org', 'X8B 2E1', 'OWA64LOP2RG', '1999-08-13', '4951', NULL),
+(5, 'Zane', 'Hanson', 'nunc@mollisPhasellusliber', 'V7E 3W9', 'BNW75OPE0DY', '1989-01-28', '9987', NULL),
+(6, 'Xyla', 'Forbes', 'consectetuer@quis.org', 'H7V 7K6', 'TEI35GVS6IJ', '2006-06-06', '6237', NULL),
+(7, 'Kaitlin', 'Johnson', 'vulputate.nisi@lectus.ca', 'H6V 3C6', 'QKS06AWJ6BH', '2000-08-21', '4806', NULL),
+(8, 'Thane', 'Bauer', 'ligula@diam.co.uk', 'N4H 2R5', 'PLT45IMB2HR', '2001-04-10', '1209', NULL),
+(9, 'Alden', 'Willis', 'ligula.Donec@Quisquepurus', 'X9D 6N3', 'ARV39VRR0FN', '2005-03-05', '7304', NULL),
+(10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691', NULL);
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `calificacion`
+-- Indices de la tabla `calificacion_doctor`
 --
-ALTER TABLE `calificacion`
+ALTER TABLE `calificacion_doctor`
   ADD PRIMARY KEY (`id_calificacion`),
-  ADD KEY `id_tipousuario` (`id_tipousuario`);
+  ADD KEY `id_doctor` (`id_doctor`),
+  ADD KEY `id_paciente` (`id_paciente`);
+
+--
+-- Indices de la tabla `calificacion_paciente`
+--
+ALTER TABLE `calificacion_paciente`
+  ADD PRIMARY KEY (`id_calificacion`),
+  ADD KEY `id_paciente` (`id_paciente`),
+  ADD KEY `id_doctor` (`id_doctor`);
 
 --
 -- Indices de la tabla `cita`
@@ -539,7 +548,8 @@ ALTER TABLE `notificacion`
 -- Indices de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  ADD PRIMARY KEY (`id_paciente`);
+  ADD PRIMARY KEY (`id_paciente`),
+  ADD KEY `id_estado` (`id_estado`);
 
 --
 -- Indices de la tabla `tipo_usuario`
@@ -551,93 +561,95 @@ ALTER TABLE `tipo_usuario`
 -- Indices de la tabla `usuarios_a`
 --
 ALTER TABLE `usuarios_a`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `id_estado` (`id_estado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `calificacion`
+-- AUTO_INCREMENT de la tabla `calificacion_doctor`
 --
-ALTER TABLE `calificacion`
-  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+ALTER TABLE `calificacion_doctor`
+  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `calificacion_paciente`
+--
+ALTER TABLE `calificacion_paciente`
+  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
   MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `consulta`
 --
 ALTER TABLE `consulta`
   MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
   MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
   MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
   MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `estado_cita`
 --
 ALTER TABLE `estado_cita`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `estado_usuarios`
 --
 ALTER TABLE `estado_usuarios`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
   MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
   MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
   MODIFY `id_tipousuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuarios_a`
 --
 ALTER TABLE `usuarios_a`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `calificacion`
+-- Filtros para la tabla `calificacion_doctor`
 --
-ALTER TABLE `calificacion`
-  ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`id_tipousuario`) REFERENCES `tipo_usuario` (`id_tipousuario`);
+ALTER TABLE `calificacion_doctor`
+  ADD CONSTRAINT `calificacion_doctor_ibfk_1` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`),
+  ADD CONSTRAINT `calificacion_doctor_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`);
+
+--
+-- Filtros para la tabla `calificacion_paciente`
+--
+ALTER TABLE `calificacion_paciente`
+  ADD CONSTRAINT `calificacion_paciente_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`),
+  ADD CONSTRAINT `calificacion_paciente_ibfk_2` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`);
 
 --
 -- Filtros para la tabla `cita`
@@ -672,7 +684,18 @@ ALTER TABLE `doctores`
 --
 ALTER TABLE `notificacion`
   ADD CONSTRAINT `notificacion_ibfk_1` FOREIGN KEY (`id_tipousuario`) REFERENCES `tipo_usuario` (`id_tipousuario`);
-COMMIT;
+
+--
+-- Filtros para la tabla `pacientes`
+--
+ALTER TABLE `pacientes`
+  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado_usuarios` (`id_estado`);
+
+--
+-- Filtros para la tabla `usuarios_a`
+--
+ALTER TABLE `usuarios_a`
+  ADD CONSTRAINT `usuarios_a_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado_usuarios` (`id_estado`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

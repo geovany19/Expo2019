@@ -204,7 +204,7 @@ class Doctores extends Validators
 	public function getDoctor()
 	{
 		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor FROM doctores WHERE id_doctor = ?';
-		$params = array($this->idusuario);
+		$params = array($this->iddoctor;
 		return Database::getRow($sql, $params);
 	}
 
@@ -215,7 +215,7 @@ class Doctores extends Validators
 		return Database::executeRow($sql, $params);
 	}
 
-	public function deleteUsuario()
+	public function deleteDoctor()
 	{
 		$sql = 'DELETE FROM doctores WHERE id_doctor = ?';
 		$params = array($this->iddoctor);

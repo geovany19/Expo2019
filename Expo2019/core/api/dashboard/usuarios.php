@@ -26,7 +26,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Usuario inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Usuario no valido';
                 }
                 break;
             case 'editProfile':
@@ -188,10 +188,10 @@ if (isset($_GET['action'])) {
                         if ($usuario->setNombres($_POST['update_nombres'])) {
                             if ($usuario->setApellidos($_POST['update_apellidos'])) {
                                 if ($usuario->setCorreo($_POST['update_correo'])) {
-                                    if ($usuario->setUsuario($_POST['update_usuario'])) {
+                                    if ($usuario->setUsuario($_POST['update_alias'])) {
                                         if ($usuario->setFecha($_POST['update_fecha'])) {
                                             if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                if ($usuario->setFoto($_FILES['update_archivo'], $_POST['imagen_producto'])) {
+                                                if ($usuario->setFoto($_FILES['update_archivo'], $_POST['imagen_usuario'])) {
                                                     $archivo = true;
                                                 } else {
                                                     $result['exception'] = $producto->getImageError();

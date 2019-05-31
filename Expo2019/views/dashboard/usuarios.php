@@ -6,7 +6,7 @@ dashboard_helper::nav();
 <main>
     <h1 class="text-center">Usuarios</h1>
     <div>
-        <table class="table table-responsive table-hover">
+        <table class="table table-responsive table-hover" id="tabla-usuarios">
             <thead class="thead-dark">
                 <!--Agregando los campos fijos a la tabla-->
                 <tr>

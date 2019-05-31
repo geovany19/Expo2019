@@ -197,14 +197,15 @@ class dashboard_helper
 					</div>
 				</footer>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/dataTables.responsive.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/dataTables.select.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>

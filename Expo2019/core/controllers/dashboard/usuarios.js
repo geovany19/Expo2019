@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
     showTable();
+    $("#tabla-usuarios").DataTable()
 })
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API

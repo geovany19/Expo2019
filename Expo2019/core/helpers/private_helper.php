@@ -8,10 +8,10 @@ class private_helper
 			<!DOCTYPE html>
 			<html lang="es">
 			 <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+						<html lang="en">
+						<head>
+								<meta charset="UTF-8">
+								<meta name="viewport" content="width=device-width, initial-scale=1.0">
 								<meta http-equiv="X-UA-Compatible" content="ie=edge">
 								
 								<link rel="stylesheet" type="text/css" href="../../resources/css/material-bootstrap.min.css">
@@ -28,7 +28,7 @@ class private_helper
 
 
 
-            </head>
+						</head>
 			<body>
 		');
 		self::modals();
@@ -38,31 +38,31 @@ class private_helper
 				print('
 				<div id="sidebar" class="sidenav sidenav-fixed expand">
 				<div class="sidenav-header">
-				  <div class="font-18 font-weight-strong mt-2"><a href="javascript:;">MATERIAL DESIGN<br>FOR BOOTSTRAP</a></div>
+					<div class="font-18 font-weight-strong mt-2"><a href="javascript:;">MATERIAL DESIGN<br>FOR BOOTSTRAP</a></div>
 				</div>
 				<div class="divider"></div>
 				<form action="javascript:;">
-				  <div class="input-group-icon input-group-icon-right">
+					<div class="input-group-icon input-group-icon-right">
 					<button type="submit" class="btn btn-icon-only btn-flat btn-rounded input-icon input-icon-right mr-2"><i class="material-icons" style="font-size:24px">search</i></button>
 					<input class="form-control form-control-line border-0" type="text" placeholder="Search" style="padding-left:30px">
-				  </div>
+					</div>
 				</form>
 				<div class="divider"></div>
 				<ul class="collapsible collapsible-accordion">
-				  <li><a href="#"><i class="material-icons sidenav-item-icon">notification_important</i>Notifications</a></li>
-				  <li><a href="#"><i class="material-icons sidenav-item-icon">shopping_cart</i>Shopping cart</a></li>
-				  <li><a href="#"><i class="material-icons sidenav-item-icon">local_shipping</i>My Delivery</a></li>
-				  <li><div class="divider"></div></li>
-				  <li><a class="active" href="#"><i class="material-icons sidenav-item-icon">place</i>Locations</a></li>
-				  <li><a href="#"><i class="material-icons sidenav-item-icon">settings</i>Another Link</a></li>
-				  <li><div class="divider"></div></li>
-				  
+					<li><a href="#"><i class="material-icons sidenav-item-icon">notification_important</i>Notifications</a></li>
+					<li><a href="#"><i class="material-icons sidenav-item-icon">shopping_cart</i>Shopping cart</a></li>
+					<li><a href="#"><i class="material-icons sidenav-item-icon">local_shipping</i>My Delivery</a></li>
+					<li><div class="divider"></div></li>
+					<li><a class="active" href="#"><i class="material-icons sidenav-item-icon">place</i>Locations</a></li>
+					<li><a href="#"><i class="material-icons sidenav-item-icon">settings</i>Another Link</a></li>
+					<li><div class="divider"></div></li>
 					
-				  <li><div class="divider"></div></li>
-				  <li><a href="javascript:;" class="subheader">Subheader</a></li>
-				  <li><a class="waves-effect" href="#"><i class="material-icons sidenav-item-icon">drafts</i>Link With Waves</a></li>     
+					
+					<li><div class="divider"></div></li>
+					<li><a href="javascript:;" class="subheader">Subheader</a></li>
+					<li><a class="waves-effect" href="#"><i class="material-icons sidenav-item-icon">drafts</i>Link With Waves</a></li>     
 				</ul>
-			  </div>
+				</div>
 
 				');
 			} else {

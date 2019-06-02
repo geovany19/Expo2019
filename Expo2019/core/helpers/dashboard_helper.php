@@ -10,7 +10,7 @@ class dashboard_helper
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/material-bootstrap.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
@@ -43,8 +43,35 @@ class dashboard_helper
 	public static function nav()
 	{
 		print('
-            <body>
-				<div class="wrapper">
+			<body>
+			<div id="sidebar" class="sidenav sidenav-fixed expand">
+				<div class="sidenav-header">
+					<div class="font-18 font-weight-strong mt-2"><a href="javascript:;">MATERIAL DESIGN<br>FOR BOOTSTRAP</a></div>
+				</div>
+				<div class="divider"></div>
+				<form action="javascript:;">
+					<div class="input-group-icon input-group-icon-right">
+					<button type="submit" class="btn btn-icon-only btn-flat btn-rounded input-icon input-icon-right mr-2"><i class="material-icons" style="font-size:24px">search</i></button>
+					<input class="form-control form-control-line border-0" type="text" placeholder="Search" style="padding-left:30px">
+					</div>
+				</form>
+				<div class="divider"></div>
+				<ul class="collapsible collapsible-accordion">
+					<li><a href="#"><i class="material-icons sidenav-item-icon">notification_important</i>Notifications</a></li>
+					<li><a href="#"><i class="material-icons sidenav-item-icon">shopping_cart</i>Shopping cart</a></li>
+					<li><a href="#"><i class="material-icons sidenav-item-icon">local_shipping</i>My Delivery</a></li>
+					<li><div class="divider"></div></li>
+					<li><a class="active" href="#"><i class="material-icons sidenav-item-icon">place</i>Locations</a></li>
+					<li><a href="#"><i class="material-icons sidenav-item-icon">settings</i>Another Link</a></li>
+					<li><div class="divider"></div></li>
+					
+					
+					<li><div class="divider"></div></li>
+					<li><a href="javascript:;" class="subheader">Subheader</a></li>
+					<li><a class="waves-effect" href="#"><i class="material-icons sidenav-item-icon">drafts</i>Link With Waves</a></li>     
+				</ul>
+				</div>
+				<!--<div class="wrapper">
 					<!-- Sidebar  -->
 					<nav id="sidebar">
 						<div class="sidebar-header">
@@ -119,15 +146,15 @@ class dashboard_helper
 								</ul>
 							</div>
 						</div>
-					</nav>
+					</nav>-->
         ');
 	}
 
 	public static function footer($controller)
 	{
 		print('
-					</div>		
-				</div>
+					<!--</div>		
+				</div>-->
 				<!--<footer class="navbar navbar-light bg-light">
 					<div class="row">
 						<div class="col col-sm-12">
@@ -198,17 +225,18 @@ class dashboard_helper
 				</footer>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/material-bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/dataTables.responsive.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/dataTables.select.min.js"></script>
+				<!--<script type="text/javascript" src="../../resources/js/dataTables.select.min.js"></script>-->
 				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../core/helpers/sweeetalert.min.js"></script>
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/'.$controller.'"></script>
             </body>

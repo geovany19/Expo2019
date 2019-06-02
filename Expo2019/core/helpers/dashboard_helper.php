@@ -12,17 +12,22 @@ class dashboard_helper
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/material-bootstrap.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
+				<!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/b-html5-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/r-2.2.2/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.css"/>-->
 				<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.dataTables.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.bootstrap4.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/colReorder.bootstrap4.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/scroller.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/buttons.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/fixedColumns.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/fixedHeader.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/rowReorder.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/select.bootstrap4.min.css">
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -44,7 +49,7 @@ class dashboard_helper
 	{
 		print('
 			<body>
-			<div id="sidebar" class="sidenav sidenav-fixed expand">
+			<div id="sidebar" class="sidenav sidenav-fixed expand blue">
 				<div class="sidenav-header">
 					<div class="font-18 font-weight-strong mt-2"><a href="javascript:;">MATERIAL DESIGN<br>FOR BOOTSTRAP</a></div>
 				</div>
@@ -72,7 +77,6 @@ class dashboard_helper
 				</ul>
 				</div>
 				<!--<div class="wrapper">
-					<!-- Sidebar  -->
 					<nav id="sidebar">
 						<div class="sidebar-header">
 							<h3>Sismed</h3>
@@ -100,7 +104,7 @@ class dashboard_helper
 								<a href="#">
 									<i class="fas fa-user"></i> Perfil
 								</a>
-								<!--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+								<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 									<i class="fas fa-copy"></i>Pages
 								</a>
 								<ul class="collapse list-unstyled" id="pageSubmenu">
@@ -113,12 +117,12 @@ class dashboard_helper
 									<li>
 										<a href="#">Page 3</a>
 									</li>
-								</ul>-->
+								</ul>
 							</li>
 							<li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
 						</ul>
 					</nav>
-				<!-- Page Content  -->
+				Page Content
 				<div id="content">
 					<nav class="navbar navbar-expand-lg navbar-light bg-light">
 						<div class="container-fluid">
@@ -225,18 +229,27 @@ class dashboard_helper
 				</footer>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/material-bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/dataTables.responsive.min.js"></script>
-				<!--<script type="text/javascript" src="../../resources/js/dataTables.select.min.js"></script>-->
-				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/select.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
-				<script type="text/javascript" src="../../core/helpers/sweeetalert.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/buttons.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/rowReorder.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/fixedColumns.bootstrap4.js"></script>
+				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.js"></script>
+				<script type="text/javascript" src="../../resources/js/pdfmake.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/vfs_fonts.js"></script>
+				<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+				<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/b-html5-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/r-2.2.2/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.js"></script>-->
+				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/'.$controller.'"></script>
             </body>

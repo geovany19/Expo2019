@@ -38,7 +38,7 @@ if (isset($_GET['action'])) {
                                 if ($usuario->setCorreo($_POST['profile_correo'])) {
                                     if ($usuario->setUsuario($_POST['profile_alias'])) {
                                         if ($usuario->setFecha($_POST['profile_fecha'])) {
-                                            if ($usuario->setFoto($_POST['profile_foto'])) {
+                                            if ($usuario->updateUsuario()) {
                                                 if ($usuario->updateUsuario()) {
                                                     $result['status'] = 1;
                                                 } else {

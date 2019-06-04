@@ -1,6 +1,6 @@
 <?php
 include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Dashboard");
+dashboard_helper::head("Doctores");
 dashboard_helper::nav() ;
 ?>
 <main>

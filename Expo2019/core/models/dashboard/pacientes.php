@@ -13,7 +13,7 @@ class Pacientes extends Validator
 		private $estatura = null;
 		private $ruta = '../../resources/img/pacientes/';
 
-		public function setId($value)
+	public function setId($value)
 	{
 		if ($this->validateId($value)) {
 			$this->idpaciente = $value;
@@ -150,23 +150,23 @@ class Pacientes extends Validator
 
 		public function setEstatura($value)
 		{
-				if ($this->validateHeight($value)) {
-			$this->estatura = $value;
-			return true;
-		} else {
-			return false;
-		}
+			if ($this->validateHeight($value)) {
+				$this->estatura = $value;
+				return true;
+			} else {
+				return false;
+			}
 		}
 
-		public function getEstatura()
-		{
-				return $this->estatura;
-		}
+	public function getEstatura()
+	{
+		return $this->estatura;
+	}
 
 	public function getRuta()
 	{
 		return $this->ruta;
-		}
+	}
 		
 		public function checkPaciente()
 		{

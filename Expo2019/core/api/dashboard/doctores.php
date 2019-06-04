@@ -172,7 +172,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'get':
                 if ($doctor->setId($_POST['id_doctor'])) {
-                    if ($result['dataset'] = $doctor->getUser()) {
+                    if ($result['dataset'] = $doctor->getDoctor()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Doctor inexistente';

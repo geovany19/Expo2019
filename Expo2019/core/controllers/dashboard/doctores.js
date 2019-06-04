@@ -59,3 +59,76 @@ function showTable()
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+// Función para mostrar formulario con registro a modificar
+function modalUpdate(id)
+{
+    $.ajax({
+        url: api + 'get',
+        type: 'post',
+        data:{
+            id_doctor: id
+        },
+        datatype: 'json'
+    })
+    .done(function(response){
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
+            if (result.status) {
+                $('#form-update')[0].reset();
+                $('#update_doctor').val(result.dataset.nombre_doctor);
+                $('#foto_doctor').val(result.dataset.foto_doctor);
+                $('#update_apellido').val(result.dataset.apellido_doctor);
+                $('#update_correo').val(result.dataset.correo_doctor);
+                $('#update_alias').val(result.dataset.usuario_doctor);
+                $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                (result.dataset.estado_producto == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
+                $('#modal-update').modal('show');
+            } else {
+                sweetAlert(2, result.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        // Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+
+// Función para modificar un registro seleccionado previamente
+$('#form-update').submit(function()
+{
+    event.preventDefault();
+    $.ajax({
+        url: api + 'update',
+        type: 'post',
+        data: new FormData($('#form-update')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+    .done(function(response){
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status) {
+                $('#modal-update').modal('hide');
+                showTable();
+                sweetAlert(1, result.message, null);
+            } else {
+                sweetAlert(2, result.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        // Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})

@@ -42,8 +42,8 @@ dashboard_helper::nav() ;
       <form id="form-update">
       <input type="hidden" id="id_doctor" name="id_doctor" >
           <div class="form-group">
-            <label for="update_doctor">Nombre:</label>
-            <input type="text" class="form-control"  class="form-control is-valid" id="update_doctor" name="update_doctor" aria-describedby="emailHelp" placeholder="Nombre:">
+            <label for="update_nombre">Nombre:</label>
+            <input type="text" class="form-control"  class="form-control is-valid" id="update_nombre" name="update_nombre" aria-describedby="emailHelp" placeholder="Nombre:">
           </div>
           <div class="form-group">
             <label for="update_apellido">Apellido:</label>
@@ -63,7 +63,8 @@ dashboard_helper::nav() ;
           </div>
           <div class="form-group">
             <label for="foto_doctor">Foto:</label>
-            <input type="picture" class="form-control" id="foto_doctor" name="foto_doctor" placeholder="Fecha:">
+            <input type="picture" class="form-control" id="foto_doctor" name="foto_doctor" >
+            <img src="<?php echo $ruta; ?> ">
           </div>
           <div class="col s12 m6">
                     <p>

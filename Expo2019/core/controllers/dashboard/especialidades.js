@@ -3,7 +3,7 @@ $(document).ready(function()
     showTable();
 });
 
-const api = '../../core/api/dashboard/especialidades.php';
+const api = '../../core/api/dashboard/especialidades.php?action=';
 
 function fillTable(rows)
 {
@@ -22,7 +22,10 @@ function fillTable(rows)
             </tr>
         `;
     });
-    $('#tbody-especialidades').html(content);
+    $('#table-body').html(content);
+    $("#tabla-especialidades").DataTable({
+        responsive: true
+    });
     $('.tooltipped').tooltip();
 }
 

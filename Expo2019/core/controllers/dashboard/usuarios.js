@@ -1,10 +1,5 @@
 $(document).ready(function () {
     showTable();
-    $("#tabla-usuarios").DataTable();
-});
-
-$("#tabla-usuarios").DataTable({
-    responsive: true
 });
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
@@ -32,7 +27,10 @@ function fillTable(rows) {
             </tr>
         `;
     });
-    $('#table-body').html(content);
+    $('#table-body').html(content);  
+    $("#tabla-usuarios").DataTable({
+        responsive: true
+    });
     $('.tooltipped').tooltip();
 }
 

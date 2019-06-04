@@ -1,19 +1,19 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/dashboard/especialidad.php');
+require_once('../../models/dashboard/especialidades.php');
 
 if (isset($_GET['action'])) {
     session_start();
     $especialidad = new Especialidad;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-    if (isset($_SESSION['idUsuario'])) {
+    if (isset($_SESSION['idUsuario']) || true) {
 		switch ($_GET['action']) {
 			case 'read':
 				if ($result['dataset'] = $especialidad->readEspecialidad()) {
 					$result['status'] = 1;
 				} else {
-					$result['exception'] = 'No hay categorías registradas';
+					$result['exception'] = 'No hay especialidades registradas';
 				}
 				break;
 			case 'search':

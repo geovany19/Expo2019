@@ -185,8 +185,8 @@ if (isset($_GET['action'])) {
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {
-                        if ($doctor->setNombres($_POST['update_nombres'])) {
-                            if ($doctor->setApellidos($_POST['update_apellidos'])) {
+                        if ($doctor->setNombre($_POST['update_nombre'])) {
+                            if ($doctor->setApellido($_POST['update_apellido'])) {
                                 if ($doctor->setCorreo($_POST['update_correo'])) {
                                     if ($doctor->setUsuario($_POST['update_alias'])) {
                                         if ($doctor->setFecha($_POST['update_fecha'])) {

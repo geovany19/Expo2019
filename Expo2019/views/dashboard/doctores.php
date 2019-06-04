@@ -26,20 +26,45 @@ dashboard_helper::nav() ;
     </div>
 </main>
 <!-- Ventana para modificar un registro existente -->
-<form action="/action_page.php">
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" >Modificar Doctor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form id="form-update">
+          <div class="form-group">
+            <label for="update_doctor">Nombre:</label>
+            <input type="name" class="form-control" id="update_doctor" name="update_doctor" aria-describedby="emailHelp" placeholder="Nombre:">
+          </div>
+          <div class="form-group">
+            <label for="update_apellido">Apellido:</label>
+            <input type="password" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido:">
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <?php
 dashboard_helper::footer('doctores.js');
 ?>

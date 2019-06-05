@@ -4,26 +4,26 @@ dashboard_helper::head("Doctores");
 dashboard_helper::nav() ;
 ?>
 <main>
-		<h1 class="text-center">Doctores</h1>
-		<div>
-				<table class="table table-responsive table-hover" id="tabla-doctores">
-						<thead class="thead-dark">
-								<!--Agregando los campos fijos a la tabla-->
-								<tr>
-										<th scope="col">Código</th>
-										<th scope="col">Nombre</th>
-										<th scope="col">Apellido</th>
-										<th scope="col">Correo</th>
-										<th scope="col">Nombre de usuario</th>
-										<th scope="col">Fecha de nacimiento</th>
-										<th scope="col">Foto</th>
-										<th scope="col">Estado</th>
-										<th scope="col">Acciones</th>
-								</tr>
-						</thead>
-						<tbody id="table-body"></tbody>
-				</table>
-		</div>
+    <h1 class="text-center">Doctores</h1>
+    <div>
+        <table class="table table-responsive table-hover"  id="tabla-doctores">
+            <thead class="thead-dark">
+                <!--Agregando los campos fijos a la tabla-->
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Nombre de usuario</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
 </main>
 <!-- Ventana para modificar un registro existente -->
 <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

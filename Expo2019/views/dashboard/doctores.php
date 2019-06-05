@@ -4,10 +4,9 @@ dashboard_helper::head("Dashboard");
 dashboard_helper::nav() ;
 ?>
 <main>
-<main>
     <h1 class="text-center">Doctores</h1>
     <div>
-        <table class="table table-responsive table-hover">
+        <table class="table table-responsive table-hover"  id="tabla-doctores">
             <thead class="thead-dark">
                 <!--Agregando los campos fijos a la tabla-->
                 <tr>

@@ -20,13 +20,13 @@ if (isset($_GET['action'])) {
                 break;
             case 'readProfile':
                 if ($paciente->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $paciente->getUser()) {
+                    if ($result['dataset'] = $paciente->getPaciente()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Usuario inexistente';
+                        $result['exception'] = 'Paciente inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario no valido';
+                    $result['exception'] = 'Paciente no valido';
                 }
                 break;
             case 'editProfile':
@@ -103,7 +103,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'read':
-                if ($result['dataset'] = $paciente->readUsuarios()) {
+                if ($result['dataset'] = $paciente->readPacientes()) {
                     $result['status'] = 1;
                 } else {
                     $result['exception'] = 'No hay usuarios registrados';
@@ -112,7 +112,7 @@ if (isset($_GET['action'])) {
             case 'search':
                 $_POST = $paciente->validateForm($_POST);
                 if ($_POST['busqueda'] != '') {
-                    if ($result['dataset'] = $paciente->searchUsuarios($_POST['busqueda'])) {
+                    if ($result['dataset'] = $paciente->searchPacientes($_POST['busqueda'])) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'No hay coincidencias';

@@ -33,12 +33,12 @@ if (isset($_GET['action'])) {
                 if ($doctor->setId($_SESSION['idDoctor'])) {
                     if ($doctor->getDoctor()) {
                         $_POST = $doctor->validateForm($_POST);
-                        if ($doctor->setNombre($_POST['profile_nombres'])) {
-                            if ($doctor->setApellido($_POST['profile_apellidos'])) {
+                        if ($doctor->setNombre($_POST['profile_nombre'])) {
+                            if ($doctor->setApellido($_POST['profile_apellido'])) {
                                 if ($doctor->setCorreo($_POST['profile_correo'])) {
                                     if ($doctor->setUsuario($_POST['profile_alias'])) {
                                         if ($doctor->setFecha($_POST['profile_fecha'])) {
-                                            if ($doctor->setFoto($_POST['profile_foto'])) {
+                                            if ($doctor->setFoto($_FILES['profile_archivo'])) {
                                                 if ($doctor->updateDoctor()) {
                                                     $result['status'] = 1;
                                                 } else {
@@ -123,8 +123,8 @@ if (isset($_GET['action'])) {
                 break;
             case 'create':
                 $_POST = $doctor->validateForm($_POST);
-                if ($doctor->setNombres($_POST['create_nombres'])) {
-                    if ($doctor->setApellidos($_POST['create_apellidos'])) {
+                if ($doctor->setNombres($_POST['create_nombre'])) {
+                    if ($doctor->setApellidos($_POST['create_apellido'])) {
                         if ($doctor->setCorreo($_POST['create_correo'])) {
                             if ($doctor->setUsuario($_POST['create_alias'])) {
                                 if ($_POST['create_clave1'] == $_POST['create_clave2']) {
@@ -191,14 +191,14 @@ if (isset($_GET['action'])) {
                                     if ($doctor->setUsuario($_POST['update_alias'])) {
                                         if ($doctor->setFecha($_POST['update_fecha'])) {
                                             if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                if ($doctor->setFoto($_FILES['update_archivo'], $_POST['imagen_doctor'])) {
+                                                if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_doctor'])) {
                                                     $archivo = true;
                                                 } else {
                                                     $result['exception'] = $producto->getImageError();
                                                     $archivo = false;
                                                 }
                                             } else {
-                                                if (!$doctor->setFoto(null, $_POST['imagen_producto'])) {
+                                                if (!$doctor->setFoto(null, $_POST['foto_doctor'])) {
                                                     $result['exception'] = $doctor->getImageError();
                                                 }
                                                 $archivo = false;

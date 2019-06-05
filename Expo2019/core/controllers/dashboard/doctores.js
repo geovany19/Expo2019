@@ -153,12 +153,12 @@ function modalUpdate(id)
             if (result.status) {
                 $('#form-update')[0].reset();
                 $('#id_doctor').val(result.dataset.id_doctor);
+                $('#foto_doctor').val(result.dataset.foto_doctor);
                 $('#update_nombre').val(result.dataset.nombre_doctor);
                 $('#update_apellido').val(result.dataset.apellido_doctor);
                 $('#update_correo').val(result.dataset.correo_doctor);
                 $('#update_alias').val(result.dataset.usuario_doctor);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
-                $('#update_archivo').val(result.dataset.foto_doctor);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 $('#modal-update').modal('show');
             } else {

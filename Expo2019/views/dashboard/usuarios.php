@@ -14,7 +14,7 @@ dashboard_helper::nav();
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Nombre de usuario</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Fecha de nacimiento</th>
                     <th scope="col">Foto</th>
                     <th scope="col">Estado</th>

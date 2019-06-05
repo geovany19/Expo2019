@@ -12,7 +12,7 @@ class Doctores extends Validator
     private $foto = null;
     private $idespecialidad = null;
     private $idestado = null;
-    private $ruta = '../../resources/img/doctores/';
+    private $ruta = '../../../resources/img/doctores/';
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -104,7 +104,7 @@ class Doctores extends Validator
 	{
 		return $this->clave;
     }
-    public function setFecha()
+    public function setFecha($value)
 	{
 		if ($this->validateDate($value)) {
 			$this->fecha = $value;
@@ -202,7 +202,7 @@ class Doctores extends Validator
 	public function updateDoctor()
 	{
 		$sql = 'UPDATE doctores SET nombre_doctor = ?, apellido_doctor = ?, correo_doctor = ?, usuario_doctor = ?, fecha_nacimiento = ?, foto_doctor = ? WHERE id_doctor = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idusuario);
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->iddoctor);
 		return Database::executeRow($sql, $params);
 	}
 

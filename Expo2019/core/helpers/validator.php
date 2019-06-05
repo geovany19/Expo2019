@@ -121,6 +121,24 @@ class Validator
         }
     }
 
+    public function validateHeight($value)
+	{
+		if (preg_match('/^[0-2]{1}+(?:\.[0-9]{1,2})?$/', $value)) {
+			return true;
+		} else {
+			return false;
+		}
+    }
+    
+    public function validateWeight($value)
+    {
+        if (preg_match('/^[0-5]{3}+(?:\.[0-9]{1,2})?$/', $value)) {
+			return true;
+		} else {
+			return false;
+		}
+    }
+
     public function validateAlphanumeric($value, $minimum, $maximum)
     {
         if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\.]{'.$minimum.','.$maximum.'}$/', $value)) {
@@ -141,7 +159,8 @@ class Validator
 
     public function validateDate($value)
     {
-        if (preg_match('^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/', $value)) {
+        $date = explode('-', $value);
+        if (checkdate($date[1], $date[2], $date[0])) {
             return true;
         } else {
             return false;

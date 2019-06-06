@@ -20,7 +20,7 @@ function fillTable(rows)
                 <td>${row.correo_doctor}</td>
                 <td>${row.usuario_doctor}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td>${row.foto_doctor}</td>
+                <td><img src="../../resources/img/doctores/${row.foto_doctor}" height="75"></td>
                 <td>${row.id_estado}</td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -179,6 +179,7 @@ function modalUpdate(id)
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
                 $('#form-update')[0].reset();
+                $('#foto').attr('src','../../resources/img/doctores/'+result.dataset.foto_doctor);
                 $('#id_doctor').val(result.dataset.id_doctor);
                 $('#foto_doctor').val(result.dataset.foto_doctor);
                 $('#update_nombre').val(result.dataset.nombre_doctor);

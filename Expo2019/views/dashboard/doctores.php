@@ -80,10 +80,10 @@ dashboard_helper::nav() ;
         <button type="submit" class="btn btn-primary">Actualizar</button>
       </div>
 </form>
-      </div>
+			</div>
 
-    </div>
-  </div>
+		</div>
+	</div>
 </div>
 <?php
 dashboard_helper::footer('doctores.js');

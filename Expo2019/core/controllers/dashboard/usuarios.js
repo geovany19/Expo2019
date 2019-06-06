@@ -18,7 +18,7 @@ function fillTable(rows) {
                 <td>${row.correo_usuario}</td>
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td>${row.foto_usuario}</td>
+                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75">${row.id_estado}</td>
                 <td>${row.id_estado}</td>
                 <td>
                     <a href="#modal-update" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -82,70 +82,71 @@ function showTable() {
             // Se muestran en consola los posibles errores de la solicitud AJAX
             console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
         });
-
-    function modalUpdate(id) {
-        $.ajax({
-            url: api + 'get',
-            type: 'post',
-            data: {
-                id_usuario: id
-            },
-            datatype: 'json'
-        })
-            .done(function (response) {
-                // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado consola
-                if (isJSONString(response)) {
-                    const result = JSON.parse(response);
-                    // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
-                    if (result.status) {
-                        $('#id_usuario').val(result.dataset.id_usuario);
-                        $('#update_nombres').val(result.dataset.nombres_usuario);
-                        $('#update_apellidos').val(result.dataset.apellidos_usuario);
-                        $('#update_correo').val(result.dataset.correo_usuario);
-                        $('#update_alias').val(result.dataset.alias_usuario);
-                        M.updateTextFields();
-                        $('#modal-update').modal('open');
-                    } else {
-                        sweetAlert(2, result.exception, null);
-                    }
-                } else {
-                    console.log(response);
-                }
-            })
-            .fail(function (jqXHR) {
-                // Se muestran en consola los posibles errores de la solicitud AJAX
-                console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-            });
-    }
-
-    // Función para modificar un registro seleccionado previamente
-    $('#form-update').submit(function () {
-        event.preventDefault();
-        $.ajax({
-            url: api + 'update',
-            type: 'post',
-            data: $('#form-update').serialize(),
-            datatype: 'json'
-        })
-            .done(function (response) {
-                // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-                if (isJSONString(response)) {
-                    const result = JSON.parse(response);
-                    // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                    if (result.status) {
-                        $('#modal-update').modal('close');
-                        showTable();
-                        sweetAlert(1, result.message, null);
-                    } else {
-                        sweetAlert(2, result.exception, null);
-                    }
-                } else {
-                    console.log(response);
-                }
-            })
-            .fail(function (jqXHR) {
-                // Se muestran en consola los posibles errores de la solicitud AJAX
-                console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-            });
-    });
 }
+
+
+function modalUpdate(id) {
+    $.ajax({
+        url: api + 'get',
+        type: 'post',
+        data: {
+            id_usuario: id
+        },
+        datatype: 'json'
+    })
+        .done(function (response) {
+            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado consola
+            if (isJSONString(response)) {
+                const result = JSON.parse(response);
+                // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
+                if (result.status) {
+                    $('#id_usuario').val(result.dataset.id_usuario);
+                    $('#update_nombre').val(result.dataset.nombre_usuario);
+                    $('#update_apellido').val(result.dataset.apellido_usuario);
+                    $('#update_correo').val(result.dataset.correo_usuario);
+                    $('#update_usuario').val(result.dataset.usuario_usuario);
+                    $('#update')
+                    $('#modal-update').modal('show');
+                } else {
+                    sweetAlert(2, result.exception, null);
+                }
+            } else {
+                console.log(response);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
+}
+
+// Función para modificar un registro seleccionado previamente
+$('#form-update').submit(function () {
+    event.preventDefault();
+    $.ajax({
+        url: api + 'update',
+        type: 'post',
+        data: $('#form-update').serialize(),
+        datatype: 'json'
+    })
+        .done(function (response) {
+            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+            if (isJSONString(response)) {
+                const result = JSON.parse(response);
+                // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                if (result.status) {
+                    $('#modal-update').modal('hide');
+                    showTable();
+                    sweetAlert(1, result.message, null);
+                } else {
+                    sweetAlert(2, result.exception, null);
+                }
+            } else {
+                console.log(response);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
+});

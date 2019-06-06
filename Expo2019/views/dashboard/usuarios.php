@@ -24,25 +24,6 @@ dashboard_helper::nav();
             <tbody id="table-body"></tbody>
         </table>
     </div>
-    <div class="modal" tabindex="-1" role="dialog" id="modal-update">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </main>
 <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -79,7 +60,7 @@ dashboard_helper::nav();
 						<label for="update_archivo">Foto</label>
 						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
-					<div class="col col-sm-12 col-md-6">
+					<div class="col s12 m6">
 						<p>
 							<div class="checkbox">
 								<span>Estado</span>
@@ -93,8 +74,8 @@ dashboard_helper::nav();
 						</p>
 					</div>
 					<div class="modal-footer justify-content-center aling-items-center">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-						<button type="submit" class="btn btn-primary">Actualizar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-success">Actualizar</button>
 					</div>
 				</form>
 			</div>

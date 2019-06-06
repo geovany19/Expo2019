@@ -183,8 +183,8 @@ if (isset($_GET['action'])) {
                 break;
             case 'update':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setId($_POST['id_doctor'])) {
-                    if ($usuario->getDoctor()) {
+                if ($usuario->setId($_POST['id_usuario'])) {
+                    if ($usuario->getUser()) {
                         if ($usuario->setNombre($_POST['update_nombre'])) {
                             if ($usuario->setApellido($_POST['update_apellido'])) {
                                 if ($usuario->setCorreo($_POST['update_correo'])) {

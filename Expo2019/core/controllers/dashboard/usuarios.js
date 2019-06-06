@@ -18,7 +18,7 @@ function fillTable(rows) {
                 <td>${row.correo_usuario}</td>
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75">${row.id_estado}</td>
+                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75"></td>
                 <td>${row.id_estado}</td>
                 <td>
                     <a href="#modal-update" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -84,7 +84,6 @@ function showTable() {
         });
 }
 
-
 function modalUpdate(id) {
     $.ajax({
         url: api + 'get',
@@ -100,12 +99,15 @@ function modalUpdate(id) {
                 const result = JSON.parse(response);
                 // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
                 if (result.status) {
+                    $('#form-update')[0].reset();
+                    $('#foto').attr('src','../../resources/img/usuarios/'+result.dataset.foto_usuario);
                     $('#id_usuario').val(result.dataset.id_usuario);
                     $('#update_nombre').val(result.dataset.nombre_usuario);
                     $('#update_apellido').val(result.dataset.apellido_usuario);
                     $('#update_correo').val(result.dataset.correo_usuario);
                     $('#update_usuario').val(result.dataset.usuario_usuario);
-                    $('#update')
+                    $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                    (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                     $('#modal-update').modal('show');
                 } else {
                     sweetAlert(2, result.exception, null);

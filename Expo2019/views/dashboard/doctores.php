@@ -4,6 +4,7 @@ dashboard_helper::head("Doctores");
 dashboard_helper::nav() ;
 ?>
 <main>
+<button type="submit" class="btn btn-primary justify-content-center aling-items-center">Agregar</button>
     <h1 class="text-center">Doctores</h1>
     <div>
         <table class="table table-responsive table-hover"  id="tabla-doctores">
@@ -33,9 +34,10 @@ dashboard_helper::nav() ;
         <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Doctor</h5>
       </div>
       <div class="modal-body">
+      <img id="foto" height="75">
       <form id="form-update" enctype="multipart/form-data">
           <input type="hidden" id="id_doctor" name="id_doctor" >
-          <input type="text" id="foto_doctor" name="foto_doctor" >
+          <input type="hidden" id="foto_doctor" name="foto_doctor" >
           <div class="form-group">
             <label for="update_nombre">Nombre:</label>
             <input type="text" class="form-control"  class="form-control is-valid" id="update_nombre" name="update_nombre" aria-describedby="emailHelp" placeholder="Nombre:">

@@ -22,7 +22,7 @@ public_helper::head("Iniciar sesión");
 							<input type="password" class="form-control" name="password" placeholder="Contraseña" required="required">
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block" href="perfil.php">Iniciar sesión</button>
 						</div>
 						<div class="clearfix text-center">
 							<label class="pull-left checkbox-inline text-center"><input type="checkbox"> Recuerdame</label>

@@ -1,7 +1,7 @@
 <?php
 include "../../core/helpers/dashboard_helper.php";
 dashboard_helper::head("Doctores");
-dashboard_helper::nav() ;
+dashboard_helper::nav();
 ?>
 <main>
 <div class="float-none">
@@ -155,7 +155,6 @@ dashboard_helper::nav() ;
       </div>
 </form>
 			</div>
-
 		</div>
 	</div>
 </div>

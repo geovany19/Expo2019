@@ -27,7 +27,7 @@ dashboard_helper::head("Iniciar sesión");
 							<a href="#" class="pull-right">¿Olvidaste tu contraseña?</a>
 						</div>
 					</form>
-					<p class="text-center small">¿No estás registrado? <a href="#">¡Registrate aquí!</a></p>
+					<p class="text-center">¿No estás registrado? <a href="registrarse.php">¡Registrate aquí!</a></p>
 				</div>
 			</div>
 		</div>
@@ -39,5 +39,4 @@ dashboard_helper::head("Iniciar sesión");
 	<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 	<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 </body>
-
 </html>

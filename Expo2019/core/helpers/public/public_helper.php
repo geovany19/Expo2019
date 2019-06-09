@@ -10,7 +10,7 @@ class public_helper {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_login.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
 				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>

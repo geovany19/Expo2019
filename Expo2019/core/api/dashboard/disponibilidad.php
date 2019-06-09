@@ -1,12 +1,12 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/dashboard/usuarios.php');
+require_once('../../models/dashboard/disponibilidad.php');
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
     session_start();
-    $usuario = new Usuarios;
+    $disponibilidad = new Disponibilidad;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario']) || true) {
@@ -19,8 +19,8 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readProfile':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $usuario->getUser()) {
+                if ($disponibilidad->setId($_SESSION['idUsuario'])) {
+                    if ($result['dataset'] = $disponibilidad->getUser()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -30,16 +30,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($usuario->getUser()) {
-                        $_POST = $usuario->validateForm($_POST);
-                        if ($usuario->setNombre($_POST['profile_nombres'])) {
-                            if ($usuario->setApellido($_POST['profile_apellidos'])) {
-                                if ($usuario->setCorreo($_POST['profile_correo'])) {
-                                    if ($usuario->setUsuario($_POST['profile_alias'])) {
-                                        if ($usuario->setFecha($_POST['profile_fecha'])) {
-                                            if ($usuario->updateUsuario()) {
-                                                if ($usuario->updateUsuario()) {
+                if ($disponibilidad->setId($_SESSION['idUsuario'])) {
+                    if ($disponibilidad->getUser()) {
+                        $_POST = $disponibilidad->validateForm($_POST);
+                        if ($disponibilidad->setNombre($_POST['profile_nombres'])) {
+                            if ($disponibilidad->setApellido($_POST['profile_apellidos'])) {
+                                if ($disponibilidad->setCorreo($_POST['profile_correo'])) {
+                                    if ($disponibilidad->setUsuario($_POST['profile_alias'])) {
+                                        if ($disponibilidad->setFecha($_POST['profile_fecha'])) {
+                                            if ($disponibilidad->updateUsuario()) {
+                                                if ($disponibilidad->updateUsuario()) {
                                                     $result['status'] = 1;
                                                 } else {
                                                     $result['exception'] = 'Operación fallida';
@@ -70,14 +70,14 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'password':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
-                    $_POST = $usuario->validateForm($_POST);
+                if ($disponibilidad->setId($_SESSION['idUsuario'])) {
+                    $_POST = $disponibilidad->validateForm($_POST);
                     if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
-                        if ($usuario->setClave($_POST['clave_actual_1'])) {
-                            if ($usuario->checkPassword()) {
+                        if ($disponibilidad->setClave($_POST['clave_actual_1'])) {
+                            if ($disponibilidad->checkPassword()) {
                                 if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($usuario->changePassword()) {
+                                    if ($disponibilidad->setClave($_POST['clave_nueva_1'])) {
+                                        if ($disponibilidad->changePassword()) {
                                             $result['status'] = 1;
                                             $result['message'] = 'Contraseña cambiada correctamente';
                                         } else {
@@ -103,16 +103,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'read':
-                if ($result['dataset'] = $usuario->readUsuarios()) {
+                if ($result['dataset'] = $disponibilidad->readDisponibilidad()) {
                     $result['status'] = 1;
                 } else {
                     $result['exception'] = 'No hay usuarios registrados';
                 }
                 break;
             case 'search':
-                $_POST = $usuario->validateForm($_POST);
+                $_POST = $disponibilidad->validateForm($_POST);
                 if ($_POST['busqueda'] != '') {
-                    if ($result['dataset'] = $usuario->searchUsuarios($_POST['busqueda'])) {
+                    if ($result['dataset'] = $disponibilidad->searchUsuarios($_POST['busqueda'])) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'No hay coincidencias';
@@ -122,19 +122,19 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'create':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['create_nombres'])) {
-                    if ($usuario->setApellidos($_POST['create_apellidos'])) {
-                        if ($usuario->setCorreo($_POST['create_correo'])) {
-                            if ($usuario->setUsuario($_POST['create_alias'])) {
+                $_POST = $disponibilidad->validateForm($_POST);
+                if ($disponibilidad->setNombres($_POST['create_nombres'])) {
+                    if ($disponibilidad->setApellidos($_POST['create_apellidos'])) {
+                        if ($disponibilidad->setCorreo($_POST['create_correo'])) {
+                            if ($disponibilidad->setUsuario($_POST['create_alias'])) {
                                 if ($_POST['create_clave1'] == $_POST['create_clave2']) {
-                                    if ($usuario->setClave($_POST['create_clave1'])) {
-                                        if ($usuario->setFecha($_POST['create_fecha'])) {
+                                    if ($disponibilidad->setClave($_POST['create_clave1'])) {
+                                        if ($disponibilidad->setFecha($_POST['create_fecha'])) {
                                             if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                if ($usuario->setFoto($_FILES['create_archivo'], null)) {
-                                                    if ($usuario->createUsuario()) {
+                                                if ($disponibilidad->setFoto($_FILES['create_archivo'], null)) {
+                                                    if ($disponibilidad->createUsuario()) {
                                                         $result['status'] = 1;
-                                                        if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
+                                                        if ($disponibilidad->saveFile($_FILES['create_archivo'], $disponibilidad->getRuta(), $disponibilidad->getFoto())) {
                                                             $result['message'] = 'Usuario creado correctamente';
                                                         } else {
                                                             $result['message'] = 'Usuario no creado. No se guardó el archivo';
@@ -143,7 +143,7 @@ if (isset($_GET['action'])) {
                                                         $result['exception'] = 'Operación fallida';
                                                     }
                                                 } else {
-                                                    $result['exception'] = $usuario->getImageError();
+                                                    $result['exception'] = $disponibilidad->getImageError();
                                                 }
                                             } else {
                                                 $result['exception'] = 'Seleccione una imagen';
@@ -171,8 +171,8 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'get':
-                if ($usuario->setId($_POST['id_usuario'])) {
-                    if ($result['dataset'] = $usuario->getUser()) {
+                if ($disponibilidad->setId($_POST['id_usuario'])) {
+                    if ($result['dataset'] = $disponibilidad->getUser()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -182,31 +182,31 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setId($_POST['id_usuario'])) {
-                    if ($usuario->getUser()) {
-                        if ($usuario->setNombre($_POST['update_nombre'])) {
-                            if ($usuario->setApellido($_POST['update_apellido'])) {
-                                if ($usuario->setCorreo($_POST['update_correo'])) {
-                                    if ($usuario->setUsuario($_POST['update_usuario'])) {
-                                        if ($usuario->setFecha($_POST['update_fecha'])) {
+                $_POST = $disponibilidad->validateForm($_POST);
+                if ($disponibilidad->setId($_POST['id_usuario'])) {
+                    if ($disponibilidad->getUser()) {
+                        if ($disponibilidad->setNombre($_POST['update_nombre'])) {
+                            if ($disponibilidad->setApellido($_POST['update_apellido'])) {
+                                if ($disponibilidad->setCorreo($_POST['update_correo'])) {
+                                    if ($disponibilidad->setUsuario($_POST['update_usuario'])) {
+                                        if ($disponibilidad->setFecha($_POST['update_fecha'])) {
                                             if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                if ($usuario->setFoto($_FILES['update_archivo'], $_POST['foto_usuario'])) {
+                                                if ($disponibilidad->setFoto($_FILES['update_archivo'], $_POST['foto_usuario'])) {
                                                     $archivo = true;
                                                 } else {
-                                                    $result['exception'] = $usuario->getImageError();
+                                                    $result['exception'] = $disponibilidad->getImageError();
                                                     $archivo = false;
                                                 }
                                             } else {
-                                                if (!$usuario->setFoto(null, $_POST['foto_usuario'])) {
-                                                    $result['exception'] = $usuario->getImageError();
+                                                if (!$disponibilidad->setFoto(null, $_POST['foto_usuario'])) {
+                                                    $result['exception'] = $disponibilidad->getImageError();
                                                 }
                                                 $archivo = false;
                                             }
-                                            if ($usuario->updateUsuario()) {
+                                            if ($disponibilidad->updateUsuario()) {
                                                 $result['status'] = 1;
                                                 if ($archivo) {
-                                                    if ($usuario->saveFile($_FILES['update_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
+                                                    if ($disponibilidad->saveFile($_FILES['update_archivo'], $disponibilidad->getRuta(), $disponibilidad->getFoto())) {
                                                         $result['message'] = 'Usuario modificado correctamente';
                                                     } else {
                                                         $result['message'] = 'Usuario modificado. No se guardó el archivo';
@@ -241,9 +241,9 @@ if (isset($_GET['action'])) {
                 break;
             case 'delete':
                 if ($_POST['id_usuario'] != $_SESSION['idUsuario']) {
-                    if ($usuario->setId($_POST['id_usuario'])) {
-                        if ($usuario->getUser()) {
-                            if ($usuario->deleteUsuario()) {
+                    if ($disponibilidad->setId($_POST['id_usuario'])) {
+                        if ($disponibilidad->getUser()) {
+                            if ($disponibilidad->deleteUsuario()) {
                                 $result['status'] = 1;
                             } else {
                                 $result['exception'] = 'Operación fallida';
@@ -264,7 +264,7 @@ if (isset($_GET['action'])) {
     } else {
         switch ($_GET['action']) {
             case 'read':
-                if ($usuario->readUsuarios()) {
+                if ($disponibilidad->readDisponibilidad()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
                     $result['exception'] = 'Hola';
@@ -273,67 +273,14 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Hola';
                 }
                 break;
-            case 'register':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombre($_POST['nombres'])) {
-                    if ($usuario->setApellido($_POST['apellidos'])) {
-                        if ($usuario->setCorreo($_POST['correo'])) {
-                            if ($usuario->setUsuario($_POST['usuario'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->setFecha($_POST['fecha'])) {
-                                            if ($usuario->setEstado($_POST['create_estado']) ? 1 : 0) {
-                                                if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                    if ($usuario->setFoto($_FILES['create_archivo'], null)) {
-                                                        if ($usuario->createUsuario()) {
-                                                            $result['status'] = 1;
-                                                            if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
-                                                                $result['message'] = 'Usuario registrado correctamente';
-                                                            } else {
-                                                                $result['message'] = 'Usuario registrado. No se creó el archivo';
-                                                            }
-                                                        } else {
-                                                            $result['exception'] = 'Operación fallida';
-                                                        }
-                                                    } else {
-                                                        $result['exception'] = $usuario->getImageError();
-                                                    }
-                                                } else {
-                                                    $result['exception'] = 'Seleccione una imagen.';
-                                                }
-                                            } else {
-                                                $result['exception'] = 'Estado incorrecto';
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Fecha no válida';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Claves diferentes';
-                                }
-                            } else {
-                                $result['exception'] = 'Alias incorrecto';
-                            }
-                        } else {
-                            $result['exception'] = 'Correo incorrecto';
-                        }
-                    } else {
-                        $result['exception'] = 'Apellidos incorrectos';
-                    }
-                } else {
-                    $result['exception'] = 'Nombres incorrectos';
-                }
-                break;
             case 'login':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setAlias($_POST['alias'])) {
-                    if ($usuario->checkAlias()) {
-                        if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                $_SESSION['idUsuario'] = $usuario->getId();
-                                $_SESSION['aliasUsuario'] = $usuario->getAlias();
+                $_POST = $disponibilidad->validateForm($_POST);
+                if ($disponibilidad->setAlias($_POST['alias'])) {
+                    if ($disponibilidad->checkAlias()) {
+                        if ($disponibilidad->setClave($_POST['clave'])) {
+                            if ($disponibilidad->checkPassword()) {
+                                $_SESSION['idUsuario'] = $disponibilidad->getId();
+                                $_SESSION['aliasUsuario'] = $disponibilidad->getAlias();
                                 $result['status'] = 1;
                                 $result['message'] = 'Autenticación correcta';
                             } else {

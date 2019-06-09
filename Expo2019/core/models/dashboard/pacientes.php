@@ -1,17 +1,17 @@
 <?php
 class Pacientes extends Validator
 {
-		private $idpaciente = null;
-		private $nombre = null;
-		private $apellido = null;
-		private $correo = null;
-		private $usuario = null;
-		private $clave = null;
-		private $fecha = null;
-		private $foto = null;
-		private $peso = null;
-		private $estatura = null;
-		private $ruta = '../../resources/img/pacientes/';
+	private $idpaciente = null;
+	private $nombre = null;
+	private $apellido = null;
+	private $correo = null;
+	private $usuario = null;
+	private $clave = null;
+	private $fecha = null;
+	private $foto = null;
+	private $peso = null;
+	private $estatura = null;
+	private $ruta = '../../resources/img/pacientes/';
 
 	public function setId($value)
 	{
@@ -112,7 +112,7 @@ class Pacientes extends Validator
 			return false;
 		}
 	}
-	
+
 	public function getFecha()
 	{
 		return $this->fecha;
@@ -131,32 +131,32 @@ class Pacientes extends Validator
 	public function getFoto()
 	{
 		return $this->foto;
-		}
-		
-		public function setPeso($value)
-		{
-				if ($this->validateWeight($value)) {
+	}
+
+	public function setPeso($value)
+	{
+		if ($this->validateWeight($value)) {
 			$this->peso = $value;
 			return true;
 		} else {
 			return false;
 		}
-		}
+	}
 
-		public function getPeso()
+	public function getPeso()
 	{
 		return $this->peso;
-		}
+	}
 
-		public function setEstatura($value)
-		{
-			if ($this->validateHeight($value)) {
-				$this->estatura = $value;
-				return true;
-			} else {
-				return false;
-			}
+	public function setEstatura($value)
+	{
+		if ($this->validateHeight($value)) {
+			$this->estatura = $value;
+			return true;
+		} else {
+			return false;
 		}
+	}
 
 	public function getEstatura()
 	{
@@ -167,10 +167,10 @@ class Pacientes extends Validator
 	{
 		return $this->ruta;
 	}
-		
-		public function checkPaciente()
-		{
-				$sql = 'SELECT id_paciente FROM pacientes WHERE usuario_paciente = ?';
+
+	public function checkPaciente()
+	{
+		$sql = 'SELECT id_paciente FROM pacientes WHERE usuario_paciente = ?';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -179,56 +179,48 @@ class Pacientes extends Validator
 		} else {
 			return false;
 		}
-		}
+	}
 
-		public function readPacientes()
+	public function readPacientes()
 	{
 		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes ORDER BY apellido_paciente';
 		$params = array(null);
 		return Database::getRows($sql, $params);
-		}
-		
-		public function searchUsuario($value)
+	}
+
+	public function searchUsuario($value)
 	{
 		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente FROM pacientes WHERE apellido_paciente LIKE ? OR nombre_paciente LIKE ? ORDER BY apellido_paciente';
 		$params = array("%$value%", "%$value%");
 		return Database::getRows($sql, $params);
-		}
-		
-		public function createPaciente()
+	}
+
+	public function createPaciente()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente) VALUES(?, ?, ?, ?, ?, ?, ?)';
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
-				return Database::executeRow($sql, $params);
-		}
+		return Database::executeRow($sql, $params);
+	}
 
-		public function getPaciente()
+	public function getPaciente()
 	{
 		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		return Database::getRow($sql, $params);
-		}
-		
-		public function getDisponibilidad()
-		{
-				$sql = 'SELECT id_disponibilidad, dia_disponible, hora_inicio, hora_fin, nombre_doctor, apellido_doctor FROM disponibilidad INNER JOIN doctores ON doctores.id_doctor = disponibilidad.id_doctor';
-				$params = array($this->iddoctor);
-				return Database::getRow($sql, $params);
-		}
+	}
 
-		public function updatePaciente()
+	public function updatePaciente()
 	{
 		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ? WHERE id_paciente = ?';
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idpaciente);
 		return Database::executeRow($sql, $params);
-		}
-		
-		public function deletePaciente()
-		{
-				$sql = 'DELETE FROM pacientes WHERE id_paciente = ?';
+	}
+
+	public function deletePaciente()
+	{
+		$sql = 'DELETE FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		return Database::executeRow($sql, $params);
-		}
+	}
 }
-?>

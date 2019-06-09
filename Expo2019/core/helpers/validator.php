@@ -156,6 +156,15 @@ class Validator
             return false;
         }
     }
+    
+    public function validateHour($value)
+    {
+        if (preg_match('/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function validateDate($value)
     {

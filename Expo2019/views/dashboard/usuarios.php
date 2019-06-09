@@ -4,26 +4,30 @@ dashboard_helper::head("Usuarios");
 dashboard_helper::nav();
 ?>
 <main>
-    <h1 class="text-center">Usuarios</h1>
-    <div>
-        <table class="display responsive no-wrap dtr-inline collapsed table table-responsive table-hover" id="tabla-usuarios" width="100%">
-            <thead class="thead-dark">
-                <!--Agregando los campos fijos a la tabla-->
-                <tr role="row">
-                    <th scope="col">Código</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Fecha de nacimiento</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-        </table>
-    </div>
+	<h1 class="text-center">Usuarios</h1>
+	<button type="button" id="add" class="btn btn-success">
+		<i class="fas fa-plus-circle"></i>
+		<span>Agregar usuario</span>
+	</button>
+	<div>
+		<table class="display responsive no-wrap dtr-inline collapsed table table-responsive table-hover" id="tabla-usuarios" width="100%">
+			<thead class="thead-dark">
+				<!--Agregando los campos fijos a la tabla-->
+				<tr role="row">
+					<th scope="col">Código</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellido</th>
+					<th scope="col">Correo</th>
+					<th scope="col">Usuario</th>
+					<th scope="col">Fecha de nacimiento</th>
+					<th scope="col">Foto</th>
+					<th scope="col">Estado</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody id="table-body"></tbody>
+		</table>
+	</div>
 </main>
 <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -54,7 +58,7 @@ dashboard_helper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_fecha">Fecha de nacimiento</label>
-						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha:">
+						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha">
 					</div>
 					<div class="form-group">
 						<label for="update_archivo">Foto</label>

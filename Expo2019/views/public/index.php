@@ -5,6 +5,7 @@ include "../../core/helpers/public/public_helper.php";
 <?php
 public_helper::head("Iniciar sesión");
 ?>
+
 <body id="body">
 	<main id="main">
 		<div class="row">

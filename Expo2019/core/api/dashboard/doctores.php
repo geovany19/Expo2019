@@ -182,6 +182,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
+            print_r($_POST);
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {
@@ -210,6 +211,16 @@ if (isset($_GET['action'])) {
                                                         $result['message'] = 'Doctor modificado correctamente';
                                                     } else {
                                                         $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                    }
+                                                    if($doctor->setIdestado (isset($_POST['update_estado'])? 1 :2)) {
+
+                                                    }else{
+                                                        $result['message'] = 'El estado a cambiado';   
+                                                    }
+                                                    if($doctor->setIdespecialidad($_POST['update_estado'])){
+
+                                                    }else{
+                                                        $result['message'] = 'Especialidad asignada'; 
                                                     }
                                                 } else {
                                                     $result['message'] = 'Doctor modificado. No se subió ningún archivo';

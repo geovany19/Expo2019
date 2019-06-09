@@ -32,7 +32,7 @@ public_helper::head("Iniciar sesión");
 							<a href="#" class="text-center">¿Olvidaste tu contraseña?</a> 
 						</div>
 					</form>
-					<p class="text-center small">¿No estás registrado? <a href="#">¡Registrate aquí!</a></p>
+					<p class="text-center small">¿No estás registrado? <a href="registro.php">¡Registrate aquí!</a></p>
 				</div>
 			</div>
 		</div>

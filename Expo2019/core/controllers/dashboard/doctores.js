@@ -12,6 +12,7 @@ function fillTable(rows)
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
     rows.forEach(function(row){
+        (row.id_estado == 1) ? icon = '1' : icon = '2';
         content += `
             <tr>
                 <td>${row.id_doctor}</td>
@@ -21,7 +22,8 @@ function fillTable(rows)
                 <td>${row.usuario_doctor}</td>
                 <td>${row.fecha_nacimiento}</td>
                 <td><img src="../../resources/img/doctores/${row.foto_doctor}" height="75"></td>
-                <td>${row.id_estado}</td>
+                <td>${row.id_especialidad}</td>
+                <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_doctor})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -187,6 +189,7 @@ function modalUpdate(id)
                 $('#update_correo').val(result.dataset.correo_doctor);
                 $('#update_alias').val(result.dataset.usuario_doctor);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                $('#update_especialidad').val(result.dataset.id_especialidad);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 $('#modal-update').modal('show');
             } else {

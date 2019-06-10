@@ -16,7 +16,7 @@ function fillTable(rows)
         content += `
             <tr>
                 <td>${row.id_paciente}</td>
-                <td><img src="../../resources/img/pacientes/${row.foto_doctor}" height="75"></td>
+                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.nombre_paciente}</td>
                 <td>${row.apellido_paciente}</td> 
                 <td>${row.correo_paciente}</td>
@@ -26,8 +26,8 @@ function fillTable(rows)
                 <td>${row.estatura_paciente}</td>
                 <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
-                    <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
-                    <a href="#" onclick="confirmDelete(${row.id_doctor})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="modalUpdate(${row.id_paciente})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
+                    <a href="#" onclick="confirmDelete(${row.id_paciente})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
         `;
@@ -121,14 +121,6 @@ $('#form-search').submit(function()
     });
 })
 
-// Función para mostrar formulario en blanco
-/*function modalCreate()
-{
-    $('#form-create')[0].reset();
-    fillSelect(categorias, 'create_d, null);
-    $('#modal-create').modal('open');
-}*/
-
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
 {
@@ -171,7 +163,7 @@ function modalUpdate(id)
         url: api + 'get',
         type: 'post',
         data:{
-            id_doctor: id
+            id_paciente: id
         },
         datatype: 'json'
     })

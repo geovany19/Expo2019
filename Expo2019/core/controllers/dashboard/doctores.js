@@ -36,6 +36,7 @@ function fillTable(rows)
     $('#table-body').html(content);
     $("#tabla-doctores").DataTable({
         responsive: true,
+        retrieve: true,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -122,13 +123,12 @@ $('#form-search').submit(function()
     });
 })
 
-// Función para mostrar formulario en blanco
-/*function modalCreate()
+function modalCreate()
 {
     $('#form-create')[0].reset();
-    fillSelect(categorias, 'create_d, null);
-    $('#modal-create').modal('open');
-}*/
+    fillSelect(especialidad, 'create_especialidad', null);
+    $('#modal-create').modal('show');
+}
 
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
@@ -149,7 +149,7 @@ $('#form-create').submit(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-create').modal('close');
+                $('#modal-create').modal('hide');
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -191,9 +191,8 @@ function modalUpdate(id)
                 $('#update_correo').val(result.dataset.correo_doctor);
                 $('#update_alias').val(result.dataset.usuario_doctor);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
-                $('#update_especialidad').val(result.dataset.id_especialidad);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
-                //fillSelect(especialidad, 'update_especialidad', result.dataset.id_especialidad);
+                fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);

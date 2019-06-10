@@ -57,3 +57,52 @@ function sweetAlert(type, text, url)
         });
     }
 }
+
+/*
+*   Función para cargar las opciones en un select de formulario.
+*
+*   Expects: api (origen de los datos a mostrar), id (identificador del select en el formulario) y selected (valor seleccionado).
+*
+*   Returns: ninguno.
+*/
+function fillSelect(api, id, selected)
+{
+    console.log(api);
+    $.ajax({
+        url: api,
+        type: 'post',
+        data: null,
+        datatype: 'json'
+    })
+    .done(function(response){
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status) {
+                let content = '';
+                if (!selected) {
+                    content += '<option value="" disabled selected>Seleccione una opción</option>';
+                }
+                result.dataset.forEach(function(row){
+                    value = Object.values(row)[0];
+                    text = Object.values(row)[1];
+                    if (value != selected) {
+                        content += `<option value="${value}">${text}</option>`;
+                    } else {
+                        content += `<option value="${value}" selected>${text}</option>`;
+                    }
+                });
+                $('#' + id).html(content);
+            } else {
+                $('#' + id).html('<option value="">No hay opciones</option>');
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        // Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}

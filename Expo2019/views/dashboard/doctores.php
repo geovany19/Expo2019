@@ -5,7 +5,7 @@ dashboard_helper::nav();
 ?>
 <main>
 	<h1 class="text-center">Doctores</h1>
-	<button type="submit" data-toggle="modal" data-target="#modal-add" class="btn btn-success">
+	<button type="submit" data-toggle="modal" data-target="#modal-add" class="btn btn-success" onclick="modalCreate()">
 		<i class="fas fa-plus-circle"></i>
 		<span>Agregar doctor</span>
 	</button>
@@ -30,11 +30,8 @@ dashboard_helper::nav();
 		</table>
 	</div>
 </main>
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!--Ventana para crear un nuevo registro -->
+<div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header justify-content-center aling-items-center">
@@ -133,7 +130,7 @@ dashboard_helper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_especialidad">Especialidad</label>
-						<select name="update_especialidad" id="update_especialidad" class="selectpicker form-control" multiple>
+						<select name="update_especialidad" id="update_especialidad" class="form-control">
 						</select>
 					</div>
 					<div class="col s12 m6">

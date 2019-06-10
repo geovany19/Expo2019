@@ -1,8 +1,8 @@
 <?php
 require_once('../../core/helpers/private_helper.php');
-private_helper::headerTemplate('Citas');
+private_helper::headerTemplate('Citas Pendientes');
 ?>
-<table class="table" id="table-citas">
+<table class="table" id="table-citas2">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -12,11 +12,11 @@ private_helper::headerTemplate('Citas');
       <th scope="col">Estado cita </th>
     </tr>
   </thead>
-  <tbody id="table-body">
+  <tbody id="table-body2">
   </tbody>
 </table>
 
 
 <?php
-private_helper::footerTemplate('citas.js');
+private_helper::footerTemplate('citas_pendientes.js');
 ?>

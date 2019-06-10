@@ -33,6 +33,56 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
 
+                case 'readCitas':
+                if ($usuario->setId($_SESSION['idUsuario'])) {
+                 if ($result['dataset'] = $usuario->getCita()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay citas registrados';
+
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto 3';
+                }
+                break;
+
+                case 'readCitaspendientes':
+                if ($usuario->setId($_SESSION['idUsuario'])) {
+                 if ($result['dataset'] = $usuario->getCitaspendientes()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay citas registrados';
+
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto 3';
+                }
+                break;
+
+                case 'cancelCita':
+                    if ($usuario->setId($_POST['id_cita'])) {
+                            if ($usuario->cancelCita()) {
+                                $result['status'] = 1;
+                            } else {
+                                $result['exception'] = 'Operación fallida';
+                            }
+                    } else {
+                        $result['exception'] = 'cita incorrecto';
+                    }
+                break;
+
+                case 'CitaAceptada':
+                    if ($usuario->setId($_POST['id_cita'])) {
+                            if ($usuario->aceptarCita()) {
+                                $result['status'] = 1;
+                            } else {
+                                $result['exception'] = 'Operación fallida';
+                            }
+                    } else {
+                        $result['exception'] = 'cita incorrecto';
+                    }
+                break;
+                
                 case 'editProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     if ($usuario->getUsuario()) {

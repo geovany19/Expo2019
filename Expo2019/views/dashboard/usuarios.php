@@ -3,6 +3,7 @@ include "../../core/helpers/dashboard_helper.php";
 dashboard_helper::head("Usuarios");
 dashboard_helper::nav();
 ?>
+<main>
 	<h1 class="text-center">Usuarios</h1>
 	<button type="button" class="btn btn-success">
 		<i class="fas fa-plus-circle"></i>

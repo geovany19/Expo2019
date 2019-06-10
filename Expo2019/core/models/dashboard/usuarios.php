@@ -142,7 +142,7 @@ class Usuarios extends Validator
 	public function setEstado($value)
 	{
 		if ($this->validateId($value)) {
-			$this->estado = $value;
+			$this->idestado = $value;
 			return true;
 		} else {
 			return false;
@@ -151,7 +151,7 @@ class Usuarios extends Validator
 
 	public function getEstado()
 	{
-		return $this->estado;
+		return $this->idestado;
 	}
 
 	// Métodos para manejar la sesión del usuario
@@ -207,7 +207,7 @@ class Usuarios extends Validator
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->estado);
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->idestado);
 		return Database::executeRow($sql, $params);
 	}
 
@@ -221,7 +221,7 @@ class Usuarios extends Validator
 	public function updateUsuario()
 	{
 		$sql = 'UPDATE usuarios_a SET nombre_usuario = ?, apellido_usuario = ?, correo_usuario = ?, usuario_usuario = ?, fecha_nacimiento = ?, foto_usuario = ?, id_estado = ? WHERE id_usuario = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->estado, $this->idusuario);
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idestado, $this->idusuario);
 		return Database::executeRow($sql, $params);
 	}
 

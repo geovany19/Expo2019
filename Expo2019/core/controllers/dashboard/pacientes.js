@@ -4,7 +4,7 @@ $(document).ready(function()
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/doctores.php?action=';
+const api = '../../core/api/dashboard/pacientes.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -15,14 +15,15 @@ function fillTable(rows)
         (row.id_estado == 1) ? icon = '1' : icon = '2';
         content += `
             <tr>
-                <td>${row.id_doctor}</td>
-                <td><img src="../../resources/img/doctores/${row.foto_doctor}" height="75"></td>
-                <td>${row.nombre_doctor}</td>
-                <td>${row.apellido_doctor}</td> 
-                <td>${row.correo_doctor}</td>
-                <td>${row.usuario_doctor}</td>
+                <td>${row.id_paciente}</td>
+                <td><img src="../../resources/img/pacientes/${row.foto_doctor}" height="75"></td>
+                <td>${row.nombre_paciente}</td>
+                <td>${row.apellido_paciente}</td> 
+                <td>${row.correo_paciente}</td>
+                <td>${row.usuario_paciente}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td>${row.id_especialidad}</td>
+                <td>${row.peso_paciente}</td>
+                <td>${row.estatura_paciente}</td>
                 <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -32,14 +33,14 @@ function fillTable(rows)
         `;
     });
     $('#table-body').html(content);
-    $("#tabla-doctores").DataTable({
+    $("#tabla-pacientes").DataTable({
         responsive: true,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
             "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfo": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
             "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
             "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix": "",
@@ -181,15 +182,16 @@ function modalUpdate(id)
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
                 $('#form-update')[0].reset();
-                $('#foto').attr('src','../../resources/img/doctores/'+result.dataset.foto_doctor);
-                $('#id_doctor').val(result.dataset.id_doctor);
-                $('#foto_doctor').val(result.dataset.foto_doctor);
-                $('#update_nombre').val(result.dataset.nombre_doctor);
-                $('#update_apellido').val(result.dataset.apellido_doctor);
-                $('#update_correo').val(result.dataset.correo_doctor);
-                $('#update_alias').val(result.dataset.usuario_doctor);
+                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
+                $('#id_paciente').val(result.dataset.id_paciente);
+                $('#foto_paciente').val(result.dataset.foto_paciente);
+                $('#update_nombre').val(result.dataset.nombre_paciente);
+                $('#update_apellido').val(result.dataset.apellido_paciente);
+                $('#update_correo').val(result.dataset.correo_paciente);
+                $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
-                $('#update_especialidad').val(result.dataset.id_especialidad);
+                $('#update_peso').val(result.dataset.peso_paciente);
+                $('#update_estatura').val(result.dataset.estatura_paciente);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 $('#modal-update').modal('show');
             } else {
@@ -245,7 +247,7 @@ function confirmDelete(id)
 {
     swal({
         title: 'Advertencia',
-        text: '¿Está seguro que desea borrar la especialidad seleccionada?',
+        text: '¿Está seguro que desea borrar el paciente seleccionado?',
         icon: 'warning',
         buttons: ['Cancelar', 'Aceptar'],
         closeOnClickOutside: false,
@@ -257,7 +259,7 @@ function confirmDelete(id)
                 url: api + 'delete',
                 type: 'post',
                 data:{
-                    id_usuario: id
+                    id_paciente: id
                 },
                 datatype: 'json'
             })

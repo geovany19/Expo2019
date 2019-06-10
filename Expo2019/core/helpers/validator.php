@@ -168,8 +168,7 @@ class Validator
 
     public function validateDate($value)
     {
-        $date = explode('-', $value);
-        if (checkdate($date[1], $date[2], $date[0])) {
+        if (!preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $value)) {
             return true;
         } else {
             return false;

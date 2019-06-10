@@ -133,7 +133,8 @@ dashboard_helper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_especialidad">Especialidad</label>
-						<select name="update_especialidad" id="update_especialidad"></select>
+						<select name="update_especialidad" id="update_especialidad" class="selectpicker form-control" multiple>
+						</select>
 					</div>
 					<div class="col s12 m6">
 						<p>

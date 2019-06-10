@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $disponibilidad = new Disponibilidad;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idUsuario']) || true) {
+    if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos11';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -121,7 +121,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            case 'create':
+            /*case 'create':
                 $_POST = $disponibilidad->validateForm($_POST);
                 if ($disponibilidad->setNombres($_POST['create_nombres'])) {
                     if ($disponibilidad->setApellidos($_POST['create_apellidos'])) {
@@ -167,9 +167,9 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos9';
                 }
-                break;
+                break;*/
             case 'get':
                 if ($disponibilidad->setId($_POST['id_usuario'])) {
                     if ($result['dataset'] = $disponibilidad->getUser()) {
@@ -230,7 +230,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos10';
                         }
                     } else {
                         $result['exception'] = 'Doctor inexistente';

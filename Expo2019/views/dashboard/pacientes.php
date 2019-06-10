@@ -51,19 +51,27 @@ dashboard_helper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_apellidos">Apellido</label>
-						<input type="text" class="form-control" id="update_apellidos" name="update_apellidos" placeholder="Apellido">
+						<input type="text" class="form-control" id="update_apellidos" name="update_apellidos" placeholder="Apellido" maxlength="25">
 					</div>
 					<div class="form-group">
 						<label for="update_correo">Correo electrónico</label>
-						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo electrónico">
+						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo electrónico" maxlength="100">
 					</div>
 					<div class="form-group">
 						<label for="update_usuario">Usuario</label>
-						<input type="text" class="form-control" id="update_usuario" name="update_usuario" placeholder="Usuario">
+						<input type="text" class="form-control" id="update_usuario" name="update_usuario" placeholder="Usuario" maxlength="25">
 					</div>
 					<div class="form-group">
 						<label for="update_fecha">Fecha de nacimiento</label>
 						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha de nacimiento">
+					</div>
+					<div class="form-group">
+						<label for="update_peso">Peso del paciente</label>
+						<input type="number" class="form-control" id="update_peso" name="update_peso" placeholder="Peso del paciente" maxlength="6">
+					</div>
+					<div class="form-group">
+						<label for="update_estatura">Estatura del paciente</label>
+						<input type="number" class="form-control" id="update_estatura" name="update_estarura" placeholder="Estatura del paciente" maxlength="4">
 					</div>
 					<div class="col s12 m6">
 						<p>

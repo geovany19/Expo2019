@@ -167,7 +167,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos 1';
                 }
                 break;
             case 'get':
@@ -240,19 +240,19 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'delete':
-                if ($_POST['id_usuario'] != $_SESSION['idUsuario']) {
-                    if ($paciente->setId($_POST['id_usuario'])) {
+                if ($_POST['id_paciente'] != $_SESSION['idUsuario']) {
+                    if ($paciente->setId($_POST['id_paciente'])) {
                         if ($paciente->getPaciente()) {
-                            if ($paciente->deleteUsuario()) {
+                            if ($paciente->deletePaciente()) {
                                 $result['status'] = 1;
                             } else {
                                 $result['exception'] = 'Operación fallida';
                             }
                         } else {
-                            $result['exception'] = 'Usuario inexistente';
+                            $result['exception'] = 'Paciente inexistente';
                         }
                     } else {
-                        $result['exception'] = 'Usuario incorrecto';
+                        $result['exception'] = 'Paciente incorrecto';
                     }
                 } else {
                     $result['exception'] = 'No se puede eliminar a sí mismo';

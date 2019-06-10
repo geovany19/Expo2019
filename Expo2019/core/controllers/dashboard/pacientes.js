@@ -173,12 +173,12 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
-                $('#form-update')[0].reset();
+                //$('#form-update')[0].reset();
                 $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
                 $('#id_paciente').val(result.dataset.id_paciente);
                 $('#foto_paciente').val(result.dataset.foto_paciente);
-                $('#update_nombre').val(result.dataset.nombre_paciente);
-                $('#update_apellido').val(result.dataset.apellido_paciente);
+                $('#update_nombres').val(result.dataset.nombre_paciente);
+                $('#update_apellidos').val(result.dataset.apellido_paciente);
                 $('#update_correo').val(result.dataset.correo_paciente);
                 $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
@@ -202,7 +202,6 @@ function modalUpdate(id)
 // Función para modificar un registro seleccionado previamente
 $('#form-update').submit(function()
 {
-    event.preventDefault();
     event.preventDefault();
     $.ajax({
         url: api + 'update',

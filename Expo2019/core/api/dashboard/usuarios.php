@@ -69,7 +69,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos. No se pudo editar el perfil';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos. No se pudo editar el perfil';
+                            $result['exception'] = 'Nombres incorrectos sexo sin condon. No se pudo editar el perfil';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';

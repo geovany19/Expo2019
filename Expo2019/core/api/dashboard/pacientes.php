@@ -30,6 +30,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
+            print_r($_POST);
                 if ($paciente->setId($_SESSION['idUsuario'])) {
                     if ($paciente->getPaciente()) {
                         $_POST = $paciente->validateForm($_POST);
@@ -60,7 +61,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos. No se pudo editar el perfil';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos. No se pudo editar el perfil';
+                            $result['exception'] = 'Nombres incorrectos Sexo. No se pudo editar el perfil';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';

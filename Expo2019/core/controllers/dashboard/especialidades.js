@@ -24,7 +24,31 @@ function fillTable(rows)
     });
     $('#table-body').html(content);
     $("#tabla-especialidades").DataTable({
-        responsive: true
+        responsive: true,
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando _START_ al _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
     });
     $('.tooltipped').tooltip();
 }
@@ -138,9 +162,9 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
-                $('#id_especialidad').val(result.dataset.id_usuario);
-                $('#update_nombre').val(result.dataset.nombre_usuario);
-                $('#update_descripcion').val(result.dataset.apellido_usuario);
+                $('#id_especialidad').val(result.dataset.id_especialidad);
+                $('#update_nombre').val(result.dataset.nombre_especialidad);
+                $('#update_descripcion').val(result.dataset.desfripcion_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);

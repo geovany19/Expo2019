@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $doctor = new Doctores;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idDoctor']) || true) {
+    if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos1';
                         }
                     } else {
                         $result['exception'] = 'Doctor no valido';
@@ -167,7 +167,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos2';
                 }
                 break;
             case 'get':
@@ -238,7 +238,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos3';
                         }
                     } else {
                         $result['exception'] = 'Doctor inexistente';
@@ -248,7 +248,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'delete':
-                if ($_POST['id_doctor'] != $_SESSION['idDoctor']) {
+                if ($_POST['id_doctor'] != $_SESSION['idUsuario']) {
                     if ($doctor->setId($_POST['id_doctor'])) {
                         if ($doctor->getDoctor()) {
                             if ($doctor->deleteDoctor()) {
@@ -325,7 +325,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos5';
                 }
                 break;
             case 'login':

@@ -203,6 +203,7 @@ function modalUpdate(id)
 $('#form-update').submit(function()
 {
     event.preventDefault();
+    event.preventDefault();
     $.ajax({
         url: api + 'update',
         type: 'post',

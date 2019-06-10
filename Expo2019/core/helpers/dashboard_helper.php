@@ -13,6 +13,7 @@ class dashboard_helper
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-select.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/private/doctores.css">
@@ -152,12 +153,12 @@ class dashboard_helper
 						<a href="#"> influencers</a>
 					</div>
 				</footer>
-				
 				</div>		
 				</div>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/bootstrap-select.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/solid.js"></script>
 				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
@@ -197,8 +198,7 @@ class dashboard_helper
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="post" id="form-profile">
-						<input type="hidden" class="form-control" id="id_usuario" name="id_usuario"/>
+					<form method="post" id="form-profile" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="profile_nombre">Nombres</label>
 							<input type="text" class="form-control" id="profile_nombre" name="profile_nombre" placeholder="Nombres">
@@ -226,12 +226,11 @@ class dashboard_helper
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+					<button type="submit" class="btn btn-primary">Guardar cambios</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
 			<div class="modal fade" id="modal-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable" role="document">
 					<div class="modal-content">
@@ -253,11 +252,11 @@ class dashboard_helper
 								</div>
 								<div class="form-group">
 									<label for="clave_nueva_1">Nueva contraseña</label>
-									<input type="password" class="form-control" id="clave_actual_1" name="clave_actual_1" placeholder="Nueva contraseña">
+									<input type="password" class="form-control" id="clave_nueva_1" name="clave_nueva_1" placeholder="Nueva contraseña">
 								</div>
 								<div class="form-group">
 									<label for="clave_actual_2">Confirmar nueva contraseña</label>
-									<input type="password" class="form-control" id="clave_actual_2" name="clave_actual_2" placeholder="Confirmar nueva contraseña">
+									<input type="password" class="form-control" id="clave_nueva_2" name="clave_nueva_2" placeholder="Confirmar nueva contraseña">
 								</div>
 						</div>
 						<div class="modal-footer">

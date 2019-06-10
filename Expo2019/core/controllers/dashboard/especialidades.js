@@ -228,7 +228,7 @@ function confirmDelete(id)
                 url: api + 'delete',
                 type: 'post',
                 data:{
-                    id_usuario: id
+                    id_especialidad: id
                 },
                 datatype: 'json'
             })

@@ -57,7 +57,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos 2';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';

@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
     showTable();
+    $('.selectpicker').selectpicker();
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
@@ -192,7 +193,7 @@ function modalUpdate(id)
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
                 $('#update_especialidad').val(result.dataset.id_especialidad);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
-                fillSelect(especialidad, 'update_especialidad', result.dataset.id_especialidad);
+                //fillSelect(especialidad, 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -260,6 +261,50 @@ function confirmDelete(id)
                 type: 'post',
                 data:{
                     id_usuario: id
+                },
+                datatype: 'json'
+            })
+            .done(function(response){
+                // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+                if (isJSONString(response)) {
+                    const result = JSON.parse(response);
+                    // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                    if (result.status) {
+                        showTable();
+                        sweetAlert(1, result.message, null);
+                    } else {
+                        sweetAlert(2, result.exception, null);
+                    }
+                } else {
+                    console.log(response);
+                }
+            })
+            .fail(function(jqXHR){
+                // Se muestran en consola los posibles errores de la solicitud AJAX
+                console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            });
+        }
+    });
+}
+
+// Función para eliminar un registro seleccionado
+function confirmDelete(id)
+{
+    swal({
+        title: 'Advertencia',
+        text: '¿Está seguro que desea borrar el registro?',
+        icon: 'warning',
+        buttons: ['Cancelar', 'Aceptar'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    })
+    .then(function(value){
+        if (value) {
+            $.ajax({
+                url: api + 'delete',
+                type: 'post',
+                data:{
+                    id_doctor: id
                 },
                 datatype: 'json'
             })

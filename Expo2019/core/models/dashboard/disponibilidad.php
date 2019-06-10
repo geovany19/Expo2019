@@ -118,7 +118,7 @@ class Disponibilidad extends Validator
     //Consulta optimizada que devuelve las disponibilidades de horarios entre las tablas disponibilidad y doctores
     public function readDisponibilidad()
 	{ 
-		$sql = 'SELECT id_disponibilidad, dia_disponible, hora_inicio, hora_fin, nombre_doctor, apellido_doctor FROM disponibilidad INNER JOIN doctores ON doctores.id_doctor = disponibilidad.id_doctor';
+		$sql = 'SELECT id_disponibilidad, dia_disponible, hora_inicio, hora_fin, nombre_doctor, apellido_doctor FROM disponibilidad INNER JOIN doctores USING(id_doctor)';
 		$params = array(null);
 		return Database::getRow($sql, $params);
 	}

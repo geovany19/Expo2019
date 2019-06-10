@@ -132,6 +132,22 @@ dashboard_helper::nav();
 						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">
+          <select class="form-control" id="update_especialidad">
+          <option value="">Selecciona papa</option>
+            <?php
+           require '../../core/helpers/database.php';
+           $sql_s = mysql_query("SELECT id_doctor FROM doctores ");
+           while($row = mysql_fetch_array($sql_s)){
+             $id_especialidad =$row_s['id_especialidad'];
+             $nombre = $row_s['nombre']
+             ?>
+             <option value="<?php echo $id_especialidad?>"></option>
+             <?php
+
+           }
+
+          ?>
+          </select>
 						<label for="update_especialidad">Especialidad:</label>
 						<input type="number" class="form-control" id="update_especialidad" name="update_especialidad" class="file-input" placeholder:="Especialidad">
 					</div>

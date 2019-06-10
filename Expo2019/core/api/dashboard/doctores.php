@@ -182,7 +182,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-                print_r($_POST);
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {

@@ -1,10 +1,12 @@
 $(document).ready(function()
 {
     showTable();
+    $('.selectpicker').selectpicker();
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
 const api = '../../core/api/dashboard/doctores.php?action=';
+const especialidad = '../../core/api/dashboard/especialidades.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -22,7 +24,7 @@ function fillTable(rows)
                 <td>${row.correo_doctor}</td>
                 <td>${row.usuario_doctor}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td>${row.id_especialidad}</td>
+                <td>${row.nombre_especialidad}</td>
                 <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -39,7 +41,7 @@ function fillTable(rows)
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
             "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfo": "Mostrando _START_ al _END_ de _TOTAL_ registros",
             "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
             "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix": "",
@@ -120,14 +122,6 @@ $('#form-search').submit(function()
     });
 })
 
-// Función para mostrar formulario en blanco
-/*function modalCreate()
-{
-    $('#form-create')[0].reset();
-    fillSelect(categorias, 'create_d, null);
-    $('#modal-create').modal('open');
-}*/
-
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
 {
@@ -191,6 +185,7 @@ function modalUpdate(id)
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
                 $('#update_especialidad').val(result.dataset.id_especialidad);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
+                //fillSelect(especialidad, 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -258,6 +253,50 @@ function confirmDelete(id)
                 type: 'post',
                 data:{
                     id_usuario: id
+                },
+                datatype: 'json'
+            })
+            .done(function(response){
+                // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+                if (isJSONString(response)) {
+                    const result = JSON.parse(response);
+                    // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                    if (result.status) {
+                        showTable();
+                        sweetAlert(1, result.message, null);
+                    } else {
+                        sweetAlert(2, result.exception, null);
+                    }
+                } else {
+                    console.log(response);
+                }
+            })
+            .fail(function(jqXHR){
+                // Se muestran en consola los posibles errores de la solicitud AJAX
+                console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            });
+        }
+    });
+}
+
+// Función para eliminar un registro seleccionado
+function confirmDelete(id)
+{
+    swal({
+        title: 'Advertencia',
+        text: '¿Está seguro que desea borrar el registro?',
+        icon: 'warning',
+        buttons: ['Cancelar', 'Aceptar'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    })
+    .then(function(value){
+        if (value) {
+            $.ajax({
+                url: api + 'delete',
+                type: 'post',
+                data:{
+                    id_doctor: id
                 },
                 datatype: 'json'
             })

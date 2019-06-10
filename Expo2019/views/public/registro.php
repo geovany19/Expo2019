@@ -3,36 +3,36 @@ include "../../core/helpers/public/public_helper.php";
 ?>
 
 <?php
-public_helper::head("Iniciar sesión");
+public_helper::head("Registrarse");
 ?>
 <body id="body">
 	<main id="main">
 		<div class="row">
 			<div class="col col-sm-12">
 				<div class="login-form-registro">
-					<form action="../../views/dashboard/pagina.php" method="post">
+					<form method="post" id="registro-form">
 						<div class="avatar">
 							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
 						</div>
 						<h2 class="text-center">Registro</h2>
-						<div class="form-group">
-							<input type="text" class="form-control" name="username" placeholder="Nombre de usuario" required="required">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputEmail4">Email</label>
+								<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">Password</label>
+								<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+							</div>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" placeholder="Contraseña" required="required">
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
-						</div>
-						<div class="clearfix text-center">
-							<label class="pull-left checkbox-inline text-center"><input type="checkbox"> Recuerdame</label>
-						</div>
-
-						<div class="text-center">
-							<a href="#" class="text-center">¿Olvidaste tu contraseña?</a> 
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Registrarse</button>
 						</div>
 					</form>
-					<p class="text-center small">¿No estás registrado? <a href="#">¡Registrate aquí!</a></p>
+					<p class="text-center small">¿Ya tienes una cuenta? <a href="#">¡Inicia sesión!</a></p>
 				</div>
 			</div>
 		</div>

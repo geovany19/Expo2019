@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $doctor = new Doctores;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idDoctor']) || true) {
+    if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos1';
                         }
                     } else {
                         $result['exception'] = 'Doctor no valido';
@@ -182,7 +182,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-                print_r($_POST);
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {
@@ -239,7 +238,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos3';
                         }
                     } else {
                         $result['exception'] = 'Doctor inexistente';
@@ -249,7 +248,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'delete':
-                if ($_POST['id_doctor'] != $_SESSION['idDoctor']) {
+                if ($_POST['id_doctor'] != $_SESSION['idUsuario']) {
                     if ($doctor->setId($_POST['id_doctor'])) {
                         if ($doctor->getDoctor()) {
                             if ($doctor->deleteDoctor()) {
@@ -291,7 +290,7 @@ if (isset($_GET['action'])) {
                                         if ($doctor->setFecha($_POST['fecha'])) {
                                             if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
                                                 if ($doctor->setFoto($_FILES['create_archivo'], null)) {
-                                                    if ($doctor->createUsuario()) {
+                                                    if ($doctor->createDoctor()) {
                                                         $result['status'] = 1;
                                                         if ($doctor->saveFile($_FILES['create_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
                                                             $result['message'] = 'Doctor registrado correctamente';
@@ -326,7 +325,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos5';
                 }
                 break;
             case 'login':

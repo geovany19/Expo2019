@@ -14,8 +14,8 @@ class Database
     {
         $server = 'localhost';
         $database = 'sismed';
-        $username = 'root';
-        $password = '';
+        $username = 'influencers';
+        $password = 'Expo2019';
         try {
             @self::$connection = new PDO('mysql:host=' . $server . '; dbname=' . $database . '; charset=utf8', $username, $password);
         } catch (PDOException $error) {
@@ -126,7 +126,7 @@ class Database
                 $message = 'Nombre de tabla desconocido';
                 break;
             case 1451:
-                $message = 'Registro ocupado, no se puede eliminar';
+                $message = 'Registro ocupado, no se puede eliminar debido a que la tabla posee un campo padre o campo hijo';
                 break;
             case 2002:
                 $message = 'Servidor desconocido';

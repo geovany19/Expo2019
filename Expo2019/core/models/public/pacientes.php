@@ -168,6 +168,7 @@ class Pacientes extends Validator
 		return $this->ruta;
 	}
 
+	//métodos para manejar la sesión del usuario
 	public function checkPaciente()
 	{
 		$sql = 'SELECT id_paciente FROM pacientes WHERE usuario_paciente = ?';
@@ -180,6 +181,28 @@ class Pacientes extends Validator
 			return false;
 		}
 	}
+
+	public function checkPassword()
+	{
+		$sql = 'SELECT contrasena_paciente FROM pacientes WHERE id_paciente = ?';
+		$params = array($this->idpaciente);
+		$data = Database::getRow($sql, $params);
+		if ($this->clave = $data['contrasena_paciente']) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function changePassword()
+	{
+		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		$sql = 'UPDATE pacientes SET contrasena_paciente = ? WHERE id_paciente = ?';
+		$params = array($hash, $this->idpaciente);
+		return Database::executeRow($sql, $params);
+	}
+
+	//métodos para manejar cruds
 
 	public function readPacientes()
 	{

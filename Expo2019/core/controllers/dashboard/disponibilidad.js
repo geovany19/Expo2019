@@ -4,12 +4,13 @@ $(document).ready(function () {
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
 const api = '../../core/api/dashboard/disponibilidad.php?action=';
+const doctor = '../../core/api/dashboard/doctores.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows) {
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
-    rows.forEach(function (row) {
+    rows.forEach(function(row) {
         content += `
             <tr>
                 <td>${row.id_disponibilidad}</td>

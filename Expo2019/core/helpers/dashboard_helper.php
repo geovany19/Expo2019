@@ -171,6 +171,7 @@ class dashboard_helper
 				</div>		
 				</div>
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/bootstrap.js"></script>
 				<script type="text/javascript" src="../../resources/js/popper.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>

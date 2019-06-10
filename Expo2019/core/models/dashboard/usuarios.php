@@ -11,6 +11,7 @@ class Usuarios extends Validator
 	private $fecha = null;
 	private $foto = null;
 	private $ruta = '../../resources/img/usuarios/';
+	private $estado = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -138,6 +139,21 @@ class Usuarios extends Validator
 		return $this->ruta;
 	}
 
+	public function setEstado($value)
+	{
+		if ($this->validateId($value)) {
+			$this->estado = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getEstado()
+	{
+		return $this->estado;
+	}
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
@@ -175,7 +191,7 @@ class Usuarios extends Validator
 	//Métodos para manejar el CRUD
 	public function readUsuarios()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario FROM usuarios_a ORDER BY apellido_usuario';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a ORDER BY apellido_usuario';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -190,8 +206,8 @@ class Usuarios extends Validator
 	public function createUsuario()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario) VALUES(?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
+		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->estado);
 		return Database::executeRow($sql, $params);
 	}
 

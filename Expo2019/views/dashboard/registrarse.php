@@ -1,98 +1,77 @@
 <?php
-include "../../core/helpers/public/public_page.php";
-include "../../core/helpers/dashboard/footeradmin.php";
-Public_page::header("Principal");
+include "../../core/helpers/dashboard_helper.php";
+dashboard_helper::head("Registrarse");
 ?>
-<html lang="es">
-<head>
-	<meta charset="UTF-8">
-	<title>Formulario de registrarse</title>
-	<link rel="stylesheet" href="../../resources/css/materialize.min.css">
-	 <link href="../../resources/css/fonts.css" rel="stylesheet">
-</head>
-<body>
-	<section class="container">
-		<div class="row">
-		<h3 class="center-align">Registrarse</h3>
-			<article class="col s6 offset-s3">
-				<form method="POST" action="pagina.php">
-					<div class="input-field">
-						<i class="material-icons prefix">perm_identity</i>
-						<label for="nombre">Nombre</label>
-						<input type="text" name="nombre" required>
-					</div>
 
-					<div class="input-field">
-						<i class="material-icons prefix">person_pin</i>
-						<label for="apellido">Apellido</label>
-						<input type="text" name="apellido" required>
+<body id="body-registrarse">
+	<nav class="navbar navbar-light bg" id="nav-registrarse">
+		<a class="navbar-brand" href="#">
+			<img src="../../resources/img/dashboard/img4.jpg" width="30" height="30" alt="">
+		</a>
+	</nav>
+	<main class="container">
+		<h2 class="text-center">Registrate</h2>
+		<form method="post" id="form-register" class="needs-validation" novalidate>
+			<div class="form-row">
+				<div class="form-group col-sm-12 col-md-6">
+					<label for="nombres">Nombres</label>
+					<input id="nombres" type="text" name="nombres" class="form-control" placeholder="Nombres" required>
+					<div class="invalid-feedback">Ingrese sus nombres</div>
+				</div>
+				<div class="form-group col-sm-12 col-md-6">
+					<label for="apellidos">Apellidos</label>
+					<input id="apellidos" type="text" name="apellidos" class="form-control" placeholder="Apellidos" required>
+					<div class="invalid-feedback">Ingrese sus apellidos</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="correo">Correo electrónico</label>
+					<input id="correo" type="email" name="correo" class="form-control" placeholder="Correo electrónico" required>
+					<div class="invalid-feedback">Ingrese su correo electrónico</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="usuario">Nombre de usuario</label>
+					<input id="usuario" type="text" name="usuario" class="form-control" placeholder="Nombre de usuario" required>
+					<div class="invalid-feedback">Ingrese su nombre se usuario</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="clave1">Contraseña</label>
+					<input type="password" class="form-control" id="clave1" name="clave1" placeholder="Contraseña" required>
+					<small id="passwordHelp" class="form-text text-muted">La contraseña debe ser de 7-20 caracteres de longitud. Debe contener letras, números y no debe contener espacios, caracteres especiales o emojis.</small>
+					<div class="invalid-feedback">Ingrese una contraseña</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="clave2">Confirmar contraseña</label>
+					<input type="password" class="form-control" id="clave2" name="clave2" placeholder="Confirmar contraseña" required>
+					<div class="invalid-feedback">No ha confirmado la contraseña</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="fecha">Fecha de nacimiento</label>
+					<input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha de nacimiento" required>
+					<div class="invalid-feedback">Ingrese su fecha de nacimiento</div>
+				</div>
+				<div class="form-group col-sm-12 col-md-6">
+					<label for="create_archivo">Seleccionar foto</label>
+					<input type="file" id="create_archivo" name="create_archivo" class="file-input" required>
+					<small id="passwordHelp" class="form-text text-muted">El archivo debe ser formato .jpg, .png, .gif. Dimensiones máximas 500px x 500px. Tamaño máximo 2MB.</small>
+					<div class="invalid-feedback">Debe seleccionar un archivo.</div>
+				</div>
+				<div class="form-group col-sm-12">
+					<input type="hidden" id="create_estado" name="create_estado" value="1">
+				</div>
+				<div class="form-group col-sm-12">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+						<label class="form-check-label" for="invalidCheck">Acepto los <a href="#">términos y condiciones</a></label>
+						<div class="ininvalid-feedback">Debe aceptar los términos y condiciones antes de continuar.</div>
 					</div>
-					<div class="input-field">
-						<i class="material-icons prefix">email</i>
-						<label for="email">Correo electrónico</label>
-						<input type="email" name="email" required>
-					</div>
-                    <div class="input-field">
-						<i class="material-icons prefix">people</i>
-						<label for="usuario">Usuario</label>
-						<input type="text" name="usuario" required>
-					</div>
-					<div class="input-field">
-						<i class="material-icons prefix">vpn_key</i>
-                        <input id="password" type="password" class="validate">
-						<label for="contraseña">Contraseña</label>
-					</div>
-                    <div class="row">
-                            <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s7">
-                                <i class="material-icons prefix">comment</i>
-                                <select>
-                                
-                                    <option value="" disabled selected>Escoge tu pregunta</option>
-                                    <option value="1">¿Color favorito?</option>
-                                    <option value="2">¿Nombre de la mascota?</option>
-                                    <option value="3">¿Apodo favorito?</option>
-                                    <option value="3">¿Cuál fue tu última mascota?</option>
-                                    </select>
-                                    <label>Pregunta</label>
-                                </div>
-                                <div class="input-field col s5">
-                                <i class="material-icons prefix">description</i>
-                                <input id="respuesta" type="tel" class="validate">
-                                <label for="respuesta">Respuesta</label>
-                                </div>
-                            </div>
-                            </form>
-                    </div>
-					<p class="center-align">
-						<button class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Registrarse</button>
-					</p>
-
-				</form>
-
-			</article>
-		</div>
-	</section>
-	<footer>
-    <?php
-    echo footer::footerbody();
-    ?>
-    <script>
-        var instance = M.Tooltip.getInstance(elem);
-    </script>
-    <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
-    <script type="text/javascript" src="../../resources/js/Chart.js"></script>
-    <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
-    <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
-</footer>
-
-	<script src="../../resources/js/jquery.js"></script>
-    <script src="../../resources/js/inicializacion.js"></script>
-	<script src="../../resources/js/materialize.min.js"></script>
-</body>
-</html>
-
- 
-        
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Registrarse</button>
+					<a href="index.php">Volver al inicio</a>
+				</div>
+			</div>
+		</form>
+	</main>
+	<?php
+	dashboard_helper::footer('registrarse.js');
+	?>

@@ -1,5 +1,5 @@
 <?php
-class Doctores extends Validators
+class Doctores extends Validator
 {
     //Declaración de variables a utilizar
     private $iddoctor = null;
@@ -12,8 +12,8 @@ class Doctores extends Validators
     private $foto = null;
     private $idespecialidad = null;
     private $idestado = null;
-    private $ruta = '../../resources/img/doctores/';
-}
+    private $ruta = '../../../resources/img/doctores/';
+
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
 	{
@@ -104,7 +104,7 @@ class Doctores extends Validators
 	{
 		return $this->clave;
     }
-    public function setFecha()
+    public function setFecha($value)
 	{
 		if ($this->validateDate($value)) {
 			$this->fecha = $value;
@@ -120,15 +120,6 @@ class Doctores extends Validators
 	}
 
 	public function setFoto($file, $name)
-	{
-		if ($this->validateImageFile($file, $this->ruta, $name, 500, 500)) {
-			$this->foto = $this->getImageName();
-			return true;
-		} else {
-			return false;
-		}
-	}
-    public function setFoto($file, $name)
 	{
 		if ($this->validateImageFile($file, $this->ruta, $name, 500, 500)) {
 			$this->foto = $this->getImageName();
@@ -181,7 +172,7 @@ class Doctores extends Validators
 	//Métodos para manejar el CRUD
 	public function readDoctores()
 	{
-		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor FROM doctores ORDER BY apellido_doctor';
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, fecha_nacimiento, foto_doctor, id_estado , id_especialidad FROM doctores  ORDER BY apellido_doctor';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -196,26 +187,26 @@ class Doctores extends Validators
 	public function createDoctor()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor) VALUES(?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
+		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor,id_estado,id_especialidad) VALUES(?,?,?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto,$this->idestado,$this->idespecialidad);
 		return Database::executeRow($sql, $params);
 	}
 
 	public function getDoctor()
 	{
-		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor FROM doctores WHERE id_doctor = ?';
-		$params = array($this->idusuario);
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor,id_estado, id_especialidad FROM doctores WHERE id_doctor = ?';
+		$params = array($this->iddoctor);
 		return Database::getRow($sql, $params);
 	}
 
 	public function updateDoctor()
 	{
-		$sql = 'UPDATE doctores SET nombre_doctor = ?, apellido_doctor = ?, correo_doctor = ?, usuario_doctor = ?, fecha_nacimiento = ?, foto_doctor = ? WHERE id_doctor = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idusuario);
+		$sql = 'UPDATE doctores SET nombre_doctor = ?, apellido_doctor = ?, correo_doctor = ?, usuario_doctor = ?, fecha_nacimiento = ?, foto_doctor = ?, id_estado = ?,id_especialidad= ? WHERE id_doctor = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto,$this->idestado,$this->idespecialidad, $this->iddoctor);
 		return Database::executeRow($sql, $params);
 	}
 
-	public function deleteUsuario()
+	public function deleteDoctor()
 	{
 		$sql = 'DELETE FROM doctores WHERE id_doctor = ?';
 		$params = array($this->iddoctor);

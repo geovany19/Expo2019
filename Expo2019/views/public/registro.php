@@ -9,12 +9,12 @@ public_helper::head("Iniciar sesión");
 	<main id="main">
 		<div class="row">
 			<div class="col col-sm-12">
-				<div class="login-form">
+				<div class="login-form-registro">
 					<form action="../../views/dashboard/pagina.php" method="post">
 						<div class="avatar">
 							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
 						</div>
-						<h2 class="text-center">Iniciar sesión</h2>
+						<h2 class="text-center">Registro</h2>
 						<div class="form-group">
 							<input type="text" class="form-control" name="username" placeholder="Nombre de usuario" required="required">
 						</div>
@@ -37,7 +37,7 @@ public_helper::head("Iniciar sesión");
 			</div>
 		</div>
 	</main>
-	
+
 	<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 </body>

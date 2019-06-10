@@ -5,6 +5,7 @@ include "../../core/helpers/public/public_helper.php";
 <?php
 public_helper::head("Iniciar sesión");
 ?>
+
 <body id="body">
 	<main id="main">
 		<div class="row">
@@ -22,7 +23,7 @@ public_helper::head("Iniciar sesión");
 							<input type="password" class="form-control" name="password" placeholder="Contraseña" required="required">
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block" href="perfil.php">Iniciar sesión</button>
 						</div>
 						<div class="clearfix text-center">
 							<label class="pull-left checkbox-inline text-center"><input type="checkbox"> Recuerdame</label>
@@ -32,7 +33,7 @@ public_helper::head("Iniciar sesión");
 							<a href="#" class="text-center">¿Olvidaste tu contraseña?</a> 
 						</div>
 					</form>
-					<p class="text-center small">¿No estás registrado? <a href="#">¡Registrate aquí!</a></p>
+					<p class="text-center small">¿No estás registrado? <a href="registro.php">¡Registrate aquí!</a></p>
 				</div>
 			</div>
 		</div>

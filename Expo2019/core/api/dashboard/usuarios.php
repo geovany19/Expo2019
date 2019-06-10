@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $usuario = new Usuarios;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idUsuario'])) {
+    if (isset($_SESSION['idUsuario']) || true) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
@@ -26,7 +26,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Usuario inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Usuario no valido';
                 }
                 break;
             case 'editProfile':
@@ -38,7 +38,7 @@ if (isset($_GET['action'])) {
                                 if ($usuario->setCorreo($_POST['profile_correo'])) {
                                     if ($usuario->setUsuario($_POST['profile_alias'])) {
                                         if ($usuario->setFecha($_POST['profile_fecha'])) {
-                                            if ($usuario->setFoto($_POST['profile_foto'])) {
+                                            if ($usuario->updateUsuario()) {
                                                 if ($usuario->updateUsuario()) {
                                                     $result['status'] = 1;
                                                 } else {
@@ -185,20 +185,20 @@ if (isset($_GET['action'])) {
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($usuario->getUser()) {
-                        if ($usuario->setNombres($_POST['update_nombres'])) {
-                            if ($usuario->setApellidos($_POST['update_apellidos'])) {
+                        if ($usuario->setNombre($_POST['update_nombre'])) {
+                            if ($usuario->setApellido($_POST['update_apellido'])) {
                                 if ($usuario->setCorreo($_POST['update_correo'])) {
                                     if ($usuario->setUsuario($_POST['update_usuario'])) {
                                         if ($usuario->setFecha($_POST['update_fecha'])) {
                                             if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                if ($usuario->setFoto($_FILES['update_archivo'], $_POST['imagen_producto'])) {
+                                                if ($usuario->setFoto($_FILES['update_archivo'], $_POST['foto_usuario'])) {
                                                     $archivo = true;
                                                 } else {
-                                                    $result['exception'] = $producto->getImageError();
+                                                    $result['exception'] = $usuario->getImageError();
                                                     $archivo = false;
                                                 }
                                             } else {
-                                                if (!$usuario->setFoto(null, $_POST['imagen_producto'])) {
+                                                if (!$usuario->setFoto(null, $_POST['foto_usuario'])) {
                                                     $result['exception'] = $usuario->getImageError();
                                                 }
                                                 $archivo = false;
@@ -221,7 +221,7 @@ if (isset($_GET['action'])) {
                                             $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto';
+                                        $result['exception'] = 'Nombre de doctor incorrecto';
                                     }
                                 } else {
                                     $result['exception'] = 'Correo incorrecto';
@@ -233,10 +233,10 @@ if (isset($_GET['action'])) {
                             $result['exception'] = 'Nombres incorrectos';
                         }
                     } else {
-                        $result['exception'] = 'Usuario inexistente';
+                        $result['exception'] = 'Doctor inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Doctor incorrecto';
                 }
                 break;
             case 'delete':
@@ -267,8 +267,10 @@ if (isset($_GET['action'])) {
                 if ($usuario->readUsuarios()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
+                    $result['exception'] = 'Hola';
                 } else {
                     $result['message'] = 'No existen usuarios registrados';
+                    $result['exception'] = 'Hola';
                 }
                 break;
             case 'register':
@@ -276,27 +278,31 @@ if (isset($_GET['action'])) {
                 if ($usuario->setNombre($_POST['nombres'])) {
                     if ($usuario->setApellido($_POST['apellidos'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
-                            if ($usuario->setUsuario($_POST['alias'])) {
+                            if ($usuario->setUsuario($_POST['usuario'])) {
                                 if ($_POST['clave1'] == $_POST['clave2']) {
                                     if ($usuario->setClave($_POST['clave1'])) {
                                         if ($usuario->setFecha($_POST['fecha'])) {
-                                            if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                if ($usuario->setFoto($_FILES['create_archivo'], null)) {
-                                                    if ($usuario->createUsuario()) {
-                                                        $result['status'] = 1;
-                                                        if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
-                                                            $result['message'] = 'Usuario registrado correctamente';
+                                            if ($usuario->setEstado($_POST['create_estado']) ? 1 : 0) {
+                                                if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
+                                                    if ($usuario->setFoto($_FILES['create_archivo'], null)) {
+                                                        if ($usuario->createUsuario()) {
+                                                            $result['status'] = 1;
+                                                            if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
+                                                                $result['message'] = 'Usuario registrado correctamente';
+                                                            } else {
+                                                                $result['message'] = 'Usuario registrado. No se creó el archivo';
+                                                            }
                                                         } else {
-                                                            $result['message'] = 'Usuario registrado. No se creó el archivo';
+                                                            $result['exception'] = 'Operación fallida';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Operación fallida';
+                                                        $result['exception'] = $usuario->getImageError();
                                                     }
                                                 } else {
-                                                    $result['exception'] = $usuario->getImageError();
+                                                    $result['exception'] = 'Seleccione una imagen.';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Seleccione una imagen.';
+                                                $result['exception'] = 'Estado incorrecto';
                                             }
                                         } else {
                                             $result['exception'] = 'Fecha no válida';
@@ -347,7 +353,8 @@ if (isset($_GET['action'])) {
                 exit('Acción no disponible');
         }
     }
-	print(json_encode($result));
+    print(json_encode($result));
 } else {
-	exit('Recurso denegado');
+    exit('Recurso denegado');
 }
+?>

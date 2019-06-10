@@ -8,6 +8,19 @@
     background: #8edaf7;
 }
 
+#nav-registrarse {
+    background: #8edaf7;
+}
+
+#body-registrarse {
+    background: #D3EDF7;
+}
+
+#add {
+    position: relative;
+    align-items: center
+}
+
 .form-control {
     min-height: 41px;
     background: #fff;
@@ -93,6 +106,183 @@
 }
 
 .page-footer{
-    background-color: #69C6F4;
-    color: #e3e3e3;
+    background-color: #8edaf7;
+    color: #5D6467;
+}
+
+.footer-text {
+    color: #828F95;
+}
+
+/*Estilos del reloj utilizado en el dashboard*/
+
+.outer_face {
+    position: relative;
+    width: 400px; /* anchura del reloj */
+    height: 400px; /* altura del reloj */
+    border-radius: 400px; /*radio de las esquinas del reloj */
+    background: white;
+    box-shadow: inset 0 0 10px gray;
+    border: 0 solid gray; /* delgadez dek borde exterior */
+}
+
+.outer_face::before, .outer_face::after, .outer_face .marker { /* estilo de las horas */
+    content: "";
+    position: absolute;
+    width: 8px; /* ancho de 3, 6, 9 y 12 */
+    height: 100%;
+    background: black;
+    z-index: 0;
+    left: 50%;
+    margin-left: -4px; /* set this value of 1/2 marker width */
+    top: 0
+}
+
+.outer_face::after {
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg)
+}
+
+.outer_face .marker {
+    background: gray;
+    width: 6px; /* width of all other markers */
+    margin-left: -3px /* set this value of 1/2 marker width */
+}
+
+.outer_face .marker.oneseven {
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg)
+}
+
+.outer_face .marker.twoeight {
+    -moz-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+    transform: rotate(60deg)
+}
+
+.outer_face .marker.fourten {
+    -moz-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+    transform: rotate(120deg)
+}
+
+.outer_face .marker.fiveeleven {
+    -moz-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    -webkit-transform: rotate(150deg);
+    transform: rotate(150deg)
+}
+
+.inner_face {
+    position: relative;
+    width: 88%;
+    height: 88%;
+    background: white;
+    -moz-border-radius: 1000px;
+    -webkit-border-radius: 1000px;
+    border-radius: 1000px;
+    z-index: 1000;
+    left: 6%; /* set this value of 1/2 width value*/
+    top: 6% /* set this value of 1/2 height value*/
+}
+
+.inner_face::before {
+    /* pequeño círculo del medio */
+    content: "";
+    width: 18px; /* ancho del círculo interior */
+    height: 18px; /* altura del círculo interior */
+    border-radius: 18px;
+    margin-left: -9px; /* fijar este valor 1/2 del ancho*/
+    margin-top: -9px; /* fijare este valo 1/2 del alto*/
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 0 30px blue;
+}
+
+.inner_face::after {
+    content: "SISMED";
+    position: absolute;
+    width: 100%;
+    font: normal 0.8em Arial;
+    color: gray;
+    text-align: center;
+    top: 85%
+}
+
+.hand, .hand.hour {
+    position: absolute;
+    width: 4px; /* ancho de aguja horaria */
+    height: 30%; /* altura de aguja horaria */
+    top: 20%; /* fijar top 50% altura */
+    left: 50%;
+    margin-left: -2px; /* fijar este valor 1/2 del ancho */
+    background: black;
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -moz-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    -webkit-transform-origin: bottom;
+    transform-origin: bottom;
+    z-index: -1;
+    -moz-box-shadow: 0 0 3px gray;
+    -webkit-box-shadow: 0 0 3px gray;
+    box-shadow: 0 0 3px gray
+}
+
+.hand.minute {
+    height: 45%; /* altura de aguja minutera */
+    top: 5%; /* fijar top a 50% de la altura */
+    width: 5px; /* ancho de aguja minutera */
+    margin-left: -2.5px; /* fijar este valor a 1/2 del ancho */
+}
+
+.hand.second {
+    height: 50%; /* altura de la aguja segundera */
+    width: 2px; /* anchura de la aguja segundera */
+    margin-left: -1px; /* fijar este valor a la mitad del ancho */
+    top: 0;
+    background: red
+}
+
+/*estilo de reloj digital*/
+.clockdate-wrapper {
+    background-color: #6497AD;
+    padding:25px;
+    max-width:350px;
+    width:100%;
+    text-align:center;
+    border-radius:5px;
+    margin:0 auto;
+    margin-top:15%;
+}
+#clock{
+    background-color:#6497AD;
+    font-size:60px;
+    text-shadow:0px 0px 1px #fff;
+    font-weight: lighter;
+    color:#fff;
+}
+#clock span {
+    color:#888;
+    text-shadow:0px 0px 1px #333;
+    font-size:30px;
+    position:relative;
+    top:-27px;
+    left:-10px;
+}
+#date {
+    letter-spacing:10px;
+    font-size:14px;
+    font-weight: bolder;
+    color:#fff;
 }

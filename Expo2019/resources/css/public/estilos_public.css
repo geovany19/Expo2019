@@ -1,0 +1,42 @@
+footer.sticky-footer {
+    padding: 2rem 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+  }
+  
+  footer.sticky-footer .copyright {
+    line-height: 1;
+    font-size: 0.8rem;
+  }
+  
+  body.sidebar-toggled footer.sticky-footer {
+    width: 100%;
+  }
+
+  .btn-circle {
+    border-radius: 100%;
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 1rem;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  
+  .btn-circle.btn-sm, .btn-group-sm > .btn-circle.btn {
+    height: 1.8rem;
+    width: 1.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .btn-circle.btn-lg, .btn-group-lg > .btn-circle.btn {
+    height: 3.5rem;
+    width: 3.5rem;
+    font-size: 1.35rem;
+  }

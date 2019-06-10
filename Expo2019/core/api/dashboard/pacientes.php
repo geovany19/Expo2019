@@ -175,10 +175,10 @@ if (isset($_GET['action'])) {
                     if ($result['dataset'] = $paciente->getPaciente()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Usuario inexistente';
+                        $result['exception'] = 'Paciente inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Paciente incorrecto';
                 }
                 break;
             case 'update':

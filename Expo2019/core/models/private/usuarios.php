@@ -151,11 +151,29 @@ class Usuarios extends Validator
 
 	public function getCita()
 	{
-		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and e.id_estado=1 and c.id_doctor=1 GROUP by p.id_paciente';
-		/*$params = array($this->id);
-		return Database::getRow($sql, $params);*/
-		$params = array(null);
+		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=1 and c.id_doctor=? GROUP by p.id_paciente';
+		$params = array($this->id);
 		return Database::getRows($sql, $params);
+	}
+
+	public function getCitaspendientes()
+	{
+		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=2 and c.id_doctor=? GROUP by p.id_paciente';
+		$params = array($this->id);
+		return Database::getRows($sql, $params);
+	}
+	public function cancelCita()
+	{
+		$sql = 'UPDATE cita SET id_estado = 3 WHERE  id_cita = ?';
+		$params = array($this->id);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function aceptarCita()
+	{
+		$sql = 'UPDATE cita SET id_estado = 4 WHERE  id_cita = ?';
+		$params = array($this->id);
+		return Database::executeRow($sql, $params);
 	}
 }
 ?>

@@ -1,67 +1,101 @@
-$(document).ready(function()
-{
-    showTableCitas()
-})
+$(document).ready(function() {
+  showTableCitas();
+});
 
-const apiCitas = '../../core/api/public/citas.php?action=';
+const apiCitas = "../../core/api/public/citas.php?action=";
 
 //Función para obtener y mostrar los registros disponibles
-function showTableCitas()
-{
-    $.ajax({
-        url: apiCitas + 'read',
-        type: 'post',
-        data: null,
-        datatype: 'json'
-    })
-    .done(function(response){
-        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-        if (isJSONString(response)) {
-            const result = JSON.parse(response);
-            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-            if (result.status) {
-                fillTableDoctores(result.dataset);
-            }
-            
-        } else {
-            console.log(response);
+function showTableCitas() {
+  $.ajax({
+    url: apiCitas + "read",
+    type: "post",
+    data: null,
+    datatype: "json"
+  })
+    .done(function(response) {
+      //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+      if (isJSONString(response)) {
+        const result = JSON.parse(response);
+        //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+        if (result.status) {
+          fillTableCitas(result.dataset);
         }
+      } else {
+        console.log(response);
+      }
     })
-    .fail(function(jqXHR){
-        //Se muestran en consola los posibles errores de la solicitud AJAX
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    .fail(function(jqXHR) {
+      //Se muestran en consola los posibles errores de la solicitud AJAX
+      console.log("Error: " + jqXHR.status + " " + jqXHR.statusText);
     });
 }
 
 //Función para llenar tabla con los datos de los registros
-function fillTableCitas(rows)
-{
-    let content = '';
-    //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
-    rows.forEach(function(row){
-        $('#tbody-doctores').html(content);
-        if ( $.fn.DataTable.isDataTable( '#dataTableDoctores' )) {
-            destroyDataTable('#dataTableDoctores');
-        }
-        content += `
+function fillTableCitas(rows) {
+  let content = "";
+  //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
+  rows.forEach(function(row) {
+    $("#tbody-citas").html(content);
+    if ($.fn.DataTable.isDataTable("#dataTableCitas")) {
+      destroyDataTable("#dataTableCitas");
+    }
+    content += `
         <tr>
-            <td>
-                <img src="../../resources/img/doctores/5cf97a422b869.png" width="100px" height="100px" alt="" />
-            </td>
-            <td>${row.nombre_doctor} ${row.apellido_doctor}</td>
-            <td>${row.nombre_especialidad}</td>
-            <td class="d-flex justify-content-center">
-                <div>
-                    <img src="../../resources/img/doctores/estado/${row.id_estado}.png" width="30px" height="30px" alt="" />
-                    ${row.estado}
-                </div>
-            </td>
-            <td>
-                ${(row.id_estado == 1)?'<div class="d-flex justify-content-center" style="align-items: center;"><a data-toggle="modal" data-target="#crearCita"><button type="button" onclick="setDoctor('+row.id_doctor+')" class="btn btn-warning ml-3">Solicitar cita</button></a></div>':''}
-            </td>
+            <td>${row.nombre_doctor}</td>
+            <td>${row.nombre_paciente}</td>
+            <td>${row.fecha_cita}</td>
+            <td>${row.hora_cita}</td>
+            <td>${row.estado}</td>
+            <td class="d-flex justify-content-center">${
+              row.id_estado != 3
+                ? '<div class="d-flex justify-content-center" style="align-items: center;"><button type="button" class="btn btn-danger ml-3" onclick="cancelarCita(' +
+                  row.id_cita +
+                  ')">Cancelar cita</button></div>'
+                : ""
+            }</td>
         </tr>
         `;
-    });
-    $('#tbody-doctores').html(content);
-    renderDataTable('#dataTableDoctores');
+  });
+  $("#tbody-citas").html(content);
+  renderDataTable("#dataTableCitas");
+}
+
+function cancelarCita(id) {
+  Swal.fire({
+    title: "¿Estas seguro?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, cancelar cita",
+    cancelButtonText: "Salir"
+  }).then(result => {
+    if (result.value) {
+      $.ajax({
+        url: apiCitas + "cancelarCita",
+        type: "post",
+        data: {
+            id_cita:id
+        },
+        datatype: "json"
+      })
+        .done(function(response) {
+          //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+          if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status) {
+                showTableCitas();
+            }
+          } else {
+            console.log(response);
+          }
+        })
+        .fail(function(jqXHR) {
+          //Se muestran en consola los posibles errores de la solicitud AJAX
+          console.log("Error: " + jqXHR.status + " " + jqXHR.statusText);
+        });
+      Swal.fire("Cita cancelada", "", "success");
+    }
+  });
 }

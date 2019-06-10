@@ -1,5 +1,5 @@
 <?php
-class Doctores extends Validator
+class Citas extends Validator
 {
     //Declaración de variables a utilizar
     private $id_cita = null;
@@ -104,7 +104,7 @@ class Doctores extends Validator
 	//Métodos para manejar el CRUD
 	public function readCitas()
 	{
-		$sql = 'SELECT a.id_cita, d.nombre_doctor, c.nombre_paciente, a.fecha_cita, a.hora_cita, b.estado FROM cita a, estado_cita b, pacientes c, doctores d WHERE a.id_doctor = d.id_doctor AND a.id_paciente = c.id_paciente AND a.id_estado = b.id_estado ORDER BY a.fecha_cita';
+		$sql = 'SELECT a.id_cita, d.nombre_doctor, c.nombre_paciente, a.fecha_cita, a.hora_cita, b.estado, b.id_estado FROM cita a, estado_cita b, pacientes c, doctores d WHERE a.id_doctor = d.id_doctor AND a.id_paciente = c.id_paciente AND a.id_estado = b.id_estado  ORDER BY a.fecha_cita';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -124,10 +124,10 @@ class Doctores extends Validator
 		return Database::getRow($sql, $params);
 	}
 
-	public function updateDoctor()
+	public function updateEstado()
 	{
-		$sql = 'UPDATE cita SET id_doctor = ?, id_paciente = ?, fecha_cita = ?, hora_cita = ?, id_estado = ? WHERE id_cita = ?';
-		$params = array($this->id_doctor, $this->id_paciente, $this->fecha, $this->hora, $this->id_estado, $this->id_cita);
+		$sql = 'UPDATE cita SET id_estado = ? WHERE id_cita = ?';
+		$params = array($this->id_estado, $this->id_cita);
 		return Database::executeRow($sql, $params);
 	}
 

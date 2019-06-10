@@ -11,6 +11,7 @@ class public_helper
 					<meta name="viewport" content="width=device-width, initial-scale=1.0">
 					<meta http-equiv="X-UA-Compatible" content="ie=edge">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
+					<link rel="stylesheet" type="text/css" href="../../resources/css/sweetalert2.min.css">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_public.css">
 					<link href="../../resources/js/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -90,6 +91,7 @@ class public_helper
 				<script src="../../resources/js/datatables/dataTables.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables-demo.js"></script>
+				<script type="text/javascript" src="../../resources/js/sweetalert2.min.js"></script>
 			</body>
 		</html>
 			';

@@ -15,15 +15,16 @@ public_helper::navbar();
                     <thead>
                         <tr>
                             <th>Doctor</th>
+                            <th>Paciente</th>
                             <th>Dia de la cita</th>
                             <th>Hora de la cita</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tbody-citas">
                         <!-- cargado desde el cotrolador -->
-
-                    </tbody>
+                                            </tbody>
                 </table>
             </div>
         </div>

@@ -5,6 +5,7 @@ $(document).ready(function()
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
 const api = '../../core/api/dashboard/doctores.php?action=';
+const especialidad = '../../core/api/dashboard/especialidades.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -22,7 +23,7 @@ function fillTable(rows)
                 <td>${row.correo_doctor}</td>
                 <td>${row.usuario_doctor}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td>${row.id_especialidad}</td>
+                <td>${row.nombre_especialidad}</td>
                 <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -39,7 +40,7 @@ function fillTable(rows)
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
             "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfo": "Mostrando _START_ al _END_ de _TOTAL_ registros",
             "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
             "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix": "",
@@ -191,6 +192,7 @@ function modalUpdate(id)
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
                 $('#update_especialidad').val(result.dataset.id_especialidad);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
+                fillSelect(especialidad, 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);

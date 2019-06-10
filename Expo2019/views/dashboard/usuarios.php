@@ -33,20 +33,24 @@ dashboard_helper::nav();
 	<div class="modal-dialog modal-dialog-scrollable" role="document">
 		<div class="modal-content">
 			<div class="modal-header justify-content-center aling-items-center">
-				<h5 class="modal-title" id="exampleModalLongTitle">Actualizar Doctor</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">Actualizar usuario</h5>
 			</div>
 			<div class="modal-body">
 				<img id="foto" height="75">
 				<form id="form-update" enctype="multipart/form-data">
-					<input type="hidden" id="id_usuario" name="id_usuario">
-					<input type="hidden" id="foto_usuario" name="foto_usuario">
+					<input type="hidden" class="form-control" id="id_usuario" name="id_usuario">
+					<input type="hidden" class="form-control" id="foto_usuario" name="foto_usuario">
 					<div class="form-group">
-						<label for="update_nombre">Nombre</label>
-						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" placeholder="Nombre">
+						<label for="update_archivo">Foto</label>
+						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">
-						<label for="update_apellido">Apellido</label>
-						<input type="text" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido">
+						<label for="update_nombres">Nombre</label>
+						<input type="text" class="form-control" class="form-control is-valid" id="update_nombres" name="update_nombres" placeholder="Nombre">
+					</div>
+					<div class="form-group">
+						<label for="update_apellidos">Apellido</label>
+						<input type="text" class="form-control" id="update_apellidos" name="update_apellidos" placeholder="Apellido">
 					</div>
 					<div class="form-group">
 						<label for="update_correo">Correo electrónico</label>
@@ -59,10 +63,6 @@ dashboard_helper::nav();
 					<div class="form-group">
 						<label for="update_fecha">Fecha de nacimiento</label>
 						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha de nacimiento">
-					</div>
-					<div class="form-group">
-						<label for="update_archivo">Foto</label>
-						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="col s12 m6">
 						<p>

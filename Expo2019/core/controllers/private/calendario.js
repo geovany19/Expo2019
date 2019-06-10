@@ -1,23 +1,45 @@
+    const api = '../../core/api/private/citas.php?action=';
 
-	$(document).ready(function() {
+    var eventos = new Object();
+
+    $(document).ready(function() {
 	    var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
-		var y = date.getFullYear();
+        var y = date.getFullYear();
+   
 		
-		/*  className colors
-		
-		className: default(transparent), important(red), chill(pink), success(green), info(blue)
-		
-		*/		
-		
+        
+        $.ajax({
+            url: api + 'readCitas',
+            type: 'post',
+            data: null,
+            datatype: 'json'
+        })
+        .done(function(response){
+            //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+            if (isJSONString(response)) {
+                const resultado = JSON.parse(response);
+                //Se comprueba que no hay usuarios registrados para redireccionar al registro del primer usuario
+                if (resultado.status) {
+                   eventos = resultado.dataset;
+                   console.log(eventos);
+                }
+            } else {
+                console.log(response);
+            }
+        })
+        .fail(function(jqXHR){
+            //Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
 		  
 		/* initialize the external events
 		-----------------------------------------------------------------*/
 	
 		$('#external-events div.external-event').each(function() {
 		
-			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+			// create an Event Object ( )
 			// it doesn't need to have a start or end
 			var eventObject = {
 				title: $.trim($(this).text()) // use the element's text as the event title
@@ -38,7 +60,7 @@
 	
 		/* initialize the calendar
 		-----------------------------------------------------------------*/
-		
+
 		var calendar =  $('#calendar').fullCalendar({
 			header: {
 				left: 'title',
@@ -65,7 +87,7 @@
 			allDaySlot: false,
 			selectHelper: true,
 			select: function(start, end, allDay) {
-				var title = prompt('Event Title:');
+				var title = prompt('Event Title test:');
 				if (title) {
 					calendar.fullCalendar('renderEvent',
 						{
@@ -75,7 +97,8 @@
 							allDay: allDay
 						},
 						true // make the event "stick"
-					);
+                    );
+                    //console.log(calendar )
 				}
 				calendar.fullCalendar('unselect');
 			},
@@ -103,45 +126,7 @@
 				}
 				
 			},
-			
 			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false,
-				},
 				{
 					title: 'Click for Google',
 					start: new Date(y, m, 28),
@@ -150,10 +135,12 @@
 					className: 'success'
 				}
 			],			
-		});
-		
-		
+        });
+        //console.log(eventos);
+        //var fecha = new Date(y, m, 28);
+        //console.log(fecha);
     });
+    
     
     /*!
  * FullCalendar v1.6.4

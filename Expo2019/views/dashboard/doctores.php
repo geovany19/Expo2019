@@ -132,8 +132,8 @@ dashboard_helper::nav();
 						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">
-						<label for="update_especialidad">Especialidad:</label>
-						<input type="number" class="form-control" id="update_especialidad" name="update_especialidad" class="file-input" placeholder:="Especialidad">
+						<label for="update_especialidad">Especialidad</label>
+						<select name="update_especialidad" id="update_especialidad"></select>
 					</div>
 					<div class="col s12 m6">
 						<p>

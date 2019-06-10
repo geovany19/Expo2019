@@ -103,8 +103,8 @@ function modalUpdate(id) {
                     $('#foto').attr('src','../../resources/img/usuarios/'+result.dataset.foto_usuario);
                     $('#id_usuario').val(result.dataset.id_usuario);
                     $('#foto_usuario').val(result.dataset.foto_usuario);
-                    $('#update_nombre').val(result.dataset.nombre_usuario);
-                    $('#update_apellido').val(result.dataset.apellido_usuario);
+                    $('#update_nombres').val(result.dataset.nombre_usuario);
+                    $('#update_apellidos').val(result.dataset.apellido_usuario);
                     $('#update_correo').val(result.dataset.correo_usuario);
                     $('#update_usuario').val(result.dataset.usuario_usuario);
                     $('#update_fecha').val(result.dataset.fecha_nacimiento);

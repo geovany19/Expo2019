@@ -79,7 +79,7 @@ class dashboard_helper
 									</li>
 									<li>
 										<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-											<i class="fas fa-user"></i> Mi perfil - <b>'.$_SESSION['aliasUsuario'].'</b>
+											<i class="fas fa-user"></i> Mi perfil - <b>' . $_SESSION['aliasUsuario'] . '</b>
 										</a>
 										<ul class="collapse list-unstyled" id="pageSubmenu">
 											<li>
@@ -90,7 +90,7 @@ class dashboard_helper
 											</li>
 										</ul>
 									</li>
-									<li><a href="#" onclick="singOff()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+									<li><a href="#" onclick="signOff()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
 								</ul>
 							</nav>
 						<div id="content">
@@ -203,69 +203,85 @@ class dashboard_helper
 	{
 		print('
 		<div class="modal fade" id="modal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-scrollable" role="document">
-		  		<div class="modal-content">
-					<div class="modal-header">
-			  			<h5 class="modal-title" id="exampleModalScrollableTitle">Editar perfil</h5>
-			  			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-			  			</button>
-					</div>
-					<div class="modal-body">
-					<form>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputEmail4">Email</label>
-								<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="inputPassword4">Password</label>
-								<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-							</div>
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalScrollableTitle">Editar perfil</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" id="form-profile">
+						<input type="hidden" class="form-control" id="id_usuario" name="id_usuario"/>
+						<div class="form-group">
+							<label for="profile_nombre">Nombres</label>
+							<input type="text" class="form-control" id="profile_nombre" name="profile_nombre" placeholder="Nombres">
 						</div>
 						<div class="form-group">
-							<label for="inputAddress">Address</label>
-							<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-							</div>
-							<div class="form-group">
-							<label for="inputAddress2">Address 2</label>
-							<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputCity">City</label>
-								<input type="text" class="form-control" id="inputCity">
-							</div>
-							<div class="form-group col-md-4">
-								<label for="inputState">State</label>
-								<select id="inputState" class="form-control">
-								<option selected>Choose...</option>
-								<option>...</option>
-								</select>
-							</div>
-							<div class="form-group col-md-2">
-								<label for="inputZip">Zip</label>
-								<input type="text" class="form-control" id="inputZip">
-							</div>
+							<label for="profile_apellido">Apellidos</label>
+							<input type="text" class="form-control" id="profile_apellido" name="profile_apellido" placeholder="Apellidos">
 						</div>
 						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="gridCheck">
-								<label class="form-check-label" for="gridCheck">
-								Check me out
-								</label>
-							</div>
+							<label for="profile_nombre">Correo electrónico</label>
+							<input type="email" class="form-control" id="profile_correo" name="profile_correo" placeholder="Correo electrónico">
 						</div>
-						<button type="submit" class="btn btn-primary">Sign in</button>
-					</form>
+						<div class="form-group">
+							<label for="profile_usuario">Nombre de usuario</label>
+							<input type="text" class="form-control" id="profile_usuario" name="profile_usuario" placeholder="Nombre de usuario">
+						</div>
+						<div class="form-group">
+							<label for="profile_nombre">Fecha de nacimiento</label>
+							<input type="date" class="form-control" id="profile_fecha" name="profile_fecha" placeholder="Fecha de nacimiento">
+						</div>
+						<!--<div class="form-group">
+							<label for="update_archivo">Foto</label>
+							<input type="file" id="update_archivo" name="update_archivo" class="file-input">
+						</div>-->
 				</div>
 				<div class="modal-footer">
-		  			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-		  			<button type="button" class="btn btn-primary">Guardar cambios</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn btn-primary">Cambiar contraseña</button>
 				</div>
-		  	</div>
+			</div>
 		</div>
 	</div>
+
+			<div class="modal fade" id="modal-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalScrollableTitle">Cambiar contraseña</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form method="post" id="form-password">
+								<div class="form-group">
+									<label for="clave_actual_1">Contraseña antigua</label>
+									<input type="password" class="form-control" id="clave_actual_1" name="clave_actual_1" placeholder="Contraseña actual">
+								</div>
+								<div class="form-group">
+									<label for="clave_actual_2">Confirmar contaseña antigua</label>
+									<input type="password" class="form-control" id="clave_actual_2" name="clave_actual_2" placeholder="Confirmar contraseña actual">
+								</div>
+								<div class="form-group">
+									<label for="clave_nueva_1">Nueva contraseña</label>
+									<input type="password" class="form-control" id="clave_actual_1" name="clave_actual_1" placeholder="Nueva contraseña">
+								</div>
+								<div class="form-group">
+									<label for="clave_actual_2">Confirmar nueva contraseña</label>
+									<input type="password" class="form-control" id="clave_actual_2" name="clave_actual_2" placeholder="Confirmar nueva contraseña">
+								</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+							<button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		');
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 require_once('../../../core/helpers/database.php');
 require_once('../../../core/helpers/validator.php');
-require_once('../../../core/models/usuarios.php');
+require_once('../../../core/models/private/usuarios.php');
 
 
 //Se comprueba si existe una petición del sitio web y la acción a realizar, de lo contrario se muestra una página de error
@@ -10,7 +10,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
     $usuario = new Usuarios;
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
+   //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
     if (isset($_SESSION['idUsuario']) && $_GET['site'] == 'private') {
         switch ($_GET['action']) {
             case 'logout':
@@ -20,6 +20,86 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     header('location: ../../../views/private/agenda.php');
                 }
                 break;
+                
+                case 'readProfile':
+                if ($usuario->setId($_SESSION['idUsuario'])) {
+                    if ($result['dataset'] = $usuario->getUsuario()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Usuario inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto 3';
+                }
+                break;
+
+                case 'editProfile':
+                if ($usuario->setId($_SESSION['idUsuario'])) {
+                    if ($usuario->getUsuario()) {
+                        $_POST = $usuario->validateForm($_POST);
+                        if ($usuario->setNombres($_POST['profile_nombres'])) {
+                            if ($usuario->setApellidos($_POST['profile_apellidos'])) {
+                                if ($usuario->setCorreo($_POST['profile_correo'])) {
+                                    if ($usuario->setAlias($_POST['profile_alias'])) {
+                                        if ($usuario->updateUsuario()) {
+                                            $_SESSION['aliasUsuario'] = $_POST['profile_alias'];
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Alias incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Correo incorrecto';
+                                }
+                            } else {
+                                $result['exception'] = 'Apellidos incorrectos';
+                            }
+                        } else {
+                            $result['exception'] = 'Nombres incorrectos';
+                        }
+                    } else {
+                        $result['exception'] = 'Usuario inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
+                break;
+
+                case 'password':
+                if ($usuario->setId($_SESSION['idUsuario'])) {
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
+                        if ($usuario->setClave($_POST['clave_actual_1'])) {
+                            if ($usuario->checkPassword()) {
+                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                    if ($usuario->setClave($_POST['clave_nueva_1'])) {
+                                        if ($usuario->changePassword()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Clave nueva menor a 6 caracteres';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Claves nuevas diferentes';
+                                }
+                            } else {
+                                $result['exception'] = 'Clave actual incorrecta';
+                            }
+                        } else {
+                            $result['exception'] = 'Clave actual menor a 6 caracteres';
+                        }
+                    } else {
+                        $result['exception'] = 'Claves actuales diferentes';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
+                break;
+
             }
         }
         else{

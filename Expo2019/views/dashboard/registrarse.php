@@ -4,11 +4,6 @@ dashboard_helper::head("Registrarse");
 ?>
 
 <body id="body-registrarse">
-	<nav class="navbar navbar-light bg" id="nav-registrarse">
-		<a class="navbar-brand" href="#">
-			<img src="../../resources/img/dashboard/img4.jpg" width="30" height="30" alt="">
-		</a>
-	</nav>
 	<main class="container">
 		<h2 class="text-center">Registrate</h2>
 		<form method="post" id="form-register" class="needs-validation" novalidate>
@@ -49,12 +44,12 @@ dashboard_helper::head("Registrarse");
 					<input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha de nacimiento" required>
 					<div class="invalid-feedback">Ingrese su fecha de nacimiento</div>
 				</div>
-				<div class="form-group col-sm-12 col-md-6">
-					<label for="create_archivo">Seleccionar foto</label>
-					<input type="file" id="create_archivo" name="create_archivo" class="file-input" required>
+				<!--<div class="form-group col-sm-12 col-md-6">
+					<label for="create_archivo">Seleccionar foto de perfil</label>
+					<input type="file" id="create_archivo" name="create_archivo" class="file-input">
 					<small id="passwordHelp" class="form-text text-muted">El archivo debe ser formato .jpg, .png, .gif. Dimensiones máximas 500px x 500px. Tamaño máximo 2MB.</small>
 					<div class="invalid-feedback">Debe seleccionar un archivo.</div>
-				</div>
+				</div>-->
 				<div class="form-group col-sm-12">
 					<input type="hidden" id="create_estado" name="create_estado" value="1">
 				</div>

@@ -182,7 +182,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-            print_r($_POST);
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {
@@ -191,42 +190,40 @@ if (isset($_GET['action'])) {
                                 if ($doctor->setCorreo($_POST['update_correo'])) {
                                     if ($doctor->setUsuario($_POST['update_alias'])) {
                                         if ($doctor->setFecha($_POST['update_fecha'])) {
-                                            if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_doctor'])) {
-                                                    $archivo = true;
-                                                } else {
-                                                    $result['exception'] = $producto->getImageError();
-                                                    $archivo = false;
-                                                }
-                                            } else {
-                                                if (!$doctor->setFoto(null, $_POST['foto_doctor'])) {
-                                                    $result['exception'] = $doctor->getImageError();
-                                                }
-                                                $archivo = false;
-                                            }
-                                            if ($doctor->updateDoctor()) {
-                                                $result['status'] = 1;
-                                                if ($archivo) {
-                                                    if ($doctor->saveFile($_FILES['update_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
-                                                        $result['message'] = 'Doctor modificado correctamente';
+                                            if ($doctor->setIdespecialidad($_POST['update_especialidad'])) {
+                                                if ($doctor->setIdestado(isset($_POST['update_estado']) ? 1 : 2)) {
+                                                    if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
+                                                        if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_doctor'])) {
+                                                            $archivo = true;
+                                                        } else {
+                                                            $result['exception'] = $producto->getImageError();
+                                                            $archivo = false;
+                                                        }
                                                     } else {
-                                                        $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                        if (!$doctor->setFoto(null, $_POST['foto_doctor'])) {
+                                                            $result['exception'] = $doctor->getImageError();
+                                                        }
+                                                        $archivo = false;
                                                     }
-                                                    if($doctor->setIdestado (isset($_POST['update_estado'])? 1 :2)) {
-
-                                                    }else{
-                                                        $result['message'] = 'El estado a cambiado';   
-                                                    }
-                                                    if($doctor->setIdespecialidad($_POST['update_estado'])){
-
-                                                    }else{
-                                                        $result['message'] = 'Especialidad asignada'; 
+                                                    if ($doctor->updateDoctor()) {
+                                                        $result['status'] = 1;
+                                                        if ($archivo) {
+                                                            if ($doctor->saveFile($_FILES['update_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
+                                                                $result['message'] = 'Doctor modificado correctamente';
+                                                            } else {
+                                                                $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                            }
+                                                        } else {
+                                                            $result['message'] = 'Doctor modificado. No se subió ningún archivo';
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Operación fallida';
                                                     }
                                                 } else {
-                                                    $result['message'] = 'Doctor modificado. No se subió ningún archivo';
+                                                    $result['exception'] = 'Error con el estado';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Operación fallida';
+                                                $result['exception'] = 'Error con la especialidad';
                                             }
                                         } else {
                                             $result['exception'] = 'Fecha no válida';
@@ -358,7 +355,7 @@ if (isset($_GET['action'])) {
                 exit('Acción no disponible');
         }
     }
-	print(json_encode($result));
+    print(json_encode($result));
 } else {
-	exit('Recurso denegado');
+    exit('Recurso denegado');
 }

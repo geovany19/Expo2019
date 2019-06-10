@@ -11,5 +11,5 @@ private_helper::headerTemplate('Bienvenido');
 </div>
 
 <?php
-private_helper::footerTemplate('index.js');
+private_helper::footerTemplate('calendario.js');
 ?>

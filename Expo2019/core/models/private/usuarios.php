@@ -8,6 +8,8 @@ class Usuarios extends Validator
 	private $correo = null;
 	private $alias = null;
 	private $clave = null;
+	private $fecha = null;
+	private $especialidad = null;
 
 	// Métodos para sobrecarga de propiedades
 	public function setId($value)
@@ -124,6 +126,34 @@ class Usuarios extends Validator
 		} else {
 			return false;
 		}
+	}
+	public function getUsuario()
+	{
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor  FROM doctores WHERE id_doctor = ?';
+		$params = array($this->id);
+		return Database::getRow($sql, $params);
+	}
+	public function updateUsuario()
+	{
+		$sql = 'UPDATE doctores SET nombre_doctor = ?, apellido_doctor = ?, correo_doctor = ?, usuario_doctor = ? WHERE id_doctor = ?';
+		$params = array($this->nombres, $this->apellidos, $this->correo, $this->alias, $this->id);
+		return Database::executeRow($sql, $params);
+	}
+
+
+	public function changePassword()
+	{
+		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		$sql = 'UPDATE doctores SET contrasena_doctor = ? WHERE id_doctor = ?';
+		$params = array($hash, $this->id);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getCita()
+	{
+		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and e.id_estado=1 and c.id_doctor=? GROUP by p.id_paciente';
+		$params = array($this->id);
+		return Database::getRow($sql, $params);
 	}
 }
 ?>

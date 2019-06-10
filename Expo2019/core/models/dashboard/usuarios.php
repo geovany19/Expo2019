@@ -173,7 +173,7 @@ class Usuarios extends Validator
 		$sql = 'SELECT contrasena_usuario FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		$data = Database::getRow($sql, $params);
-		if (password_verify($this->clave, $data['clave_usuario'])) {
+		if (password_verify($this->clave, $data['contrasena_usuario'])) {
 			return true;
 		} else {
 			return false;
@@ -219,6 +219,13 @@ class Usuarios extends Validator
 	}
 
 	public function updateUsuario()
+	{
+		$sql = 'UPDATE usuarios_a SET nombre_usuario = ?, apellido_usuario = ?, correo_usuario = ?, usuario_usuario = ?, fecha_nacimiento = ?, foto_usuario = ?, id_estado = ? WHERE id_usuario = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->estado, $this->idusuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function updatePerfil()
 	{
 		$sql = 'UPDATE usuarios_a SET nombre_usuario = ?, apellido_usuario = ?, correo_usuario = ?, usuario_usuario = ?, fecha_nacimiento = ?, foto_usuario = ? WHERE id_usuario = ?';
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idusuario);

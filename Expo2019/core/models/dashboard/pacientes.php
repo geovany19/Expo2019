@@ -11,6 +11,7 @@ class Pacientes extends Validator
 	private $foto = null;
 	private $peso = null;
 	private $estatura = null;
+	private $idestado = null;
 	private $ruta = '../../resources/img/pacientes/';
 
 	public function setId($value)
@@ -163,6 +164,21 @@ class Pacientes extends Validator
 		return $this->estatura;
 	}
 
+	public function setIdestado($value)
+	{
+		if ($this->validateId($value)) {
+			$this->idestado = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getIdestado()
+	{
+		return $this->idestado;
+	}
+
 	public function getRuta()
 	{
 		return $this->ruta;
@@ -198,8 +214,8 @@ class Pacientes extends Validator
 	public function createPaciente()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente) VALUES(?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
+		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->peso, $this->estatura, $this->idestado);
 		return Database::executeRow($sql, $params);
 	}
 
@@ -212,8 +228,8 @@ class Pacientes extends Validator
 
 	public function updatePaciente()
 	{
-		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ? WHERE id_paciente = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idpaciente);
+		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ?, id_estado = ? WHERE id_paciente = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idestado, $this->idpaciente);
 		return Database::executeRow($sql, $params);
 	}
 

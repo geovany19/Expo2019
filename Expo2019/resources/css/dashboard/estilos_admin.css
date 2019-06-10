@@ -106,12 +106,12 @@
 }
 
 .page-footer{
-    background-color: #8edaf7;
-    color: #5D6467;
+    background-color: rgb(19, 140, 201);;
+    color: #fffff0;
 }
 
 .footer-text {
-    color: #828F95;
+    color: #fffff1;
 }
 
 /*Estilos del reloj utilizado en el dashboard*/

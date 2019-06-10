@@ -11,7 +11,7 @@ public_helper::head("Iniciar sesión");
 		<div class="row">
 			<div class="col col-sm-12">
 				<div class="login-form">
-					<form action="../../views/dashboard/pagina.php" method="post">
+					<form action="../../views/public/perfil.php" method="post">
 						<div class="avatar">
 							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
 						</div>

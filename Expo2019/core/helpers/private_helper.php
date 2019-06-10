@@ -19,6 +19,7 @@ class private_helper
 								<link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/font-awesome.min.css">
+								<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/private/calendario.css">
 								<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -37,31 +38,23 @@ class private_helper
 					<nav id="sidebar">
 						<div class="sidebar-header">
 							<h3>Sismed</h3>
+							<b>'.$_SESSION['aliasUsuario'].'</b>
 							<strong>SM</strong>
 						</div>
 						<ul class="list-unstyled components">
-							<li>
-							<b>'.$_SESSION['aliasUsuario'].'</b>
-								<a href="#modal-password">
-									<i class="fas fa-home"></i>
-									Inicio
-								</a>
-							</li>
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-password">
-  Launch demo modal
-</button>
+							<li><a href="agenda.php"><i class="fas fa-calendar"></i> Agenda</a></li>
+							<li><a href="#" onclick="modalProfile()"><i class="fas fa-users-cog"></i> Perfil</a></li>
+							<li><a href="#modal-password" data-toggle="modal" data-target="#modal-password"><i class="fas fa-unlock-alt"></i> Contraseña</a></li>
 							<li class="active">
 								<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 									<i class="fas fa-book"></i> Citas
 								</a>
 								<ul class="collapse list-unstyled" id="homeSubmenu">
 									<li><a href="citas.php">Realizadas</a></li>
-									<li><a href="#">Pendientes</a></li>
+									<li><a href="citas_pendientes.php">Pendientes</a></li>
 									<li><a href="" >Horarios de disponibilidad</a></li>
 								</ul>
 							</li>
-							<li><a href="#" onclick="modalProfile()"><i class="fas fa-sign-out-alt"></i> Perfil</a></li>
-							
 							<li><a href="#" onclick="signOff()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
 						</ul>
 					</nav>
@@ -136,7 +129,7 @@ class private_helper
 				<script type="text/javascript" src="../../resources/js/sidenav.js"></script>
 				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-				
+				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
 				
 
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>

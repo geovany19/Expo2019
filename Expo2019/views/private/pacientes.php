@@ -1,48 +1,46 @@
 <?php
-include "../../core/helpers/private_helper.php";
-private_helper::head("Pacientes");
+require_once('../../core/helpers/private_helper.php');
+private_helper::headerTemplate('Paciente');
 ?>
-<main class="main grey lighten-3">
-    <div class="row">
-        <div class="col col-sm-12">
-            <div class="card-content">
-                <div class="col col-sm-12">
-                    <div class="input-field col col-sm-12">
-                        <i class="material-icons prefix">search</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete">
-                        <label for="autocomplete-input">Buscar</label>
-                    </div>
-                </div>
-            </div>
-            <h1 class="text-center">Pacientes</h1>
-            <table class="table table-responsive table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Nombre del paciente</th>
-                            <th scope="col">Ultima consulta</th>
-                            <th scope="col">Proxima consulta</th>
-                            <th scope="col">Padecimientos</th>
-                            <th scope="col">Edad</th>
-                            <th scope="col">Peso</th>
-                            <th scope="col">Estatura</th>
-                        </tr>
-                    </thead>
+<div class="form-group">
+	<label for="Nombre" class="col-form-label">Nombre paciente:</label>
+	<input id="Nombre" type="text" name="Nombre" class="form-control" required/>
+</div>
+<div class="form-group">
+	<label for="Peso" class="col-form-label">Peso:</label>
+	<input id="Peso" type="number" name="Peso" class="form-control" required/>
+</div>
 
-                    <tbody>
-                        <tr>
-                            <td>herbert cornejo</td>
-                            <td>07/02/19</td>
-                            <td>07/03/19</td>
-                            <td>gripe</td>
-                            <td>23</td>
-                            <td>160lb</td>
-                            <td>1.65</td>
-                        </tr>
-                    </tbody>
-                </table>
-        </div>
-    </div>
-</main>
+<div class="form-group">
+	<label for="Peso" class="col-form-label">Peso:</label>
+	<input id="Peso" type="number" name="Peso" class="form-control" required/>
+</div>
+
+<div class="form-group">
+	<label for="Estatura" class="col-form-label">Estatura:</label>
+	<input id="Estatura" type="number" name="Estatura" class="form-control" required/>
+</div>
+
+<div class="form-group">
+	<label for="Edad" class="col-form-label">Edad:</label>
+	<input id="Edad" type="password" name="Edad" class="form-control" required/>
+</div>
+
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Padecimintos</span>
+  </div>
+  <textarea class="form-control" aria-label="With textarea"></textarea>
+</div>
+<br>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Receta</span>
+  </div>
+  <textarea class="form-control" aria-label="With textarea"></textarea>
+</div>
+
 <?php
-private_helper::footer();
+private_helper::footerTemplate('');
 ?>

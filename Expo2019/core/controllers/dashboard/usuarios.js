@@ -1,15 +1,19 @@
-$(document).ready(function () {
+$(document).ready(function()
+{
     showTable();
-});
+    $('.selectpicker').selectpicker();
+})
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
 const api = '../../core/api/dashboard/usuarios.php?action=';
 
 //Función para llenar la tabla con los registros
-function fillTable(rows) {
+function fillTable(rows)
+ {
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
     rows.forEach(function (row) {
+        (row.id_estado == 1) ? icon = '1' : icon = '2';
         content += `
             <tr>
                 <td>${row.id_usuario}</td>
@@ -19,9 +23,9 @@ function fillTable(rows) {
                 <td>${row.correo_usuario}</td>
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td>${row.id_estado}</td>
+                <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"</td>
                 <td>
-                    <a href="#modal-update" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
+                    <a href="#" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_usuario})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
@@ -58,7 +62,8 @@ function fillTable(rows) {
     $('.tooltipped').tooltip();
 }
 
-function showTable() {
+function showTable() 
+{
     $.ajax({
         url: api + 'read',
         type: 'post',
@@ -85,6 +90,7 @@ function showTable() {
 }
 
 function modalUpdate(id) {
+    
     $.ajax({
         url: api + 'get',
         type: 'post',
@@ -103,8 +109,8 @@ function modalUpdate(id) {
                     $('#foto').attr('src','../../resources/img/usuarios/'+result.dataset.foto_usuario);
                     $('#id_usuario').val(result.dataset.id_usuario);
                     $('#foto_usuario').val(result.dataset.foto_usuario);
-                    $('#update_nombres').val(result.dataset.nombre_usuario);
-                    $('#update_apellidos').val(result.dataset.apellido_usuario);
+                    $('#update_nombre').val(result.dataset.nombre_usuario);
+                    $('#update_apellido').val(result.dataset.apellido_usuario);
                     $('#update_correo').val(result.dataset.correo_usuario);
                     $('#update_usuario').val(result.dataset.usuario_usuario);
                     $('#update_fecha').val(result.dataset.fecha_nacimiento);
@@ -124,13 +130,17 @@ function modalUpdate(id) {
 }
 
 // Función para modificar un registro seleccionado previamente
-$('#form-update').submit(function () {
+$('#form-update').submit(function()
+{
     event.preventDefault();
     $.ajax({
         url: api + 'update',
         type: 'post',
-        data: $('#form-update').serialize(),
-        datatype: 'json'
+        data: new FormData($('#form-update')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
     })
         .done(function (response) {
             // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
@@ -172,7 +182,6 @@ function confirmDelete(id, file)
                 type: 'post',
                 data:{
                     id_usuario: id,
-                    imagen_categoria: file
                 },
                 datatype: 'json'
             })

@@ -39,7 +39,7 @@ function modalProfile()
                 $('#profile_correo').val(result.dataset.correo_usuario);
                 $('#profile_usuario').val(result.dataset.usuario_usuario);
                 $('#profile_fecha').val(result.dataset.fecha_nacimiento);
-                //$('#foto_usuario').val(result.dataset.foto_usuario);
+                $('#foto_usuario').val(result.dataset.foto_usuario);
                 $('#modal-profile').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);

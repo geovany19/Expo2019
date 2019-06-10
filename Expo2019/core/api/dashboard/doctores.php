@@ -167,7 +167,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos2';
+                    $result['exception'] = 'Nombres incorrectos';
                 }
                 break;
             case 'get':
@@ -290,7 +290,7 @@ if (isset($_GET['action'])) {
                                         if ($doctor->setFecha($_POST['fecha'])) {
                                             if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
                                                 if ($doctor->setFoto($_FILES['create_archivo'], null)) {
-                                                    if ($doctor->createUsuario()) {
+                                                    if ($doctor->createDoctor()) {
                                                         $result['status'] = 1;
                                                         if ($doctor->saveFile($_FILES['create_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
                                                             $result['message'] = 'Doctor registrado correctamente';

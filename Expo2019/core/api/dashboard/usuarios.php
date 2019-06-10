@@ -29,55 +29,46 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Usuario no valido';
                 }
                 break;
-            case 'editProfile':
+                /*case 'editProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     if ($usuario->getUser()) {
                         $_POST = $usuario->validateForm($_POST);
                         if ($usuario->setNombre($_POST['profile_nombre'])) {
                             if ($usuario->setApellido($_POST['profile_apellido'])) {
                                 if ($usuario->setCorreo($_POST['profile_correo'])) {
-                                    if ($usuario->setUsuario($_POST['profile_usuario'])) {
+                                    if ($usuario->setUsuario($_POST['profile_alias'])) {
                                         if ($usuario->setFecha($_POST['profile_fecha'])) {
-                                            //if (is_uploaded_file($_FILES['profile_foto']['tmp_name'])) {
-                                            //if ($usuario->setFoto($_FILES['update_archivo'], $_POST['foto_usuario'])) {
-                                            //$archivo = true;
-                                            //} else {
-                                            /*$result['exception'] = $producto->getImageError();
-                                                    $archivo = false;
+                                            if ($usuario->setFoto($_FILES['profile_archivo'])) {
+                                                if ($usuario->updateUsuario()) {
+                                                    $result['status'] = 1;
+                                                } else {
+                                                    $result['exception'] = 'Operación fallida';
                                                 }
                                             } else {
-                                                if (!$usuario->setFoto(null, $_POST['foto_usuario'])) {
-                                                    $result['exception'] = $usuario->getImageError();
-                                                }
-                                                $archivo = false;*/
-                                            if ($usuario->updatePerfil()) {
-                                                $result['status'] = 1;
-                                                $result['exception'] = 'Perfil modificado correctamente';
-                                            } else {
-                                                $result['exception'] = 'Operación fallida';
+                                                $result['exception'] = 'Foto no válida';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida. No se pudo editar el perfil';
+                                            $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto. No se pudo editar el perfil';
+                                        $result['exception'] = 'Nombre de doctor incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo incorrecto. No se pudo el perfil';
+                                    $result['exception'] = 'Correo incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Apellidos incorrectos. No se pudo editar el perfil';
+                                $result['exception'] = 'Apellidos incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos. No se pudo editar el perfil';
+                            $result['exception'] = 'Nombres incorrectos frank';
                         }
                     } else {
-                        $result['exception'] = 'Usuario inexistente';
+                        $result['exception'] = 'usuario no valido';
                     }
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
-                break;
+                break;*/
             case 'password':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     $_POST = $usuario->validateForm($_POST);
@@ -132,8 +123,8 @@ if (isset($_GET['action'])) {
                 break;
             case 'create':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['create_nombres'])) {
-                    if ($usuario->setApellidos($_POST['create_apellidos'])) {
+                if ($usuario->setNombres($_POST['create_nombre'])) {
+                    if ($usuario->setApellidos($_POST['create_apellido'])) {
                         if ($usuario->setCorreo($_POST['create_correo'])) {
                             if ($usuario->setUsuario($_POST['create_alias'])) {
                                 if ($_POST['create_clave1'] == $_POST['create_clave2']) {
@@ -272,7 +263,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             default:
-                exit('Acción no disponible 1');
+                exit('Acción no disponible  ');
         }
     } else {
         switch ($_GET['action']) {
@@ -333,7 +324,7 @@ if (isset($_GET['action'])) {
                         if ($usuario->setClave($_POST['clave'])) {
                             if ($usuario->checkPassword()) {
                                 $_SESSION['idUsuario'] = $usuario->getId();
-                                $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                $_SESSION['aliasUsuario'] = $usuario->getAlias();
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
                             } else {
@@ -350,7 +341,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             default:
-                exit('Acción no disponible 2');
+                exit('Acción no disponible');
         }
     }
     print(json_encode($result));

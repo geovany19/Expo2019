@@ -3,6 +3,7 @@ include "../../core/helpers/dashboard_helper.php";
 dashboard_helper::head("Usuarios");
 dashboard_helper::nav();
 ?>
+<main>
 	<h1 class="text-center">Usuarios</h1>
 	<button type="button" class="btn btn-success">
 		<i class="fas fa-plus-circle"></i>
@@ -37,16 +38,16 @@ dashboard_helper::nav();
 			</div>
 			<div class="modal-body">
 				<img id="foto" height="75">
-				<form method="post" id="form-update" enctype="multipart/form-data">
+				<form  id="form-update" enctype="multipart/form-data">
 					<input type="hidden" id="id_usuario" name="id_usuario">
 					<input type="hidden" id="foto_usuario" name="foto_usuario">
 					<div class="form-group">
-						<label for="update_nombres">Nombre</label>
-						<input type="text" class="form-control" class="form-control is-valid" id="update_nombres" name="update_nombres" placeholder="Nombre" maxlength="25">
+						<label for="update_nombre">Nombre</label>
+						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" placeholder="Nombre" maxlength="25">
 					</div>
 					<div class="form-group">
-						<label for="update_apellidos">Apellido</label>
-						<input type="text" class="form-control" id="update_apellidos" name="update_apellidos" placeholder="Apellido" maxlength="25">
+						<label for="update_apellido">Apellido</label>
+						<input type="text" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido" maxlength="25">
 					</div>
 					<div class="form-group">
 						<label for="update_correo">Correo electrónico</label>

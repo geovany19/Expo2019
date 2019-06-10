@@ -122,14 +122,6 @@ $('#form-search').submit(function()
     });
 })
 
-// Función para mostrar formulario en blanco
-/*function modalCreate()
-{
-    $('#form-create')[0].reset();
-    fillSelect(categorias, 'create_d, null);
-    $('#modal-create').modal('open');
-}*/
-
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
 {

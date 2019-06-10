@@ -16,12 +16,12 @@ function fillTable(rows)
         content += `
             <tr>
                 <td>${row.id_paciente}</td>
-                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.nombre_paciente}</td>
                 <td>${row.apellido_paciente}</td> 
                 <td>${row.correo_paciente}</td>
                 <td>${row.usuario_paciente}</td>
                 <td>${row.fecha_nacimiento}</td>
+                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.peso_paciente}</td>
                 <td>${row.estatura_paciente}</td>
                 <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
@@ -35,6 +35,8 @@ function fillTable(rows)
     $('#table-body').html(content);
     $("#tabla-pacientes").DataTable({
         responsive: true,
+        retrieve: true,
+        paging: false,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -174,7 +176,6 @@ function modalUpdate(id)
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
                 $('#form-update')[0].reset();
-                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
                 $('#id_paciente').val(result.dataset.id_paciente);
                 $('#foto_paciente').val(result.dataset.foto_paciente);
                 $('#update_nombre').val(result.dataset.nombre_paciente);
@@ -182,6 +183,7 @@ function modalUpdate(id)
                 $('#update_correo').val(result.dataset.correo_paciente);
                 $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
                 $('#update_peso').val(result.dataset.peso_paciente);
                 $('#update_estatura').val(result.dataset.estatura_paciente);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);

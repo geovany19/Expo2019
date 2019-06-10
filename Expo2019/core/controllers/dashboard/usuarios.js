@@ -13,12 +13,12 @@ function fillTable(rows) {
         content += `
             <tr>
                 <td>${row.id_usuario}</td>
-                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75"></td>
                 <td>${row.nombre_usuario}</td>
                 <td>${row.apellido_usuario}</td> 
                 <td>${row.correo_usuario}</td>
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
+                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75"></td>
                 <td>${row.id_estado}</td>
                 <td>
                     <a href="#modal-update" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
@@ -30,6 +30,7 @@ function fillTable(rows) {
     $('#table-body').html(content);
     $("#tabla-usuarios").DataTable({
         responsive: true,
+        retrieve: true,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -102,12 +103,12 @@ function modalUpdate(id) {
                     $('#form-update')[0].reset();
                     $('#foto').attr('src','../../resources/img/usuarios/'+result.dataset.foto_usuario);
                     $('#id_usuario').val(result.dataset.id_usuario);
-                    $('#foto_usuario').val(result.dataset.foto_usuario);
                     $('#update_nombres').val(result.dataset.nombre_usuario);
                     $('#update_apellidos').val(result.dataset.apellido_usuario);
                     $('#update_correo').val(result.dataset.correo_usuario);
                     $('#update_usuario').val(result.dataset.usuario_usuario);
                     $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                    $('#foto_usuario').val(result.dataset.foto_usuario);
                     (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                     $('#modal-update').modal('show');
                 } else {
@@ -159,7 +160,7 @@ function confirmDelete(id, file)
 {
     swal({
         title: 'Advertencia',
-        text: '¿Quiere eliminar la categoría?',
+        text: '¿Quiere eliminar el registro?',
         icon: 'warning',
         buttons: ['Cancelar', 'Aceptar'],
         closeOnClickOutside: false,

@@ -4,6 +4,10 @@ dashboard_helper::head("Pacientes");
 dashboard_helper::nav();
 ?>
 <main class="row">
+<button type="submit" data-toggle="modal" data-target="#modal-update" class="btn btn-success">
+		<i class="fas fa-plus-circle"></i>
+		<span>Agregar doctor</span>
+	</button>
     <div class="col col-sm-12">
         <h1 class="text-center">Pacientes</h1>
         <div>
@@ -29,7 +33,7 @@ dashboard_helper::nav();
         </div>
     </div>
 </main>
-<!-- Ventana para modificar un registro existente -->
+<!-- Ventana para modificar un registro existente 
 <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable" role="document">
 		<div class="modal-content">
@@ -86,7 +90,7 @@ dashboard_helper::nav();
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->
 <?php
 dashboard_helper::footer('pacientes.js');
 ?>

@@ -1,13 +1,15 @@
--- phpMyAdmin SQL Dump
--- version 4.6.5.2
+﻿-- phpMyAdmin SQL Dump
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2019 a las 15:49:31
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Tiempo de generación: 10-06-2019 a las 15:59:08
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,6 +21,10 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sismed`
 --
+
+CREATE DATABASE IF NOT EXISTS `sismed`;
+
+USE `sismed`;
 
 DELIMITER $$
 --
@@ -464,7 +470,8 @@ INSERT INTO `usuarios_a` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `c
 (7, 'Kaitlin', 'Johnson', 'vulputate.nisi@lectus.ca', 'H6V 3C6', 'QKS06AWJ6BH', '2000-08-21', '4806', NULL),
 (8, 'Thane', 'Bauer', 'ligula@diam.co.uk', 'N4H 2R5', 'PLT45IMB2HR', '2001-04-10', '1209', NULL),
 (9, 'Alden', 'Willis', 'ligula.Donec@Quisquepurus', 'X9D 6N3', 'ARV39VRR0FN', '2005-03-05', '7304', NULL),
-(10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691', NULL);
+(10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691', NULL),
+(11, 'Federico', 'Ramírez', 'fede@gmail.com', 'fede', '$2y$10$i5OM84r9NhYTuGIp3KQL9ekQrVauWqkqufsk.SDf2rLSnGvE/rxiW', '2000-08-29', NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -573,66 +580,79 @@ ALTER TABLE `usuarios_a`
 --
 ALTER TABLE `calificacion_doctor`
   MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `calificacion_paciente`
 --
 ALTER TABLE `calificacion_paciente`
   MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
   MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `consulta`
 --
 ALTER TABLE `consulta`
   MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
   MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
   MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
   MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `estado_cita`
 --
 ALTER TABLE `estado_cita`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `estado_usuarios`
 --
 ALTER TABLE `estado_usuarios`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
   MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
   MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
   MODIFY `id_tipousuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `usuarios_a`
 --
 ALTER TABLE `usuarios_a`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -696,6 +716,7 @@ ALTER TABLE `pacientes`
 --
 ALTER TABLE `usuarios_a`
   ADD CONSTRAINT `usuarios_a_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado_usuarios` (`id_estado`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

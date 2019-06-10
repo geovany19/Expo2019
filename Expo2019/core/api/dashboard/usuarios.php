@@ -57,19 +57,19 @@ if (isset($_GET['action'])) {
                                                 $result['exception'] = 'Operación fallida';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo editar el perfil';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto';
+                                        $result['exception'] = 'Nombre de usuario incorrecto. No se pudo editar el perfil';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo incorrecto';
+                                    $result['exception'] = 'Correo incorrecto. No se pudo el perfil';
                                 }
                             } else {
-                                $result['exception'] = 'Apellidos incorrectos';
+                                $result['exception'] = 'Apellidos incorrectos. No se pudo editar el perfil';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos alv';
+                            $result['exception'] = 'Nombres incorrectos. No se pudo editar el perfil';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -161,22 +161,22 @@ if (isset($_GET['action'])) {
                                             $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Clave menor a 6 caracteres. No se pudo crear el perfil';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Claves diferentes. No se pudo crear el perfil';
                                 }
                             } else {
-                                $result['exception'] = 'Alias incorrecto';
+                                $result['exception'] = 'Usuario incorrecto. No se pudo crear el perfil';
                             }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
+                            $result['exception'] = 'Correo incorrecto. No se pudo crear el perfil';
                         }
                     } else {
-                        $result['exception'] = 'Apellidos incorrectos';
+                        $result['exception'] = 'Apellidos incorrectos. No se pudo crear el perfil';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos6';
+                    $result['exception'] = 'Nombres incorrectos. No se pudo crear el perfil';
                 }
                 break;
             case 'get':
@@ -228,22 +228,22 @@ if (isset($_GET['action'])) {
                                                     $result['exception'] = 'Operación fallida';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Error con el estado';
+                                                $result['exception'] = 'Error con el estado. No se pudo actualizar el usuario';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo actualizar el usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto';
+                                        $result['exception'] = 'Nombre de usuario incorrecto. No se pudo actualizar el usuario';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo incorrecto';
+                                    $result['exception'] = 'Correo incorrecto. No se pudo actualizar el usuario';
                                 }
                             } else {
-                                $result['exception'] = 'Apellidos incorrectos';
+                                $result['exception'] = 'Apellidos incorrectos. No se pudo actualizar el usuario';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos3';
+                            $result['exception'] = 'Nombres incorrectos. No se pudo actualizar el usuario';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -302,28 +302,28 @@ if (isset($_GET['action'])) {
                                                     $result['exception'] = 'Operación fallida';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Estado incorrecto';
+                                                $result['exception'] = 'Estado incorrecto. No se pudo registrar el usuario';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo registrar el usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Clave menor a 6 caracteres. No se pudo registrar el usuario';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Claves diferentes. No se pudo registrar el usuario';
                                 }
                             } else {
-                                $result['exception'] = 'Alias incorrecto';
+                                $result['exception'] = 'Alias incorrecto. No se pudo registrar el usuario';
                             }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
+                            $result['exception'] = 'Correo incorrecto. No se pudo registrar el usuario';
                         }
                     } else {
-                        $result['exception'] = 'Apellidos incorrectos';
+                        $result['exception'] = 'Apellidos incorrectos. No se pudo registrar el usuario';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos8';
+                    $result['exception'] = 'Nombres incorrectos. No se pudo registrar el usuario';
                 }
                 break;
             case 'login':

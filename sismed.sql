@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2019 a las 18:58:09
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.0
+-- Tiempo de generación: 10-06-2019 a las 15:49:31
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -181,8 +179,8 @@ CREATE TABLE `consulta` (
   `id_doctor` int(11) DEFAULT NULL,
   `id_paciente` int(11) DEFAULT NULL,
   `receta` varchar(200) DEFAULT NULL,
-  `peso` decimal(10,0) DEFAULT NULL,
-  `estatura` decimal(10,0) DEFAULT NULL,
+  `peso` double DEFAULT NULL,
+  `estatura` double DEFAULT NULL,
   `presion` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -191,16 +189,16 @@ CREATE TABLE `consulta` (
 --
 
 INSERT INTO `consulta` (`id_consulta`, `padecimientos`, `id_doctor`, `id_paciente`, `receta`, `peso`, `estatura`, `presion`) VALUES
-(1, 'Tos', 3, 7, 'Jarabe para tos cada 8 horas', '176', '185', 122),
-(2, 'Cefalea', 5, 9, 'Acetaminofen', '169', '134', 125),
-(3, 'Gastritis', 3, 9, 'Pepto Bismol', '101', '172', 139),
-(4, 'Temperatura alta', 8, 9, 'Trapitos húmedos en la frente', '137', '163', 125),
-(5, 'Dengue', 7, 9, 'Acetaminofen', '139', '114', 101),
-(6, 'Infección en la garganta', 4, 4, 'Jarabe para la tos', '184', '154', 110),
-(7, 'Infección en las vías urinarias', 1, 6, 'Agua en abundancia y medicamentos', '109', '190', 122),
-(8, 'Mal de orin', 8, 4, 'Agua en abundancia', '104', '131', 112),
-(9, 'Extracción de cordales', 6, 2, 'Acetaminofen', '127', '170', 139),
-(10, 'VIH', 4, 6, 'Medicamentos', '136', '123', 116);
+(1, 'Tos', 3, 7, 'Jarabe para tos cada 8 horas', 176, 185, 122),
+(2, 'Cefalea', 5, 9, 'Acetaminofen', 169, 134, 125),
+(3, 'Gastritis', 3, 9, 'Pepto Bismol', 101, 172, 139),
+(4, 'Temperatura alta', 8, 9, 'Trapitos húmedos en la frente', 137, 163, 125),
+(5, 'Dengue', 7, 9, 'Acetaminofen', 139, 114, 101),
+(6, 'Infección en la garganta', 4, 4, 'Jarabe para la tos', 184, 154, 110),
+(7, 'Infección en las vías urinarias', 1, 6, 'Agua en abundancia y medicamentos', 109, 190, 122),
+(8, 'Mal de orin', 8, 4, 'Agua en abundancia', 104, 131, 112),
+(9, 'Extracción de cordales', 6, 2, 'Acetaminofen', 127, 170, 139),
+(10, 'VIH', 4, 6, 'Medicamentos', 136, 123, 116);
 
 --
 -- Disparadores `consulta`
@@ -258,11 +256,11 @@ CREATE TABLE `doctores` (
   `id_doctor` int(11) NOT NULL,
   `nombre_doctor` varchar(25) NOT NULL,
   `apellido_doctor` varchar(25) NOT NULL,
-  `correo_doctor` varchar(25) NOT NULL,
+  `correo_doctor` varchar(100) NOT NULL,
   `usuario_doctor` varchar(25) NOT NULL,
   `contrasena_doctor` varchar(100) NOT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `foto_doctor` varchar(150) DEFAULT NULL,
+  `foto_doctor` varchar(50) DEFAULT NULL,
   `id_especialidad` int(11) DEFAULT NULL,
   `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -272,16 +270,16 @@ CREATE TABLE `doctores` (
 --
 
 INSERT INTO `doctores` (`id_doctor`, `nombre_doctor`, `apellido_doctor`, `correo_doctor`, `usuario_doctor`, `contrasena_doctor`, `fecha_nacimiento`, `foto_doctor`, `id_especialidad`, `id_estado`) VALUES
-(1, 'Ainsley', 'Rojas', 'eu.odio.tristique@nunc.or', 'GDF07JJX5AG', 'LJZ91DBJ9KZ', '1999-04-29', 'Neque Corporation', 6, 1),
+(1, 'Carlos', 'Ramirez', 'RamirezCarlos@gmail.com', 'CarRam1', 'LJZ91DBJ9KZ', '1999-04-29', '5cfbef4223c64.png', 1, 1),
 (2, 'Faith', 'Ware', 'augue@diamluctus.ca', 'RYS95ZHC2RY', 'KLV27NRB4FC', '1999-04-03', 'Porttitor Eros Nec LLC', 8, 1),
-(3, 'Marsden', 'Melendez', 'In.condimentum@convallisl', 'CTH86YOU4XP', 'DIM73LAI5QT', '2000-08-29', 'Lectus Nullam Suscipit Inc.', 7, 1),
-(4, 'Callum', 'Richards', 'molestie@Sedeu.org', 'OSD32HFP5YS', 'PSK42IEG0PQ', '2001-08-16', 'Sem Company', 8, 1),
-(5, 'Isabelle', 'Hicks', 'sem.consequat@quam.org', 'UGG00RZI7UR', 'PLL22AND5QU', '2000-06-04', 'Adipiscing Ligula Associates', 9, 1),
-(6, 'Keane', 'Sandoval', 'natoque@dolorFuscefeugiat', 'SIN45XBP6HD', 'DJT89QNC4YO', '2000-09-04', 'Adipiscing Fringilla Associates', 8, 1),
+(3, 'Marsden', 'Melendez', 'In.condimentum@convallisl.es', 'CTH86YOU4XP', 'DIM73LAI5QT', '2000-08-29', '5cf9713676cc5.jpg', 7, 1),
+(4, 'Callum', 'Richards', 'molestie@Sedeu.com', 'OSD32HFP5YS', 'PSK42IEG0PQ', '2001-08-16', '5cf97a422b869.png', 4, 1),
+(5, 'Isabelle', 'Hicks', 'sem.consequat@gmail.com', 'UGG00RZI7UR', 'PLL22AND5QU', '2000-06-04', 'Adipiscing Ligula Associates', 9, 1),
+(6, 'Keane', 'Sandoval', 'natoque@dolorFuscefeugiat.com', 'SIN45XBP6HD', 'DJT89QNC4YO', '2000-09-04', 'Adipiscing Fringilla Associates', 8, 1),
 (7, 'Ciara', 'Torres', 'eu@adlitora.com', 'EWT16TLE3OH', 'OGN81XJD2MG', '1980-06-13', 'Habitant Morbi Tristique Company', 6, 1),
 (8, 'Dillon', 'Wood', 'ut.ipsum@dolorsitamet.edu', 'OMG23HBL5SS', 'KWL29SPP6JH', '1995-02-27', 'Eu Eleifend Nec Incorporated', 6, 1),
 (9, 'Dalton', 'Wyatt', 'fringilla@mienim.com', 'XPA32DZC5AS', 'ZFQ29HFO8WC', '1984-09-20', 'Turpis Company', 1, 1),
-(10, 'Perry', 'Garner', 'non.lobortis@vulputatelac', 'ZJP43QHA2UU', 'DMV29SXT8NH', '1997-11-02', 'Elit Etiam LLC', 4, 1);
+(10, 'Perry', 'Garner', 'perry@gmail.es', 'ZJP43QHA2UU', 'DMV29SXT8NH', '1997-11-02', 'usuario2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -292,14 +290,14 @@ INSERT INTO `doctores` (`id_doctor`, `nombre_doctor`, `apellido_doctor`, `correo
 CREATE TABLE `especialidad` (
   `id_especialidad` int(11) NOT NULL,
   `nombre_especialidad` varchar(25) DEFAULT NULL,
-  `descripcion_especialidad` varchar(130) DEFAULT NULL
+  `descripcion` varchar(130) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `especialidad`
 --
 
-INSERT INTO `especialidad` (`id_especialidad`, `nombre_especialidad`, `descripcion_especialidad`) VALUES
+INSERT INTO `especialidad` (`id_especialidad`, `nombre_especialidad`, `descripcion`) VALUES
 (1, 'Cardiología', 'se encarga del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.'),
 (2, 'Nutriología', ' estudia la alimentación humana y su relación con los procesos químicos, biológicos y metabólicos y estado de salud humana.'),
 (3, 'Oftalmología', 'estudia las enfermedades de ojo y su tratamiento, incluyendo el globo ocular, su musculatura, el sistema lagrimal y los párpados. '),
@@ -457,16 +455,16 @@ CREATE TABLE `usuarios_a` (
 --
 
 INSERT INTO `usuarios_a` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `correo_usuario`, `usuario_usuario`, `contrasena_usuario`, `fecha_nacimiento`, `foto_usuario`, `id_estado`) VALUES
-(1, 'MacKenzie', 'Andrews', 'nec.cursus@maurissapiencu', 'N3P 4X9', 'OBC22TVM6NY', '1985-02-10', '8311', 1),
-(2, 'Cassandra', 'Church', 'ut@hendreritid.org', 'A0U 2U1', 'RQM10TIO1ZK', '2019-04-29', '7343', 1),
-(3, 'Len', 'Miranda', 'aptent@Maurisnondui.org', 'Z1G 3W5', 'NKI94ECW5SF', '2004-04-05', '2170', 1),
-(4, 'Lucas', 'Hines', 'diam.Sed@ultrices.org', 'X8B 2E1', 'OWA64LOP2RG', '1999-08-13', '4951', 1),
-(5, 'Zane', 'Hanson', 'nunc@mollisPhasellusliber', 'V7E 3W9', 'BNW75OPE0DY', '1989-01-28', '9987', 1),
-(6, 'Xyla', 'Forbes', 'consectetuer@quis.org', 'H7V 7K6', 'TEI35GVS6IJ', '2006-06-06', '6237', 1),
-(7, 'Kaitlin', 'Johnson', 'vulputate.nisi@lectus.ca', 'H6V 3C6', 'QKS06AWJ6BH', '2000-08-21', '4806', 1),
-(8, 'Thane', 'Bauer', 'ligula@diam.co.uk', 'N4H 2R5', 'PLT45IMB2HR', '2001-04-10', '1209', 1),
-(9, 'Alden', 'Willis', 'ligula.Donec@Quisquepurus', 'X9D 6N3', 'ARV39VRR0FN', '2005-03-05', '7304', 1),
-(10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691', 1);
+(1, 'MacKenzie', 'Andrews', 'nec.cursus@maurissapiencu', 'N3P 4X9', 'OBC22TVM6NY', '1985-02-10', '8311', NULL),
+(2, 'Cassandra', 'Church', 'ut@hendreritid.org', 'A0U 2U1', 'RQM10TIO1ZK', '2019-04-29', '7343', NULL),
+(3, 'Len', 'Miranda', 'aptent@Maurisnondui.org', 'Z1G 3W5', 'NKI94ECW5SF', '2004-04-05', '2170', NULL),
+(4, 'Lucas', 'Hines', 'diam.Sed@ultrices.org', 'X8B 2E1', 'OWA64LOP2RG', '1999-08-13', '4951', NULL),
+(5, 'Zane', 'Hanson', 'nunc@mollisPhasellusliber', 'V7E 3W9', 'BNW75OPE0DY', '1989-01-28', '9987', NULL),
+(6, 'Xyla', 'Forbes', 'consectetuer@quis.org', 'H7V 7K6', 'TEI35GVS6IJ', '2006-06-06', '6237', NULL),
+(7, 'Kaitlin', 'Johnson', 'vulputate.nisi@lectus.ca', 'H6V 3C6', 'QKS06AWJ6BH', '2000-08-21', '4806', NULL),
+(8, 'Thane', 'Bauer', 'ligula@diam.co.uk', 'N4H 2R5', 'PLT45IMB2HR', '2001-04-10', '1209', NULL),
+(9, 'Alden', 'Willis', 'ligula.Donec@Quisquepurus', 'X9D 6N3', 'ARV39VRR0FN', '2005-03-05', '7304', NULL),
+(10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -575,79 +573,66 @@ ALTER TABLE `usuarios_a`
 --
 ALTER TABLE `calificacion_doctor`
   MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `calificacion_paciente`
 --
 ALTER TABLE `calificacion_paciente`
   MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
   MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `consulta`
 --
 ALTER TABLE `consulta`
   MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
   MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
   MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
   MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `estado_cita`
 --
 ALTER TABLE `estado_cita`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `estado_usuarios`
 --
 ALTER TABLE `estado_usuarios`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
   MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
   MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
   MODIFY `id_tipousuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuarios_a`
 --
 ALTER TABLE `usuarios_a`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -711,7 +696,6 @@ ALTER TABLE `pacientes`
 --
 ALTER TABLE `usuarios_a`
   ADD CONSTRAINT `usuarios_a_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado_usuarios` (`id_estado`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

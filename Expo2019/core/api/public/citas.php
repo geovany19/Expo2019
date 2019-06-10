@@ -18,7 +18,6 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'cancelarCita':
-            $_POST = $cita->validateForm($_POST);
             if ($cita->setIdestado(3)) {
 
                 if ($cita->setIdcita($_POST['id_cita'])) {

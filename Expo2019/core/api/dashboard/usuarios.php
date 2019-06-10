@@ -33,8 +33,8 @@ if (isset($_GET['action'])) {
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     if ($usuario->getUser()) {
                         $_POST = $usuario->validateForm($_POST);
-                        if ($usuario->setNombre($_POST['profile_nombres'])) {
-                            if ($usuario->setApellido($_POST['profile_apellidos'])) {
+                        if ($usuario->setNombre($_POST['profile_nombre'])) {
+                            if ($usuario->setApellido($_POST['profile_apellido'])) {
                                 if ($usuario->setCorreo($_POST['profile_correo'])) {
                                     if ($usuario->setUsuario($_POST['profile_usuario'])) {
                                         if ($usuario->setFecha($_POST['profile_fecha'])) {
@@ -198,8 +198,8 @@ if (isset($_GET['action'])) {
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($usuario->getUser()) {
-                        if ($usuario->setNombre($_POST['update_nombre'])) {
-                            if ($usuario->setApellido($_POST['update_apellido'])) {
+                        if ($usuario->setNombre($_POST['update_nombres'])) {
+                            if ($usuario->setApellido($_POST['update_apellidos'])) {
                                 if ($usuario->setCorreo($_POST['update_correo'])) {
                                     if ($usuario->setUsuario($_POST['update_usuario'])) {
                                         if ($usuario->setFecha($_POST['update_fecha'])) {
@@ -341,7 +341,7 @@ if (isset($_GET['action'])) {
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
                             } else {
-                                $result['exception'] = 'Contraseña inexistente';
+                                $result['exception'] = 'Contraseña incorrecta.';
                             }
                         } else {
                             $result['exception'] = 'Contraseña menor a 6 caracteres';

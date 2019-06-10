@@ -34,12 +34,12 @@ function modalProfile()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#profile_nombres').val(result.dataset.nombres_usuario);
-                $('#profile_apellidos').val(result.dataset.apellidos_usuario);
+                $('#profile_nombre').val(result.dataset.nombre_usuario);
+                $('#profile_apellido').val(result.dataset.apellido_usuario);
                 $('#profile_correo').val(result.dataset.correo_usuario);
                 $('#profile_usuario').val(result.dataset.usuario_usuario);
                 $('#profile_fecha').val(result.dataset.fecha_nacimiento);
-                $('#foto_usuario').val(result.dataset.foto_usuario);
+                //$('#foto_usuario').val(result.dataset.foto_usuario);
                 $('#modal-profile').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -101,7 +101,7 @@ $('#form-password').submit(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-password').modal('close');
+                $('#modal-password').modal('hide');
                 sweetAlert(1, result.message, 'pagina.php');
             } else {
                 sweetAlert(2, result.exception, null);

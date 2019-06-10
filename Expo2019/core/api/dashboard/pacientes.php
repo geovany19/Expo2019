@@ -31,7 +31,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'editProfile':
                 if ($paciente->setId($_SESSION['idUsuario'])) {
-                    if ($paciente->getUser()) {
+                    if ($paciente->getPaciente()) {
                         $_POST = $paciente->validateForm($_POST);
                         if ($paciente->setNombre($_POST['profile_nombres'])) {
                             if ($paciente->setApellido($_POST['profile_apellidos'])) {
@@ -171,8 +171,8 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'get':
-                if ($paciente->setId($_POST['id_usuario'])) {
-                    if ($result['dataset'] = $paciente->getUser()) {
+                if ($paciente->setId($_POST['id_paciente'])) {
+                    if ($result['dataset'] = $paciente->getPaciente()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -184,7 +184,7 @@ if (isset($_GET['action'])) {
             case 'update':
                 $_POST = $paciente->validateForm($_POST);
                 if ($paciente->setId($_POST['id_usuario'])) {
-                    if ($paciente->getUser()) {
+                    if ($paciente->getPaciente()) {
                         if ($paciente->setNombres($_POST['update_nombres'])) {
                             if ($paciente->setApellidos($_POST['update_apellidos'])) {
                                 if ($paciente->setCorreo($_POST['update_correo'])) {
@@ -242,7 +242,7 @@ if (isset($_GET['action'])) {
             case 'delete':
                 if ($_POST['id_usuario'] != $_SESSION['idUsuario']) {
                     if ($paciente->setId($_POST['id_usuario'])) {
-                        if ($paciente->getUser()) {
+                        if ($paciente->getPaciente()) {
                             if ($paciente->deleteUsuario()) {
                                 $result['status'] = 1;
                             } else {

@@ -1,5 +1,5 @@
-// Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/dashboard/usuarios.php?action=';
+// Constante para establecer la ruta y parámetros de comunicación con la apiCuenta
+const apiCuenta = '../../core/api/dashboard/usuarios.php?action=';
 
 // Función para cerrar la sesión del usuario
 function signOff()
@@ -14,7 +14,7 @@ function signOff()
     })
     .then(function(value){
         if (value) {
-            location.href = apiAccount + 'logout';
+            location.href = apiCuenta + 'logout';
         }
     });
 }
@@ -23,7 +23,7 @@ function signOff()
 function modalProfile()
 {
     $.ajax({
-        url: apiAccount + 'readProfile',
+        url: apiCuenta + 'readProfile',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -59,7 +59,7 @@ $('#form-profile').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiAccount + 'editProfile',
+        url: apiCuenta + 'editProfile',
         type: 'post',
         data: $('#form-profile').serialize(),
         datatype: 'json'
@@ -90,7 +90,7 @@ $('#form-password').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiAccount + 'password',
+        url: apiCuenta + 'password',
         type: 'post',
         data: $('#form-password').serialize(),
         datatype: 'json'
@@ -102,7 +102,7 @@ $('#form-password').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-password').modal('hide');
-                sweetAlert(1, result.message, 'pagina.php');
+                sweetAlert(1, result.message, 'perfil.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

@@ -1,11 +1,10 @@
 $(document).ready(function()
 {
     showTable();
-    $('.selectpicker').selectpicker();
 })
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
-const apiUsuarios = '../../core/api/dashboard/usuarios.php?action=';
+const api = '../../core/api/dashboard/usuarios.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -66,7 +65,7 @@ function fillTable(rows)
 function showTable() 
 {
     $.ajax({
-        url: apiUsuarios + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -93,7 +92,7 @@ function showTable()
 function modalUpdate(id) {
     
     $.ajax({
-        url: apiUsuarios + 'get',
+        url: api + 'get',
         type: 'post',
         data: {
             id_usuario: id
@@ -135,7 +134,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiUsuarios + 'update',
+        url: api + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -179,7 +178,7 @@ function confirmDelete(id, file)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: apiUsuarios + 'delete',
+                url: api + 'delete',
                 type: 'post',
                 data:{
                     id_usuario: id,

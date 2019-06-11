@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
-            print_r($_POST);
+                print_r($_POST);
                 if ($paciente->setId($_SESSION['idUsuario'])) {
                     if ($paciente->getPaciente()) {
                         $_POST = $paciente->validateForm($_POST);
@@ -127,36 +127,28 @@ if (isset($_GET['action'])) {
                 if ($paciente->setNombres($_POST['create_nombres'])) {
                     if ($paciente->setApellidos($_POST['create_apellidos'])) {
                         if ($paciente->setCorreo($_POST['create_correo'])) {
-                            if ($paciente->setUsuario($_POST['create_alias'])) {
-                                if ($_POST['create_clave1'] == $_POST['create_clave2']) {
-                                    if ($paciente->setClave($_POST['create_clave1'])) {
-                                        if ($paciente->setFecha($_POST['create_fecha'])) {
-                                            if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                if ($paciente->setFoto($_FILES['create_archivo'], null)) {
-                                                    if ($paciente->createUsuario()) {
-                                                        $result['status'] = 1;
-                                                        if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
-                                                            $result['message'] = 'Paciente creado correctamente';
-                                                        } else {
-                                                            $result['message'] = 'Paciente no creado. No se guardó el archivo';
-                                                        }
-                                                    } else {
-                                                        $result['exception'] = 'Operación fallida';
-                                                    }
+                            if ($paciente->setUsuario($_POST['create_usuario'])) {
+                                if ($paciente->setFecha($_POST['create_fecha'])) {
+                                    if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
+                                        if ($paciente->setFoto($_FILES['create_archivo'], null)) {
+                                            if ($paciente->createUsuario()) {
+                                                $result['status'] = 1;
+                                                if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
+                                                    $result['message'] = 'Paciente creado correctamente';
                                                 } else {
-                                                    $result['exception'] = $paciente->getImageError();
+                                                    $result['message'] = 'Paciente no creado. No se guardó el archivo';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Seleccione una imagen';
+                                                $result['exception'] = 'Operación fallida';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida. No se pudo crear el paciente';
+                                            $result['exception'] = $paciente->getImageError();
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres. No se pudo crear el paciente';
+                                        $result['exception'] = 'Seleccione una imagen';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes. No se pudo crear el paciente';
+                                    $result['exception'] = 'Fecha no válida. No se pudo crear el paciente';
                                 }
                             } else {
                                 $result['exception'] = 'Usuario incorrecto. No se pudo crear el paciente';
@@ -183,12 +175,12 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-            print_r($_POST);
+                print_r($_POST);
                 $_POST = $paciente->validateForm($_POST);
                 if ($paciente->setId($_POST['id_paciente'])) {
                     if ($paciente->getPaciente()) {
-                        if ($paciente->setNombres($_POST['update_nombres'])) {
-                            if ($paciente->setApellidos($_POST['update_apellidos'])) {
+                        if ($paciente->setNombre($_POST['update_nombres'])) {
+                            if ($paciente->setApellido($_POST['update_apellidos'])) {
                                 if ($paciente->setCorreo($_POST['update_correo'])) {
                                     if ($paciente->setUsuario($_POST['update_usuario'])) {
                                         if ($paciente->setFecha($_POST['update_fecha'])) {
@@ -359,7 +351,7 @@ if (isset($_GET['action'])) {
                 exit('Acción no disponible');
         }
     }
-	print(json_encode($result));
+    print(json_encode($result));
 } else {
-	exit('Recurso denegado');
+    exit('Recurso denegado');
 }

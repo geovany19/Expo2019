@@ -22,12 +22,6 @@ dashboard_helper::head("Iniciar sesión");
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
 						</div>
-						<div class="clearfix text-center">
-							<label class="pull-left checkbox-inline"><input type="checkbox"> Recuerdame</label>
-						</div>
-						<div class="clearfix text-center">
-							<a href="#" class="pull-right">¿Olvidaste tu contraseña?</a>
-						</div>
 					</form>
 					<p class="text-center">¿No estás registrado? <a href="registrarse.php">¡Registrate aquí!</a></p>
 				</div>

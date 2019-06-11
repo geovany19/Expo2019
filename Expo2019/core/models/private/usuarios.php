@@ -150,7 +150,7 @@ class Usuarios extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function getCita()
+	public function getCitas()
 	{
 		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=1 and c.id_doctor=? GROUP by p.id_paciente';
 		$params = array($this->id);
@@ -163,6 +163,14 @@ class Usuarios extends Validator
 		$params = array($this->id);
 		return Database::getRows($sql, $params);
 	}
+	//Obtener cita para el calendario
+	public function getCita()
+	{
+		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita from cita c, pacientes p WHERE c.id_doctor=? and c.id_estado=4 and c.id_paciente=p.id_paciente group by c.fecha_cita';
+		$params = array($this->id);
+		return Database::getRows($sql, $params);
+	}
+
 	public function cancelCita()
 	{
 		$sql = 'UPDATE cita SET id_estado = 3 WHERE  id_cita = ?';

@@ -36,7 +36,6 @@ function fillTable(rows)
     $("#tabla-pacientes").DataTable({
         responsive: true,
         retrieve: true,
-        paging: false,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -142,7 +141,7 @@ $('#form-create').submit(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-create').modal('close');
+                $('#modal-create').modal('hide');
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {

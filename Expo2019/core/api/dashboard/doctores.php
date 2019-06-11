@@ -29,79 +29,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Doctor no valido';
                 }
                 break;
-            case 'editProfile':
-                if ($doctor->setId($_SESSION['idDoctor'])) {
-                    if ($doctor->getDoctor()) {
-                        $_POST = $doctor->validateForm($_POST);
-                        if ($doctor->setNombre($_POST['profile_nombre'])) {
-                            if ($doctor->setApellido($_POST['profile_apellido'])) {
-                                if ($doctor->setCorreo($_POST['profile_correo'])) {
-                                    if ($doctor->setUsuario($_POST['profile_alias'])) {
-                                        if ($doctor->setFecha($_POST['profile_fecha'])) {
-                                            if ($doctor->setFoto($_FILES['profile_archivo'])) {
-                                                if ($doctor->updateDoctor()) {
-                                                    $result['status'] = 1;
-                                                } else {
-                                                    $result['exception'] = 'Operación fallida';
-                                                }
-                                            } else {
-                                                $result['exception'] = 'Foto no válida';
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Fecha no válida';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Nombre de doctor incorrecto';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Correo incorrecto';
-                                }
-                            } else {
-                                $result['exception'] = 'Apellidos incorrectos';
-                            }
-                        } else {
-                            $result['exception'] = 'Nombres incorrectos1';
-                        }
-                    } else {
-                        $result['exception'] = 'Doctor no valido';
-                    }
-                } else {
-                    $result['exception'] = 'Doctor incorrecto';
-                }
-                break;
-            case 'password':
-                if ($doctor->setId($_SESSION['idDoctor'])) {
-                    $_POST = $doctor->validateForm($_POST);
-                    if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
-                        if ($doctor->setClave($_POST['clave_actual_1'])) {
-                            if ($doctor->checkPassword()) {
-                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($doctor->setClave($_POST['clave_nueva_1'])) {
-                                        if ($doctor->changePassword()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = ' Tu contraseña a cambiado correctamente';
-                                        } else {
-                                            $result['exception'] = 'La operacion no a podido ejecutarse';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Clave nueva menor a 6 caracteres';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Claves nuevas diferentes';
-                                }
-                            } else {
-                                $result['exception'] = 'Clave actual incorrecta';
-                            }
-                        } else {
-                            $result['exception'] = 'Clave actual menor a 6 caracteres';
-                        }
-                    } else {
-                        $result['exception'] = 'Claves actuales diferentes';
-                    }
-                } else {
-                    $result['exception'] = 'Doctor no valido';
-                }
-                break;
             case 'read':
                 if ($result['dataset'] = $doctor->readDoctores()) {
                     $result['status'] = 1;
@@ -123,46 +50,42 @@ if (isset($_GET['action'])) {
                 break;
             case 'create':
                 $_POST = $doctor->validateForm($_POST);
-                if ($doctor->setNombres($_POST['create_nombre'])) {
-                    if ($doctor->setApellidos($_POST['create_apellido'])) {
+                if ($doctor->setNombre($_POST['create_nombre'])) {
+                    if ($doctor->setApellido($_POST['create_apellido'])) {
                         if ($doctor->setCorreo($_POST['create_correo'])) {
                             if ($doctor->setUsuario($_POST['create_usuario'])) {
-                                if ($_POST['create_clave1'] == $_POST['create_clave2']) {
-                                    if ($doctor->setClave($_POST['create_clave1'])) {
-                                        if ($doctor->setFecha($_POST['create_fecha'])) {
-                                            if ($doctor->setIdespecialidad($_POST['create_especialidad'])) {
-                                                if ($doctor->setIdestado(isset($_POST['create_estado']) ? 1 : 2)) {
-                                                    if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                        if ($doctor->setFoto($_FILES['create_archivo'], null)) {
-                                                            if ($doctor->createDoctor()) {
-                                                                $result['status'] = 1;
-                                                                if ($doctor->saveFile($_FILES['create_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
-                                                                    $result['message'] = 'Doctor creado correctamente';
-                                                                } else {
-                                                                    $result['message'] = 'Doctor no creado. No se guardó el archivo';
-                                                                }
-                                                            } else {
-                                                                $result['exception'] = 'Operación fallida';
-                                                            }
+                                if ($doctor->setFecha($_POST['create_fecha'])) {
+                                    if ($doctor->setIdespecialidad($_POST['create_especialidad'])) {
+                                        if ($doctor->setIdestado(isset($_POST['create_estado']) ? 1 : 2)) {
+                                            if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
+                                                if ($doctor->setFoto($_FILES['create_archivo'], null)) {
+                                                    if ($doctor->createDoctor()) {
+                                                        $result['status'] = 1;
+                                                        if ($doctor->saveFile($_FILES['create_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
+                                                            $result['message'] = 'Doctor creado correctamente';
                                                         } else {
-                                                            $result['exception'] = $doctor->getImageError();
+                                                            $result['message'] = 'Doctor no creado. No se guardó el archivo';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Seleccione una imagen';
+                                                        $result['exception'] = 'Operación fallida';
                                                     }
+                                                } else {
+                                                    $result['exception'] = $doctor->getImageError();
                                                 }
+                                            } else {
+                                                $result['exception'] = 'Seleccione una imagen';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Error con el estado';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Error con la especialidad';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Fecha no válida';
                                 }
                             } else {
-                                $result['exception'] = 'Alias incorrecto';
+                                $result['exception'] = 'Usuario incorrecto';
                             }
                         } else {
                             $result['exception'] = 'Correo incorrecto';
@@ -186,6 +109,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
+            print_r($_POST);
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {

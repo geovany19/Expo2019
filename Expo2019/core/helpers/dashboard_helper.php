@@ -16,6 +16,7 @@ class dashboard_helper
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-select.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/fonts/poppins.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/private/doctores.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
@@ -50,7 +51,6 @@ class dashboard_helper
 		if (isset($_SESSION['idUsuario'])) {
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registrarse.php') {
-				self::modals();
 				print('
 					<body onload="startTime()">
 						<div class="wrapper">
@@ -84,10 +84,7 @@ class dashboard_helper
 										</a>
 										<ul class="collapse list-unstyled" id="pageSubmenu">
 											<li>
-												<a href="#" onclick="modalProfile()">Editar perfil</a>
-											</li>
-											<li>
-												<a href="#modal-password" class="modal-trigger" data-toggle="modal" data-target="#modal-password">Cambiar contraseña</a>
+												<a href="perfil.php">Editar perfil</a>
 											</li>
 										</ul>
 									</li>
@@ -183,12 +180,5 @@ class dashboard_helper
             </body>
             </html>
         ');
-	}
-
-	public function modals()
-	{
-		print('
-			
-		');
 	}
 }

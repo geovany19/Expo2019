@@ -4,7 +4,7 @@ $(document).ready(function()
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const apiPacientes = '../../core/api/dashboard/pacientes.php?action=';
+const api = '../../core/api/dashboard/pacientes.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -68,7 +68,7 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: apiPacientes + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'

@@ -1,5 +1,5 @@
 <?php
-class Usuarios extends Validator
+class Usuario extends Validator
 {
 	//Declaración de variables a utilizar
 	private $idusuario = null;

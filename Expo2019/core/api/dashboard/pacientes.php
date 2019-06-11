@@ -187,8 +187,8 @@ if (isset($_GET['action'])) {
                 $_POST = $paciente->validateForm($_POST);
                 if ($paciente->setId($_POST['id_paciente'])) {
                     if ($paciente->getPaciente()) {
-                        if ($paciente->setNombres($_POST['update_nombres'])) {
-                            if ($paciente->setApellidos($_POST['update_apellidos'])) {
+                        if ($paciente->setNombre($_POST['update_nombres'])) {
+                            if ($paciente->setApellido($_POST['update_apellidos'])) {
                                 if ($paciente->setCorreo($_POST['update_correo'])) {
                                     if ($paciente->setUsuario($_POST['update_usuario'])) {
                                         if ($paciente->setFecha($_POST['update_fecha'])) {

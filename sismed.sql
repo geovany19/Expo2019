@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2019 a las 06:14:58
+-- Tiempo de generación: 11-06-2019 a las 09:39:36
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -13,7 +13,213 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
--
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `sismed`
+--
+
+CREATE DATABASE IF NOT EXISTS `sismed`;
+
+USE `sismed`;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregar_calificacion` (IN `id_calificacion` INT, IN `puntuacion` DOUBLE, IN `resena` VARCHAR(100), IN `usuario_calificador` INT, IN `usuario_calificado` INT, IN `id_tipousuario` INT)  NO SQL
+INSERT INTO calificacion VALUES(`id_calificacion`, `puntuacion`, `resena`, `usuario_calificador`, `usuario_calificado`, `id_tipousuario`)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregar_cita` (IN `id_cita` INT, IN `id_doctor` INT, IN `id_paciente` INT, IN `fecha_cita` DATE, IN `hora_cita` TIME, IN `id_estado` INT)  NO SQL
+INSERT INTO cita VALUES(`id_cita`, `id_doctor`, `id_estado`, `fecha_cita`, `hora_cita`, `id_estado`)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregar_disponibilidad` (IN `id_disponibilidad` INT, IN `fecha_disponible` DATE, IN `hora_inicio` TIME, IN `hora_fin` TIME, IN `id_doctor` INT)  NO SQL
+INSERT INTO disponibilidad VALUES(`id_disponibilidad`, `fecha_disponible`, `hora_inicio`, `hora_fin`, `id_doctor`)$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bitacora`
+--
+
+CREATE TABLE `bitacora` (
+  `id_bitacora` int(11) NOT NULL,
+  `operacion` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `usuario` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `host` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `modificado` datetime DEFAULT NULL,
+  `tabla` varchar(40) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `bitacora`
+--
+
+INSERT INTO `bitacora` (`id_bitacora`, `operacion`, `usuario`, `host`, `modificado`, `tabla`) VALUES
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 20:57:25', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 20:57:25', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-29 20:44:03', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 14:09:24', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-04-30 20:57:25', 'cita');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calificacion_doctor`
+--
+
+CREATE TABLE `calificacion_doctor` (
+  `id_calificacion` int(11) NOT NULL,
+  `id_doctor` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `calificacion_doctor` int(11) NOT NULL,
+  `comentario` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calificacion_paciente`
+--
+
+CREATE TABLE `calificacion_paciente` (
+  `id_calificacion` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `id_doctor` int(11) NOT NULL,
+  `calificacion_paciente` int(11) NOT NULL,
+  `comentario` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cita`
+--
+
+CREATE TABLE `cita` (
+  `id_cita` int(11) NOT NULL,
+  `id_doctor` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `fecha_cita` date NOT NULL,
+  `hora_cita` time NOT NULL,
+  `id_estado` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cita`
+--
+
+INSERT INTO `cita` (`id_cita`, `id_doctor`, `id_paciente`, `fecha_cita`, `hora_cita`, `id_estado`) VALUES
+(1, 4, 6, '2019-05-02', '15:00:00', 3),
+(2, 2, 5, '2019-04-30', '14:00:00', 3),
+(3, 5, 7, '2019-04-29', '09:30:00', 3),
+(4, 7, 1, '2019-04-30', '10:30:00', 3),
+(5, 3, 10, '2019-04-30', '13:15:00', 2),
+(6, 5, 7, '2019-04-29', '09:30:00', 3);
+
+--
+-- Disparadores `cita`
+--
+DELIMITER $$
+CREATE TRIGGER `bitacora_cita` AFTER INSERT ON `cita` FOR EACH ROW INSERT INTO bitacora (host, usuario, operacion, modificado, tabla) VALUES ("localhost", "root", "INSERTAR", NOW(), "cita")
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `consulta`
+--
+
+CREATE TABLE `consulta` (
+  `id_consulta` int(11) NOT NULL,
+  `padecimientos` varchar(200) DEFAULT NULL,
+  `id_doctor` int(11) DEFAULT NULL,
+  `id_paciente` int(11) DEFAULT NULL,
+  `receta` varchar(200) DEFAULT NULL,
+  `peso` decimal(10,0) DEFAULT NULL,
+  `estatura` decimal(10,0) DEFAULT NULL,
+  `presion` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `consulta`
+--
+
+INSERT INTO `consulta` (`id_consulta`, `padecimientos`, `id_doctor`, `id_paciente`, `receta`, `peso`, `estatura`, `presion`) VALUES
+(1, 'Tos', 3, 7, 'Jarabe para tos cada 8 horas', '176', '185', 122),
+(2, 'Cefalea', 5, 9, 'Acetaminofen', '169', '134', 125),
+(3, 'Gastritis', 3, 9, 'Pepto Bismol', '101', '172', 139),
+(4, 'Temperatura alta', 8, 9, 'Trapitos húmedos en la frente', '137', '163', 125),
+(5, 'Dengue', 7, 9, 'Acetaminofen', '139', '114', 101),
+(6, 'Infección en la garganta', 4, 4, 'Jarabe para la tos', '184', '154', 110),
+(7, 'Infección en las vías urinarias', 1, 6, 'Agua en abundancia y medicamentos', '109', '190', 122),
+(8, 'Mal de orin', 8, 4, 'Agua en abundancia', '104', '131', 112),
+(9, 'Extracción de cordales', 6, 2, 'Acetaminofen', '127', '170', 139),
+(10, 'VIH', 4, 6, 'Medicamentos', '136', '123', 116);
+
+--
+-- Disparadores `consulta`
+--
+DELIMITER $$
+CREATE TRIGGER `bitacora_consulta` AFTER INSERT ON `consulta` FOR EACH ROW INSERT INTO bitacora (host, usuario, operacion, modificado, tabla) VALUES ("localhost", "root", "INSERTAR", NOW(), "consulta")
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `disponibilidad`
+--
+
 CREATE TABLE `disponibilidad` (
   `id_disponibilidad` int(11) NOT NULL,
   `dia_disponible` varchar(10) NOT NULL,
@@ -98,16 +304,16 @@ CREATE TABLE `especialidad` (
 --
 
 INSERT INTO `especialidad` (`id_especialidad`, `nombre_especialidad`, `descripcion_especialidad`) VALUES
-(1, 'Cardiología', 'se encarga del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.'),
-(2, 'Nutriología', ' estudia la alimentación humana y su relación con los procesos químicos, biológicos y metabólicos y estado de salud humana.'),
-(3, 'Oftalmología', 'estudia las enfermedades de ojo y su tratamiento, incluyendo el globo ocular, su musculatura, el sistema lagrimal y los párpados. '),
-(4, 'Pediatría', 'es la especialidad médica que estudia al niño y sus enfermedades.'),
-(5, 'Oncología médica', 'diagnóstico y tratamiento del cáncer, centrada en la atención del enfermo con cáncer como un todo'),
-(6, 'Dermatología', 'es la especialidad médica encargada del estudio de la piel, su estructura, función y enfermedades.'),
-(7, 'Gastroenterología', ' comprende el diagnóstico y tratamiento de pacientes con afecciones del  estómago, intestino delgado, colon, recto y páncreas'),
-(8, 'Ginecología', 'especialidad médica que trata las enfermedades del sistema reproductor femenino (útero, vagina y ovarios) y de la reproducción.'),
-(9, 'Neumología', 'es la especialidad médica encargada del estudio de las enfermedades del aparato respiratorio.'),
-(10, 'Urología', 'tratamiento de las patologías que afectan al aparato urinario de ambos sexos y al aparato reproductor masculino, sin límite edad.');
+(1, 'Cardiología', 'Se encarga del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.'),
+(2, 'Nutriología', 'Estudia la alimentación humana y su relación con los procesos químicos, biológicos y metabólicos y estado de salud humana.'),
+(3, 'Oftalmología', 'Estudia las enfermedades de ojo y su tratamiento, incluyendo el globo ocular, su musculatura, el sistema lagrimal y los párpados.'),
+(4, 'Pediatría', 'Es la especialidad médica que estudia al niño y sus enfermedades.'),
+(5, 'Oncología médica', 'Diagnóstico y tratamiento del cáncer, centrada en la atención del enfermo con cáncer como un todo'),
+(6, 'Dermatología', 'Es la especialidad médica encargada del estudio de la piel, su estructura, función y enfermedades.'),
+(7, 'Gastroenterología', 'Comprende el diagnóstico y tratamiento de pacientes con afecciones del  estómago, intestino delgado, colon, recto y páncreas'),
+(8, 'Ginecología', 'Especialidad médica que trata las enfermedades del sistema reproductor femenino (útero, vagina y ovarios) y de la reproducción.'),
+(9, 'Neumología', 'Es la especialidad médica encargada del estudio de las enfermedades del aparato respiratorio.'),
+(10, 'Urología', 'Tratamiento de las patologías que afectan al aparato urinario de ambos sexos y al aparato reproductor masculino.');
 
 -- --------------------------------------------------------
 
@@ -266,10 +472,11 @@ INSERT INTO `usuarios_a` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `c
 (8, 'Thane', 'Bauer', 'ligula@diam.co.uk', 'N4H 2R5', 'PLT45IMB2HR', '2001-04-10', '1209', 1),
 (9, 'Alden', 'Willis', 'ligula.Donec@Quisquepurus', 'X9D 6N3', 'ARV39VRR0FN', '2005-03-05', '7304', 1),
 (10, 'Denise', 'Buckley', 'ipsum.cursus@massaSuspend', 'M1Y 7E4', 'PMQ90RWX3VW', '1990-10-31', '3691', 1),
-(11, 'Federico', 'Ramírez', 'fede@gmail.com', 'fede', '$2y$10$MkGeed.cBRAS7ic8B7Y7.O413yHYkDYSiXudUTk4acUNDkz7QVmhm', '2000-08-29', NULL, 1),
+(11, 'Fede', 'Ramírez', 'fede@gmail.com', 'fede', '$2y$10$/pLNQolNf1O88rkPkDpEQ.NYVIQKlLZPCx/8.mDHx0NYljtsZl8pe', '2000-08-29', NULL, 1),
 (12, 'Geovany', 'Pineda', 'geova@gmail.com', 'geova', '$2y$10$IcEnmb9qF2pzhmQ1AWsahOBX42gQIJ8490Hpyi00O0qYRE5aboJbm', '2000-09-04', NULL, 1),
 (13, 'María', 'Campos', 'maria@gmail.com', 'majo', '$2y$10$.LT4Q5Ulr0ufqsiTNUW/nO4KSWKE3zZeRZNLqn93xmaQSlE8bPP/q', '2000-06-04', NULL, 1),
-(14, 'Bryan', 'Amaya', 'bryan@gmail.com', 'bryan', '$2y$10$pPEmi8Nd9AWYikmvpaa7PuKN7.pq2N2lU2qa38aFF7hB8eR8HhFCa', '2001-08-16', NULL, 1);
+(14, 'Bryan', 'Amaya', 'bryan@gmail.com', 'bryan', '$2y$10$pPEmi8Nd9AWYikmvpaa7PuKN7.pq2N2lU2qa38aFF7hB8eR8HhFCa', '2001-08-16', NULL, 1),
+(15, 'Admin', 'Admin', 'admin@gmail.com', 'admin', '$2y$10$L3VCHFPcCcbbf1jaKrSuPOY8ak/Da3gM5Z8pBVJmC4PyWUyjMHQyO', '2019-06-12', NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -413,7 +620,7 @@ ALTER TABLE `doctores`
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
-  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_cita`
@@ -449,7 +656,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuarios_a`
 --
 ALTER TABLE `usuarios_a`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas

@@ -3,7 +3,7 @@ $(document).ready(function()
     showTable();
 });
 
-const apiEspecialidades = '../../core/api/dashboard/especialidades.php?action=';
+const api = '../../core/api/dashboard/especialidades.php?action=';
 
 function fillTable(rows)
 {
@@ -14,7 +14,7 @@ function fillTable(rows)
             <tr>
                 <td>${row.id_especialidad}</td>
                 <td>${row.nombre_especialidad}</td>
-                <td>${row.descripcion}</td>
+                <td>${row.descripcion_especialidad}</td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_especialidad})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_especialidad})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -58,7 +58,7 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: apiEspecialidades + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -87,7 +87,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiEspecialidades + 'search',
+        url: api + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -118,7 +118,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiEspecialidades + 'create',
+        url: api + 'create',
         type: 'post',
         data: $('#form-create').serialize(),
         datatype: 'json'
@@ -165,7 +165,7 @@ function modalUpdate(id)
             if (result.status) {
                 $('#id_especialidad').val(result.dataset.id_especialidad);
                 $('#update_nombre').val(result.dataset.nombre_especialidad);
-                $('#update_descripcion').val(result.dataset.descripcion);
+                $('#update_descripcion').val(result.dataset.descripcion_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);

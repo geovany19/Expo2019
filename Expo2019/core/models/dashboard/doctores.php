@@ -32,7 +32,7 @@ class Doctores extends Validator
 
 	public function setNombre($value)
 	{
-		if ($this->validateAlphabetic($value, 1, 50)) {
+		if ($this->validateAlphabetic($value, 1, 25)) {
 			$this->nombre = $value;
 			return true;
 		} else {
@@ -47,7 +47,7 @@ class Doctores extends Validator
 
 	public function setApellido($value)
 	{
-		if ($this->validateAlphabetic($value, 1, 50)) {
+		if ($this->validateAlphabetic($value, 1, 25)) {
 			$this->apellido = $value;
 			return true;
 		} else {
@@ -77,7 +77,7 @@ class Doctores extends Validator
 
 	public function setUsuario($value)
 	{
-		if ($this->validateAlphanumeric($value, 1, 50)) {
+		if ($this->validateAlphanumeric($value, 1, 25)) {
 			$this->usuario = $value;
 			return true;
 		} else {

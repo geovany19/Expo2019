@@ -46,6 +46,19 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
 
+                case 'readCita':
+                if ($usuario->setId($_SESSION['idUsuario'])) {
+                 if ($result['dataset'] = $usuario->getCitas()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay citas registrados';
+
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto 3';
+                }
+                break;
+
                 case 'readCitaspendientes':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                  if ($result['dataset'] = $usuario->getCitaspendientes()) {

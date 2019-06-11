@@ -92,7 +92,7 @@ function showTable()
 function modalUpdate(id) {
     
     $.ajax({
-        url: apiUsuarios + 'get',
+        url: api + 'get',
         type: 'post',
         data: {
             id_usuario: id
@@ -134,7 +134,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiUsuarios + 'update',
+        url: api + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -178,7 +178,7 @@ function confirmDelete(id, file)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: apiUsuarios + 'delete',
+                url: api + 'delete',
                 type: 'post',
                 data:{
                     id_usuario: id,

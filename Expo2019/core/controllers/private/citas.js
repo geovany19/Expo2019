@@ -53,7 +53,7 @@ function fillTable(rows) {
 
 function showTable() {
     $.ajax({
-        url: apiCitas + 'readCitas',
+        url: apiCitas + 'readCita',
         type: 'post',
         data: null,
         datatype: 'json'

@@ -1,13 +1,14 @@
-    const api = '../../core/api/private/citas.php?action=';
+    const api = '../../core/api/private/usuarios.php?site=private&action=';
 
     var eventos = new Object();
 
+    var cita  = [];
     $(document).ready(function() {
 	    var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
         var y = date.getFullYear();
-   
+        var cita  = [];
 		
         
         $.ajax({
@@ -24,15 +25,25 @@
                 if (resultado.status) {
                    eventos = resultado.dataset;
                    console.log(eventos);
+                   for (let i = 0; i < eventos.length; i++) {
+                        cita.push({
+                            title:'Cita con : '+ eventos[i].nombre_paciente,
+                            start: eventos[i].fecha_cita,
+                            url: 'pacientes.php',
+                            className: 'success'
+                    })                   
                 }
-            } else {
-                console.log(response);
             }
+                } else {
+                console.log(response);
+                }
         })
         .fail(function(jqXHR){
             //Se muestran en consola los posibles errores de la solicitud AJAX
             console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
         });
+
+        
 		  
 		/* initialize the external events
 		-----------------------------------------------------------------*/
@@ -125,21 +136,14 @@
 					$(this).remove();
 				}
 				
-			},
-			events: [
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-					className: 'success'
-				}
-			],			
+            },
+			events: cita		
         });
-        //console.log(eventos);
+        console.log(cita)
         //var fecha = new Date(y, m, 28);
         //console.log(fecha);
     });
+
     
     
     /*!

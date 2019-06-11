@@ -5,7 +5,7 @@ $(document).ready(function()
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/doctores.php?action=';
+const apiDoctores = '../../core/api/dashboard/doctores.php?action=';
 const especialidad = '../../core/api/dashboard/especialidades.php?action=';
 
 //Función para llenar la tabla con los registros
@@ -68,13 +68,13 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: api + 'read',
+        url: apiDoctores + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
     })
     .done(function(response){
-        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        // Se verifica si la respuesta de la apiDoctores es una cadena JSON, sino se muestra el resultado en consola
         if (isJSONString(response)) {
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
@@ -97,7 +97,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'search',
+        url: apiDoctores + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -135,7 +135,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'create',
+        url: apiDoctores + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -169,7 +169,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: api + 'get',
+        url: apiDoctores + 'get',
         type: 'post',
         data:{
             id_doctor: id
@@ -212,7 +212,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiDoctores + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -256,10 +256,10 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiDoctores + 'delete',
                 type: 'post',
                 data:{
-                    id_usuario: id
+                    id_doctor: id
                 },
                 datatype: 'json'
             })
@@ -300,7 +300,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiDoctores + 'delete',
                 type: 'post',
                 data:{
                     id_doctor: id

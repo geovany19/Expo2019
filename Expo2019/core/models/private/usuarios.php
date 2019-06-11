@@ -127,6 +127,7 @@ class Usuarios extends Validator
 			return false;
 		}
 	}
+	
 	public function getUsuario()
 	{
 		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor  FROM doctores WHERE id_doctor = ?';

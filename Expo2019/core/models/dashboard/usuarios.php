@@ -11,7 +11,7 @@ class Usuarios extends Validator
 	private $fecha = null;
 	private $foto = null;
 	private $ruta = '../../../resources/img/usuarios/';
-	private $estado = null;
+	private $idestado = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -76,7 +76,7 @@ class Usuarios extends Validator
 
 	public function setUsuario($value)
 	{
-		if ($this->validateAlphanumeric($value, 1, 50)) {
+		if ($this->validateAlphanumeric($value, 1, 25)) {
 			$this->usuario = $value;
 			return true;
 		} else {

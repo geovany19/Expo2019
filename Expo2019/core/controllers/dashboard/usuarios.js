@@ -5,7 +5,7 @@ $(document).ready(function()
 })
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/usuarios.php?action=';
+const apiUsuarios = '../../core/api/dashboard/usuarios.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -66,7 +66,7 @@ function fillTable(rows)
 function showTable() 
 {
     $.ajax({
-        url: api + 'read',
+        url: apiUsuarios + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -93,7 +93,7 @@ function showTable()
 function modalUpdate(id) {
     
     $.ajax({
-        url: api + 'get',
+        url: apiUsuarios + 'get',
         type: 'post',
         data: {
             id_usuario: id
@@ -135,7 +135,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiUsuarios + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -179,7 +179,7 @@ function confirmDelete(id, file)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiUsuarios + 'delete',
                 type: 'post',
                 data:{
                     id_usuario: id,

@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/disponibilidad.php?action=';
+const apiDisponibilidad = '../../core/api/dashboard/disponibilidad.php?action=';
 const doctor = '../../core/api/dashboard/doctores.php?action=';
 
 //Función para llenar la tabla con los registros
@@ -60,7 +60,7 @@ function fillTable(rows) {
 
 function showTable() {
     $.ajax({
-        url: api + 'read',
+        url: apiDisponibilidad + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -98,7 +98,7 @@ $('#form-create').submit(function()
     event.preventDefault();
 
     $.ajax({
-        url: api + 'create',
+        url: apiDisponibilidad + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',

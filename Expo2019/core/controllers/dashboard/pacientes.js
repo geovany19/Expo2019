@@ -4,7 +4,7 @@ $(document).ready(function()
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/pacientes.php?action=';
+const apiPacientes = '../../core/api/dashboard/pacientes.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -68,7 +68,7 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: api + 'read',
+        url: apiPacientes + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -97,7 +97,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'search',
+        url: apiPacientes + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -128,7 +128,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'create',
+        url: apiPacientes + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -162,7 +162,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: api + 'get',
+        url: apiPacientes + 'get',
         type: 'post',
         data:{
             id_paciente: id
@@ -206,7 +206,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiPacientes + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -250,7 +250,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiPacientes + 'delete',
                 type: 'post',
                 data:{
                     id_paciente: id

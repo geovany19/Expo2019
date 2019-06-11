@@ -69,7 +69,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
-                break;*/
+                break;
             case 'password':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     $_POST = $usuario->validateForm($_POST);
@@ -264,7 +264,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             default:
-                exit('Acción no disponible  ');
+                exit('Acción no disponible  1');
         }
     } else {
         switch ($_GET['action']) {
@@ -272,10 +272,8 @@ if (isset($_GET['action'])) {
                 if ($usuario->readUsuarios()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
-                    $result['exception'] = 'Hola';
                 } else {
                     $result['message'] = 'No existen usuarios registrados';
-                    $result['exception'] = 'Hola';
                 }
                 break;
             case 'register':
@@ -325,7 +323,7 @@ if (isset($_GET['action'])) {
                         if ($usuario->setClave($_POST['clave'])) {
                             if ($usuario->checkPassword()) {
                                 $_SESSION['idUsuario'] = $usuario->getId();
-                                $_SESSION['aliasUsuario'] = $usuario->getAlias();
+                                $_SESSION['aliasUsuario'] = $usuario->getUsuario();
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
                             } else {
@@ -342,7 +340,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             default:
-                exit('Acción no disponible');
+                exit('Acción no disponible 2');
         }
     }
     print(json_encode($result));

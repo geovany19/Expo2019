@@ -97,7 +97,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiPacientes + 'search',
+        url: api + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -128,7 +128,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiPacientes + 'create',
+        url: api + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -162,7 +162,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: apiPacientes + 'get',
+        url: api + 'get',
         type: 'post',
         data:{
             id_paciente: id
@@ -206,7 +206,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiPacientes + 'update',
+        url: api + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -250,7 +250,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: apiPacientes + 'delete',
+                url: api + 'delete',
                 type: 'post',
                 data:{
                     id_paciente: id

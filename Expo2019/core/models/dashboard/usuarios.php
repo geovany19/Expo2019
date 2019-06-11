@@ -1,5 +1,5 @@
 <?php
-class Usuarios extends Validator
+class Usuario extends Validator
 {
 	//Declaración de variables a utilizar
 	private $idusuario = null;
@@ -10,7 +10,7 @@ class Usuarios extends Validator
 	private $clave = null;
 	private $fecha = null;
 	private $foto = null;
-	private $ruta = '../../resources/img/usuarios/';
+	private $ruta = '../../../resources/img/usuarios/';
 	private $idestado = null;
 
 	//Métodos para la sobre carga de propiedades
@@ -76,7 +76,7 @@ class Usuarios extends Validator
 
 	public function setUsuario($value)
 	{
-		if ($this->validateAlphanumeric($value, 1, 50)) {
+		if ($this->validateAlphanumeric($value, 1, 25)) {
 			$this->usuario = $value;
 			return true;
 		} else {

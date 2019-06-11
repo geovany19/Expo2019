@@ -4,7 +4,7 @@ dashboard_helper::head("Pacientes");
 dashboard_helper::nav();
 ?>
 <main class="row">
-<button type="submit" data-toggle="modal" data-target="#modal-update" class="btn btn-success">
+<button type="button" data-toggle="modal" data-target="#modal-update" class="btn btn-success">
 		<i class="fas fa-plus-circle"></i>
 		<span>Agregar doctor</span>
 	</button>
@@ -33,22 +33,18 @@ dashboard_helper::nav();
         </div>
     </div>
 </main>
-<!-- Ventana para modificar un registro existente 
+<!-- Ventana para modificar un registro existente -->
 <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable" role="document">
 		<div class="modal-content">
 			<div class="modal-header justify-content-center aling-items-center">
-				<h5 class="modal-title" id="exampleModalLongTitle">Actualizar usuario</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">Actualizar pacientes</h5>
 			</div>
 			<div class="modal-body">
 				<img id="foto" height="75">
-				<form method="post" id="form-update" enctype="multipart/form-data">
+				<form id="form-update" enctype="multipart/form-data">
 					<input type="hidden" class="form-control" id="id_paciente" name="id_paciente">
 					<input type="hidden" class="form-control" id="foto_paciente" name="foto_paciente">
-					<div class="form-group">
-						<label for="update_archivo">Foto</label>
-						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
-					</div>
 					<div class="form-group">
 						<label for="update_nombres">Nombre</label>
 						<input type="text" class="form-control" class="form-control is-valid" id="update_nombres" name="update_nombres" placeholder="Nombre">
@@ -70,12 +66,16 @@ dashboard_helper::nav();
 						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha de nacimiento">
 					</div>
 					<div class="form-group">
-						<label for="update_peso">Peso del paciente</label>
-						<input type="number" class="form-control" id="update_peso" name="update_peso" placeholder="Peso del paciente" maxlength="6">
+						<label for="update_archivo">Foto</label>
+						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">
-						<label for="update_estatura">Estatura del paciente</label>
-						<input type="number" class="form-control" id="update_estatura" name="update_estarura" placeholder="Estatura del paciente" maxlength="4">
+						<label for="update_peso">Peso del paciente (kg)</label>
+						<input type="number" class="form-control" id="update_peso" name="update_peso" placeholder="Peso del paciente (kg)" maxlength="6">
+					</div>
+					<div class="form-group">
+						<label for="update_estatura">Estatura del paciente (m)</label>
+						<input type="number" class="form-control" id="update_estatura" name="update_estarura" placeholder="Estatura del paciente (m)" maxlength="4">
 					</div>
 					<div class="col s12 m6">
 						<p>
@@ -98,7 +98,7 @@ dashboard_helper::nav();
 			</div>
 		</div>
 	</div>
-</div>-->
+</div>
 <?php
 dashboard_helper::footer('pacientes.js');
 ?>

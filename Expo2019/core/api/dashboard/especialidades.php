@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
 				break;
 			case 'create':
 				$_POST = $especialidad->validateForm($_POST);
-				if ($especialidad->setNombre($_POST['create_especialidad'])) {
+				if ($especialidad->setEspecialidad($_POST['create_especialidad'])) {
 					if ($especialidad->setDescripcion($_POST['create_descripcion'])) {
 						if ($especialidad->createEspecialidad()) {
 							$result['id'] = Database::getLastRowId();
@@ -75,10 +75,10 @@ if (isset($_GET['action'])) {
 									$result['exception'] = 'Operación fallida';
 								}
 							} else {
-								$result['exception'] = 'Descripción incorrecta';
+								$result['exception'] = 'Descripción incorrecta. El campo posee caracteres no permitidos.';
 							}
 						} else {
-							$result['exception'] = 'Nombre incorrecto';
+							$result['exception'] = 'Nombre incorrecto. El campo posee caracteres no permitidos.';
 						}
 					} else {
 						$result['exception'] = 'Especialidad inexistente';

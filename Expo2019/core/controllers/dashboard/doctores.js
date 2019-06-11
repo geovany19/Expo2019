@@ -1,7 +1,6 @@
 $(document).ready(function()
 {
     showTable();
-    $('.selectpicker').selectpicker();
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
@@ -36,6 +35,7 @@ function fillTable(rows)
     $('#table-body').html(content);
     $("#tabla-doctores").DataTable({
         responsive: true,
+        retrieve: true,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -73,7 +73,7 @@ function showTable()
         datatype: 'json'
     })
     .done(function(response){
-        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        // Se verifica si la respuesta de la api es una cadena JSON, sino se muestra el resultado en consola
         if (isJSONString(response)) {
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
@@ -122,6 +122,13 @@ $('#form-search').submit(function()
     });
 })
 
+function modalCreate()
+{
+    $('#form-create')[0].reset();
+    fillSelect(especialidad, 'create_especialidad', null);
+    $('#modal-create').modal('show');
+}
+
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
 {
@@ -141,7 +148,7 @@ $('#form-create').submit(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-create').modal('close');
+                $('#modal-create').modal('hide');
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -174,6 +181,7 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
+                console.log(response);
                 $('#form-update')[0].reset();
                 $('#foto').attr('src','../../resources/img/doctores/'+result.dataset.foto_doctor);
                 $('#id_doctor').val(result.dataset.id_doctor);
@@ -183,9 +191,8 @@ function modalUpdate(id)
                 $('#update_correo').val(result.dataset.correo_doctor);
                 $('#update_alias').val(result.dataset.usuario_doctor);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
-                $('#update_especialidad').val(result.dataset.id_especialidad);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
-                //fillSelect(especialidad, 'update_especialidad', result.dataset.id_especialidad);
+                fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -252,7 +259,7 @@ function confirmDelete(id)
                 url: api + 'delete',
                 type: 'post',
                 data:{
-                    id_usuario: id
+                    id_doctor: id
                 },
                 datatype: 'json'
             })

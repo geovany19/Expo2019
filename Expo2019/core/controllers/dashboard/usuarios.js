@@ -1,7 +1,6 @@
 $(document).ready(function()
 {
     showTable();
-    $('.selectpicker').selectpicker();
 })
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
@@ -17,13 +16,13 @@ function fillTable(rows)
         content += `
             <tr>
                 <td>${row.id_usuario}</td>
-                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75"></td>
                 <td>${row.nombre_usuario}</td>
                 <td>${row.apellido_usuario}</td> 
                 <td>${row.correo_usuario}</td>
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"</td>
+                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75"></td>
+                <td>${row.id_estado}</td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_usuario})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -34,6 +33,7 @@ function fillTable(rows)
     $('#table-body').html(content);
     $("#tabla-usuarios").DataTable({
         responsive: true,
+        retrieve: true,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -92,7 +92,7 @@ function showTable()
 function modalUpdate(id) {
     
     $.ajax({
-        url: api + 'get',
+        url: apiUsuarios + 'get',
         type: 'post',
         data: {
             id_usuario: id
@@ -108,12 +108,12 @@ function modalUpdate(id) {
                     $('#form-update')[0].reset();
                     $('#foto').attr('src','../../resources/img/usuarios/'+result.dataset.foto_usuario);
                     $('#id_usuario').val(result.dataset.id_usuario);
-                    $('#foto_usuario').val(result.dataset.foto_usuario);
-                    $('#update_nombre').val(result.dataset.nombre_usuario);
-                    $('#update_apellido').val(result.dataset.apellido_usuario);
+                    $('#update_nombres').val(result.dataset.nombre_usuario);
+                    $('#update_apellidos').val(result.dataset.apellido_usuario);
                     $('#update_correo').val(result.dataset.correo_usuario);
                     $('#update_usuario').val(result.dataset.usuario_usuario);
                     $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                    $('#foto_usuario').val(result.dataset.foto_usuario);
                     (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                     $('#modal-update').modal('show');
                 } else {
@@ -134,7 +134,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiUsuarios + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -169,7 +169,7 @@ function confirmDelete(id, file)
 {
     swal({
         title: 'Advertencia',
-        text: '¿Quiere eliminar la categoría?',
+        text: '¿Quiere eliminar el registro?',
         icon: 'warning',
         buttons: ['Cancelar', 'Aceptar'],
         closeOnClickOutside: false,
@@ -178,7 +178,7 @@ function confirmDelete(id, file)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiUsuarios + 'delete',
                 type: 'post',
                 data:{
                     id_usuario: id,

@@ -1,11 +1,10 @@
 $(document).ready(function()
 {
     showTable();
-    $('.selectpicker').selectpicker();
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const apiDoctores = '../../core/api/dashboard/doctores.php?action=';
+const api = '../../core/api/dashboard/doctores.php?action=';
 const especialidad = '../../core/api/dashboard/especialidades.php?action=';
 
 //Función para llenar la tabla con los registros
@@ -68,13 +67,13 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: apiDoctores + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
     })
     .done(function(response){
-        // Se verifica si la respuesta de la apiDoctores es una cadena JSON, sino se muestra el resultado en consola
+        // Se verifica si la respuesta de la api es una cadena JSON, sino se muestra el resultado en consola
         if (isJSONString(response)) {
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
@@ -97,7 +96,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiDoctores + 'search',
+        url: api + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -135,7 +134,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiDoctores + 'create',
+        url: api + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -169,7 +168,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: apiDoctores + 'get',
+        url: api + 'get',
         type: 'post',
         data:{
             id_doctor: id
@@ -182,6 +181,7 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
+                console.log(response);
                 $('#form-update')[0].reset();
                 $('#foto').attr('src','../../resources/img/doctores/'+result.dataset.foto_doctor);
                 $('#id_doctor').val(result.dataset.id_doctor);
@@ -212,7 +212,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiDoctores + 'update',
+        url: api + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -256,7 +256,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: apiDoctores + 'delete',
+                url: api + 'delete',
                 type: 'post',
                 data:{
                     id_doctor: id
@@ -300,7 +300,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: apiDoctores + 'delete',
+                url: api + 'delete',
                 type: 'post',
                 data:{
                     id_doctor: id

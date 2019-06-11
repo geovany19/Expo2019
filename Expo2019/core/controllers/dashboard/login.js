@@ -4,13 +4,13 @@ $(document).ready(function()
 })
 
 // Constante para establecer la ruta y parámetros de comunicación con la API
-const apiLogin = '../../core/api/dashboard/usuarios.php?action=';
+const api = '../../core/api/dashboard/usuarios.php?action=';
 
 // Función para verificar si existen usuarios en el sitio privado
 function checkUsuarios()
 {
     $.ajax({
-        url: apiLogin + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -38,7 +38,7 @@ $('#form-sesion').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiLogin + 'login',
+        url: api + 'login',
         type: 'post',
         data: $('#form-sesion').serialize(),
         datatype: 'json'

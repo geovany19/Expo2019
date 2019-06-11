@@ -1,11 +1,10 @@
 $(document).ready(function()
 {
     showTable();
-    $('.selectpicker').selectpicker();
 })
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
-const apiUsuarios = '../../core/api/dashboard/usuarios.php?action=';
+const api = '../../core/api/dashboard/usuarios.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -66,7 +65,7 @@ function fillTable(rows)
 function showTable() 
 {
     $.ajax({
-        url: apiUsuarios + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'

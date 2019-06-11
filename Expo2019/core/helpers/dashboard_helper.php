@@ -16,6 +16,7 @@ class dashboard_helper
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-select.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/fonts/poppins.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/private/doctores.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">

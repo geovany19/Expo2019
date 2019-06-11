@@ -109,26 +109,25 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-            print_r($_POST);
                 $_POST = $doctor->validateForm($_POST);
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($doctor->getDoctor()) {
                         if ($doctor->setNombre($_POST['update_nombre'])) {
                             if ($doctor->setApellido($_POST['update_apellido'])) {
                                 if ($doctor->setCorreo($_POST['update_correo'])) {
-                                    if ($doctor->setUsuario($_POST['update_alias'])) {
+                                    if ($doctor->setUsuario($_POST['update_usuario'])) {
                                         if ($doctor->setFecha($_POST['update_fecha'])) {
                                             if ($doctor->setIdespecialidad($_POST['update_especialidad'])) {
                                                 if ($doctor->setIdestado(isset($_POST['update_estado']) ? 1 : 2)) {
                                                     if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                        if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_doctor'])) {
+                                                        if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_paciente'])) {
                                                             $archivo = true;
                                                         } else {
                                                             $result['exception'] = $producto->getImageError();
                                                             $archivo = false;
                                                         }
                                                     } else {
-                                                        if (!$doctor->setFoto(null, $_POST['foto_doctor'])) {
+                                                        if (!$doctor->setFoto(null, $_POST['foto_paciente'])) {
                                                             $result['exception'] = $doctor->getImageError();
                                                         }
                                                         $archivo = false;

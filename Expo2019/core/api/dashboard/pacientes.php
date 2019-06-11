@@ -30,7 +30,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
-                print_r($_POST);
                 if ($paciente->setId($_SESSION['idUsuario'])) {
                     if ($paciente->getPaciente()) {
                         $_POST = $paciente->validateForm($_POST);
@@ -131,6 +130,9 @@ if (isset($_GET['action'])) {
                                 if ($paciente->setFecha($_POST['create_fecha'])) {
                                     if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
                                         if ($paciente->setFoto($_FILES['create_archivo'], null)) {
+                                            if ($paciente->setPeso($_POST['create_peso'])) {
+                                                
+                                            }
                                             if ($paciente->createUsuario()) {
                                                 $result['status'] = 1;
                                                 if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
@@ -175,7 +177,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-                print_r($_POST);
                 $_POST = $paciente->validateForm($_POST);
                 if ($paciente->setId($_POST['id_paciente'])) {
                     if ($paciente->getPaciente()) {
@@ -188,14 +189,14 @@ if (isset($_GET['action'])) {
                                                 if ($paciente->setEstatura($_POST['update_estatura'])) {
                                                     if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 2)) {
                                                         if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                            if ($paciente->setFoto($_FILES['update_archivo'], $_POST['imagen_usuario'])) {
+                                                            if ($paciente->setFoto($_FILES['update_archivo'], $_POST['foto_paciente'])) {
                                                                 $archivo = true;
                                                             } else {
                                                                 $result['exception'] = $producto->getImageError();
                                                                 $archivo = false;
                                                             }
                                                         } else {
-                                                            if (!$paciente->setFoto(null, $_POST['imagen_producto'])) {
+                                                            if (!$paciente->setFoto(null, $_POST['foto_paciente'])) {
                                                                 $result['exception'] = $paciente->getImageError();
                                                             }
                                                             $archivo = false;

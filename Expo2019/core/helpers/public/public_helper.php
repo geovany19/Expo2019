@@ -94,8 +94,8 @@ class public_helper
 				<script src="../../resources/js/datatables/dataTables.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables-demo.js"></script>
-				<script type="text/javascript" src="../../resources/js/sweetalert2.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/sweetalert2.min.js"></script>
 				<script type="text/javascript" src="../../core/controllers/public/account.js"></script>
 			</body>
 		</html>

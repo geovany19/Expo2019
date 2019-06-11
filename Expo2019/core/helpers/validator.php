@@ -123,7 +123,7 @@ class Validator
 
     public function validateHeight($value)
 	{
-		if (preg_match('/^[1-2][0-9]{0,3}$/', $value)) {
+		if (preg_match('/^[0-2]+(?:\.[0-9]{1,2})?$/', $value)) {
 			return true;
 		} else {
 			return false;

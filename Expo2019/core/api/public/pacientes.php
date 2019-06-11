@@ -355,7 +355,7 @@ if (isset($_GET['action'])) {
                 if (session_destroy()) {
                     header('location: ../../../views/public/');
                 } else {
-                    header('location: ../../../views/public/perfil.php');
+                    header('location: ../../../views/public/home.php');
                 }
                 break;
             default:

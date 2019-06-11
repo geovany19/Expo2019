@@ -75,7 +75,7 @@ dashboard_helper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_estatura">Estatura del paciente (cm)</label>
-						<input type="number" class="form-control" id="update_estatura" name="update_estarura" min="1" max="299" maxlength="3" placeholder="Estatura del paciente (m)" >
+						<input type="number" class="form-control" id="update_estatura" name="update_estatura" min="0.01" max="2.99" step="any" maxlength="3" placeholder="Estatura del paciente (m)" >
 					</div>
 					<div class="col s12 m6">
 						<p>
@@ -83,7 +83,7 @@ dashboard_helper::nav();
 								<span>Estado:</span>
 								<label>
 									<i class="material-icons">visibility_off</i>
-									<input id="update_estado" type="checkbox" data-toggle="toggle" name="update_estado" checked />
+									<input id="update_estado" type="checkbox" data-toggle="toggle" name="update_estado" />
 									<span class="lever"></span>
 									<i class="material-icons">visibility</i>
 								</label>

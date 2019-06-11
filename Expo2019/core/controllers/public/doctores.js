@@ -50,12 +50,6 @@ function fillTableDoctores(rows)
             </td>
             <td>${row.nombre_doctor} ${row.apellido_doctor}</td>
             <td>${row.nombre_especialidad}</td>
-            <td class="d-flex justify-content-center">
-                <div>
-                    <img src="../../resources/img/doctores/estado/${row.id_estado}.png" width="30px" height="30px" alt="" />
-                    ${row.estado}
-                </div>
-            </td>
             <td>
                 ${(row.id_estado == 1)?'<div class="d-flex justify-content-center" style="align-items: center;"><a data-toggle="modal" data-target="#crearCita"><button type="button" onclick="setDoctor('+row.id_doctor+')" class="btn btn-warning ml-3">Solicitar cita</button></a></div>':''}
             </td>
@@ -69,3 +63,17 @@ function fillTableDoctores(rows)
 function setDoctor(doctor){
     $('#idDoctor').val(doctor);
 }
+
+//VISIBILIDAD QUE CONSIDERO INNECESARIA
+//<td class="d-flex justify-content-center">
+//<div>
+//<img src="../../resources/img/doctores/estado/${row.id_estado}.png" width="30px" height="30px" alt="" />
+//${row.estado}
+//</div>
+//</td>
+//
+//
+//
+//
+//
+//

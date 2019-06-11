@@ -5,7 +5,7 @@ dashboard_helper::nav();
 ?>
 <main>
 	<h1 class="text-center">Usuarios</h1>
-	<button type="button" class="btn btn-success">
+	<button type="button" data-toggle="modal" data-target="#modal-update" class="btn btn-success">
 		<i class="fas fa-plus-circle"></i>
 		<span>Agregar usuario</span>
 	</button>

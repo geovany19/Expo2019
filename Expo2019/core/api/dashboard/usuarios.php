@@ -37,7 +37,7 @@ if (isset($_GET['action'])) {
                         if ($usuario->setNombre($_POST['profile_nombre'])) {
                             if ($usuario->setApellido($_POST['profile_apellido'])) {
                                 if ($usuario->setCorreo($_POST['profile_correo'])) {
-                                    if ($usuario->setUsuario($_POST['profile_alias'])) {
+                                    if ($usuario->setUsuario($_POST['profile_usuario'])) {
                                         if ($usuario->setFecha($_POST['profile_fecha'])) {
                                             if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
                                                 if ($usuario->setFoto($_FILES['update_archivo'], $_POST['foto_usuario'])) {

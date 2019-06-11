@@ -43,38 +43,38 @@ dashboard_helper::nav();
 					<input type="hidden" id="id_doctor" name="id_doctor">
 					<input type="hidden" id="foto_doctor" name="foto_doctor">
 					<div class="form-group">
-						<label for="update_nombre">Nombre:</label>
-						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" aria-describedby="emailHelp" placeholder="Nombre:">
+						<label for="update_nombre">Nombre</label>
+						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" aria-describedby="emailHelp" placeholder="Nombre">
 					</div>
 					<div class="form-group">
-						<label for="update_apellido">Apellido:</label>
-						<input type="text" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido:">
+						<label for="update_apellido">Apellido</label>
+						<input type="text" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido">
 					</div>
 					<div class="form-group">
-						<label for="update_correo">Correo:</label>
-						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo:">
+						<label for="update_correo">Correo eletrónico</label>
+						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo eletrónico">
 					</div>
 					<div class="form-group">
-						<label for="update_alias">Usuario:</label>
-						<input type="text" class="form-control" id="update_alias" name="update_alias" placeholder="Usuario:">
+						<label for="update_alias">Usuario</label>
+						<input type="text" class="form-control" id="update_alias" name="update_alias" placeholder="Usuario">
 					</div>
 					<div class="form-group">
-						<label for="update_fecha">Fecha:</label>
-						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha:">
+						<label for="update_fecha">Fecha</label>
+						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha">
 					</div>
 					<div class="form-group">
-						<label for="update_archivo">Foto:</label>
+						<label for="update_archivo">Foto</label>
 						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">
-						<label for="update_especialidad">Especialidad</label>
-						<select name="update_especialidad" id="update_especialidad" class="form-control">
+						<label for="create_especialidad">Especialidad</label>
+						<select name="create_especialidad" id="create_especialidad" class="form-control">
 						</select>
 					</div>
 					<div class="col s12 m6">
 						<p>
 							<div class="checked">
-								<span>Estado:</span>
+								<span>Estado</span>
 								<label>
 									<i class="material-icons">visibility_off</i>
 									<input id="update_estado" type="checkbox" data-toggle="toggle" name="update_estado" checked />
@@ -106,27 +106,27 @@ dashboard_helper::nav();
 					<input type="hidden" id="id_doctor" name="id_doctor">
 					<input type="hidden" id="foto_doctor" name="foto_doctor">
 					<div class="form-group">
-						<label for="update_nombre">Nombre:</label>
-						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" aria-describedby="emailHelp" placeholder="Nombre:">
+						<label for="update_nombre">Nombre</label>
+						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" aria-describedby="emailHelp" placeholder="Nombre">
 					</div>
 					<div class="form-group">
-						<label for="update_apellido">Apellido:</label>
-						<input type="text" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido:">
+						<label for="update_apellido">Apellido</label>
+						<input type="text" class="form-control" id="update_apellido" name="update_apellido" placeholder="Apellido">
 					</div>
 					<div class="form-group">
-						<label for="update_correo">Correo:</label>
-						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo:">
+						<label for="update_correo">Correo eletrónico</label>
+						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo eletrónico">
 					</div>
 					<div class="form-group">
-						<label for="update_alias">Usuario:</label>
-						<input type="text" class="form-control" id="update_alias" name="update_alias" placeholder="Usuario:">
+						<label for="update_usuario">Usuario</label>
+						<input type="text" class="form-control" id="update_usuario" name="update_usuario" placeholder="Usuario">
 					</div>
 					<div class="form-group">
-						<label for="update_fecha">Fecha:</label>
-						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha:">
+						<label for="update_fecha">Fecha</label>
+						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha">
 					</div>
 					<div class="form-group">
-						<label for="update_archivo">Foto:</label>
+						<label for="update_archivo">Foto</label>
 						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">
@@ -137,10 +137,10 @@ dashboard_helper::nav();
 					<div class="col s12 m6">
 						<p>
 							<div class="checked">
-								<span>Estado:</span>
+								<span>Estado</span>
 								<label>
 									<i class="material-icons">visibility_off</i>
-									<input id="update_estado" type="checkbox" data-toggle="toggle" name="update_estado" checked />
+									<input id="update_estado" type="checkbox" data-toggle="toggle" name="update_estado"/>
 									<span class="lever"></span>
 									<i class="material-icons">visibility</i>
 								</label>

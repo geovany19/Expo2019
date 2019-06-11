@@ -3,8 +3,8 @@ $(document).ready(function()
     showTable();
 })
 
-//Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/doctores.php?action=';
+//Constantes que sirve para establecer la ruta y los parámetros de comunicación con la apiDoctores
+const apiDoctores = '../../core/api/dashboard/doctores.php?action=';
 const especialidad = '../../core/api/dashboard/especialidades.php?action=';
 
 //Función para llenar la tabla con los registros
@@ -67,7 +67,7 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: api + 'read',
+        url: apiDoctores + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -96,7 +96,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'search',
+        url: apiDoctores + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -134,7 +134,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'create',
+        url: apiDoctores + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -168,7 +168,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: api + 'get',
+        url: apiDoctores + 'get',
         type: 'post',
         data:{
             id_doctor: id
@@ -181,7 +181,7 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
-                console.log(response);
+                console.log(result);
                 $('#form-update')[0].reset();
                 $('#foto').attr('src','../../resources/img/doctores/'+result.dataset.foto_doctor);
                 $('#id_doctor').val(result.dataset.id_doctor);
@@ -189,7 +189,7 @@ function modalUpdate(id)
                 $('#update_nombre').val(result.dataset.nombre_doctor);
                 $('#update_apellido').val(result.dataset.apellido_doctor);
                 $('#update_correo').val(result.dataset.correo_doctor);
-                $('#update_alias').val(result.dataset.usuario_doctor);
+                $('#update_usuario').val(result.dataset.usuario_doctor);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
@@ -212,7 +212,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiDoctores + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -256,51 +256,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
-                type: 'post',
-                data:{
-                    id_doctor: id
-                },
-                datatype: 'json'
-            })
-            .done(function(response){
-                // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-                if (isJSONString(response)) {
-                    const result = JSON.parse(response);
-                    // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                    if (result.status) {
-                        showTable();
-                        sweetAlert(1, result.message, null);
-                    } else {
-                        sweetAlert(2, result.exception, null);
-                    }
-                } else {
-                    console.log(response);
-                }
-            })
-            .fail(function(jqXHR){
-                // Se muestran en consola los posibles errores de la solicitud AJAX
-                console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-            });
-        }
-    });
-}
-
-// Función para eliminar un registro seleccionado
-function confirmDelete(id)
-{
-    swal({
-        title: 'Advertencia',
-        text: '¿Está seguro que desea borrar el registro?',
-        icon: 'warning',
-        buttons: ['Cancelar', 'Aceptar'],
-        closeOnClickOutside: false,
-        closeOnEsc: false
-    })
-    .then(function(value){
-        if (value) {
-            $.ajax({
-                url: api + 'delete',
+                url: apiDoctores + 'delete',
                 type: 'post',
                 data:{
                     id_doctor: id

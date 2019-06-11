@@ -41,8 +41,8 @@ dashboard_helper::head("Registrarse");
 				</div>
 				<div class="form-group col-md-6">
 					<label for="fecha">Fecha de nacimiento</label>
-					<input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha de nacimiento" required>
-					<div class="invalid-feedback">Ingrese su fecha de nacimiento</div>
+					<input type="date" class="form-control" id="fecha" name="fecha" min="2000-01-01" max="2019-06-11" placeholder="Fecha de nacimiento" required>
+					<div class="invalid-feedback">Ingrese una fecha válida</div>
 				</div>
 				<!--<div class="form-group col-sm-12 col-md-6">
 					<label for="create_archivo">Seleccionar foto de perfil</label>
@@ -52,13 +52,6 @@ dashboard_helper::head("Registrarse");
 				</div>-->
 				<div class="form-group col-sm-12">
 					<input type="hidden" id="create_estado" name="create_estado" value="1">
-				</div>
-				<div class="form-group col-sm-12">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-						<label class="form-check-label" for="invalidCheck">Acepto los <a href="#">términos y condiciones</a></label>
-						<div class="ininvalid-feedback">Debe aceptar los términos y condiciones antes de continuar.</div>
-					</div>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Registrarse</button>

@@ -12,7 +12,7 @@ class Pacientes extends Validator
 	private $peso = null;
 	private $estatura = null;
 	private $idestado = null;
-	private $ruta = '../../resources/img/pacientes/';
+	private $ruta = '../../../resources/img/pacientes/';
 
 	public function setId($value)
 	{

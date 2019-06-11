@@ -4,7 +4,7 @@ $(document).ready(function()
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/pacientes.php?action=';
+const apiPacientes = '../../core/api/dashboard/pacientes.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -16,12 +16,12 @@ function fillTable(rows)
         content += `
             <tr>
                 <td>${row.id_paciente}</td>
-                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.nombre_paciente}</td>
                 <td>${row.apellido_paciente}</td> 
                 <td>${row.correo_paciente}</td>
                 <td>${row.usuario_paciente}</td>
                 <td>${row.fecha_nacimiento}</td>
+                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.peso_paciente}</td>
                 <td>${row.estatura_paciente}</td>
                 <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
@@ -35,6 +35,8 @@ function fillTable(rows)
     $('#table-body').html(content);
     $("#tabla-pacientes").DataTable({
         responsive: true,
+        retrieve: true,
+        paging: false,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -66,7 +68,7 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: api + 'read',
+        url: apiPacientes + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -95,7 +97,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'search',
+        url: apiPacientes + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -126,7 +128,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'create',
+        url: apiPacientes + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -160,7 +162,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: api + 'get',
+        url: apiPacientes + 'get',
         type: 'post',
         data:{
             id_paciente: id
@@ -174,14 +176,14 @@ function modalUpdate(id)
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
                 $('#form-update')[0].reset();
-                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
                 $('#id_paciente').val(result.dataset.id_paciente);
                 $('#foto_paciente').val(result.dataset.foto_paciente);
-                $('#update_nombre').val(result.dataset.nombre_paciente);
-                $('#update_apellido').val(result.dataset.apellido_paciente);
+                $('#update_nombres').val(result.dataset.nombre_paciente);
+                $('#update_apellidos').val(result.dataset.apellido_paciente);
                 $('#update_correo').val(result.dataset.correo_paciente);
                 $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
                 $('#update_peso').val(result.dataset.peso_paciente);
                 $('#update_estatura').val(result.dataset.estatura_paciente);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
@@ -204,7 +206,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiPacientes + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -248,7 +250,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiPacientes + 'delete',
                 type: 'post',
                 data:{
                     id_paciente: id

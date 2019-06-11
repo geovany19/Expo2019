@@ -30,6 +30,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
+            print_r($_POST);
                 if ($paciente->setId($_SESSION['idUsuario'])) {
                     if ($paciente->getPaciente()) {
                         $_POST = $paciente->validateForm($_POST);
@@ -45,22 +46,22 @@ if (isset($_GET['action'])) {
                                                     $result['exception'] = 'Operación fallida';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Foto no válida';
+                                                $result['exception'] = 'Foto no válida. No se pudo editar el perfil';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo editar el perfil';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto';
+                                        $result['exception'] = 'Nombre de usuario incorrecto. No se pudo editar el perfil';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo incorrecto';
+                                    $result['exception'] = 'Correo incorrecto. No se pudo editar el perfil';
                                 }
                             } else {
-                                $result['exception'] = 'Apellidos incorrectos';
+                                $result['exception'] = 'Apellidos incorrectos. No se pudo editar el perfil';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos Sexo. No se pudo editar el perfil';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -135,9 +136,9 @@ if (isset($_GET['action'])) {
                                                     if ($paciente->createUsuario()) {
                                                         $result['status'] = 1;
                                                         if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
-                                                            $result['message'] = 'Usuario creado correctamente';
+                                                            $result['message'] = 'Paciente creado correctamente';
                                                         } else {
-                                                            $result['message'] = 'Usuario no creado. No se guardó el archivo';
+                                                            $result['message'] = 'Paciente no creado. No se guardó el archivo';
                                                         }
                                                     } else {
                                                         $result['exception'] = 'Operación fallida';
@@ -149,25 +150,25 @@ if (isset($_GET['action'])) {
                                                 $result['exception'] = 'Seleccione una imagen';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo crear el paciente';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Clave menor a 6 caracteres. No se pudo crear el paciente';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Claves diferentes. No se pudo crear el paciente';
                                 }
                             } else {
-                                $result['exception'] = 'Alias incorrecto';
+                                $result['exception'] = 'Usuario incorrecto. No se pudo crear el paciente';
                             }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
+                            $result['exception'] = 'Correo incorrecto. No se pudo crear el paciente';
                         }
                     } else {
-                        $result['exception'] = 'Apellidos incorrectos';
+                        $result['exception'] = 'Apellidos incorrectos. No se pudo crear el paciente';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos. No se pudo crear el paciente';
                 }
                 break;
             case 'get':
@@ -182,77 +183,88 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
+            print_r($_POST);
                 $_POST = $paciente->validateForm($_POST);
-                if ($paciente->setId($_POST['id_usuario'])) {
+                if ($paciente->setId($_POST['id_paciente'])) {
                     if ($paciente->getPaciente()) {
                         if ($paciente->setNombres($_POST['update_nombres'])) {
                             if ($paciente->setApellidos($_POST['update_apellidos'])) {
                                 if ($paciente->setCorreo($_POST['update_correo'])) {
-                                    if ($paciente->setUsuario($_POST['update_alias'])) {
+                                    if ($paciente->setUsuario($_POST['update_usuario'])) {
                                         if ($paciente->setFecha($_POST['update_fecha'])) {
-                                            if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                if ($paciente->setFoto($_FILES['update_archivo'], $_POST['imagen_usuario'])) {
-                                                    $archivo = true;
-                                                } else {
-                                                    $result['exception'] = $producto->getImageError();
-                                                    $archivo = false;
-                                                }
-                                            } else {
-                                                if (!$paciente->setFoto(null, $_POST['imagen_producto'])) {
-                                                    $result['exception'] = $paciente->getImageError();
-                                                }
-                                                $archivo = false;
-                                            }
-                                            if ($paciente->updateUsuario()) {
-                                                $result['status'] = 1;
-                                                if ($archivo) {
-                                                    if ($paciente->saveFile($_FILES['update_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
-                                                        $result['message'] = 'Usuario modificado correctamente';
-                                                    } else {
-                                                        $result['message'] = 'Usuario modificado. No se guardó el archivo';
+                                            if ($paciente->setPeso($_POST['update_peso'])) {
+                                                if ($paciente->setEstatura($_POST['update_estatura'])) {
+                                                    if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 2)) {
+                                                        if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
+                                                            if ($paciente->setFoto($_FILES['update_archivo'], $_POST['imagen_usuario'])) {
+                                                                $archivo = true;
+                                                            } else {
+                                                                $result['exception'] = $producto->getImageError();
+                                                                $archivo = false;
+                                                            }
+                                                        } else {
+                                                            if (!$paciente->setFoto(null, $_POST['imagen_producto'])) {
+                                                                $result['exception'] = $paciente->getImageError();
+                                                            }
+                                                            $archivo = false;
+                                                        }
+                                                        if ($paciente->updatePaciente()) {
+                                                            $result['status'] = 1;
+                                                            if ($archivo) {
+                                                                if ($paciente->saveFile($_FILES['update_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
+                                                                    $result['message'] = 'Paciente modificado correctamente';
+                                                                } else {
+                                                                    $result['message'] = 'Paciente modificado. No se guardó el archivo';
+                                                                }
+                                                            } else {
+                                                                $result['message'] = 'Paciente modificado. No se subió ningún archivo';
+                                                            }
+                                                        } else {
+                                                            $result['exception'] = 'Operación fallida. No se pudo actualizar el paciente';
+                                                        }
                                                     }
                                                 } else {
-                                                    $result['message'] = 'Usuario modificado. No se subió ningún archivo';
+                                                    $result['exception'] = 'Estatura no válida';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Operación fallida';
+                                                $result['exception'] = 'Peso no válido. No se pudo actualizar el paciente';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo actualizar el paciente';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto';
+                                        $result['exception'] = 'Nombre de usuario incorrecto. No se pudo actualizar el paciente';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo incorrecto';
+                                    $result['exception'] = 'Correo incorrecto. No se pudo actualizar el paciente';
                                 }
                             } else {
-                                $result['exception'] = 'Apellidos incorrectos';
+                                $result['exception'] = 'Apellidos incorrectos. No se pudo actualizar el paciente';
                             }
                         } else {
-                            $result['exception'] = 'Nombres incorrectos';
+                            $result['exception'] = 'Nombres incorrectos. No se pudo actualizar el paciente';
                         }
                     } else {
-                        $result['exception'] = 'Usuario inexistente';
+                        $result['exception'] = 'Paciente inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Paciente incorrecto';
                 }
                 break;
             case 'delete':
-                if ($_POST['id_usuario'] != $_SESSION['idUsuario']) {
-                    if ($paciente->setId($_POST['id_usuario'])) {
+                if ($_POST['id_paciente'] != $_SESSION['idUsuario']) {
+                    if ($paciente->setId($_POST['id_paciente'])) {
                         if ($paciente->getPaciente()) {
-                            if ($paciente->deleteUsuario()) {
+                            if ($paciente->deletePaciente()) {
                                 $result['status'] = 1;
                             } else {
                                 $result['exception'] = 'Operación fallida';
                             }
                         } else {
-                            $result['exception'] = 'Usuario inexistente';
+                            $result['exception'] = 'Paciente inexistente';
                         }
                     } else {
-                        $result['exception'] = 'Usuario incorrecto';
+                        $result['exception'] = 'Paciente incorrecto';
                     }
                 } else {
                     $result['exception'] = 'No se puede eliminar a sí mismo';
@@ -264,7 +276,7 @@ if (isset($_GET['action'])) {
     } else {
         switch ($_GET['action']) {
             case 'read':
-                if ($paciente->readUsuarios()) {
+                if ($paciente->readPacientes()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
                 } else {
@@ -296,28 +308,28 @@ if (isset($_GET['action'])) {
                                                     $result['exception'] = $paciente->getImageError();
                                                 }
                                             } else {
-                                                $result['exception'] = 'Seleccione una imagen.';
+                                                $result['exception'] = 'Seleccione una imagen. No se pudo registrar';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Fecha no válida. No se pudo registrar';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Clave menor a 6 caracteres. No se pudo registrar';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Claves diferentes. No se pudo registrar';
                                 }
                             } else {
-                                $result['exception'] = 'Alias incorrecto';
+                                $result['exception'] = 'Usuario incorrecto. No se pudo registrar';
                             }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
+                            $result['exception'] = 'Correo incorrecto. No se pudo registrar';
                         }
                     } else {
-                        $result['exception'] = 'Apellidos incorrectos';
+                        $result['exception'] = 'Apellidos incorrectos. No se pudo registrar';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Nombres incorrectos. No se pudo registrar';
                 }
                 break;
             case 'login':
@@ -351,4 +363,3 @@ if (isset($_GET['action'])) {
 } else {
 	exit('Recurso denegado');
 }
-?>

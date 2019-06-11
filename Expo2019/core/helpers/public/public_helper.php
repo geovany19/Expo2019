@@ -60,7 +60,7 @@ class public_helper
 						</a>
 		
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" onclick="signOff()" data-toggle="modal" data-target="#logoutModal">
+						<a class="dropdown-item" onclick="signOff()">
 							<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 							Cerrar sesión
 						</a>
@@ -95,13 +95,15 @@ class public_helper
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables-demo.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert2.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+				<script type="text/javascript" src="../../core/controllers/public/account.js"></script>
 			</body>
 		</html>
 			';
 		if($controller == null){
 			print($scri);
 		}else{
-			print($scri .= '<script type="text/javascript" src="../../core/controllers/private/'.$controller.'"></script>');
+			print($scri .= '<script type="text/javascript" src="../../core/controllers/public/'.$controller.'"></script>');
 		}
 	}
 }

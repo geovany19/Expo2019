@@ -117,7 +117,7 @@ class Citas extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function getDoctor()
+	public function getCita()
 	{
 		$sql = 'SELECT id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ?';
 		$params = array($this->id_cita);

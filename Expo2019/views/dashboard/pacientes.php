@@ -66,7 +66,7 @@ dashboard_helper::nav();
 						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha de nacimiento">
 					</div>
 					<div class="form-group">
-						<label for="update_archivo">Foto</label>
+						<label for="update_archivo">Foto:</label>
 						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
 					</div>
 					<div class="form-group">

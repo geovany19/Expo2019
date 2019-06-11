@@ -196,14 +196,14 @@ if (isset($_GET['action'])) {
                                                 if ($paciente->setEstatura($_POST['update_estatura'])) {
                                                     if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 2)) {
                                                         if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                            if ($paciente->setFoto($_FILES['update_archivo'], $_POST['imagen_usuario'])) {
+                                                            if ($paciente->setFoto($_FILES['update_archivo'], $_POST['imagen_paciente'])) {
                                                                 $archivo = true;
                                                             } else {
                                                                 $result['exception'] = $producto->getImageError();
                                                                 $archivo = false;
                                                             }
                                                         } else {
-                                                            if (!$paciente->setFoto(null, $_POST['imagen_producto'])) {
+                                                            if (!$paciente->setFoto(null, $_POST['imagen_paciente'])) {
                                                                 $result['exception'] = $paciente->getImageError();
                                                             }
                                                             $archivo = false;

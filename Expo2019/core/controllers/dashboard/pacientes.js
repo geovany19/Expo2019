@@ -177,12 +177,12 @@ function modalUpdate(id)
             if (result.status) {
                 $('#form-update')[0].reset();
                 $('#id_paciente').val(result.dataset.id_paciente);
-                $('#foto_paciente').val(result.dataset.foto_paciente);
                 $('#update_nombres').val(result.dataset.nombre_paciente);
                 $('#update_apellidos').val(result.dataset.apellido_paciente);
                 $('#update_correo').val(result.dataset.correo_paciente);
                 $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                $('#foto_paciente').val(result.dataset.foto_paciente);
                 $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
                 $('#update_peso').val(result.dataset.peso_paciente);
                 $('#update_estatura').val(result.dataset.estatura_paciente);

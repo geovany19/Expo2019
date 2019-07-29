@@ -156,7 +156,7 @@ class Doctores extends Validator
 
 	public function setIdestado($value)
 	{
-		if ($this->validateId($value)) {
+		if ($value == '1' || $value == '0') {
 			$this->idestado = $value;
 			return true;
 		} else {

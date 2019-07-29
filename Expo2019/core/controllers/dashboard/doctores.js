@@ -3,31 +3,30 @@ $(document).ready(function()
     showTable();
 })
 
-//Constantes que sirve para establecer la ruta y los parámetros de comunicación con la apiDoctores
+//Constantes que sirve para establecer la ruta y los parámetros de comunicación con la apiDoctores y especialidad
 const apiDoctores = '../../core/api/dashboard/doctores.php?action=';
 const especialidad = '../../core/api/dashboard/especialidades.php?action=';
-
 //Función para llenar la tabla con los registros
 function fillTable(rows)
 {
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
     rows.forEach(function(row){
-        (row.id_estado == 1) ? icon = '1' : icon = '2';
+        (row.id_estado == 1) ? icon = '1' : icon = '0';
         content += `
             <tr>
                 <td>${row.id_doctor}</td>
-                <td><img src="../../resources/img/doctores/${row.foto_doctor}" height="75"></td>
+                <td><img src="../../resources/img/dashboard/doctores/${row.foto_doctor}" height="75"></td>
                 <td>${row.nombre_doctor}</td>
                 <td>${row.apellido_doctor}</td> 
                 <td>${row.correo_doctor}</td>
                 <td>${row.usuario_doctor}</td>
                 <td>${row.fecha_nacimiento}</td>
                 <td>${row.nombre_especialidad}</td>
-                <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
+                <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
-                    <a href="#" onclick="modalUpdate(${row.id_doctor})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
-                    <a href="#" onclick="confirmDelete(${row.id_doctor})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="modalUpdate(${row.id_doctor})" data-toggle="tooltip" data-placement="top" title="Editar"><i class="material-icons">mode_edit</i></a>
+                    <a href="#" onclick="confirmDelete(${row.id_doctor})"data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
         `;
@@ -36,6 +35,8 @@ function fillTable(rows)
     $("#tabla-doctores").DataTable({
         responsive: true,
         retrieve: true,
+        colReorder: false,
+        rowReorder: false,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -125,7 +126,7 @@ $('#form-search').submit(function()
 function modalCreate()
 {
     $('#form-create')[0].reset();
-    fillSelect(especialidad, 'create_especialidad', null);
+    fillSelect(especialidad + 'read', 'create_especialidad', null);
     $('#modal-create').modal('show');
 }
 
@@ -149,6 +150,7 @@ $('#form-create').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-create').modal('hide');
+                $("#tabla-doctores").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -183,7 +185,7 @@ function modalUpdate(id)
             if (result.status) {
                 console.log(result.dataset);
                 $('#form-update')[0].reset();
-                $('#foto').attr('src','../../resources/img/doctores/'+result.dataset.foto_doctor);
+                $('#foto').attr('src','../../resources/img/dashboard/doctores/'+result.dataset.foto_doctor);
                 $('#id_doctor').val(result.dataset.id_doctor);
                 $('#foto_doctor').val(result.dataset.foto_doctor);
                 $('#update_nombre').val(result.dataset.nombre_doctor);
@@ -194,6 +196,8 @@ function modalUpdate(id)
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
+                $("#tabla-doctores").DataTable().destroy();
+                showTable();
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -227,6 +231,7 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
+                $("#tabla-doctores").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -269,6 +274,7 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
+                        $("#tabla-doctores").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {

@@ -106,7 +106,7 @@ if (isset($_GET['action'])) {
                 if ($result['dataset'] = $paciente->readPacientes()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay usuarios registrados';
+                    $result['exception'] = 'No tenemos registrado ningun paciente';
                 }
                 break;
             case 'search':
@@ -121,27 +121,36 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            case 'create':
+                case 'create':
                 $_POST = $paciente->validateForm($_POST);
-                if ($paciente->setNombres($_POST['create_nombres'])) {
-                    if ($paciente->setApellidos($_POST['create_apellidos'])) {
+                if ($paciente->setNombre($_POST['create_nombres'])) {
+                    if ($paciente->setApellido($_POST['create_apellidos'])) {
                         if ($paciente->setCorreo($_POST['create_correo'])) {
                             if ($paciente->setUsuario($_POST['create_usuario'])) {
                                 if ($paciente->setFecha($_POST['create_fecha'])) {
                                     if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
                                         if ($paciente->setFoto($_FILES['create_archivo'], null)) {
                                             if ($paciente->setPeso($_POST['create_peso'])) {
-                                                
-                                            }
-                                            if ($paciente->createUsuario()) {
-                                                $result['status'] = 1;
-                                                if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
-                                                    $result['message'] = 'Paciente creado correctamente';
-                                                } else {
-                                                    $result['message'] = 'Paciente no creado. No se guardó el archivo';
+                                                if ($paciente->setEstatura($_POST['create_estatura'])) {
+                                                    if ($paciente->setIdestado(isset($_POST['create_estado']) ? 1 : 0)) {
+                                                        if ($paciente->createPaciente()) {
+                                                            $result['status'] = 1;
+                                                            if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
+                                                                $result['message'] = 'Paciente creado correctamente';
+                                                            } else {
+                                                                $result['message'] = 'Paciente no creado. No se guardó el archivo';
+                                                            }
+                                                        } else {
+                                                            $result['exception'] = 'Operación fallida';
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Estado incorrecto';
+                                                    }
+                                                }else {
+                                                    $result['exception'] = 'Estatura incorrecta';
                                                 }
-                                            } else {
-                                                $result['exception'] = 'Operación fallida';
+                                            }else {
+                                                $result['exception'] = 'Peso incorrecto';
                                             }
                                         } else {
                                             $result['exception'] = $paciente->getImageError();
@@ -187,7 +196,7 @@ if (isset($_GET['action'])) {
                                         if ($paciente->setFecha($_POST['update_fecha'])) {
                                             if ($paciente->setPeso($_POST['update_peso'])) {
                                                 if ($paciente->setEstatura($_POST['update_estatura'])) {
-                                                    if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 2)) {
+                                                    if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 0)) {
                                                         if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
                                                             if ($paciente->setFoto($_FILES['update_archivo'], $_POST['foto_paciente'])) {
                                                                 $archivo = true;
@@ -244,6 +253,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Paciente incorrecto';
                 }
                 break;
+
             case 'delete':
                 if ($_POST['id_paciente'] != $_SESSION['idUsuario']) {
                     if ($paciente->setId($_POST['id_paciente'])) {
@@ -273,7 +283,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
                 } else {
-                    $result['message'] = 'No existen usuarios registrados';
+                    $result['message'] = 'No tenemos registrado ningun paciente';
                 }
                 break;
             case 'register':

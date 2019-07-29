@@ -12,19 +12,19 @@ function fillTable(rows)
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
     rows.forEach(function(row){
-        (row.id_estado == 1) ? icon = '1' : icon = '2';
+        (row.id_estado == 1) ? icon = '1' : icon = '0';
         content += `
             <tr>
                 <td>${row.id_paciente}</td>
+                <td><img src="../../resources/img/dashboard/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.nombre_paciente}</td>
                 <td>${row.apellido_paciente}</td> 
                 <td>${row.correo_paciente}</td>
                 <td>${row.usuario_paciente}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.peso_paciente}</td>
                 <td>${row.estatura_paciente}</td>
-                <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
+                <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_paciente})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_paciente})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -142,6 +142,8 @@ $('#form-create').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-create').modal('hide');
+                $("#tabla-pacientes").DataTable().destroy();
+                $('#form-create')[0].reset();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -174,6 +176,7 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
+                console.log(result.dataset)
                 $('#form-update')[0].reset();
                 $('#id_paciente').val(result.dataset.id_paciente);
                 $('#update_nombres').val(result.dataset.nombre_paciente);
@@ -182,7 +185,7 @@ function modalUpdate(id)
                 $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
                 $('#foto_paciente').val(result.dataset.foto_paciente);
-                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
+                $('#foto').attr('src','../../resources/img/dashboard/pacientes/'+result.dataset.foto_paciente);
                 $('#update_peso').val(result.dataset.peso_paciente);
                 $('#update_estatura').val(result.dataset.estatura_paciente);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
@@ -220,6 +223,7 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
+                $("#tabla-pacientes").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -262,6 +266,7 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
+                        $("#tabla-pacientes").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {
@@ -275,6 +280,7 @@ function confirmDelete(id)
                 // Se muestran en consola los posibles errores de la solicitud AJAX
                 console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
             });
+
         }
     });
 }

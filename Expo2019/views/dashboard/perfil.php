@@ -22,7 +22,9 @@ dashboard_helper::nav();
                 <h5 class="modal-title" id="exampleModalLongTitle">Actualizar perfil</h5>
             </div>
             <div class="modal-body">
-                <img id="foto" height="75">
+                <div class="d-flex justify-content-center" >
+					<img id="foto" class="img-fluid" width="100">
+				</div>
                 <form id="form-profile" enctype="multipart/form-data">
                     <input type="hidden" id="id_usuario" name="id_usuario">
                     <input type="hidden" id="foto_usuario" name="foto_usuario">
@@ -51,8 +53,8 @@ dashboard_helper::nav();
                         <input type="file" id="update_archivo" name="update_archivo" class="file-input">
                     </div>
                     <div class="modal-footer justify-content-center aling-items-center">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Actualizar perfil</button>
+                    <button type="button" data-toggle="tooltip" data-placement="top" title="Cancelar" class="btn btn-danger" data-dismiss="modal"><i class="material-icons prefix">cancel</i></button>
+				<button type="submit" data-toggle="tooltip" data-placement="top" title="Actualizar" class="btn btn-success" ><i class="material-icons prefix">done</i></button>
                     </div>
                 </form>
             </div>
@@ -91,8 +93,8 @@ dashboard_helper::nav();
                         <div class="invalid-feedback">Confirme la contraseña. Asegurese que ambas contraseñas coincidan.</div>
                     </div>
                     <div class="modal-footer justify-content-center aling-items-center">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Modificar contraseña</button>
+                        <button type="button"  data-toggle="tooltip" data-placement="top" title="Cancelar" class="btn btn-danger" data-dismiss="modal"><i class="material-icons prefix">cancel</i></button>
+                        <button type="submit"  data-toggle="tooltip" data-placement="top" title="Modifica Contraseña" class="btn btn-success" ><i class="material-icons prefix">done</i></button>
                     </div>
                 </form>
             </div>

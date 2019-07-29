@@ -67,7 +67,7 @@ function sweetAlert(type, text, url)
 */
 function fillSelect(api, id, selected)
 {
-    console.log(api);
+    //console.log(api);
     $.ajax({
         url: api,
         type: 'post',

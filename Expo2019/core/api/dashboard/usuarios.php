@@ -30,7 +30,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
-                print_r($_POST);
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     if ($usuario->getUser()) {
                         $_POST = $usuario->validateForm($_POST);
@@ -54,14 +53,15 @@ if (isset($_GET['action'])) {
                                             }
                                             if ($usuario->updatePerfil()) {
                                                 $result['status'] = 1;
+                                                $_SESSION['aliasUsuario'] = $usuario->getUsuario();
                                                 if ($archivo) {
                                                     if ($usuario->saveFile($_FILES['update_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
-                                                        $result['message'] = 'Doctor modificado correctamente';
+                                                        $result['message'] = 'Perfil modificado correctamente';
                                                     } else {
-                                                        $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                        $result['message'] = 'Perfil modificado. No se guardó el archivo';
                                                     }
                                                 } else {
-                                                    $result['message'] = 'Doctor modificado. No se subió ningún archivo';
+                                                    $result['message'] = 'Perfil modificado. No se subió ningún archivo';
                                                 }
                                             } else {
                                                 $result['exception'] = 'Operación fallida';
@@ -70,7 +70,7 @@ if (isset($_GET['action'])) {
                                             $result['exception'] = 'Fecha no válida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Nombre de doctor incorrecto';
+                                        $result['exception'] = 'Nombre de perfil incorrecto';
                                     }
                                 } else {
                                     $result['exception'] = 'Correo incorrecto';
@@ -125,7 +125,7 @@ if (isset($_GET['action'])) {
                 if ($result['dataset'] = $usuario->readUsuarios()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No hay usuarios registrados';
+                    $result['exception'] = 'No se encuentran Usuarios registrados.Registraras uno ahora';
                 }
                 break;
             case 'search':
@@ -142,8 +142,8 @@ if (isset($_GET['action'])) {
                 break;
             case 'create':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['create_nombre'])) {
-                    if ($usuario->setApellidos($_POST['create_apellido'])) {
+                if ($usuario->setNombre($_POST['create_nombre'])) {
+                    if ($usuario->setApellido($_POST['create_apellido'])) {
                         if ($usuario->setCorreo($_POST['create_correo'])) {
                             if ($usuario->setUsuario($_POST['create_alias'])) {
                                 if ($_POST['create_clave1'] == $_POST['create_clave2']) {
@@ -201,6 +201,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
+            print_r($_POST);
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($usuario->getUser()) {
@@ -209,7 +210,7 @@ if (isset($_GET['action'])) {
                                 if ($usuario->setCorreo($_POST['update_correo'])) {
                                     if ($usuario->setUsuario($_POST['update_usuario'])) {
                                         if ($usuario->setFecha($_POST['update_fecha'])) {
-                                            if ($usuario->setEstado(isset($_POST['update_estado']) ? 1 : 2)) {
+                                            if ($usuario->setEstado(isset($_POST['update_estado']) ? 1 : 0)) {
                                                 if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
                                                     if ($usuario->setFoto($_FILES['update_archivo'], $_POST['foto_usuario'])) {
                                                         $archivo = true;
@@ -227,12 +228,12 @@ if (isset($_GET['action'])) {
                                                     $result['status'] = 1;
                                                     if ($archivo) {
                                                         if ($usuario->saveFile($_FILES['update_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
-                                                            $result['message'] = 'Doctor modificado correctamente';
+                                                            $result['message'] = 'Perfil modificado correctamente';
                                                         } else {
-                                                            $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                            $result['message'] = 'Perfil modificado. No se guardó el archivo';
                                                         }
                                                     } else {
-                                                        $result['message'] = 'Doctor modificado. No se subió ningún archivo';
+                                                        $result['message'] = 'Perfil modificado. No se subió ningún archivo';
                                                     }
                                                 } else {
                                                     $result['exception'] = 'Operación fallida';
@@ -287,7 +288,7 @@ if (isset($_GET['action'])) {
     } else {
         switch ($_GET['action']) {
             case 'read':
-                if ($usuario->readUsuarios()) {
+                if ($usuario->getUsuarios()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
                 } else {

@@ -59,7 +59,7 @@ if (isset($_GET['action'])) {
 						$result['exception'] = 'Especialidad inexistente';
 					}
 				} else {
-					$result['exception'] = 'Especialidad incorrecta';
+					$result['exception'] = 'Especialidad incorrecta 2';
 				}
 				break;
 			case 'update':

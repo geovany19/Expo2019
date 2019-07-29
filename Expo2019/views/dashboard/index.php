@@ -23,7 +23,6 @@ dashboard_helper::head("Iniciar sesión");
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
 						</div>
 					</form>
-					<p class="text-center">¿No estás registrado? <a href="registrarse.php">¡Registrate aquí!</a></p>
 				</div>
 			</div>
 		</div>
@@ -36,7 +35,6 @@ dashboard_helper::head("Iniciar sesión");
 	<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 	<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 	<script type="text/javascript" src="../../core/helpers/functions.js"></script>
-	<script type="text/javascript" src="../../core/controllers/dashboard/account.js"></script>
 	<script type="text/javascript" src="../../core/controllers/dashboard/login.js"></script>
 </body>
 </html>

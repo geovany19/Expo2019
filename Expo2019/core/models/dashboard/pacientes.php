@@ -12,7 +12,7 @@ class Pacientes extends Validator
 	private $peso = null;
 	private $estatura = null;
 	private $idestado = null;
-	private $ruta = '../../../resources/img/pacientes/';
+	private $ruta = '../../../resources/img/dashboard/pacientes/';
 
 	public function setId($value)
 	{
@@ -166,7 +166,7 @@ class Pacientes extends Validator
 
 	public function setIdestado($value)
 	{
-		if ($this->validateId($value)) {
+		if ($value == 1 || $value == 0) {
 			$this->idestado = $value;
 			return true;
 		} else {
@@ -221,7 +221,7 @@ class Pacientes extends Validator
 
 	public function getPaciente()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente FROM pacientes WHERE id_paciente = ?';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		return Database::getRow($sql, $params);
 	}

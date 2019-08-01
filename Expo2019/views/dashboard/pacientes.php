@@ -11,7 +11,7 @@ dashboard_helper::nav();
 			</button>
 		</div>
 		<div  class="float-left">
-			<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-warning"  class="btn btn-outline-success" data-placement="top" title="Generar Reporte">
+			<button type="button" data-toggle="modal" data-target="#reportes" class="btn btn-outline-warning"  class="btn btn-outline-success" data-placement="top" title="Generar Reporte">
 				<i class="material-icons prefix">assignment</i>
 			</button>
 		</div>
@@ -174,6 +174,37 @@ dashboard_helper::nav();
 			</div>
 		</div>
 	</div>
+</div>
+<!--Creando moda de reportes-->
+<div class="modal fade" id="reportes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center aling-items-center">
+        <h5 class="modal-title" id="exampleModalLongTitle">Crear Reportes</h5>
+        </button>
+      </div>
+      <div class="modal-body">
+							
+	  <form class="needs-validation" id="form-reportes" novalidate>
+	  <div class="d-flex justify-content-center">
+	  </div>	
+			<div class="row">
+			<div class="col-md-6 mb-4">
+				  <label for="fecha_inicio">Seleccione Fecha Inicial</label>
+      			<input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+    		</div>
+			<div class="col-md-6 mb-6">
+      			<label for="fecha_fin">Seleccione Fecha Final</label>
+      			<input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
+			</div>
+			</div>
+			<div class="modal-footer justify-content-center aling-items-center">
+			<button onclick="reportePacientes()" type="button" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Generar reporte" ><i class='material-icons'>assignment</i></button>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
 </div>
 <?php
 dashboard_helper::footer('pacientes.js');

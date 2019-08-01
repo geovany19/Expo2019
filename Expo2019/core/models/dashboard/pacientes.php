@@ -199,7 +199,7 @@ class Pacientes extends Validator
 
 	public function readPacientes()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes ORDER BY apellido_paciente';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes ORDER BY id_paciente ASC';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -238,5 +238,13 @@ class Pacientes extends Validator
 		$sql = 'DELETE FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		return Database::executeRow($sql, $params);
+	}
+	
+	//Métodos para reportes
+	public function pacientesFechas($fechaini, $fechafin)
+	{
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes WHERE fecha_nacimiento BETWEEN ? AND ? ORDER BY id_paciente';
+		$params = array($fechaini, $fechafin);
+		return Database::getRows($sql, $params);
 	}
 }

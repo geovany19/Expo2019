@@ -239,4 +239,6 @@ class Pacientes extends Validator
 		$params = array($this->idpaciente);
 		return Database::executeRow($sql, $params);
 	}
+
+	
 }

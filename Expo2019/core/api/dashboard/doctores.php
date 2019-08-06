@@ -36,6 +36,13 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay Doctores registrados';
                 }
                 break;
+            case 'calificacionesDoctores':
+                if ($result['dataset'] = $doctor->graficoCalificacionesD()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay datos por mostrar.';
+                }
+                break;
             case 'search':
                 $_POST = $doctor->validateForm($_POST);
                 if ($_POST['busqueda'] != '') {

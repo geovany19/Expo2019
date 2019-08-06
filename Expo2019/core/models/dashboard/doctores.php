@@ -212,4 +212,11 @@ class Doctores extends Validator
 		$params = array($this->iddoctor);
 		return Database::executeRow($sql, $params);
 	}
+
+	public function graficoCalificacionesD()
+	{
+		$sql = 'SELECT nombre_doctor, apellido_doctor, SUM(calificacion) / COUNT(DISTINCT(id_calificacion)) AS Promedio FROM calificacion_doctor c INNER JOIN doctores d USING(id_doctor) GROUP BY id_doctor ORDER BY apellido_doctor';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
 }

@@ -5,34 +5,31 @@ dashboard_helper::nav();
 ?>
 <main>
 	<div>
+		<h2>¡Bienvenido!</h2>
 		<div id="chart-dashboard">
 			<div class="row">
 				<div class="col col-sm-12 col-md-6">
-					<div id="liveclock" class="outer_face">
-						<div class="marker oneseven"></div>
-						<div class="marker twoeight"></div>
-						<div class="marker fourten"></div>
-						<div class="marker fiveeleven"></div>
-
-						<div class="inner_face">
-							<div class="hand hour"></div>
-							<div class="hand minute"></div>
-							<div class="hand second"></div>
-						</div>
-					</div>
+					<canvas id="chartConsultasFecha"></canvas>
 				</div>
 				<div class="col col-sm-12 col-md-6">
-					<div id="clockdate">
-						<div class="clockdate-wrapper">
-							<div id="clock"></div>
-							<div id="date"></div>
-						</div>
-					</div>
+					<canvas id="chartConsultasHora"></canvas>
+				</div>
+				<div class="col col-sm-12 col-md-6">
+					<canvas id="chartCitasEspecialidad"></canvas>
+				</div>
+				<div class="col col-sm-12 col-md-6">
+					<canvas id="chartCitasRealizadas"></canvas>
+				</div>
+				<div class="col col-sm-12 col-md-6">
+					<canvas id="chartCitasCanceladas"></canvas>
+				</div>
+				<div class="col col-sm-12 col-md-6">
+					<canvas id="chartCalificacionesDoctores"></canvas>
 				</div>
 			</div>
 		</div>
 	</div>
 </main>
 <?php
-dashboard_helper::footer('reloj.js');
+dashboard_helper::footer('dashboard.js');
 ?>

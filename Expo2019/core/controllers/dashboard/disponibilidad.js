@@ -10,13 +10,13 @@ const doctor = '../../core/api/dashboard/doctores.php?action=';
 function fillTable(rows) {
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
-    rows.forEach(function(row) {
+    rows.forEach(function (row) {
         content += `
             <tr>
                 <td>${row.id_disponibilidad}</td>
                 <td>${row.nombre_doctor}</td>
                 <td>${row.apellido_doctor}</td>
-                <td>${row.dia_disponible}</td>
+                <td>${row.dia}</td>
                 <td>${row.hora_inicio}</td> 
                 <td>${row.hora_fin}</td>
                 <td>
@@ -93,8 +93,7 @@ function showTable() {
 }*/
 
 // Función para crear un nuevo registro
-$('#form-create').submit(function()
-{
+$('#form-create').submit(function () {
     event.preventDefault();
 
     $.ajax({
@@ -106,25 +105,189 @@ $('#form-create').submit(function()
         contentType: false,
         processData: false
     })
-    .done(function(response){
-        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-        if (isJSONString(response)) {
-            const result = JSON.parse(response);
-            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-            if (result.status) {
-                $('#form-create')[0].reset();
-                $('#modal-create').modal('show');
-                showTable();
-                sweetAlert(1, result.message, null);
+        .done(function (response) {
+            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+            if (isJSONString(response)) {
+                const result = JSON.parse(response);
+                // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                if (result.status) {
+                    $('#form-create')[0].reset();
+                    $('#modal-create').modal('show');
+                    showTable();
+                    sweetAlert(1, result.message, null);
+                } else {
+                    sweetAlert(2, result.exception, null);
+                }
             } else {
-                sweetAlert(2, result.exception, null);
+                console.log(response);
             }
-        } else {
-            console.log(response);
-        }
-    })
-    .fail(function(jqXHR){
-        // Se muestran en consola los posibles errores de la solicitud AJAX
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-    });
+        })
+        .fail(function (jqXHR) {
+            // Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
 })
+
+function modalCreate() {
+    $('#form-create')[0].reset();
+    fillSelect(especialidad + 'read', 'create_especialidad', null);
+    $('#modal-create').modal('show');
+}
+
+// Función para crear un nuevo registro
+$('#form-create').submit(function () {
+    event.preventDefault();
+    $.ajax({
+        url: apiDoctores + 'create',
+        type: 'post',
+        data: new FormData($('#form-create')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+        .done(function (response) {
+            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+            if (isJSONString(response)) {
+                const result = JSON.parse(response);
+                // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                if (result.status) {
+                    $('#modal-create').modal('hide');
+                    $("#tabla-doctores").DataTable().destroy();
+                    showTable();
+                    sweetAlert(1, result.message, null);
+                } else {
+                    sweetAlert(2, result.exception, null);
+                }
+            } else {
+                console.log(response);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
+})
+
+// Función para mostrar formulario con registro a modificar
+function modalUpdate(id) {
+    $.ajax({
+        url: apiDoctores + 'get',
+        type: 'post',
+        data: {
+            id_doctor: id
+        },
+        datatype: 'json'
+    })
+        .done(function (response) {
+            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+            if (isJSONString(response)) {
+                const result = JSON.parse(response);
+                // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
+                if (result.status) {
+                    console.log(result.dataset);
+                    $('#form-update')[0].reset();
+                    $('#foto').attr('src', '../../resources/img/dashboard/doctores/' + result.dataset.foto_doctor);
+                    $('#id_doctor').val(result.dataset.id_doctor);
+                    $('#foto_doctor').val(result.dataset.foto_doctor);
+                    $('#update_nombre').val(result.dataset.nombre_doctor);
+                    $('#update_apellido').val(result.dataset.apellido_doctor);
+                    $('#update_correo').val(result.dataset.correo_doctor);
+                    $('#update_usuario').val(result.dataset.usuario_doctor);
+                    $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                    (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
+                    fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
+                    $('#modal-update').modal('show');
+                    $("#tabla-doctores").DataTable().destroy();
+                    showTable();
+                } else {
+                    sweetAlert(2, result.exception, null);
+                }
+            } else {
+                console.log(response);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
+}
+
+// Función para modificar un registro seleccionado previamente
+$('#form-update').submit(function () {
+    event.preventDefault();
+    $.ajax({
+        url: apiDoctores + 'update',
+        type: 'post',
+        data: new FormData($('#form-update')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+        .done(function (response) {
+            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+            if (isJSONString(response)) {
+                const result = JSON.parse(response);
+                // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                if (result.status) {
+                    $('#modal-update').modal('hide');
+                    $("#tabla-doctores").DataTable().destroy();
+                    showTable();
+                    sweetAlert(1, result.message, null);
+                } else {
+                    sweetAlert(2, result.exception, null);
+                }
+            } else {
+                console.log(response);
+            }
+        })
+        .fail(function (jqXHR) {
+            // Se muestran en consola los posibles errores de la solicitud AJAX
+            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        });
+})
+
+// Función para eliminar un registro seleccionado
+function confirmDelete(id) {
+    swal({
+        title: 'Advertencia',
+        text: '¿Está seguro que desea borrar la disponibilidad seleccionada?',
+        icon: 'warning',
+        buttons: ['Cancelar', 'Aceptar'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    })
+        .then(function (value) {
+            if (value) {
+                $.ajax({
+                    url: apiDisponibilidad + 'delete',
+                    type: 'post',
+                    data: {
+                        id_disponibilidad: id
+                    },
+                    datatype: 'json'
+                })
+                    .done(function (response) {
+                        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+                        if (isJSONString(response)) {
+                            const result = JSON.parse(response);
+                            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+                            if (result.status) {
+                                $("#tabla-doctores").DataTable().destroy();
+                                showTable();
+                                sweetAlert(1, result.message, null);
+                            } else {
+                                sweetAlert(2, result.exception, null);
+                            }
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .fail(function (jqXHR) {
+                        // Se muestran en consola los posibles errores de la solicitud AJAX
+                        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+                    });
+            }
+        });
+}

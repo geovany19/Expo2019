@@ -11,97 +11,6 @@ if (isset($_GET['action'])) {
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
-            case 'logout':
-                if (session_destroy()) {
-                    header('location: ../../../views/dashboard/');
-                } else {
-                    header('location: ../../../views/dashboard/pagina.php');
-                }
-                break;
-            case 'readProfile':
-                if ($disponibilidad->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $disponibilidad->getUser()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['exception'] = 'Usuario inexistente';
-                    }
-                } else {
-                    $result['exception'] = 'Usuario no valido';
-                }
-                break;
-            case 'editProfile':
-                if ($disponibilidad->setId($_SESSION['idUsuario'])) {
-                    if ($disponibilidad->getUser()) {
-                        $_POST = $disponibilidad->validateForm($_POST);
-                        if ($disponibilidad->setNombre($_POST['profile_nombres'])) {
-                            if ($disponibilidad->setApellido($_POST['profile_apellidos'])) {
-                                if ($disponibilidad->setCorreo($_POST['profile_correo'])) {
-                                    if ($disponibilidad->setUsuario($_POST['profile_alias'])) {
-                                        if ($disponibilidad->setFecha($_POST['profile_fecha'])) {
-                                            if ($disponibilidad->updateUsuario()) {
-                                                if ($disponibilidad->updateUsuario()) {
-                                                    $result['status'] = 1;
-                                                } else {
-                                                    $result['exception'] = 'Operación fallida';
-                                                }
-                                            } else {
-                                                $result['exception'] = 'Foto no válida';
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Fecha no válida';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Nombre de usuario incorrecto';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Correo incorrecto';
-                                }
-                            } else {
-                                $result['exception'] = 'Apellidos incorrectos';
-                            }
-                        } else {
-                            $result['exception'] = 'Nombres incorrectos11';
-                        }
-                    } else {
-                        $result['exception'] = 'Usuario inexistente';
-                    }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
-                break;
-            case 'password':
-                if ($disponibilidad->setId($_SESSION['idUsuario'])) {
-                    $_POST = $disponibilidad->validateForm($_POST);
-                    if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
-                        if ($disponibilidad->setClave($_POST['clave_actual_1'])) {
-                            if ($disponibilidad->checkPassword()) {
-                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($disponibilidad->setClave($_POST['clave_nueva_1'])) {
-                                        if ($disponibilidad->changePassword()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Contraseña cambiada correctamente';
-                                        } else {
-                                            $result['exception'] = 'Operación fallida';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Clave nueva menor a 6 caracteres';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Claves nuevas diferentes';
-                                }
-                            } else {
-                                $result['exception'] = 'Clave actual incorrecta';
-                            }
-                        } else {
-                            $result['exception'] = 'Clave actual menor a 6 caracteres';
-                        }
-                    } else {
-                        $result['exception'] = 'Claves actuales diferentes';
-                    }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
-                break;
             case 'read':
                 if ($result['dataset'] = $disponibilidad->readDisponibilidad()) {
                     $result['status'] = 1;
@@ -121,7 +30,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            /*case 'create':
+                /*case 'create':
                 $_POST = $disponibilidad->validateForm($_POST);
                 if ($disponibilidad->setNombres($_POST['create_nombres'])) {
                     if ($disponibilidad->setApellidos($_POST['create_apellidos'])) {
@@ -240,22 +149,19 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'delete':
-                if ($_POST['id_usuario'] != $_SESSION['idUsuario']) {
-                    if ($disponibilidad->setId($_POST['id_usuario'])) {
-                        if ($disponibilidad->getUser()) {
-                            if ($disponibilidad->deleteUsuario()) {
-                                $result['status'] = 1;
-                            } else {
-                                $result['exception'] = 'Operación fallida';
-                            }
+                if ($disponibilidad->setId($_POST['id_disponibilidad'])) {
+                    if ($disponibilidad->getDisponibilidad()) {
+                        if ($disponibilidad->deleteDisponibilidad()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Disponibilidad eliminada correctamente';
                         } else {
-                            $result['exception'] = 'Usuario inexistente';
+                            $result['exception'] = 'Operación fallida';
                         }
                     } else {
-                        $result['exception'] = 'Usuario incorrecto';
+                        $result['exception'] = 'Disponibilidad inexistente';
                     }
                 } else {
-                    $result['exception'] = 'No se puede eliminar a sí mismo';
+                    $result['exception'] = 'Disponibilidad incorrecto';
                 }
                 break;
             default:
@@ -273,29 +179,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Hola';
                 }
                 break;
-            case 'login':
-                $_POST = $disponibilidad->validateForm($_POST);
-                if ($disponibilidad->setAlias($_POST['alias'])) {
-                    if ($disponibilidad->checkAlias()) {
-                        if ($disponibilidad->setClave($_POST['clave'])) {
-                            if ($disponibilidad->checkPassword()) {
-                                $_SESSION['idUsuario'] = $disponibilidad->getId();
-                                $_SESSION['aliasUsuario'] = $disponibilidad->getAlias();
-                                $result['status'] = 1;
-                                $result['message'] = 'Autenticación correcta';
-                            } else {
-                                $result['exception'] = 'Clave inexistente';
-                            }
-                        } else {
-                            $result['exception'] = 'Clave menor a 6 caracteres';
-                        }
-                    } else {
-                        $result['exception'] = 'Alias inexistente';
-                    }
-                } else {
-                    $result['exception'] = 'Alias incorrecto';
-                }
-                break;
             default:
                 exit('Acción no disponible');
         }
@@ -304,4 +187,3 @@ if (isset($_GET['action'])) {
 } else {
     exit('Recurso denegado');
 }
-?>

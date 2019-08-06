@@ -75,7 +75,7 @@ class dashboard_helper
 											<li><a href="pacientes.php">Pacientes</a></li>
 											<li><a href="usuarios.php">Usuarios</a></li>
 											<li><a href="especialidad.php">Especialidades</a></li>
-											<li><a href="disponibilidad.php">Horarios de disponibilidad</a></li>
+											<li><a href="disponibilidad.php">Horarios</a></li>
 										</ul>
 									</li>
 									<li>
@@ -175,6 +175,7 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/vfs_fonts.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
+				<script type="text/javascript" src="../../core/helpers/componentes.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/logout.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/' . $controller . '"></script>
             </body>

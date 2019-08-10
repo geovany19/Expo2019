@@ -11,6 +11,7 @@ $(document).ready(function()
 const apiConsultas = '../../core/api/dashboard/consultas.php?action=';
 const apiCitas = '../../core/api/dashboard/citas.php?action=';
 const apiDoctores = '../../core/api/dashboard/doctores.php?action=';
+const apiEspecialidad = '../../core/api/dashboard/especialidades.php?action=';
 
 //Función para crear gráficos en página de inicio
 function chartConsultasFecha(){
@@ -33,7 +34,7 @@ function chartConsultasFecha(){
                     cantidad.push(row.CantidadCitas);
 
                 });
-                lineGraph('chartConsultasFecha', fechas, cantidad, 'Consultas', 'Consultas realizadas mensuales')
+                lineGraph('chartConsultasFecha', fechas, cantidad, 'Consultas', 'Consultas realizadas')
                 
             }else{
                 $('#chartProductosCat').remove();
@@ -109,8 +110,7 @@ function chartCitasCanceladas(){
                     cantidad.push(row.CitasCanceladas);
 
                 });
-
-                pieGraph('chartCitasCanceladas', nombre, cantidad, 'Cantidad', 'Cantidad de citas canceladas')
+                doughnutGraph('chartCitasCanceladas', nombre, cantidad, 'Cantidad', 'Cantidad de citas canceladas')
                 
             }else{
                 $('#chartCitasCanceladas').remove();
@@ -269,3 +269,114 @@ function chartCitasEspecialidad(){
 
     });
 }
+
+$('#grafico1').submit(function(){
+    event.preventDefault()
+    $.ajax({
+        url: apiConsultas + 'consultasConFecha',
+        type: 'post',
+        data: $('#grafico1').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                let fechas = [];
+                let cantidad = [];
+                result.dataset.forEach(function(row){
+                    fechas.push(row.NombreMes);
+                    cantidad.push(row.CantidadCitas);
+
+                });
+                $('#chartConsultas').attr('hidden',false);
+                horizontalGraph('chartConsultasPorFecha', fechas, cantidad, 'Consultas', 'Consultas realizadas mensuales')
+            }else{
+                sweetAlert(2,result.exception,null);
+                $('#chartConsultas').attr('hidden',true);
+            }
+        }else{
+            console.log(response);
+        }
+
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+
+    });
+});
+
+$('#grafico2').submit(function(){
+    event.preventDefault()
+    $.ajax({
+        url: apiConsultas + 'consultasMensuales',
+        type: 'post',
+        data: $('#grafico2').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                let fechas = [];
+                let consultas = [];
+                result.dataset.forEach(function(row){
+                    fechas.push(row.fecha_cita);
+                    consultas.push(row.Consultas);
+
+                });
+                $('#chartConsultas-2').attr('hidden',false);
+                lineGraph('chartConsultasMensuales', fechas, consultas, 'Consultas', 'Consultas realizadas por mes')
+            }else{
+                sweetAlert(2,result.exception,null);
+                $('#chartConsultas-2').attr('hidden',true);
+            }
+        }else{
+            console.log(response);
+        }
+
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+
+    });
+});
+
+$('#grafico3').submit(function(){
+    event.preventDefault()
+    $.ajax({
+        url: apiConsultas + 'consultasMensualesDoc',
+        type: 'post',
+        data: $('#grafico3').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                let nombre = [];
+                let consultas = [];
+                result.dataset.forEach(function(row){
+                    nombre.push(row.nombre_doctor+' '+row.apellido_doctor);
+                    consultas.push(row.Consultas);
+
+                });
+                $('#chartConsultas-3').attr('hidden',false);
+                pieGraph('chartConsultasMensualesDoc', nombre, consultas, 'Consultas', 'Consultas mensuales de cada doctor')
+            }else{
+                sweetAlert(2,result.exception,null);
+                $('#chartConsultas-3').attr('hidden',true);
+            }
+        }else{
+            console.log(response);
+        }
+
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+
+    });
+});

@@ -43,6 +43,39 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos por mostrar.';
                 }
                 break;
+            case 'consultasConFecha':
+                if ($consultas->setFecha1($_POST['Fecha1'])) {
+                    if ($consultas->setFecha2($_POST['Fecha2'])) {
+                        if ($result['dataset'] = $consultas->consultasConFechas()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = 'No hay datos por mostrar';
+                        }
+                    }
+                }
+                break;
+            case 'consultasMensuales':
+                if ($consultas->setMes($_POST['Mes'])) {
+                    if ($result['dataset'] = $consultas->consultasMensuales()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos por mostrar';
+                    }
+                } else {
+                    $result['exception'] = 'Mes incorrecto';
+                }
+                break;
+            case 'consultasMensualesDoc':
+                if ($consultas->setMes($_POST['Mes'])) {
+                    if ($result['dataset'] = $consultas->consultasMensualesDoc()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos por mostrar';
+                    }
+                } else {
+                    $result['exception'] = 'Mes incorrecto';
+                }
+                break;
                 /*case 'create':
                 $_POST = $consultas->validateForm($_POST);
                 if ($consultas->setNombre($_POST['create_nombre'])) {

@@ -284,3 +284,11 @@ function confirmDelete(id)
         }
     });
 }
+
+function reportePacientes() {
+    let fechaini = $('#fecha_inicio').val();
+    let fechafin = $('#fecha_fin').val();
+    console.log(fechaini)
+    console.log(fechafin)
+    window.open('../../core/reportes/reportepacientes.php?fechaini=' + fechaini + '&fechafin=' + fechafin);
+}

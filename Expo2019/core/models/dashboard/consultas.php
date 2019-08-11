@@ -149,7 +149,7 @@ class Consultas extends Validator
 
     public function consultasMensualesDoc()
     {
-        $sql = 'SELECT COUNT(id_consulta) AS Consultas, nombre_doctor, apellido_doctor FROM consulta c INNER JOIN cita ci USING(id_cita) INNER JOIN doctores d ON c.id_doctor = d.id_doctor WHERE MONTH(fecha_cita) = ? GROUP BY c.id_doctor ORDER BY fecha_cita LIMIT 10';
+        $sql = 'SELECT COUNT(id_consulta) AS Consultas, nombre_doctor, apellido_doctor FROM consulta c INNER JOIN cita ci USING(id_cita) INNER JOIN doctores d ON c.id_doctor = d.id_doctor WHERE MONTH(fecha_cita) = ? GROUP BY c.id_doctor ORDER BY Consultas DESC LIMIT 10';
         $params = array($this->mes);
         return Database::getRows($sql, $params);
     }

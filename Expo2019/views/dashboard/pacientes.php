@@ -16,7 +16,7 @@ dashboard_helper::nav();
 			</button>
 		</div>
         <div>
-            <table class="table table-responsive table-hover" id="tabla-pacientes">
+            <table class="table table-responsive table-hover" id="table-body">
                 <thead class="thead-dark">
                     <!--Agregando los campos fijos a la tabla-->
                     <tr>
@@ -33,7 +33,7 @@ dashboard_helper::nav();
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="table-body" class="col col-sm-12"></tbody>
+                <tbody id="tabla-pacientes" class="col col-sm-12"></tbody>
             </table>
         </div>
 

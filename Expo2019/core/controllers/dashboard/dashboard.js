@@ -183,7 +183,7 @@ function chartCalificacionesDoctores(){
                     nombre.push(row.nombre_doctor+' '+row.apellido_doctor);
                     promedio.push(row.Promedio);
                 });
-                polarAreaGraph('chartCalificacionesDoctores', nombre, promedio, 'Promedio', 'Doctores con mejor desempeño')
+                polarAreaGraph('chartCalificacionesDoctores', nombre, promedio, 'Promedio', 'Promedio de calificaciones de doctores')
                 
             }else{
                 $('#chartCalificacionesDoctores').remove();

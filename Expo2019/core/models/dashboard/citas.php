@@ -189,14 +189,14 @@ class Citas extends Validator
 
     public function showCitasRealizadas()
     {
-        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY id_cita LIMIT 10';
+        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }
 
     public function showCitasEspecialidad()
     {
-        $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY id_cita LIMIT 10';
+        $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }

@@ -37,6 +37,28 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos por mostrar.';
                 }
                 break;
+            case 'citasEspecialidadParam':
+                if ($citas->setEspecialidad($_POST['select_especialidad'])) {
+                    if ($result['dataset'] = $citas->showCitasEspecialidadParam()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos por mostrar';
+                    }
+                } else {
+                    $result['exception'] = 'Especialidad incorrecta';
+                }
+                break;
+            case 'citasEstadoDoctor':
+                if ($citas->setIddoctor($_POST['select_doctores'])) {
+                    if ($result['dataset'] = $citas->showCitasEstadoDoctor()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos por mostrar';
+                    }
+                } else {
+                    $result['exception'] = 'Doctor incorrecta';
+                }
+                break;
             case 'create':
                 $_POST = $citas->validateForm($_POST);
                 if ($citas->setIddoctor($_POST['create_doctor'])) {

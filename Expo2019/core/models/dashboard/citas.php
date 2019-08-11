@@ -8,6 +8,7 @@ class Citas extends Validator
     private $fecha = null;
     private $hora = null;
     private $idestado = null;
+    private $especialidad = null;
 
 
     //Métodos para la sobre carga de propiedades
@@ -101,6 +102,21 @@ class Citas extends Validator
         return $this->idestado;
     }
 
+    public function setEspecialidad($value)
+    {
+        if ($this->validateId($value)) {
+            $this->especialidad = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getEspecialidad()
+    {
+        return $this->especialidad;
+    }
+
     public function readCitas()
     {
         $sql = 'SELECT id_cita, fecha_cita, hora_cita, d.nombre_doctor, d.apellido_doctor, p.nombre_paciente, p.apellido_paciente, estado FROM cita c INNER JOIN doctores d ON d.id_doctor = c.id_doctor INNER JOIN pacientes p ON p.id_paciente = c.id_paciente INNER JOIN estado_cita e ON e.id_estado = c.id_estado ORDER BY fecha_cita DESC';
@@ -182,6 +198,20 @@ class Citas extends Validator
     {
         $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY id_cita LIMIT 10';
         $params = array(null);
+        return Database::getRows($sql, $params);
+    }
+
+    public function showCitasEspecialidadParam()
+    {
+        $sql = 'SELECT c.id_doctor, es.id_especialidad, nombre_especialidad, COUNT(id_cita) AS Citas, fecha_cita FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 AND es.id_especialidad = ? GROUP BY fecha_cita ORDER BY fecha_cita LIMIT 10';
+        $params = array($this->especialidad);
+        return Database::getRows($sql, $params);
+    }
+
+    public function showCitasEstadoDoctor()
+    {
+        $sql = 'SELECT COUNT(id_cita) AS Citas, id_doctor, nombre_doctor, apellido_doctor, c.id_estado, e.estado FROM cita c INNER JOIN doctores d USING(id_doctor) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE id_doctor = ? GROUP BY id_estado ORDER BY id_doctor';
+        $params = array($this->iddoctor);
         return Database::getRows($sql, $params);
     }
 }

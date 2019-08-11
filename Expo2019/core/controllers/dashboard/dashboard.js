@@ -104,7 +104,8 @@ function chartCitasCanceladas(){
                 let nombre = [];
                 let cantidad = [];
                 
-
+                fillSelect(apiEspecialidad + 'read', 'select_especialidad', result.dataset.id_especialidad);
+                fillSelect(apiDoctores + 'fill', 'select_doctores', result.dataset.id_doctor);
                 result.dataset.forEach(function(row){
                     nombre.push(row.nombre_doctor+' '+row.apellido_doctor);
                     cantidad.push(row.CitasCanceladas);
@@ -365,10 +366,82 @@ $('#grafico3').submit(function(){
 
                 });
                 $('#chartConsultas-3').attr('hidden',false);
-                pieGraph('chartConsultasMensualesDoc', nombre, consultas, 'Consultas', 'Consultas mensuales de cada doctor')
+                pieGraph('chartConsultasMensualesDoc', nombre, consultas, 'Consultas', 'Desempeño de consultas mensuales de cada doctor')
             }else{
                 sweetAlert(2,result.exception,null);
                 $('#chartConsultas-3').attr('hidden',true);
+            }
+        }else{
+            console.log(response);
+        }
+
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+
+    });
+});
+
+$('#grafico4').submit(function(){
+    event.preventDefault()
+    $.ajax({
+        url: apiCitas + 'citasEspecialidadParam',
+        type: 'post',
+        data: $('#grafico4').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                let fechas = [];
+                let citas = [];
+                result.dataset.forEach(function(row){
+                    fechas.push(row.fecha_cita);
+                    citas.push(row.Citas);
+                });
+                $('#chartCitasParam').attr('hidden',false);
+                barGraph('chartCitasEspecialidadParam', fechas, citas, 'Citas', 'Citas por especialidad')
+            }else{
+                sweetAlert(2,result.exception,null);
+                $('#chartCitasParam').attr('hidden',true);
+            }
+        }else{
+            console.log(response);
+        }
+
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+
+    });
+});
+
+$('#grafico5').submit(function(){
+    event.preventDefault()
+    $.ajax({
+        url: apiCitas + 'citasEstadoDoctor',
+        type: 'post',
+        data: $('#grafico5').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                let estado = [];
+                let citas = [];
+                result.dataset.forEach(function(row){
+                    estado.push(row.estado);
+                    citas.push(row.Citas);
+                });
+                $('#chartDesempenoDoctor').attr('hidden',false);
+                doughnutGraph('chartCitasDesempenoDoctor', estado, citas, 'Citas', 'Estadísticas de citas por doctor')
+            }else{
+                sweetAlert(2,result.exception,null);
+                $('#chartDesempenoDoctor').attr('hidden',true);
             }
         }else{
             console.log(response);

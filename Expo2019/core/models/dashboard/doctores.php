@@ -177,6 +177,13 @@ class Doctores extends Validator
 		return Database::getRows($sql, $params);
 	}
 
+	public function fillDoctores()
+	{
+		$sql = 'SELECT id_doctor, CONCAT(nombre_doctor,\' \',apellido_doctor) AS NombreDoc FROM doctores';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
+
 	public function searchDoctores($value)
 	{
 		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor FROM doctores WHERE apellido_doctor LIKE ? OR nombre_doctor LIKE ? ORDER BY apellido_doctor';

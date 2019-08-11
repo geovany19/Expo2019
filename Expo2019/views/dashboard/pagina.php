@@ -27,11 +27,12 @@ dashboard_helper::nav();
 					<canvas id="chartCalificacionesDoctores"></canvas>
 				</div>
 				<div class="col col-sm-12 col-md-6">
-					<form id="grafico1" method="post" class="col col-sm-12 col-md-6">
+					<h5>Gráfico de citas por periodo</h5>
+					<form id="grafico1" method="post" class="col col-sm-12">
 						<h6>Seleccione fecha inicial</h6>
-						<input type="date" id="Fecha1" name="Fecha1" required>
+						<input type="date" id="Fecha1" name="Fecha1" class="col col-sm-12 col-md-6" required>
 						<h6>Seleccione fecha fin</h6>
-						<input type="date" id="Fecha2" name="Fecha2" max=<?php echo date('Y-m-d') ?> required>
+						<input type="date" id="Fecha2" name="Fecha2" max=<?php echo date('Y-m-d') ?> class='col col-sm-12 col-md-6' required>
 						<button type="submit" class="btn btn-primary">Generar gráfico</button>
 					</form>
 					<div id="chartConsultas" hidden>
@@ -39,10 +40,10 @@ dashboard_helper::nav();
 					</div>
 				</div>
 				<div class="col col-sm-12 col-md-6">
-					<form id="grafico2" method="post" class="col col-sm-12 col-md-6">
-						<h6>Seleccione un mes</h6>
-						<label>Mes</label>
-						<select name="Mes" id="Mes" class="form-control">
+					<h5>Gráfico de consultas realizadas al mes </h5>
+					<form id="grafico2" method="post" class="col col-sm-12">
+						<label>Seleccione un mes</label>
+						<select name="Mes" id="Mes" class="form-control col col-sm-12">
 							<option value="1">Enero</option>
 							<option value="2">Febrero</option>
 							<option value="3">Marzo</option>
@@ -63,9 +64,9 @@ dashboard_helper::nav();
 					</div>
 				</div>
 				<div class="col col-sm-12 col-md-6">
-					<form id="grafico3" method="post" class="col col-sm-12 col-md-6">
-						<h6>Seleccione un mes</h6>
-						<label>Mes</label>
+					<h5>Desempeño de consultas mensuales</h5>
+					<form id="grafico3" method="post" class="col col-sm-12">
+						<label>Seleccione un mes</label>
 						<select name="Mes" id="Mes" class="form-control">
 							<option value="1">Enero</option>
 							<option value="2">Febrero</option>
@@ -84,6 +85,28 @@ dashboard_helper::nav();
 					</form>
 					<div id="chartConsultas-3" hidden>
 						<canvas id="chartConsultasMensualesDoc"></canvas>
+					</div>
+				</div>
+				<div class="col col-sm-12 col-md-6">
+					<h5>Gráfico de citas por especialidad</h5>
+					<form id="grafico4" method="post" class="col col-sm-12">
+						<label>Seleccione una especialidad</label>
+						<select name="select_especialidad" id="select_especialidad" class="form-control"></select>
+						<button type="submit" class="btn btn-primary">Generar gráfico</button>
+					</form>
+					<div id="chartCitasParam" hidden>
+						<canvas id="chartCitasEspecialidadParam"></canvas>
+					</div>
+				</div>
+				<div class="col col-sm-12 col-md-6"> 
+					<form id="grafico5" method="post" class="col col-sm-12">
+						<h5>Estadísticas de citas por doctor</h5>
+						<label>Seleccione un doctor</label>
+						<select name="select_doctores" id="select_doctores" class="form-control"></select>
+						<button type="submit" class="btn btn-primary">Generar gráfico</button>
+					</form>
+					<div id="chartDesempenoDoctor" hidden>
+						<canvas id="chartCitasDesempenoDoctor"></canvas>
 					</div>
 				</div>
 			</div>

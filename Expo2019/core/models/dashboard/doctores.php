@@ -213,7 +213,7 @@ class Doctores extends Validator
 		return Database::executeRow($sql, $params);
 	}
 	public function doctoresEspecialidad($id_especialidad){
-		$sql='SELECT doctores.nombre_doctor, doctores.apellido_doctor, especialidad.nombre_especialidad FROM (doctores INNER JOIN especialidad ON especialidad.id_especialidad=doctores.id_especialidad) WHERE especialidad.id_especialidad=?';
+		$sql='SELECT doctores.nombre_doctor, doctores.apellido_doctor, especialidad.nombre_especialidad,foto_doctor FROM (doctores INNER JOIN especialidad ON especialidad.id_especialidad=doctores.id_especialidad) WHERE especialidad.id_especialidad=?';
 		$params = array($id_especialidad);
 		return Database::getRows($sql,$params);
 	}

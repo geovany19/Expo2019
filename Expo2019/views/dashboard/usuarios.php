@@ -11,9 +11,9 @@ dashboard_helper::nav();
 		</button>
 	</div>
 	<div  class="float-left">
-		<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-warning"  class="btn btn-outline-success" data-placement="top" title="Generar Reporte">
+		<a href='../../core/reportes/reporteusuario.php'   class="btn btn-outline-warning"  class="btn btn-outline-success" data-placement="top" title="Generar Reporte" target="_blank">
 			<i class="material-icons prefix">assignment</i>
-		</button>
+</a>
 	</div>	
 	<div>
 		<table class="display responsive no-wrap dtr-inline collapsed table table-responsive table-hover" id="tabla-usuarios" width="100%">

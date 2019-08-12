@@ -61,16 +61,15 @@ $(document).ready(function() {
   }
   
   function cancelarCita(id) {
-    swal.fire({
-      title: "¿Estas seguro?",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, cancelar cita",
-      cancelButtonText: "Salir"
-    }).then(result => {
-      if (result.value) {
+    swal({
+        title: 'Advertencia',
+        text: '¿Quiere cancelar la cita?',
+        icon: 'warning',
+        buttons: ['Cancelar', 'Aceptar'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    }).then(function(value) {
+      if (value) {
         $.ajax({
           url: apiCitas + "cancelarCita",
           type: "post",
@@ -86,6 +85,14 @@ $(document).ready(function() {
               //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
               if (result.status) {
                   showTableCitas();
+                  swal({
+                    title: 'Enhorabuena',
+                    text: 'Se ha cancelado la cita',
+                    icon: 'success',
+                    button: 'Aceptar',
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
               }
             } else {
               console.log(response);
@@ -95,7 +102,6 @@ $(document).ready(function() {
             //Se muestran en consola los posibles errores de la solicitud AJAX
             console.log("Error: " + jqXHR.status + " " + jqXHR.statusText);
           });
-        Swal.fire("Cita cancelada", "", "success");
       }
     });
   }

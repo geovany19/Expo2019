@@ -11,7 +11,8 @@ class dashboard_helper
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+				<meta http-equiv="X-UA-Compatible" content="ie=edge">
+				<link rel="shortcut icon" href="../../resources/img/dashboard/img4.jpg">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-select.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
@@ -52,7 +53,7 @@ class dashboard_helper
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registrarse.php') {
 				print('
-					<body onload="startTime()">
+					<body>
 						<div class="wrapper">
 							<nav id="sidebar">
 								<div class="sidebar-header">
@@ -163,14 +164,14 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 				<script type="text/javascript" src="../../resources/js/inicializacion.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
-				<!--<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>-->
-				<!--<script type="text/javascript" src="../../resources/js/select.bootstrap4.min.js"></script>-->
-				<!--<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>-->
-				<!--<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/buttons.bootstrap4.min.js"></script>-->
-				<!--<script type="text/javascript" src="../../resources/js/rowReorder.bootstrap4.min.js"></script>-->
-				<!--<script type="text/javascript" src="../../resources/js/fixedColumns.bootstrap4.min.js"></script>-->
-				<!--<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>-->
+				<!--<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/select.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/buttons.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/rowReorder.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/fixedColumns.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>-->
 				<script type="text/javascript" src="../../resources/js/pdfmake.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/vfs_fonts.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>

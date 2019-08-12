@@ -226,7 +226,7 @@ class Doctores extends Validator
 
 	public function graficoCalificacionesD()
 	{
-		$sql = 'SELECT nombre_doctor, apellido_doctor, SUM(calificacion) / COUNT(DISTINCT(id_calificacion)) AS Promedio FROM calificacion_doctor c INNER JOIN doctores d USING(id_doctor) GROUP BY id_doctor ORDER BY apellido_doctor';
+		$sql = 'SELECT nombre_doctor, apellido_doctor, SUM(calificacion) / COUNT(DISTINCT(id_calificacion)) AS Promedio FROM calificacion_doctor c INNER JOIN doctores d USING(id_doctor) GROUP BY id_doctor ORDER BY Promedio DESC';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}

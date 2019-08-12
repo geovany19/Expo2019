@@ -55,7 +55,7 @@ dashboard_helper::nav();
 							<option value="9">Septiembre</option>
 							<option value="10">Octubre</option>
 							<option value="11">Noviembre</option>
-							<option value="12">Diciembre</option>
+							<option value="12">Diciembre</option>-->
 						</select>
 						<button type="submit" class="btn btn-primary">Generar gráfico</button>
 					</form>

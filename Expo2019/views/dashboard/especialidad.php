@@ -17,7 +17,7 @@ dashboard_helper::nav();
 	</div>
 	<div>
 	<div>
-		<table class="display responsive no-wrap dtr-inline collapsed table table-responsive table-hover" id="tabla-especialidades">
+		<table class="table table-responsive table-hover" id="table-body">
 			<thead class="thead-dark">
 				<!--Agregando los campos fijos a la tabla-->
 				<tr role="row">
@@ -27,7 +27,7 @@ dashboard_helper::nav();
 					<th scope="col">Acciones</th>
 				</tr>
 			</thead>
-			<tbody id="table-body"></tbody>
+			<tbody id="tabla-especialidades"></tbody>
 		</table>
 	</div>
 </main>

@@ -142,14 +142,15 @@ class Consultas extends Validator
 
     public function consultasMensuales()
     {
-        $sql = 'SELECT COUNT(id_consulta) AS Consultas, fecha_cita FROM consulta c INNER JOIN cita ci USING(id_cita) WHERE MONTH(fecha_cita) = ? GROUP BY fecha_cita ORDER BY fecha_cita LIMIT 10';
+        $sql = 'SELECT COUNT(id_consulta) AS Consultas, DAY(fecha_cita) AS Dia, MONTH(fecha_cita) AS Mes FROM consulta c INNER JOIN cita ci USING(id_cita) WHERE MONTH(fecha_cita) = ? GROUP BY fecha_cita ORDER BY fecha_cita LIMIT 10';
+        //$sql = 'SELECT COUNT(id_consulta) AS Consultas, fecha_cita FROM consulta c INNER JOIN cita ci USING(id_cita) WHERE MONTH(fecha_cita) = ? GROUP BY fecha_cita ORDER BY fecha_cita LIMIT 10';
         $params = array($this->mes);
         return Database::getRows($sql, $params);
     }
 
     public function consultasMensualesDoc()
     {
-        $sql = 'SELECT COUNT(id_consulta) AS Consultas, nombre_doctor, apellido_doctor FROM consulta c INNER JOIN cita ci USING(id_cita) INNER JOIN doctores d ON c.id_doctor = d.id_doctor WHERE MONTH(fecha_cita) = ? GROUP BY c.id_doctor ORDER BY Consultas DESC LIMIT 10';
+        $sql = 'SELECT COUNT(id_consulta) AS Consultas, nombre_doctor, apellido_doctor FROM consulta c INNER JOIN cita ci USING(id_cita) INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE MONTH(fecha_cita) = ? AND ci.id_estado = 4 GROUP BY c.id_doctor ORDER BY Consultas DESC LIMIT 10';
         $params = array($this->mes);
         return Database::getRows($sql, $params);
     }

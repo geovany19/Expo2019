@@ -148,7 +148,7 @@ function chartCitasRealizadas(){
                     cantidad.push(row.CitasRealizadas);
 
                 });
-                barGraph('chartCitasRealizadas', nombre, cantidad, 'Consultas', 'Citas realizadas')
+                barGraph('chartCitasRealizadas', nombre, cantidad, 'Consultas', 'Consultas realizadas por doctor')
                 
             }else{
                 $('#chartCitasCanceladas').remove();
@@ -199,43 +199,6 @@ function chartCalificacionesDoctores(){
     });
 }
 
-function chartCitasRealizadas(){
-
-    $.ajax({
-        url: apiCitas + 'citasRealizadas',
-        type: 'post',
-        data: null,
-        datatype: 'json'
-    })
-    .done(function(response){
-        if(isJSONString(response)){
-            const result = JSON.parse(response);
-            console.log(result);
-
-            if(result.status){
-                let nombre = [];
-                let cantidad = [];
-                result.dataset.forEach(function(row){
-                    nombre.push(row.nombre_doctor+' '+row.apellido_doctor);
-                    cantidad.push(row.CitasRealizadas);
-
-                });
-                barGraph('chartCitasRealizadas', nombre, cantidad, 'Consultas', 'Citas realizadas')
-                
-            }else{
-                $('#chartCitasCanceladas').remove();
-            }
-        }else{
-            console.log(response);
-        }
-
-    })
-    .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-
-    });
-}
-
 function chartCitasEspecialidad(){
 
     $.ajax({
@@ -255,7 +218,7 @@ function chartCitasEspecialidad(){
                     especialidad.push(row.nombre_especialidad);
                     citas.push(row.CitasRealizadas);
                 });
-                horizontalGraph('chartCitasEspecialidad', especialidad, citas, 'Citas', 'Citas realizadas por especialidad')
+                horizontalGraph('chartCitasEspecialidad', especialidad, citas, 'Consultas', 'Consultas realizadas por especialidad')
                 
             }else{
                 $('#chartCitasEspecialidad').remove();
@@ -324,7 +287,7 @@ $('#grafico2').submit(function(){
                 let fechas = [];
                 let consultas = [];
                 result.dataset.forEach(function(row){
-                    fechas.push(row.fecha_cita);
+                    fechas.push(row.Dia+'/'+row.Mes);
                     consultas.push(row.Consultas);
 
                 });
@@ -395,14 +358,14 @@ $('#grafico4').submit(function(){
             const result = JSON.parse(response);
             console.log(result);
             if(result.status){
-                let fechas = [];
+                let mes = [];
                 let citas = [];
                 result.dataset.forEach(function(row){
-                    fechas.push(row.fecha_cita);
+                    mes.push(row.NombreMes);
                     citas.push(row.Citas);
                 });
                 $('#chartCitasParam').attr('hidden',false);
-                barGraph('chartCitasEspecialidadParam', fechas, citas, 'Citas', 'Citas por especialidad')
+                barGraph('chartCitasEspecialidadParam', mes, citas, 'Consultas', 'Consultas por especialidad')
             }else{
                 sweetAlert(2,result.exception,null);
                 $('#chartCitasParam').attr('hidden',true);

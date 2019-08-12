@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-08-2019 a las 19:51:50
+-- Tiempo de generación: 12-08-2019 a las 06:53:10
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -146,7 +146,99 @@ INSERT INTO `bitacora` (`id_bitacora`, `operacion`, `usuario`, `host`, `modifica
 (0, 'INSERTAR', 'root', 'localhost', '2019-08-05 14:55:23', 'cita'),
 (0, 'INSERTAR', 'root', 'localhost', '2019-08-05 14:55:23', 'cita'),
 (0, 'INSERTAR', 'root', 'localhost', '2019-08-05 14:56:57', 'cita'),
-(0, 'INSERTAR', 'root', 'localhost', '2019-08-05 14:57:33', 'consulta');
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-05 14:57:33', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 14:46:49', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 17:11:00', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:37:27', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 18:51:30', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 19:04:10', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 20:20:01', 'cita'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 21:22:31', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta'),
+(0, 'INSERTAR', 'root', 'localhost', '2019-08-11 22:24:13', 'consulta');
 
 -- --------------------------------------------------------
 
@@ -175,7 +267,18 @@ INSERT INTO `calificacion_doctor` (`id_calificacion`, `id_doctor`, `id_paciente`
 (6, 4, 1, 3, 'Desempeño no muy destacable'),
 (7, 3, 1, 3, NULL),
 (8, 4, 1, 5, NULL),
-(9, 3, 1, 5, NULL);
+(9, 3, 1, 5, NULL),
+(10, 1, 4, 5, NULL),
+(11, 8, 1, 5, 'Buena atención'),
+(12, 5, 1, 5, 'Excelente desempeño. Excelente doctora'),
+(13, 6, 2, 3, 'Su desempeño puede mejorar.'),
+(14, 6, 3, 4, NULL),
+(15, 9, 2, 4, 'Buena atención'),
+(16, 10, 1, 5, 'Excelente doctora'),
+(17, 10, 2, 4, NULL),
+(18, 8, 3, 4, NULL),
+(19, 9, 4, 5, NULL),
+(20, 1, 4, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,45 +314,79 @@ CREATE TABLE `cita` (
 --
 
 INSERT INTO `cita` (`id_cita`, `id_doctor`, `id_paciente`, `fecha_cita`, `hora_cita`, `id_estado`) VALUES
-(1, 4, 1, '2019-03-20', '09:00:00', 4),
-(2, 4, 1, '2019-03-20', '10:00:00', 4),
-(3, 3, 1, '2019-03-20', '10:30:00', 4),
-(5, 2, 1, '2019-03-21', '08:10:00', 4),
-(6, 4, 1, '2019-03-21', '08:40:00', 4),
-(7, 4, 1, '2019-03-21', '09:20:00', 4),
-(8, 3, 1, '2019-03-21', '15:00:00', 4),
-(9, 2, 1, '2019-03-21', '16:00:00', 4),
-(10, 2, 1, '2019-03-21', '16:30:00', 4),
-(11, 3, 1, '2019-03-22', '08:15:00', 4),
-(12, 3, 1, '2019-03-22', '08:50:00', 4),
-(13, 2, 1, '2019-03-22', '09:05:00', 4),
-(14, 2, 1, '2019-03-22', '09:45:00', 4),
-(15, 4, 2, '2019-03-23', '07:30:00', 4),
-(16, 4, 2, '2019-03-23', '08:00:00', 4),
-(17, 3, 2, '2019-03-23', '08:30:00', 4),
-(18, 2, 2, '2019-03-23', '08:10:00', 4),
-(19, 2, 1, '2019-03-23', '08:40:00', 4),
-(20, 2, 1, '2019-03-23', '09:20:00', 4),
-(21, 3, 1, '2019-03-23', '08:05:00', 4),
-(22, 2, 1, '2019-03-23', '16:00:00', 4),
-(23, 2, 1, '2019-03-24', '10:00:00', 4),
-(24, 3, 1, '2019-03-24', '08:15:00', 4),
-(25, 3, 1, '2019-03-24', '08:50:00', 4),
-(26, 2, 1, '2019-03-24', '09:05:00', 4),
-(27, 2, 1, '2019-03-22', '10:35:00', 4),
-(28, 1, 2, '2019-03-25', '07:35:00', 4),
-(29, 2, 2, '2019-03-25', '08:00:00', 4),
-(30, 3, 1, '2019-03-25', '08:30:00', 4),
-(31, 4, 2, '2019-03-25', '08:10:00', 4),
-(32, 4, 2, '2019-03-25', '08:40:00', 4),
-(33, 3, 1, '2019-03-25', '09:20:00', 4),
-(34, 3, 1, '2019-03-26', '14:05:00', 4),
-(35, 4, 1, '2019-03-26', '15:15:00', 4),
-(36, 2, 1, '2019-03-26', '07:00:00', 3),
-(37, 1, 2, '2019-03-26', '08:15:00', 3),
-(38, 4, 1, '2019-03-26', '08:50:00', 4),
-(39, 1, 2, '2019-03-26', '09:05:00', 4),
-(40, 1, 2, '2019-04-27', '09:05:00', 4);
+(1, 4, 1, '2019-01-21', '09:00:00', 4),
+(2, 4, 1, '2019-01-21', '10:00:00', 4),
+(3, 3, 1, '2019-01-21', '10:30:00', 4),
+(5, 2, 1, '2019-01-21', '08:10:00', 4),
+(6, 4, 1, '2019-01-22', '08:40:00', 4),
+(7, 4, 1, '2019-01-22', '09:20:00', 4),
+(8, 3, 1, '2019-01-22', '15:00:00', 4),
+(9, 2, 1, '2019-01-22', '16:00:00', 4),
+(10, 2, 1, '2019-01-22', '16:30:00', 4),
+(11, 3, 1, '2019-01-23', '08:15:00', 4),
+(12, 3, 1, '2019-01-23', '08:50:00', 4),
+(13, 2, 1, '2019-01-23', '09:05:00', 4),
+(14, 2, 1, '2019-01-23', '09:45:00', 4),
+(15, 4, 2, '2019-01-24', '07:30:00', 4),
+(16, 6, 2, '2019-01-24', '08:00:00', 4),
+(17, 3, 2, '2019-01-24', '08:30:00', 4),
+(18, 7, 2, '2019-01-24', '08:10:00', 4),
+(19, 8, 1, '2019-01-24', '10:40:00', 4),
+(20, 6, 1, '2019-01-24', '11:20:00', 4),
+(21, 3, 1, '2019-01-24', '13:05:00', 4),
+(22, 5, 1, '2019-01-24', '16:00:00', 4),
+(23, 5, 1, '2019-01-25', '10:00:00', 3),
+(24, 5, 1, '2019-01-25', '08:15:00', 4),
+(25, 9, 3, '2019-01-25', '08:50:00', 4),
+(26, 10, 2, '2019-01-25', '09:05:00', 4),
+(27, 10, 1, '2019-01-25', '10:35:00', 4),
+(28, 6, 4, '2019-01-26', '07:35:00', 4),
+(29, 3, 4, '2019-01-26', '08:00:00', 4),
+(30, 8, 1, '2019-01-26', '10:30:00', 4),
+(31, 4, 2, '2019-01-26', '11:10:00', 4),
+(32, 4, 2, '2019-01-26', '08:40:00', 4),
+(33, 3, 1, '2019-01-26', '09:20:00', 4),
+(34, 7, 1, '2019-01-26', '10:05:00', 4),
+(35, 4, 1, '2019-01-26', '11:15:00', 4),
+(36, 2, 1, '2019-01-30', '14:00:00', 3),
+(37, 1, 2, '2019-01-28', '13:15:00', 4),
+(38, 8, 1, '2019-01-28', '11:50:00', 4),
+(39, 2, 2, '2019-01-28', '14:05:00', 4),
+(40, 2, 2, '2019-01-28', '14:05:00', 4),
+(41, 1, 2, '2019-01-28', '08:10:00', 4),
+(42, 4, 2, '2019-01-28', '08:40:00', 4),
+(43, 4, 1, '2019-01-28', '09:20:00', 4),
+(44, 1, 1, '2019-01-28', '10:05:00', 4),
+(45, 3, 1, '2019-01-28', '11:15:00', 4),
+(46, 2, 1, '2019-01-29', '07:30:00', 4),
+(47, 3, 1, '2019-01-29', '12:00:00', 4),
+(48, 4, 2, '2019-01-29', '13:40:00', 4),
+(49, 2, 1, '2019-01-29', '09:05:00', 4),
+(50, 2, 2, '2019-01-29', '09:25:00', 4),
+(51, 10, 2, '2019-01-29', '09:15:00', 4),
+(52, 5, 1, '2019-01-29', '10:50:00', 4),
+(53, 2, 2, '2019-01-29', '11:05:00', 4),
+(54, 2, 2, '2019-01-29', '15:05:00', 4),
+(55, 6, 2, '2019-01-30', '14:10:00', 4),
+(56, 8, 2, '2019-01-30', '10:40:00', 4),
+(57, 9, 3, '2019-01-30', '10:20:00', 4),
+(58, 10, 1, '2019-01-30', '11:25:00', 4),
+(59, 3, 1, '2019-01-30', '11:15:00', 4),
+(60, 2, 1, '2019-01-31', '07:30:00', 4),
+(61, 6, 1, '2019-01-31', '11:25:00', 3),
+(62, 7, 2, '2019-01-31', '13:40:00', 4),
+(63, 5, 3, '2019-01-31', '14:05:00', 4),
+(64, 2, 2, '2019-01-31', '14:25:00', 4),
+(65, 6, 2, '2019-02-01', '15:10:00', 4),
+(66, 8, 2, '2019-02-01', '14:40:00', 4),
+(67, 9, 3, '2019-02-01', '10:20:00', 4),
+(68, 10, 1, '2019-02-01', '09:25:00', 4),
+(69, 7, 1, '2019-02-01', '10:15:00', 4),
+(70, 2, 1, '2019-02-01', '07:30:00', 4),
+(71, 6, 1, '2019-02-02', '15:25:00', 4),
+(72, 10, 3, '2019-02-02', '10:05:00', 4),
+(73, 5, 3, '2019-02-04', '15:05:00', 4),
+(74, 9, 4, '2019-02-04', '09:55:00', 4);
 
 --
 -- Disparadores `cita`
@@ -289,10 +426,68 @@ INSERT INTO `consulta` (`id_consulta`, `padecimientos`, `id_doctor`, `id_pacient
 (8, 'Mal de orin', 4, 1, 'Agua en abundancia', 9),
 (10, 'VIH', 1, 1, 'Medicamentos', 10),
 (11, 'Infección en las vías urinarias', 3, 1, 'Agua en abundancia y medicamentos', 11),
-(12, 'Mal de orin', 4, 1, 'Agua en abundancia', 12),
+(12, 'Mal de orin', 2, 1, 'Agua en abundancia', 12),
 (13, 'Gastritis', 1, 1, 'Medicamentos', 13),
 (14, 'Gastritis', 3, 1, 'Medicamentos', 14),
-(15, 'Gastritis', 3, 1, 'Medicamentos', 40);
+(15, 'Gastritis', 6, 3, 'Medicamentos', 15),
+(16, 'Tos', 9, 4, 'Jarabe para tos cada 8 horas', 16),
+(17, 'Cefalea', 6, 3, 'Acetaminofen', 17),
+(18, 'Gastritis', 10, 2, 'Pepto Bismol', 18),
+(19, 'Conjuntivitis', 8, 1, 'Aplicar gotas para los ojos cada 6 horas durante 7 días.', 19),
+(20, 'Dengue', 6, 2, 'Acetaminofen', 20),
+(21, 'Dengue', 10, 4, '1 acetaminofen cada 8 horas', 21),
+(22, 'Infección en las vías urinarias', 7, 3, 'Agua en abundancia y medicamentos', 22),
+(23, 'Mal de orin', 5, 1, 'Agua en abundancia', 23),
+(24, 'Dolor de huesos', 1, 3, 'Medicamentos. Incapacidad por 3 días.', 24),
+(25, 'Infección en las vías urinarias', 3, 1, 'Agua en abundancia y medicamentos', 25),
+(26, 'Mal de orin', 4, 4, 'Agua en abundancia', 26),
+(27, 'Gastritis', 8, 1, 'Medicamentos', 27),
+(28, 'Gastritis', 3, 4, 'Medicamentos', 28),
+(29, 'Gastritis', 6, 4, 'Medicamentos', 29),
+(30, 'Dengue', 8, 1, 'Acetaminofen', 30),
+(31, 'Dengue', 4, 2, '1 acetaminofen cada 8 horas', 31),
+(32, 'Infección en las vías urinarias', 4, 2, 'Agua en abundancia y medicamentos', 32),
+(33, 'Mal de orin', 3, 1, 'Agua en abundancia', 33),
+(34, 'Dolor de huesos', 7, 1, 'Medicamentos. Incapacidad por 3 días.', 34),
+(35, 'Infección en las vías urinarias', 4, 1, 'Agua en abundancia y medicamentos', 35),
+(36, 'Mal de orin', 1, 2, 'Agua en abundancia', 37),
+(37, 'Gastritis', 8, 1, 'Medicamentos', 38),
+(38, 'Cefalea', 2, 2, 'Medicamentos', 39),
+(39, 'Zika', 2, 2, 'Medicamentos', 40),
+(40, 'H1N1', 1, 2, 'Cuarentena', 41),
+(41, 'Chequeo de peso corporal', 4, 2, 'Plan de alimentación', 42),
+(42, 'Reducción de peso corporal', 4, 1, 'Continuar según plan de alimentación, ejercitarse a diario y tomar abundante agua', 43),
+(43, 'Rotavirus', 1, 1, 'Vacunas', 44),
+(44, 'Dolor de huesos', 3, 1, 'Medicamentos. Incapacidad por 3 días.', 45),
+(45, 'Infección en las vías urinarias', 2, 1, 'Agua en abundancia y medicamentos', 46),
+(46, 'Mal de orin', 3, 1, 'Agua en abundancia', 47),
+(47, 'Gastritis', 4, 2, 'Medicamentos', 48),
+(48, 'Cefalea', 2, 1, 'Medicamentos', 49),
+(49, 'Zika', 2, 2, 'Medicamentos', 50),
+(50, 'Infección en las vías urinarias', 10, 2, 'Agua en abundancia y medicamentos', 51),
+(51, 'Mal de orin', 5, 1, 'Agua en abundancia', 52),
+(52, 'Gastritis', 2, 2, 'Medicamentos', 53),
+(53, 'Cefalea', 2, 2, 'Medicamentos', 54),
+(54, 'Zika', 6, 2, 'Medicamentos', 55),
+(55, 'H1N1', 8, 2, 'Cuarentena', 56),
+(56, 'Chequeo de peso corporal', 9, 3, 'Plan de alimentación', 57),
+(57, 'Reducción de peso corporal', 10, 1, 'Continuar según plan de alimentación, ejercitarse a diario y tomar abundante agua', 58),
+(58, 'Rotavirus', 3, 1, 'Vacunas', 59),
+(59, 'Dolor de huesos', 2, 1, 'Medicamentos. Incapacidad por 3 días.', 60),
+(60, 'Infección en las vías urinarias', 6, 1, 'Agua en abundancia y medicamentos', 61),
+(61, 'Mal de orin', 7, 2, 'Agua en abundancia', 62),
+(62, 'Gastritis', 5, 3, 'Medicamentos', 63),
+(63, 'Cefalea', 2, 2, 'Medicamentos', 64),
+(64, 'Zika', 6, 2, 'Medicamentos', 65),
+(65, 'Chequeo de peso corporal', 8, 2, 'Plan de alimentación', 66),
+(66, 'Reducción de peso corporal', 9, 3, 'Continuar según plan de alimentación, ejercitarse a diario y tomar abundante agua', 67),
+(67, 'Rotavirus', 10, 1, 'Vacunas', 68),
+(68, 'Dolor de huesos', 7, 1, 'Medicamentos. Incapacidad por 3 días.', 69),
+(69, 'Infección en las vías urinarias', 2, 1, 'Agua en abundancia y medicamentos', 70),
+(70, 'Mal de orin', 6, 1, 'Agua en abundancia', 71),
+(71, 'Gastritis', 10, 3, 'Medicamentos', 72),
+(72, 'Cefalea', 5, 3, 'Medicamentos', 73),
+(73, 'Zika', 9, 4, 'Medicamentos', 74);
 
 --
 -- Disparadores `consulta`
@@ -373,7 +568,7 @@ CREATE TABLE `doctores` (
   `id_doctor` int(11) NOT NULL,
   `nombre_doctor` varchar(25) NOT NULL,
   `apellido_doctor` varchar(25) NOT NULL,
-  `correo_doctor` varchar(25) NOT NULL,
+  `correo_doctor` varchar(150) NOT NULL,
   `usuario_doctor` varchar(25) NOT NULL,
   `contrasena_doctor` varchar(100) NOT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
@@ -390,7 +585,13 @@ INSERT INTO `doctores` (`id_doctor`, `nombre_doctor`, `apellido_doctor`, `correo
 (1, 'Carlos', 'Ramirez', 'fede@gmail.com', 'FR1', '$2y$10$gZkOWNToIRGwyZCHHzmMq.iWGke1GXQtAUg6LKeCxix1jkgSTH03G', '2000-08-29', '5d2ce5fdea331.jpg', 4, 1),
 (2, 'Bryan', 'Amaya', 'bryan28@gmail.com', 'Boscopony', '$2y$10$K9IUbArlaysW0ZD.Lez1Ve52.oGcn4AV50kPKRi2SLaonXl0pjozK', '2001-08-16', '5d2cf28163ba9.jpg', 2, 1),
 (3, 'Geovany', 'Fuentes', 'geovany@gmail.com', 'geovany', '$2y$10$AUjA29YYWOYOfBoT80eCku4tl5tcIIWWq4e7PpQV68gcT8KKEL656', '2000-09-04', '5d2cf2a2bfdb8.jpg', 8, 1),
-(4, 'Maria', 'Campos', 'mariacampos@gmail.com', 'maria1', '$2y$10$QAzi8yRHsvwzQotubSQov.Q7wrL5BQ0fJUX3Hstd4PhZWrTtSk3Aa', '2000-06-04', '5d2cf2cf2cfda.jpg', 1, 1);
+(4, 'Maria', 'Campos', 'mariacampos@gmail.com', 'maria1', '$2y$10$QAzi8yRHsvwzQotubSQov.Q7wrL5BQ0fJUX3Hstd4PhZWrTtSk3Aa', '2000-06-04', '5d2cf2cf2cfda.jpg', 1, 1),
+(5, 'Patricia', 'Soriano', 'patricia_soriano@gmail.com', 'PS01', '$2y$10$QAzi8yRHsvwzQotubSQov.Q7wrL5BQ0fJUX3Hstd4PhZWrTtSk3Aa', '1986-07-18', '5d2cf2cf2cfda.jpg', 7, 1),
+(6, 'César', 'Ferrufino', 'cesar_ferrufino@gmail.com', 'CF01', '$2y$10$gZkOWNToIRGwyZCHHzmMq.iWGke1GXQtAUg6LKeCxix1jkgSTH03G', '2001-05-02', '5d2ce5fdea331.jpg', 3, 1),
+(7, 'Pamela', 'Urbina', 'pamela_urbina@gmail.com', 'PU01', '$2y$10$K9IUbArlaysW0ZD.Lez1Ve52.oGcn4AV50kPKRi2SLaonXl0pjozK', '2000-06-12', '5d2cf28163ba9.jpg', 5, 1),
+(8, 'Marcelo', 'Mayorga', 'marcelo_mayorga@gmail.com', 'MM01', '$2y$10$AUjA29YYWOYOfBoT80eCku4tl5tcIIWWq4e7PpQV68gcT8KKEL656', '2000-12-20', '5d2cf2a2bfdb8.jpg', 10, 1),
+(9, 'Gabriela', 'Alfaro', 'gabriela_alfaro@gmail.com', 'GA01', '$2y$10$QAzi8yRHsvwzQotubSQov.Q7wrL5BQ0fJUX3Hstd4PhZWrTtSk3Aa', '2000-08-21', '5d2cf2cf2cfda.jpg', 6, 1),
+(10, 'Alejandra', 'Menjívar', 'alejandra_menjivar@gmail.com', 'AM01', '$2y$10$QAzi8yRHsvwzQotubSQov.Q7wrL5BQ0fJUX3Hstd4PhZWrTtSk3Aa', '1995-03-23', '5d2cf2cf2cfda.jpg', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -526,7 +727,7 @@ CREATE TABLE `pacientes` (
   `id_paciente` int(11) NOT NULL,
   `nombre_paciente` varchar(25) NOT NULL,
   `apellido_paciente` varchar(25) NOT NULL,
-  `correo_paciente` varchar(25) NOT NULL,
+  `correo_paciente` varchar(150) NOT NULL,
   `usuario_paciente` varchar(25) NOT NULL,
   `contrasena_paciente` varchar(100) NOT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
@@ -542,7 +743,9 @@ CREATE TABLE `pacientes` (
 
 INSERT INTO `pacientes` (`id_paciente`, `nombre_paciente`, `apellido_paciente`, `correo_paciente`, `usuario_paciente`, `contrasena_paciente`, `fecha_nacimiento`, `foto_paciente`, `peso_paciente`, `estatura_paciente`, `id_estado`) VALUES
 (1, 'Carlos', 'Ramírez', 'carlos@gmail.com', 'carlos', '1234567', '2000-08-29', '5d3f01c0e1a05.jpg', 157, 162, 1),
-(2, 'Oswaldo', 'Franco', 'oswaldo@gmail.com', 'oswaldo', '1234567', '2001-04-10', '5d3f01c0e1a05.jpg', 157, 162, 1);
+(2, 'Oswaldo', 'Franco', 'oswaldo@gmail.com', 'oswaldo', '1234567', '2001-04-10', '5d3f01c0e1a05.jpg', 157, 162, 1),
+(3, 'Fernando', 'Paredes', 'fernando@gmail.com', 'fernando', '1234567', '1992-08-02', '5d3f01c0e1a05.jpg', 100, 170, 1),
+(4, 'Amanda', 'Blanco', 'amanda@gmail.com', 'amanda', '1234567', '1990-04-01', '5d3f01c0e1a05.jpg', 157, 162, 1);
 
 -- --------------------------------------------------------
 
@@ -726,7 +929,7 @@ ALTER TABLE `usuarios_a`
 -- AUTO_INCREMENT de la tabla `calificacion_doctor`
 --
 ALTER TABLE `calificacion_doctor`
-  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `calificacion_paciente`
@@ -738,13 +941,13 @@ ALTER TABLE `calificacion_paciente`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `dias_disponibilidad`
@@ -762,7 +965,7 @@ ALTER TABLE `disponibilidad`
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
@@ -798,7 +1001,7 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

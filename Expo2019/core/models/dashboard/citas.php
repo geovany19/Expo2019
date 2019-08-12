@@ -189,21 +189,21 @@ class Citas extends Validator
 
     public function showCitasRealizadas()
     {
-        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
+        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }
 
     public function showCitasEspecialidad()
     {
-        $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_cita) AS CitasRealizadas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
+        $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 4 GROUP BY nombre_especialidad ORDER BY CitasRealizadas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }
 
     public function showCitasEspecialidadParam()
     {
-        $sql = 'SELECT c.id_doctor, es.id_especialidad, nombre_especialidad, COUNT(id_cita) AS Citas, fecha_cita FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 AND es.id_especialidad = ? GROUP BY fecha_cita ORDER BY fecha_cita LIMIT 10';
+        $sql = 'SELECT NombreMes, Mes, Citas, Especialidad FROM (SELECT c.id_doctor, es.id_especialidad, nombre_especialidad AS Especialidad, COUNT(id_cita) AS Citas, MONTH(fecha_cita) AS Mes, m.mes AS NombreMes FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 4 AND es.id_especialidad = ? AND MONTH(fecha_cita) = id_mes GROUP BY Mes ORDER BY Mes LIMIT 10) COUNTTABLE';
         $params = array($this->especialidad);
         return Database::getRows($sql, $params);
     }

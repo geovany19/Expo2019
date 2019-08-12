@@ -73,6 +73,8 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Mes incorrecto';
                 }
                 break;
+            //caso utilizado para mostrar las consultas mensuales de doctor
+            //recibe el valor del mes a través del select 'mes' de pagina.php
             case 'consultasMensualesDoc':
                 if ($consultas->setMes($_POST['Mes'])) {
                     if ($result['dataset'] = $consultas->consultasMensualesDoc()) {

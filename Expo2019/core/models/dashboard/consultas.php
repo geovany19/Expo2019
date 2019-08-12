@@ -113,12 +113,14 @@ class Consultas extends Validator
         return true;
     }
 
+    //método para setear el parámetro mes
     public function setMes($value)
     {
         $this->mes = $value;
         return true;
     }
-
+    //métodos para mostrar las consultas por mes
+    //utiliza una sub consulta para obtener los datos del mes, para luego obtener y mostar el nombre del mes y la cantidad de citas
     public function consultasPorFecha()
     {
         $sql = 'SELECT NumeroMes, NombreMes, CantidadCitas FROM (SELECT MONTH(fecha_cita) AS NumeroMes, COUNT(cn.id_cita) AS CantidadCitas, m.mes AS NombreMes FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 4 AND MONTH(fecha_cita) = id_mes GROUP BY NumeroMes ORDER BY NumeroMes LIMIT 10) COUNTTABLE';

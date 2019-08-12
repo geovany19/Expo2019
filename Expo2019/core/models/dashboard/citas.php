@@ -180,6 +180,8 @@ class Citas extends Validator
         return Database::executeRow($sql, $params);
     }
 
+    //métodos utilizados para la elaboración de gráficos
+    //método para mostrar la cantidad de citas canceladas que posee cada doctor, no recibe parámetros
     public function showCitasCanceladas()
     {
         $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_cita) AS CitasCanceladas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 3 GROUP BY nombre_doctor ORDER BY id_cita LIMIT 10';
@@ -187,6 +189,7 @@ class Citas extends Validator
         return Database::getRows($sql, $params);
     }
 
+    //método para mostrar la cantidad de consultas de cada doctor, no recibe parámetros 
     public function showCitasRealizadas()
     {
         $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
@@ -194,6 +197,7 @@ class Citas extends Validator
         return Database::getRows($sql, $params);
     }
 
+    //método para mostrar las consultas realizadas por cada especialidad. no recibe parámetros
     public function showCitasEspecialidad()
     {
         $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 4 GROUP BY nombre_especialidad ORDER BY CitasRealizadas DESC LIMIT 10';
@@ -201,6 +205,8 @@ class Citas extends Validator
         return Database::getRows($sql, $params);
     }
 
+    //método para mostrar las consultas mensuales de una especialidad determinada
+    //recibe como parámetro el id de la especialidad a través del select en pagina.php
     public function showCitasEspecialidadParam()
     {
         $sql = 'SELECT NombreMes, Mes, Citas, Especialidad FROM (SELECT c.id_doctor, es.id_especialidad, nombre_especialidad AS Especialidad, COUNT(id_cita) AS Citas, MONTH(fecha_cita) AS Mes, m.mes AS NombreMes FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 4 AND es.id_especialidad = ? AND MONTH(fecha_cita) = id_mes GROUP BY Mes ORDER BY Mes LIMIT 10) COUNTTABLE';
@@ -208,6 +214,8 @@ class Citas extends Validator
         return Database::getRows($sql, $params);
     }
 
+    //método para mostrar la cantidad de citas agrupadas por estado de un doctor determinado
+    //recibe como parámetro el id del doctor a través del select en pagina.php
     public function showCitasEstadoDoctor()
     {
         $sql = 'SELECT COUNT(id_cita) AS Citas, id_doctor, nombre_doctor, apellido_doctor, c.id_estado, e.estado FROM cita c INNER JOIN doctores d USING(id_doctor) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE id_doctor = ? GROUP BY id_estado ORDER BY id_doctor';

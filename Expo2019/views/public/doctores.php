@@ -17,7 +17,6 @@ public_helper::navbar();
                             <th>Foto</th>
                             <th>Nombre</th>
                             <th>Especialidad</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>

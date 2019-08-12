@@ -14,8 +14,8 @@ class Database
     {
         $server = 'localhost';
         $database = 'sismed';
-        $username = 'influencers';
-        $password = 'Expo2019';
+        $username = 'root';
+        $password = '';
         try {
             @self::$connection = new PDO('mysql:host=' . $server . '; dbname=' . $database . '; charset=utf8', $username, $password);
         } catch (PDOException $error) {

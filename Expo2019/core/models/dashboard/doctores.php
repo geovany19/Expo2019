@@ -12,7 +12,7 @@ class Doctores extends Validator
     private $foto = null;
     private $idespecialidad = null;
     private $idestado = null;
-    private $ruta = '../../../resources/img/doctores/';
+    private $ruta = '../../../resources/img/dashboard/doctores/';
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -32,7 +32,7 @@ class Doctores extends Validator
 
 	public function setNombre($value)
 	{
-		if ($this->validateAlphabetic($value, 1, 50)) {
+		if ($this->validateAlphabetic($value, 1, 25)) {
 			$this->nombre = $value;
 			return true;
 		} else {
@@ -47,7 +47,7 @@ class Doctores extends Validator
 
 	public function setApellido($value)
 	{
-		if ($this->validateAlphabetic($value, 1, 50)) {
+		if ($this->validateAlphabetic($value, 1, 25)) {
 			$this->apellido = $value;
 			return true;
 		} else {
@@ -77,7 +77,7 @@ class Doctores extends Validator
 
 	public function setUsuario($value)
 	{
-		if ($this->validateAlphanumeric($value, 1, 50)) {
+		if ($this->validateAlphanumeric($value, 1, 25)) {
 			$this->usuario = $value;
 			return true;
 		} else {
@@ -139,24 +139,24 @@ class Doctores extends Validator
 		return $this->ruta;
 	}
 	
-	public function setIdespecialidad($value)
-	{
-		if ($this->validateId($value)) {
-			$this->idespecialidad = $value;
-			return true;
-		} else {
-			return false;
+		public function setIdespecialidad($value)
+		{
+			if ($this->validateId($value)) {
+				$this->idespecialidad = $value;
+				return true;
+			} else {
+				return false;
+			}
 		}
-	}
 
-	public function getIdespecialidad()
-	{
-		return $this->idespecialidad;
-	}
+		public function getIdespecialidad()
+		{
+			return $this->idespecialidad;
+		}
 
 	public function setIdestado($value)
 	{
-		if ($this->validateId($value)) {
+		if ($value == '1' || $value == '0') {
 			$this->idestado = $value;
 			return true;
 		} else {
@@ -172,7 +172,14 @@ class Doctores extends Validator
 	//Métodos para manejar el CRUD
 	public function readDoctores()
 	{
-		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, fecha_nacimiento, foto_doctor, es.id_estado, e.id_especialidad, e.nombre_especialidad, es.estado FROM doctores d INNER JOIN especialidad e ON e.id_especialidad = d.id_especialidad INNER JOIN estado_usuarios es ON es.id_estado = d.id_estado  ORDER BY apellido_doctor';
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, fecha_nacimiento, foto_doctor, es.id_estado, e.id_especialidad, e.nombre_especialidad, es.estado FROM doctores d INNER JOIN especialidad e ON e.id_especialidad = d.id_especialidad INNER JOIN estado_usuarios es ON es.id_estado = d.id_estado  ORDER BY id_doctor';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
+
+	public function fillDoctores()
+	{
+		$sql = 'SELECT id_doctor, CONCAT(nombre_doctor,\' \',apellido_doctor) AS NombreDoc FROM doctores';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -205,11 +212,22 @@ class Doctores extends Validator
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto,$this->idestado,$this->idespecialidad, $this->iddoctor);
 		return Database::executeRow($sql, $params);
 	}
-
+	public function doctoresEspecialidad($id_especialidad){
+		$sql='SELECT doctores.nombre_doctor, doctores.apellido_doctor, especialidad.nombre_especialidad FROM (doctores INNER JOIN especialidad ON especialidad.id_especialidad=doctores.id_especialidad) WHERE especialidad.id_especialidad=?';
+		$params = array($id_especialidad);
+		return Database::getRows($sql,$params);
+	}
 	public function deleteDoctor()
 	{
 		$sql = 'DELETE FROM doctores WHERE id_doctor = ?';
 		$params = array($this->iddoctor);
 		return Database::executeRow($sql, $params);
+	}
+
+	public function graficoCalificacionesD()
+	{
+		$sql = 'SELECT nombre_doctor, apellido_doctor, SUM(calificacion) / COUNT(DISTINCT(id_calificacion)) AS Promedio FROM calificacion_doctor c INNER JOIN doctores d USING(id_doctor) GROUP BY id_doctor ORDER BY Promedio DESC';
+		$params = array(null);
+		return Database::getRows($sql, $params);
 	}
 }

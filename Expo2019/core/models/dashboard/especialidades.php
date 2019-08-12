@@ -55,35 +55,35 @@ class Especialidad extends Validator
 
 	public function readEspecialidad()
 	{
-		$sql = 'SELECT id_especialidad, nombre_especialidad, descripcion FROM especialidad ORDER BY nombre_especialidad';
+		$sql = 'SELECT id_especialidad, nombre_especialidad, descripcion_especialidad FROM especialidad ORDER BY nombre_especialidad';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
 
 	public function searchEspecialidad($value)
 	{
-		$sql = 'SELECT * FROM especialidad WHERE nombre_especialidad LIKE ? OR descripcion LIKE ? ORDER BY nombre_especialidad';
+		$sql = 'SELECT * FROM especialidad WHERE nombre_especialidad LIKE ? OR descripcion_especialidad LIKE ? ORDER BY nombre_especialidad';
 		$params = array("%$value%", "%$value%");
 		return Database::getRows($sql, $params);
 	}
 
 	public function createEspecialidad()
 	{
-		$sql = 'INSERT INTO especialidad(nombre_especialidad, descripcion) VALUES(?, ?)';
+		$sql = 'INSERT INTO especialidad(nombre_especialidad, descripcion_especialidad) VALUES(?, ?)';
 		$params = array($this->especialidad, $this->descripcion);
 		return Database::executeRow($sql, $params);
 	}
 
 	public function selectEspecialidad()
 	{
-		$sql = 'SELECT id_especialidad, nombre_especialidad, descripcion FROM especialidad WHERE id_especialidad = ?';
+		$sql = 'SELECT id_especialidad, nombre_especialidad, descripcion_especialidad FROM especialidad WHERE id_especialidad = ?';
 		$params = array($this->idespecialidad);
 		return Database::getRow($sql, $params);
 	}
 
 	public function updateEspecialidad()
 	{
-		$sql = 'UPDATE especialidad SET nombre_especialidad = ?, descripcion = ? WHERE id_especialidad = ?';
+		$sql = 'UPDATE especialidad SET nombre_especialidad = ?, descripcion_especialidad = ? WHERE id_especialidad = ?';
 		$params = array($this->especialidad, $this->descripcion, $this->idespecialidad);
 		return Database::executeRow($sql, $params);
 	}

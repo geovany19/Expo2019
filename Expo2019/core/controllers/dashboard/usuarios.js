@@ -5,14 +5,13 @@ $(document).ready(function()
 
 //Constante que sirve para establecer la ruta y los parámetros de comunicación con la API
 const api = '../../core/api/dashboard/usuarios.php?action=';
-
 //Función para llenar la tabla con los registros
 function fillTable(rows)
  {
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
     rows.forEach(function (row) {
-        (row.id_estado == 1) ? icon = '1' : icon = '2';
+        (row.id_estado == 1) ? icon = '1' : icon = '0';
         content += `
             <tr>
                 <td>${row.id_usuario}</td>
@@ -21,8 +20,8 @@ function fillTable(rows)
                 <td>${row.correo_usuario}</td>
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td><img src="../../resources/img/usuarios/${row.foto_usuario}" height="75"></td>
-                <td>${row.id_estado}</td>
+                <td><img src="../../resources/img/dashboard/usuarios/${row.foto_usuario}" height="75"></td>
+                <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td></td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_usuario})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -88,11 +87,81 @@ function showTable()
             console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
         });
 }
-
+// Función para mostrar formulario con registro a modificar
+$('#form-search').submit(function()
+{
+    event.preventDefault();
+    $.ajax({
+        url: api + 'search',
+        type: 'post',
+        data: $('#form-search').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status) {
+                fillTable(result.dataset);
+                sweetAlert(1, result.message, null);
+            } else {
+                sweetAlert(3, result.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        // Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+function modalcreate()
+{
+    $('#form-create')[0].reset();
+    $('#modal-create').modal('show');
+}
+// Función para crear un nuevo registro
+$('#form-create').submit(function()
+{
+    event.preventDefault();
+    $.ajax({
+        url: api + 'create',
+        type: 'post',
+        data: new FormData($('#form-create')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+    .done(function(response){
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status) {
+                $('#modal-create').modal('hide');
+                $('#form-create')[0].reset();
+                $("#tabla-usuarios").DataTable().destroy();
+                showTable();
+                sweetAlert(1, result.message, null);
+            } else {
+                sweetAlert(2, result.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        // Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
 function modalUpdate(id) {
     
     $.ajax({
-        url: apiUsuarios + 'get',
+        url: api + 'get',
         type: 'post',
         data: {
             id_usuario: id
@@ -106,7 +175,7 @@ function modalUpdate(id) {
                 // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
                 if (result.status) {
                     $('#form-update')[0].reset();
-                    $('#foto').attr('src','../../resources/img/usuarios/'+result.dataset.foto_usuario);
+                    $('#foto').attr('src','../../resources/img/dashboard/usuarios/'+result.dataset.foto_usuario);
                     $('#id_usuario').val(result.dataset.id_usuario);
                     $('#update_nombres').val(result.dataset.nombre_usuario);
                     $('#update_apellidos').val(result.dataset.apellido_usuario);
@@ -134,7 +203,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiUsuarios + 'update',
+        url: api + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -149,6 +218,7 @@ $('#form-update').submit(function()
                 // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                 if (result.status) {
                     $('#modal-update').modal('hide');
+                    $("#tabla-usuarios").DataTable().destroy();
                     showTable();
                     sweetAlert(1, result.message, null);
                 } else {
@@ -178,7 +248,7 @@ function confirmDelete(id, file)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: apiUsuarios + 'delete',
+                url: api + 'delete',
                 type: 'post',
                 data:{
                     id_usuario: id,
@@ -191,6 +261,7 @@ function confirmDelete(id, file)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
+                    $("#tabla-usuarios").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {

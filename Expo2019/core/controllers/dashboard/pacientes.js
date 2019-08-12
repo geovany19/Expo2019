@@ -4,7 +4,7 @@ $(document).ready(function()
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la API
-const api = '../../core/api/dashboard/pacientes.php?action=';
+const apiPacientes = '../../core/api/dashboard/pacientes.php?action=';
 
 //Función para llenar la tabla con los registros
 function fillTable(rows)
@@ -12,19 +12,19 @@ function fillTable(rows)
     let content = '';
     //Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
     rows.forEach(function(row){
-        (row.id_estado == 1) ? icon = '1' : icon = '2';
+        (row.id_estado == 1) ? icon = '1' : icon = '0';
         content += `
             <tr>
                 <td>${row.id_paciente}</td>
+                <td><img src="../../resources/img/dashboard/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.nombre_paciente}</td>
                 <td>${row.apellido_paciente}</td> 
                 <td>${row.correo_paciente}</td>
                 <td>${row.usuario_paciente}</td>
                 <td>${row.fecha_nacimiento}</td>
-                <td><img src="../../resources/img/pacientes/${row.foto_paciente}" height="75"></td>
                 <td>${row.peso_paciente}</td>
                 <td>${row.estatura_paciente}</td>
-                <td><img src="../../resources/img/doctores/estado/${row.id_estado}.png" height="25"></td>//
+                <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_paciente})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_paciente})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -32,35 +32,36 @@ function fillTable(rows)
             </tr>
         `;
     });
-    $('#table-body').html(content);
-    $("#tabla-pacientes").DataTable({
-        responsive: true,
-        retrieve: true,
-        paging: false,
-        "language": {
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar:",
-            "sUrl": "",
-            "sInfoThousands": ",",
+    $('#tabla-pacientes').html(content);
+    $("#table-body").DataTable({
+        "oLanguage":{
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-                "sFirst": "Primero",
-                "sLast": "Último",
-                "sNext": "Siguiente",
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
                 "sPrevious": "Anterior"
             },
             "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-        }
+        },
+        responsive: true,
+        retrieve: true,
+        colReorder: false,
+        rowReorder: false,
     });
     $('.tooltipped').tooltip();
 }
@@ -68,7 +69,7 @@ function fillTable(rows)
 function showTable()
 {
     $.ajax({
-        url: api + 'read',
+        url: apiPacientes + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -97,7 +98,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'search',
+        url: apiPacientes + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -128,7 +129,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'create',
+        url: apiPacientes + 'create',
         type: 'post',
         data: new FormData($('#form-create')[0]),
         datatype: 'json',
@@ -142,7 +143,9 @@ $('#form-create').submit(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-create').modal('close');
+                $('#modal-create').modal('hide');
+                $("#tabla-pacientes").DataTable().destroy();
+                $('#form-create')[0].reset();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -162,7 +165,7 @@ $('#form-create').submit(function()
 function modalUpdate(id)
 {
     $.ajax({
-        url: api + 'get',
+        url: apiPacientes + 'get',
         type: 'post',
         data:{
             id_paciente: id
@@ -175,15 +178,16 @@ function modalUpdate(id)
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
             if (result.status) {
+                console.log(result.dataset)
                 $('#form-update')[0].reset();
                 $('#id_paciente').val(result.dataset.id_paciente);
-                $('#foto_paciente').val(result.dataset.foto_paciente);
                 $('#update_nombres').val(result.dataset.nombre_paciente);
                 $('#update_apellidos').val(result.dataset.apellido_paciente);
                 $('#update_correo').val(result.dataset.correo_paciente);
                 $('#update_usuario').val(result.dataset.usuario_paciente);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
-                $('#foto').attr('src','../../resources/img/pacientes/'+result.dataset.foto_paciente);
+                $('#foto_paciente').val(result.dataset.foto_paciente);
+                $('#foto').attr('src','../../resources/img/dashboard/pacientes/'+result.dataset.foto_paciente);
                 $('#update_peso').val(result.dataset.peso_paciente);
                 $('#update_estatura').val(result.dataset.estatura_paciente);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
@@ -206,7 +210,7 @@ $('#form-update').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: api + 'update',
+        url: apiPacientes + 'update',
         type: 'post',
         data: new FormData($('#form-update')[0]),
         datatype: 'json',
@@ -221,6 +225,7 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
+                $("#tabla-pacientes").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -250,7 +255,7 @@ function confirmDelete(id)
     .then(function(value){
         if (value) {
             $.ajax({
-                url: api + 'delete',
+                url: apiPacientes + 'delete',
                 type: 'post',
                 data:{
                     id_paciente: id
@@ -263,6 +268,7 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
+                        $("#tabla-pacientes").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {
@@ -276,6 +282,20 @@ function confirmDelete(id)
                 // Se muestran en consola los posibles errores de la solicitud AJAX
                 console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
             });
+
         }
     });
+}
+
+function reportePacientes() {
+    var todayDate = moment().format('YYYY-MM-DD');
+    let fechaini = $('#fecha_inicio').val();
+    let fechafin = $('#fecha_fin').val();
+    if( fechaini < todayDate && fechafin < todayDate && fechaini < fechafin){
+        window.open('../../core/reportes/reportepacientes.php?fechaini=' + fechaini + '&fechafin=' + fechafin);
+    }
+    else{
+        alert("Error de fechas para reporte");
+    }
+
 }

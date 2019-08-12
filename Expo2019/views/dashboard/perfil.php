@@ -1,100 +1,106 @@
 <?php
-include('../../core/helpers/dashboard/navbaradmin.php');
-include('../../core/helpers/dashboard/footeradmin.php');
+include "../../core/helpers/dashboard_helper.php";
+dashboard_helper::head("Editar perfil");
+dashboard_helper::nav();
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" href="../../resources/img/jardin-iso.png">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
-    <link rel="stylesheet" href="../../resources/css/materialize.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/Chart.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/chart-style.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/sidenav.css">
-    <title>Perfil</title>
-</head>
-
-<body class="has-fixed-navbar">
-    <header>
-        <?php
-        echo navbar::nav();
-        echo navbar::sidenav();
-        ?>
-    </header>
-    <main>
-        <div class="container">
-            <div class="row center-align">
-                <div class="col s12">
-                    <h3>Perfil</h3>
-                    <form class="col s12">
-                        <div class="input-field">
-                            <i class="material-icons prefix">person</i>
-                            <label for="nombre">Nombre</label>
-                            <input value="Lana" type="text" name="nombre" required>
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">person</i>
-                            <label for="apellido">Apellido</label>
-                            <input value="del Rey" type="text" name="nombre" required>
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">account_circle</i>
-                            <label for="usuario">Usuario</label>
-                            <input value="lana_delrey123" type="text" name="nombre" required>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">mail</i>
-                                <input value="lanadelrey@gmail.com" id="email" type="email" class="validate" disabled="disabled">
-                                <label for="email">Correo electrónico</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">vpn_key</i>
-                                <input value="lana123" id="password" type="password" class="validate">
-                                <label for="password">Contraseña</label>
-                            </div>
-                        </div>
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Seleccionar foto</span>
-                                <input type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <i class="material-icons prefix">add_a_photo</i>
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
-                        <button class="waves-effect waves-light btn" href="#modal1"><a href="#modal1" class="white-text"><i class="material-icons left white-text" href="#modal1">edit</i>Modificar</a></button>
-                    </form>
-                </div>
+<main>
+    <div class="container">
+        <h2 class="text-center">Configuración del perfil</h2>
+        <button type="button" class="btn btn-outline-info btn-lg btn-block" onclick="modalProfile()" data-target="#modal-profile">
+            <i class="fas fa-user-edit"></i>
+            Editar perfil</button>
+        <button type="button" data-toggle="modal" data-target="#modal-password" class="btn btn-outline-warning btn-lg btn-block">
+            <i class="fas fa-key"></i>
+            Modificar contraseña</button>
+        <hr>
+    </div>
+</main>
+<div class="modal fade" id="modal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center aling-items-center">
+                <h5 class="modal-title" id="exampleModalLongTitle">Actualizar perfil</h5>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center" >
+					<img id="foto" class="img-fluid" width="100">
+				</div>
+                <form id="form-profile" enctype="multipart/form-data">
+                    <input type="hidden" id="id_usuario" name="id_usuario">
+                    <input type="hidden" id="foto_usuario" name="foto_usuario">
+                    <div class="form-group">
+                        <label for="profile_nombre">Nombre</label>
+                        <input type="text" class="form-control" class="form-control is-valid" id="profile_nombre" name="profile_nombre" aria-describedby="emailHelp" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile_apellido">Apellido</label>
+                        <input type="text" class="form-control" id="profile_apellido" name="profile_apellido" placeholder="Apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile_correo">Correo</label>
+                        <input type="text" class="form-control" id="profile_correo" name="profile_correo" placeholder="Correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile_usuario">Usuario</label>
+                        <input type="text" class="form-control" id="profile_usuario" name="profile_usuario" placeholder="Usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile_fecha">Fecha</label>
+                        <input type="date" class="form-control" id="profile_fecha" name="profile_fecha" placeholder="Fecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="update_archivo">Foto</label>
+                        <input type="file" id="update_archivo" name="update_archivo" class="file-input">
+                    </div>
+                    <div class="modal-footer justify-content-center aling-items-center">
+                    <button type="button" data-toggle="tooltip" data-placement="top" title="Cancelar" class="btn btn-danger" data-dismiss="modal"><i class="material-icons prefix">cancel</i></button>
+				<button type="submit" data-toggle="tooltip" data-placement="top" title="Actualizar" class="btn btn-success" ><i class="material-icons prefix">done</i></button>
+                    </div>
+                </form>
             </div>
         </div>
-    </main>
-    <footer>
-        <?php
-        echo footer::footerbody();
-        ?>
-        <script>
-            var instance = M.Tooltip.getInstance(elem);
-        </script>
-        <script type="text/javascript" src="../../resources/js/tooltip.js"></script>
-        <script type="text/javascript" src="../../resources/js/Chart.js"></script>
-        <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
-        <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
-        <script type="text/javascript" src="../../resources/js/jquery-3.2.1.min.js"></script>
-    </footer>
-    <script src="../../resources/js/jquery.js"></script>
-    <script src="../../resources/js/materialize.min.js"></script>
-</body>
-
-</html> 
+    </div>
+</div>
+<!--Modal para actualizar contraseña -->
+<div class="modal fade" id="modal-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center aling-items-center">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modificar contraseña</h5>
+            </div>
+            <div class="modal-body">
+                <form id="form-password" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="clave_actual_1">Contraseña actual</label>
+                        <input type="password" class="form-control" class="form-control is-valid" id="clave_actual_1" name="clave_actual_1" aria-describedby="emailHelp" placeholder="Contraseña actual" required>
+                        <div class="invalid-feedback">Ingrese la contraseña actual</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clave_actual_2">Confirmar contraseña actual</label>
+                        <input type="password" class="form-control" id="clave_actual_2" name="clave_actual_2" placeholder="Confirmar contraseña actual" required>
+                        <div class="invalid-feedback">Confirme la contraseña actual. Asegurese que ambas contraseñas coincidan.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clave_nueva_1">Nueva contraseña</label>
+                        <input type="password" class="form-control" id="clave_nueva_1" name="clave_nueva_1" placeholder="Nueva contraseña" required>
+                        <small id="passwordHelp" class="form-text text-muted">La nueva contraseña debe ser de 7-15 caracteres de longitud. Debe contener letras, números.
+                            No debe contener espacios, caracteres especiales o emojis, y no debe ser igual a la contraseña actual.</small>
+                        <div class="invalid-feedback">Ingrese la nueva contraseña</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clave_nueva_2">Confirmar nueva contraseña</label>
+                        <input type="password" class="form-control" id="clave_nueva_2" name="clave_nueva_2" placeholder="Confirmar nueva contraseña" required>
+                        <div class="invalid-feedback">Confirme la contraseña. Asegurese que ambas contraseñas coincidan.</div>
+                    </div>
+                    <div class="modal-footer justify-content-center aling-items-center">
+                        <button type="button"  data-toggle="tooltip" data-placement="top" title="Cancelar" class="btn btn-danger" data-dismiss="modal"><i class="material-icons prefix">cancel</i></button>
+                        <button type="submit"  data-toggle="tooltip" data-placement="top" title="Modifica Contraseña" class="btn btn-success" ><i class="material-icons prefix">done</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+dashboard_helper::footer('account.js');
+?>

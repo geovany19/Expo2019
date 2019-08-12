@@ -187,8 +187,8 @@ class Doctores extends Validator
 	public function createDoctor()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor,id_estado,id_especialidad) VALUES(?,?,?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto,$this->idestado,$this->idespecialidad);
+		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, fecha_nacimiento, foto_doctor, id_estado, id_especialidad) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idestado, $this->idespecialidad);
 		return Database::executeRow($sql, $params);
 	}
 

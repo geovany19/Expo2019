@@ -11,7 +11,8 @@ class dashboard_helper
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+				<meta http-equiv="X-UA-Compatible" content="ie=edge">
+				<link rel="shortcut icon" href="../../resources/img/dashboard/img4.jpg">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-select.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
@@ -24,14 +25,14 @@ class dashboard_helper
 				<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/colReorder.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/scroller.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/buttons.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/fixedColumns.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/fixedHeader.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/rowReorder.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/select.bootstrap4.min.css">
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.bootstrap4.min.css">-->
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/colReorder.bootstrap4.min.css">-->
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/scroller.bootstrap4.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/buttons.bootstrap4.min.css">-->
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/fixedColumns.bootstrap4.min.css">-->
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/fixedHeader.bootstrap4.min.css">-->
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/rowReorder.bootstrap4.min.css">-->
+				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/select.bootstrap4.min.css">-->
                 <title>SISMED - ' . $title . '</title>
             </head>
         ');
@@ -51,9 +52,8 @@ class dashboard_helper
 		if (isset($_SESSION['idUsuario'])) {
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registrarse.php') {
-				self::modals();
 				print('
-					<body onload="startTime()">
+					<body>
 						<div class="wrapper">
 							<nav id="sidebar">
 								<div class="sidebar-header">
@@ -76,19 +76,16 @@ class dashboard_helper
 											<li><a href="pacientes.php">Pacientes</a></li>
 											<li><a href="usuarios.php">Usuarios</a></li>
 											<li><a href="especialidad.php">Especialidades</a></li>
-											<li><a href="disponibilidad.php">Horarios de disponibilidad</a></li>
+											<li><a href="disponibilidad.php">Horarios</a></li>
 										</ul>
 									</li>
 									<li>
 										<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-											<i class="fas fa-user"></i> Mi perfil - <b>' . $_SESSION['aliasUsuario'] . '</b>
+											<i class="fas fa-user"></i> Cuenta - <b>' . $_SESSION['aliasUsuario'] . '</b>
 										</a>
 										<ul class="collapse list-unstyled" id="pageSubmenu">
 											<li>
-												<a href="#" onclick="modalProfile()">Editar perfil</a>
-											</li>
-											<li>
-												<a href="#modal-password" class="modal-trigger" data-toggle="modal" data-target="#modal-password">Cambiar contraseña</a>
+												<a href="perfil.php">Editar perfil</a>
 											</li>
 										</ul>
 									</li>
@@ -167,29 +164,25 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 				<script type="text/javascript" src="../../resources/js/inicializacion.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
+				<!--<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/select.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/buttons.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/rowReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/fixedColumns.bootstrap4.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>-->
 				<script type="text/javascript" src="../../resources/js/pdfmake.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/vfs_fonts.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
-				<script type="text/javascript" src="../../core/controllers/dashboard/account.js"></script>
+				<script type="text/javascript" src="../../core/helpers/componentes.js"></script>
+				<script type="text/javascript" src="../../core/controllers/dashboard/logout.js"></script>
+				<script type="text/javascript" src="../../resources/js/moment-with-locales.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/' . $controller . '"></script>
+				
             </body>
             </html>
         ');
-	}
-
-	public function modals()
-	{
-		print('
-			
-		');
 	}
 }

@@ -1,9 +1,10 @@
 $(document).ready(function()
 {
     showTable();
+    selectEspecialidad('especialidadI',null);
 });
 
-const apiEspecialidades = '../../core/api/dashboard/especialidades.php?action=';
+const api = '../../core/api/dashboard/especialidades.php?action=';
 
 function fillTable(rows)
 {
@@ -14,7 +15,7 @@ function fillTable(rows)
             <tr>
                 <td>${row.id_especialidad}</td>
                 <td>${row.nombre_especialidad}</td>
-                <td>${row.descripcion}</td>
+                <td>${row.descripcion_especialidad}</td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_especialidad})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_especialidad})" class="red-text tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -22,43 +23,44 @@ function fillTable(rows)
             </tr>
         `;
     });
-    $('#table-body').html(content);
-    $("#tabla-especialidades").DataTable({
-        responsive: true,
-        retrieve: true,
-        "language": {
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando _START_ al _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar:",
-            "sUrl": "",
-            "sInfoThousands": ",",
+    $('#tabla-especialidades').html(content);
+    $("#table-body").DataTable({
+        "oLanguage":{
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-                "sFirst": "Primero",
-                "sLast": "Último",
-                "sNext": "Siguiente",
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
                 "sPrevious": "Anterior"
             },
             "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-        }
+        },
+        responsive: true,
+        retrieve: true,
+        colReorder: false,
+        rowReorder: false,
     });
-    $('.tooltipped').tooltip();
 }
 
 // Función para obtener y mostrar los registros disponibles
 function showTable()
 {
     $.ajax({
-        url: apiEspecialidades + 'read',
+        url: api + 'read',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -87,7 +89,7 @@ $('#form-search').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiEspecialidades + 'search',
+        url: api + 'search',
         type: 'post',
         data: $('#form-search').serialize(),
         datatype: 'json'
@@ -118,7 +120,7 @@ $('#form-create').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiEspecialidades + 'create',
+        url: api + 'create',
         type: 'post',
         data: $('#form-create').serialize(),
         datatype: 'json'
@@ -131,6 +133,7 @@ $('#form-create').submit(function()
             if (result.status) {
                 $('#form-create')[0].reset();
                 $('#modal-create').modal('hide');
+                $("#tabla-especialidades").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -145,7 +148,42 @@ $('#form-create').submit(function()
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
-
+function selectEspecialidad(Select, value){
+    $.ajax({
+        url:api+'read',
+        type: 'POST',
+        data: null,
+        datatype: 'JSON'
+    })
+    .done(function(response){
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            console.log(response);
+            if (result.status) {
+                let content = '';
+                if (!value) {
+                    content += '<option value="" disabled selected>Seleccione una especialidad</option>';
+                }
+                result.dataset.forEach(function(row){
+                    if (row.id_especialidad != value) {
+                        console.log(row.id_especialidad);
+                        content += `<option  value="${row.id_especialidad}">${row.nombre_especialidad}</option>`;
+                    } else {
+                        content += `<option  value="${row.id_especialidad}" selected>${row.nombre_especialidad}</option>`;
+                    }
+                });
+                $('#' + Select).html(content);
+            } else {
+                $('#' + Select).html('<option value="">No hay especialidades</option>');
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
 // Función para mostrar formulario con registro a modificar
 function modalUpdate(id)
 {
@@ -165,7 +203,7 @@ function modalUpdate(id)
             if (result.status) {
                 $('#id_especialidad').val(result.dataset.id_especialidad);
                 $('#update_nombre').val(result.dataset.nombre_especialidad);
-                $('#update_descripcion').val(result.dataset.descripcion);
+                $('#update_descripcion').val(result.dataset.descripcion_especialidad);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -197,6 +235,7 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
+                $("#tabla-especialidades").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -239,6 +278,7 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
+                    $("#tabla-especialidades").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {
@@ -255,3 +295,7 @@ function confirmDelete(id)
         }
     });
 }
+$('#formEspecialidad').submit(function(){
+    var value = $('#especialidadI').val();
+    window.open("../../core/reportes/reporteDoctores.php?requestID="+value);
+})

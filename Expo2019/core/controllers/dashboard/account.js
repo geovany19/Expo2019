@@ -1,29 +1,11 @@
-// Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/dashboard/usuarios.php?action=';
-
-// Función para cerrar la sesión del usuario
-function signOff()
-{
-    swal({
-        title: 'Advertencia',
-        text: '¿Está seguro que desea cerrar sesión?',
-        icon: 'warning',
-        buttons: ['Cancelar', 'Aceptar'],
-        closeOnClickOutside: false,
-        closeOnEsc: false
-    })
-    .then(function(value){
-        if (value) {
-            location.href = apiAccount + 'logout';
-        }
-    });
-}
+// Constante para establecer la ruta y parámetros de comunicación con la api
+const api = '../../core/api/dashboard/usuarios.php?action=';
 
 // Función para mostrar formulario de perfil de usuario
 function modalProfile()
 {
     $.ajax({
-        url: apiAccount + 'readProfile',
+        url: api + 'readProfile',
         type: 'post',
         data: null,
         datatype: 'json'
@@ -35,6 +17,7 @@ function modalProfile()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#profile_nombre').val(result.dataset.nombre_usuario);
+                $('#foto').attr('src','../../resources/img/dashboard/usuarios/'+result.dataset.foto_usuario);
                 $('#profile_apellido').val(result.dataset.apellido_usuario);
                 $('#profile_correo').val(result.dataset.correo_usuario);
                 $('#profile_usuario').val(result.dataset.usuario_usuario);
@@ -59,10 +42,13 @@ $('#form-profile').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiAccount + 'editProfile',
+        url: api + 'editProfile',
         type: 'post',
-        data: $('#form-profile').serialize(),
-        datatype: 'json'
+        data: new FormData($('#form-profile')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
     })
     .done(function(response){
         // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
@@ -90,7 +76,7 @@ $('#form-password').submit(function()
 {
     event.preventDefault();
     $.ajax({
-        url: apiAccount + 'password',
+        url: api + 'password',
         type: 'post',
         data: $('#form-password').serialize(),
         datatype: 'json'
@@ -102,7 +88,7 @@ $('#form-password').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-password').modal('hide');
-                sweetAlert(1, result.message, 'pagina.php');
+                sweetAlert(1, result.message, 'perfil.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

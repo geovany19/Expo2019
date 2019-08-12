@@ -10,7 +10,7 @@ class Usuario extends Validator
 	private $clave = null;
 	private $fecha = null;
 	private $foto = null;
-	private $ruta = '../../../resources/img/usuarios/';
+	private $ruta = '../../../resources/img/dashboard/usuarios/';
 	private $idestado = null;
 
 	//Métodos para la sobre carga de propiedades
@@ -141,7 +141,7 @@ class Usuario extends Validator
 
 	public function setEstado($value)
 	{
-		if ($this->validateId($value)) {
+		if ($value == '1' || $value == '0') {
 			$this->idestado = $value;
 			return true;
 		} else {
@@ -189,10 +189,17 @@ class Usuario extends Validator
 	}
 
 	//Métodos para manejar el CRUD
-	public function readUsuarios()
+	public function getUsuarios()
 	{
 		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a ORDER BY apellido_usuario';
 		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
+
+	public function readUsuarios()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a ORDER BY apellido_usuario';
+		$params = array($_SESSION['idUsuario']);
 		return Database::getRows($sql, $params);
 	}
 
@@ -213,7 +220,7 @@ class Usuario extends Validator
 
 	public function getUser()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		return Database::getRow($sql, $params);
 	}

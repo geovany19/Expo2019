@@ -13,7 +13,7 @@ const apiCitas = '../../core/api/dashboard/citas.php?action=';
 const apiDoctores = '../../core/api/dashboard/doctores.php?action=';
 const apiEspecialidad = '../../core/api/dashboard/especialidades.php?action=';
 
-//Función para crear gráficos en página de inicio
+//Función para la creación del gráfico de las consultas realizadas por mes
 function chartConsultasFecha(){
 
     $.ajax({
@@ -27,13 +27,18 @@ function chartConsultasFecha(){
             const result = JSON.parse(response);
             console.log(result);
             if(result.status){
+                //declaración del arreglo para el eje X
                 let fechas = [];
+                //declaración del arreglo para el eje Y
                 let cantidad = [];
                 result.dataset.forEach(function(row){
+                    //parametros de la base de datos que reciben lo arreglos
                     fechas.push(row.NombreMes);
                     cantidad.push(row.CantidadCitas);
 
                 });
+                //determina el tipo de gráfico y los párametros que recibe, id del canva, arreglo para el eje X, arreglo para el eje Y
+                //lectura del dato, y título del gráfico
                 lineGraph('chartConsultasFecha', fechas, cantidad, 'Consultas', 'Consultas realizadas')
                 
             }else{

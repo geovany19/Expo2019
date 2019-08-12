@@ -3,7 +3,10 @@ class Especialidad extends Validator
 {
     private $idespecialidad = null;
     private $especialidad = null;
-    private $descripcion = null;
+	private $descripcion = null;
+	
+
+	
 
     public function setId($value)
 	{

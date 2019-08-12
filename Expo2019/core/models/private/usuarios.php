@@ -10,6 +10,111 @@ class Usuarios extends Validator
 	private $clave = null;
 	private $fecha = null;
 	private $especialidad = null;
+	//para insertar en citas 
+	private $padecimientos = null;
+	private $id_paciente = null;
+	private $id_cita = null;
+	private $receta = null;
+	private $peso = null;
+	private $estatura = null;
+	private $presion = null;
+
+	/*aqui va algo de prueba */
+	public function getPeso()
+	{
+		return $this->peso;
+	}
+
+	public function setPeso($value)
+	{
+		$this->peso = $value;
+		return true;
+	}
+//as
+public function getEstatura()
+	{
+		return $this->estatura;
+	}
+
+	public function setEstatura($value)
+	{
+		$this->estatura = $value;
+		return true;
+	}
+
+//as
+public function getPresion()
+	{
+		return $this->presion;
+	}
+
+	public function setPresion($value)
+	{
+		$this->presion = $value;
+		return true;
+
+	}
+
+public function setId_paciente($value)
+	{
+		if ($this->validateId($value)) {
+			$this->id_paciente = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getId_cita()
+	{
+		return $this->id_cita;
+	}
+	public function setId_cita($value)
+	{
+		if ($this->validateId($value)) {
+			$this->id_cita = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getId_paciente()
+	{
+		return $this->id_paciente;
+	}
+
+
+public function setReceta($value)
+	{
+		if ($this->validateAlphabetic($value, 1, 130)) {
+			$this->receta = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getPadecimientos()
+	{
+		return $this->padecimientos;
+	}
+
+	public function setPadecimientos($value)
+	{
+		if ($this->validateAlphabetic($value, 1, 130)) {
+			$this->padecimientos = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getReceta()
+	{
+		return $this->descripcion;
+	}
+	/* */
 
 	// Métodos para sobrecarga de propiedades
 	public function setId($value)
@@ -152,8 +257,15 @@ class Usuarios extends Validator
 
 	public function getCitas()
 	{
-		$sql = 'SELECT c.id_cita, p.nombre_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=1 and c.id_doctor=? GROUP by p.id_paciente';
+		$sql = 'SELECT c.id_cita, p.nombre_paciente,p.id_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=1 and c.id_doctor=? GROUP by p.id_paciente';
 		$params = array($this->id);
+		return Database::getRows($sql, $params);
+	}
+
+	public function reporteExpediente($id)
+	{
+		$sql = 'SELECT p.nombre_paciente, p.apellido_paciente, co.padecimientos, co.receta, c.fecha_cita from pacientes p, cita c, consulta co where c.id_paciente=p.id_paciente and co.id_paciente=c.id_paciente and c.id_paciente=?';
+		$params = array($id);
 		return Database::getRows($sql, $params);
 	}
 
@@ -183,6 +295,38 @@ class Usuarios extends Validator
 		$sql = 'UPDATE cita SET id_estado = 4 WHERE  id_cita = ?';
 		$params = array($this->id);
 		return Database::executeRow($sql, $params);
+	}
+
+	public function readPaciente()
+	{
+		$sql = 'SELECT id_paciente, id_cita, c.id_estado, p.nombre_paciente FROM cita c  INNER JOIN pacientes p USING (id_paciente) WHERE id_cita = ?';
+		$params = array($this->id);
+		return Database::getRow($sql, $params);
+	}
+
+	//Insertar en la tabla consulta
+
+	public function insertConsulta()
+	{
+		$sql = 'INSERT INTO consulta (padecimientos, id_doctor, id_paciente, receta, peso, estatura, presion, id_cita) VALUES (?,?,?,?,?,?,?,?)';
+		$params = array($this->padecimientos, $this->id, $this->id_paciente,$this->receta, $this->peso, $this->estatura, $this->presion, $this->id_cita);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function updateEstadocita()
+	{
+		$sql = 'UPDATE cita SET id_estado = 1 WHERE cita.id_cita = ?';
+		$params = array($this->id_cita);
+		return Database::executeRow($sql, $params);
+	}
+	
+	//Consulta para el reporte de receta 
+
+	public function reporteReceta1($id)
+	{
+		$sql = 'SELECT d.nombre_doctor, d.apellido_doctor, c.receta, p.nombre_paciente, p.apellido_paciente from doctores d, consulta c, pacientes p where d.id_doctor=c.id_doctor and p.id_paciente= ?';
+		$params = array($id);
+		return Database::getRows($sql, $params);
 	}
 }
 ?>

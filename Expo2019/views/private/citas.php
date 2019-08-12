@@ -9,7 +9,8 @@ private_helper::headerTemplate('Citas');
       <th scope="col">Paciente</th>
       <th scope="col">Fecha cita</th>
       <th scope="col">Hora cita</th>
-      <th scope="col">Estado cita </th>
+      <th scope="col">Estado cita</th>
+      <th scope="col">Ver</th>
     </tr>
   </thead>
   <tbody id="table-body">

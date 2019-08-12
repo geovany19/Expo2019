@@ -1,6 +1,6 @@
 <?php
 //los require necesario para que funcione
-require_once("../helpers/fpdf/fpdf.php");
+require_once("../fpdf/fpdf.php");
 session_start();
 class PDF extends FPDF
 {

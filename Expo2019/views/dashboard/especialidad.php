@@ -94,17 +94,17 @@ dashboard_helper::nav();
       </div>
       <div class="modal-body">
 							
-	  <form class="needs-validation" id="form-reportes" novalidate>
-	  <div class="d-flex justify-content-center">
-	  </div>	
+	  <form class="needs-validation" id="formEspecialidad">
+	  	<div class="d-flex justify-content-center">
 			<div class="row">
-			<div class="form-group">
-						<label for="update_nombre">Especialidad</label>
-						<input type="text" class="form-control" class="form-control is-valid" id="update_nombre" name="update_nombre" placeholder="Especialidad" maxlength="25">
-					</div>
+				<div class="form-group">
+					<label for="update_nombre">Especialidad</label>
+					<select name="especialidadI" id="especialidadI"></select>
+				</div>
 			</div>
+		</div>
 			<div class="modal-footer justify-content-center aling-items-center">
-			<button onclick="reportePacientes()" type="button" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Generar reporte" ><i class='material-icons'>assignment</i></button>
+			<button type="submit" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Generar reporte" ><i class='material-icons'>assignment</i></button>
 			</div>
 		</form>
       </div>

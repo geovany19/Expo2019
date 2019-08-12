@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
     showTable();
+    selectEspecialidad('doctoresI',null);
 })
 
 //Constantes que sirve para establecer la ruta y los parámetros de comunicación con la apiDoctores y especialidad
@@ -246,7 +247,42 @@ $('#form-update').submit(function()
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
-
+function selectEspecialidad(Select, value){
+    $.ajax({
+        url:especialidad+'read',
+        type: 'POST',
+        data: null,
+        datatype: 'JSON'
+    })
+    .done(function(response){
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            console.log(response);
+            if (result.status) {
+                let content = '';
+                if (!value) {
+                    content += '<option value="" disabled selected>Seleccione una especialidad</option>';
+                }
+                result.dataset.forEach(function(row){
+                    if (row.id_especialidad != value) {
+                        console.log(row.id_especialidad);
+                        content += `<option  value="${row.id_especialidad}">${row.nombre_especialidad}</option>`;
+                    } else {
+                        content += `<option  value="${row.id_especialidad}" selected>${row.nombre_especialidad}</option>`;
+                    }
+                });
+                $('#' + Select).html(content);
+            } else {
+                $('#' + Select).html('<option value="">No hay especialidades</option>');
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
 // Función para eliminar un registro seleccionado
 function confirmDelete(id)
 {
@@ -291,3 +327,7 @@ function confirmDelete(id)
         }
     });
 }
+$('#formDoctor').submit(function(){
+    var value = $('#doctoresI').val();
+    window.open("../../core/reportes/reporteDoctores.php?requestID="+value);
+})

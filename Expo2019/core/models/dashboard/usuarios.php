@@ -198,7 +198,7 @@ class Usuario extends Validator
 
 	public function readUsuarios()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a  WHERE id_usuario <> ? ORDER BY apellido_usuario';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a ORDER BY apellido_usuario';
 		$params = array($_SESSION['idUsuario']);
 		return Database::getRows($sql, $params);
 	}

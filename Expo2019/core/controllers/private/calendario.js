@@ -29,7 +29,7 @@
                         cita.push({
                             title:'Cita con : '+ eventos[i].nombre_paciente,
                             start: eventos[i].fecha_cita,
-                            url: 'pacientes.php',
+                            url: '../../core/api/private/usuarios.php?site=private&action=set&id='+eventos[i].id_cita,
                             className: 'success'
                     })                   
                 }

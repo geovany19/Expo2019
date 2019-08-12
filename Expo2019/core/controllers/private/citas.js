@@ -17,6 +17,9 @@ function fillTable(rows) {
         <td>${row.fecha_cita}</td>
         <td>${row.hora_cita}</td>
         <td>Realizada</td>
+        <td>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="reporteExpediente(${row.id_paciente})">Expediente</button>
+        </td>
       </tr>
         `;
     });
@@ -75,5 +78,9 @@ function showTable() {
             // Se muestran en consola los posibles errores de la solicitud AJAX
             console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
         });
+}
+function reporteExpediente(id){
+
+    location.href='../../core/reportes/private/reporteExpediente.php?id='+id;
 }
 

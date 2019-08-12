@@ -13,6 +13,22 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
    //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
     if (isset($_SESSION['idUsuario']) && $_GET['site'] == 'private') {
         switch ($_GET['action']) {
+            case 'set':
+                if($_SESSION['idPaciente'] = $_GET['id']){
+                    header('location: ../../../views/private/pacientes.php');
+                }
+                break;
+            case 'readPaciente':
+                if($usuario->setId($_SESSION['idPaciente'])){
+                    if($result['dataset'] = $usuario->readPaciente()){
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'Paciente inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Paciente incorrecto';
+                }
+                break;
             case 'logout':
                 if (session_destroy()) {
                     header('location: ../../../views/private/');
@@ -160,6 +176,50 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     }
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
+                }
+                break;
+
+
+                //crear cita 
+                case 'create':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setPadecimientos($_POST['padecimientos'])) {
+                    if ($usuario->setId($_SESSION['idUsuario'])) {
+                        if ($usuario->setId_paciente($_POST['idPaciente'])) {
+                                if ($usuario->setReceta($_POST['receta'])) {
+                                    if ($usuario->setPeso($_POST['Peso'])) {
+                                        if ($usuario->setEstatura($_POST['Estatura'])) {
+                                            if ($usuario->setPresion($_POST['presion'])) {
+                                            if ($usuario->setId_cita($_POST['idCita'])) {
+                                                if ($usuario->insertConsulta() && $usuario->updateEstadocita()) {
+                                                    $result['status'] = 1;                                                
+                                                } else {
+                                                    $result['exception'] = 'Operación fallida';
+                                                }  
+                                            } else {
+                                                $result['exception'] = 'Categoría incorrecta 1';
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Categoría incorrecta 2';
+                                        }
+
+                                    } else {
+                                        $result['exception'] = 'Precio incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Descripción incorrecta';
+                                }
+                             } else {
+                                $result['exception'] = 'Nombre incorrecto';
+                            }
+                        } else {
+                            $result['exception'] = 'Nombre incorrecto';
+                        }
+                    } else {
+                     $result['exception'] = 'Nombre incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Nombre incorrecto';
                 }
                 break;
 

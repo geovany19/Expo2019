@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
     showTable();
+    selectEspecialidad('especialidadI',null);
 });
 
 const api = '../../core/api/dashboard/especialidades.php?action=';
@@ -147,7 +148,42 @@ $('#form-create').submit(function()
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
-
+function selectEspecialidad(Select, value){
+    $.ajax({
+        url:api+'read',
+        type: 'POST',
+        data: null,
+        datatype: 'JSON'
+    })
+    .done(function(response){
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            console.log(response);
+            if (result.status) {
+                let content = '';
+                if (!value) {
+                    content += '<option value="" disabled selected>Seleccione una especialidad</option>';
+                }
+                result.dataset.forEach(function(row){
+                    if (row.id_especialidad != value) {
+                        console.log(row.id_especialidad);
+                        content += `<option  value="${row.id_especialidad}">${row.nombre_especialidad}</option>`;
+                    } else {
+                        content += `<option  value="${row.id_especialidad}" selected>${row.nombre_especialidad}</option>`;
+                    }
+                });
+                $('#' + Select).html(content);
+            } else {
+                $('#' + Select).html('<option value="">No hay especialidades</option>');
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
 // Función para mostrar formulario con registro a modificar
 function modalUpdate(id)
 {
@@ -259,3 +295,7 @@ function confirmDelete(id)
         }
     });
 }
+$('#formEspecialidad').submit(function(){
+    var value = $('#especialidadI').val();
+    window.open("../../core/reportes/reporteDoctores.php?requestID="+value);
+})

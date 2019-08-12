@@ -212,7 +212,11 @@ class Doctores extends Validator
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto,$this->idestado,$this->idespecialidad, $this->iddoctor);
 		return Database::executeRow($sql, $params);
 	}
-
+	public function doctoresEspecialidad($id_especialidad){
+		$sql='SELECT doctores.nombre_doctor, doctores.apellido_doctor, especialidad.nombre_especialidad FROM (doctores INNER JOIN especialidad ON especialidad.id_especialidad=doctores.id_especialidad) WHERE especialidad.id_especialidad=?';
+		$params = array($id_especialidad);
+		return Database::getRows($sql,$params);
+	}
 	public function deleteDoctor()
 	{
 		$sql = 'DELETE FROM doctores WHERE id_doctor = ?';

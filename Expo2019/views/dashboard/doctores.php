@@ -178,25 +178,19 @@ dashboard_helper::nav();
     <div class="modal-content">
       <div class="modal-header justify-content-center aling-items-center">
         <h5 class="modal-title" id="exampleModalLongTitle">Crear Reportes</h5>
-        </button>
       </div>
-      <div class="modal-body">
-							
-	  <form class="needs-validation" id="form-reportes" novalidate>
-	  <div class="d-flex justify-content-center">
-	  </div>	
-			<div class="row">
-			<div class="col-md-6 mb-4">
-				  <label for="update_nombre">Seleccione Fecha Inicial</label>
-      			<input type="date" class="form-control" id="update_nombre" name="update_nombre" required>
-    		</div>
-			<div class="col-md-6 mb-6">
-      			<label for="update_apellido">Seleccione Fecha Final</label>
-      			<input type="date" class="form-control" id="update_apellido" name="update_apellido" required>
-    		</div>
-			</div>
+      <div class="modal-body">			
+	  	<form id="formDoctor" method="POST">
+			<div class="d-flex justify-content-center">
+				<div class="row">
+					<div class="col-md-6 mb-4">
+						<label for="doctoresI">Seleccione un doctor</label>
+						<select name="doctoresI" id="doctoresI"></select>
+					</div>
+				</div>
+			</div>	
 			<div class="modal-footer justify-content-center aling-items-center">
-			<button type="submit" data-toggle="tooltip" data-placement="top" title="Crear Reporte" class="btn btn-success" ><i class="material-icons prefix">assignment</i></button>
+				<button type="submit" data-toggle="tooltip" data-placement="top" title="Crear Reporte" class="btn btn-success" ><i class="material-icons prefix">assignment</i></button>
 			</div>
 		</form>
       </div>

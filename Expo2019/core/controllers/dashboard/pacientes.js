@@ -288,9 +288,14 @@ function confirmDelete(id)
 }
 
 function reportePacientes() {
+    var todayDate = moment().format('YYYY-MM-DD');
     let fechaini = $('#fecha_inicio').val();
     let fechafin = $('#fecha_fin').val();
-    console.log(fechaini)
-    console.log(fechafin)
-    window.open('../../core/reportes/reportepacientes.php?fechaini=' + fechaini + '&fechafin=' + fechafin);
+    if( fechaini < todayDate && fechafin < todayDate && fechaini < fechafin){
+        window.open('../../core/reportes/reportepacientes.php?fechaini=' + fechaini + '&fechafin=' + fechafin);
+    }
+    else{
+        alert("Error de fechas para reporte");
+    }
+
 }

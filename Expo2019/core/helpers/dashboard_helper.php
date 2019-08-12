@@ -178,7 +178,9 @@ class dashboard_helper
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				<script type="text/javascript" src="../../core/helpers/componentes.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/logout.js"></script>
+				<script type="text/javascript" src="../../resources/js/moment-with-locales.js"></script>
 				<script type="text/javascript" src="../../core/controllers/dashboard/' . $controller . '"></script>
+				
             </body>
             </html>
         ');

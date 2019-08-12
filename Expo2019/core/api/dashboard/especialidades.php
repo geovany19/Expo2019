@@ -5,7 +5,7 @@ require_once('../../models/dashboard/especialidades.php');
 
 if (isset($_GET['action'])) {
 	session_start();
-	$especialidad = new Especialidad;
+	$especialidad = new Especialidad();
 	$result = array('status' => 0, 'message' => null, 'exception' => null);
 	if (isset($_SESSION['idUsuario']) || true) {
 		switch ($_GET['action']) {

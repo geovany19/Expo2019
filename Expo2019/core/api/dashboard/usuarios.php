@@ -125,7 +125,7 @@ if (isset($_GET['action'])) {
                 if ($result['dataset'] = $usuario->readUsuarios()) {
                     $result['status'] = 1;
                 } else {
-                    $result['exception'] = 'No se encuentran Usuarios registrados.Registraras uno ahora';
+                    $result['exception'] = 'No se encuentran Usuarios registrados. Registre uno ahora';
                 }
                 break;
             case 'search':
@@ -288,7 +288,7 @@ if (isset($_GET['action'])) {
     } else {
         switch ($_GET['action']) {
             case 'read':
-                if ($usuario->getUsuarios()) {
+                if ($usuario->readUsuarios()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existe al menos un usuario registrado';
                 } else {

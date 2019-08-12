@@ -6,7 +6,8 @@ $(document).ready(function()
 // Constante para establecer la ruta y parámetros de comunicación con la API
 const api = '../../core/api/dashboard/usuarios.php?action=';
 
-// Función para verificar si existen usuarios en el sitio privado
+// Función para verificar si existen usuarios en el sitio 
+//okey es esta función
 function checkUsuarios()
 {
     $.ajax({
@@ -21,6 +22,7 @@ function checkUsuarios()
             const dataset = JSON.parse(response);
             // Se comprueba que no hay usuarios registrados para redireccionar al registro del primer usuario
             if (!dataset.status) {
+                alert('hola');
                 sweetAlert(3, dataset.message, 'registrarse.php');
             }
         } else {
@@ -54,6 +56,7 @@ $('#form-sesion').submit(function()
                 sweetAlert(2, dataset.exception, null);
             }
         } else {
+            alert('xd')
             console.log(response);
         }
     })

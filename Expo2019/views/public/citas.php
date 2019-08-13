@@ -29,7 +29,7 @@ public_helper::navbar();
             </div>
         </div>
 
-        <a role="button" href="../../core/reportes/public/reporteCitas.php" class="btn btn-primary">Generar reporte</a>
+        <a role="button" href="../../core/reportes/public/reporteCitas.php" class="btn btn-primary" target="_blank">Generar reporte</a>
     </div>
 </main>
 

@@ -29,8 +29,8 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            //casos utilizados para la realización de gráficos
-            //caso para mostrar consultas totales de cada mes
+                //casos utilizados para la realización de gráficos
+                //caso para mostrar consultas totales de cada mes
             case 'consultasFecha':
                 if ($result['dataset'] = $consultas->consultasPorFecha()) {
                     $result['status'] = 1;
@@ -38,7 +38,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos por mostrar.';
                 }
                 break;
-            //caso utilizado para mostrar las consultas totales por hora 
+                //caso utilizado para mostrar las consultas totales por hora 
             case 'consultasHora':
                 if ($result['dataset'] = $consultas->consultasPorHorario()) {
                     $result['status'] = 1;
@@ -46,9 +46,9 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos por mostrar.';
                 }
                 break;
-            //caso utilizado para mostrar las consultas totales en un rango de fechas
-            //recibe los valores a través de los date del dashboard (pagina.php)
-            //Fecha1 y Fecha2
+                //caso utilizado para mostrar las consultas totales en un rango de fechas
+                //recibe los valores a través de los date del dashboard (pagina.php)
+                //Fecha1 y Fecha2
             case 'consultasConFecha':
                 if ($consultas->setFecha1($_POST['Fecha1'])) {
                     if ($consultas->setFecha2($_POST['Fecha2'])) {
@@ -60,8 +60,8 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-            //caso utilizado pra mostrar las consultas por fecha de cada mes
-            //recibe el valor del mes a través del select 'mes' de pagina.php
+                //caso utilizado pra mostrar las consultas por fecha de cada mes
+                //recibe el valor del mes a través del select 'mes' de pagina.php
             case 'consultasMensuales':
                 if ($consultas->setMes($_POST['Mes'])) {
                     if ($result['dataset'] = $consultas->consultasMensuales()) {
@@ -73,8 +73,19 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Mes incorrecto';
                 }
                 break;
-            //caso utilizado para mostrar las consultas mensuales de doctor
-            //recibe el valor del mes a través del select 'mes' de pagina.php
+            case 'consultasMensualesHora':
+                if ($consultas->setMes($_POST['Mes'])) {
+                    if ($result['dataset'] = $consultas->consultasMensualesHoras()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos por mostrar';
+                    }
+                } else {
+                    $result['exception'] = 'Mes incorrecto';
+                }
+                break;
+                //caso utilizado para mostrar las consultas mensuales de doctor
+                //recibe el valor del mes a través del select 'mes' de pagina.php
             case 'consultasMensualesDoc':
                 if ($consultas->setMes($_POST['Mes'])) {
                     if ($result['dataset'] = $consultas->consultasMensualesDoc()) {

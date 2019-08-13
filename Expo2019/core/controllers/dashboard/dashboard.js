@@ -116,7 +116,7 @@ function chartCitasCanceladas(){
                     cantidad.push(row.CitasCanceladas);
 
                 });
-                doughnutGraph('chartCitasCanceladas', nombre, cantidad, 'Cantidad', 'Cantidad de citas canceladas')
+                doughnutGraph('chartCitasCanceladas', nombre, cantidad, 'Cantidad', 'Cantidad de citas canceladas de cada doctor')
                 
             }else{
                 $('#chartCitasCanceladas').remove();
@@ -297,7 +297,7 @@ $('#grafico2').submit(function(){
 
                 });
                 $('#chartConsultas-2').attr('hidden',false);
-                lineGraph('chartConsultasMensuales', fechas, consultas, 'Consultas', 'Consultas realizadas por mes')
+                lineGraph('chartConsultasMensuales', fechas, consultas, 'Consultas', 'Consultas realizadas de cada mes')
             }else{
                 sweetAlert(2,result.exception,null);
                 $('#chartConsultas-2').attr('hidden',true);
@@ -410,6 +410,42 @@ $('#grafico5').submit(function(){
             }else{
                 sweetAlert(2,result.exception,null);
                 $('#chartDesempenoDoctor').attr('hidden',true);
+            }
+        }else{
+            console.log(response);
+        }
+
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+
+    });
+});
+
+$('#grafico6').submit(function(){
+    event.preventDefault()
+    $.ajax({
+        url: apiConsultas + 'consultasMensualesHora',
+        type: 'post',
+        data: $('#grafico6').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                let horas = [];
+                let consultas = [];
+                result.dataset.forEach(function(row){
+                    horas.push(row.Hora+':00');
+                    consultas.push(row.CantidadCitas);
+                });
+                $('#chartConsultasHoritas').attr('hidden',false);
+                lineGraph('chartConsultasPorHoritas', horas, consultas, 'Consultas', 'Consultas realizadas de cada mes')
+            }else{
+                sweetAlert(2,result.exception,null);
+                $('#chartConsultasHoritas').attr('hidden',true);
             }
         }else{
             console.log(response);

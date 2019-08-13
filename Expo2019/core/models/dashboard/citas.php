@@ -184,7 +184,7 @@ class Citas extends Validator
     //método para mostrar la cantidad de citas canceladas que posee cada doctor, no recibe parámetros
     public function showCitasCanceladas()
     {
-        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_cita) AS CitasCanceladas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 3 GROUP BY nombre_doctor ORDER BY id_cita LIMIT 10';
+        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_cita) AS CitasCanceladas FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 3 GROUP BY nombre_doctor ORDER BY CitasCanceladas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }

@@ -265,7 +265,7 @@ public function setReceta($value)
 	public function reporteExpediente($id)
 	{
 		$sql = 'SELECT p.nombre_paciente, p.apellido_paciente, co.padecimientos, co.receta, c.fecha_cita, d.nombre_doctor, d.apellido_doctor from pacientes p, cita c, consulta co, doctores d where c.id_paciente=p.id_paciente and co.id_paciente=c.id_paciente 
-		and d.id_doctor=co.id_doctor and co.id_doctor=c.id_doctor and c.id_paciente=? order by c.fecha_cita asc';
+		and d.id_doctor=co.id_doctor and co.id_doctor=c.id_doctor and c.id_paciente=? GROUP by c.id_cita order by c.fecha_cita asc';
 		$params = array($id);
 		return Database::getRows($sql, $params);
 	}

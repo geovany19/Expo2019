@@ -12,7 +12,7 @@ dashboard_helper::nav();
                     <h5>Gráfico de citas por periodo</h5>
                     <form id="grafico1" method="post" class="col col-sm-12">
                         <h6>Seleccione fecha inicial</h6>
-                        <input type="date" id="Fecha1" name="Fecha1" class="form-control col col-sm-12 col-md-6" required>
+                        <input type="date" id="Fecha1" name="Fecha1" max=<?php echo date('Y-m-d') ?> class="form-control col col-sm-12 col-md-6" required>
                         <h6>Seleccione fecha fin</h6>
                         <input type="date" id="Fecha2" name="Fecha2" max=<?php echo date('Y-m-d') ?> class='form-control col col-sm-12 col-md-6' required>
                         <button type="submit" class="btn btn-primary">Generar gráfico</button>

@@ -327,6 +327,7 @@ function confirmDelete(id)
         }
     });
 }
+//Tenemos la funcion para el reporte correspondiente donde selecciona la especialidad y aparece el doctor que corresponde a cada especialidad
 $('#formDoctor').submit(function(){
     var value = $('#doctoresI').val();
     window.open("../../core/reportes/reporteDoctores.php?requestID="+value);

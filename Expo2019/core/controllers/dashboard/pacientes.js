@@ -286,7 +286,7 @@ function confirmDelete(id)
         }
     });
 }
-
+//Funcion para generar el reporte por fecha, agregando en url la fecha y validada
 function reportePacientes() {
     var todayDate = moment().format('YYYY-MM-DD');
     let fechaini = $('#fecha_inicio').val();

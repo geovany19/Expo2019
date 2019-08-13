@@ -39,7 +39,7 @@ private_helper::headerTemplate('Paciente');
 		</div>
 		<textarea type="text" name="receta" id="receta" class="form-control" aria-label="With textarea"></textarea>
 	</div>
-	<button type="submit" class="btn btn-primary">Send Nudes</button>
+	<button type="submit" class="btn btn-primary">Procesar</button>
 </form>
 <?php
 private_helper::footerTemplate('paciente.js');

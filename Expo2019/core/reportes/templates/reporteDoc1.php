@@ -12,29 +12,36 @@
 			$this->AliasNbPages();
 		}
 
-		//Se crea la función Header que sevirá para todos los reportes
+		//e crea la función Header que sevirá para todos los reportes
 		/*function Header()
 		{
 			
-			$this->Image('../../../resources/img/private/fondo.jpg', 16, 10, 60);
-			$this->Cell(65,13);
-			$this->SetFont('Courier','B',15);
-			$this->SetTextColor(255,255,255);
-			$this->SetFillColor(29,185,84);
-			$this->Cell(125,13, utf8_decode($this->title),0,0,'C',true);
-			$this->Ln(15);
+			$this->Image('../../../resources/img/dashboard/img4.jpg', 170, 15, 25, 25);
+			$this->Cell(10,10,'',0,0,'C',false);
+			$this->setTextColor(0,0,0);
+			$this->setTitle('Expediente', true);
+			//$this->Cell(100,40,'',utf8_decode('Fecha:'),0,-10,'C',false);
 
 		}*/
 
 		//Se crea la función date para todos los reportes
 		function date()
 		{
-			$this->Ln(5);
-			$this->SetFont('Courier','',10);
+			$this->Image('../../../resources/img/dashboard/img4.jpg', 170, 15, 25, 25);
+			$this->Cell(10,10,'',0,0,'C',false);
+			$this->setTextColor(255,255,255);
+
+			$this->Ln(-10);
+			$this->SetFont('Courier','B',10);
 			$this->SetTextColor(0, 0, 0);
 			$this->SetFillColor(255,255,255);
-			$this->Cell(85,10, utf8_decode(date('G:i:s j/n/Y') ),0,0,'L',true);
-			$this->Ln(5);
+			$this->Cell(22,10, utf8_decode('Fecha:'),'',0,'B',true);
+			$this->Cell(5,10, utf8_decode(date('j/n/Y') ),0,0,'C',true);
+			$this->Ln(10);
+			$this->Cell(20,10, utf8_decode('Hora:'),'',0,'B',true);
+			$this->Cell(5,10, utf8_decode(date('G:i:s') ),0,0,'C',true);
+			$this->Ln(10);
+			
 		}
 		
 		//Se crea la función footer para todos los reportes

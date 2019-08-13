@@ -24,10 +24,12 @@ public_helper::navbar();
                     </thead>
                     <tbody id="tbody-citas">
                         <!-- cargado desde el cotrolador -->
-                                            </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
+
+        <a role="button" href="../../core/reportes/public/reporteCitas.php" class="btn btn-primary">Generar reporte</a>
     </div>
 </main>
 

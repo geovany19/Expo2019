@@ -137,4 +137,13 @@ class Citas extends Validator
 		$params = array($this->id_cita);
 		return Database::executeRow($sql, $params);
 	}
+
+	//reportes
+
+	public function reporteCitas()
+	{
+		$sql = 'SELECT pacientes.nombre_paciente, cita.id_paciente, doctores.nombre_doctor, cita.fecha_cita as fecha, cita.hora_cita, estado_cita.estado from cita, pacientes, doctores, estado_cita WHERE pacientes.id_paciente = cita.id_paciente AND doctores.id_doctor = cita.id_doctor AND cita.id_estado = estado_cita.id_estado ORDER BY cita.fecha_cita';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
 }

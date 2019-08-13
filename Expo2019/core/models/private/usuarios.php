@@ -331,8 +331,8 @@ public function setReceta($value)
 
 	public function reporteReceta1($id)
 	{
-		$sql = 'SELECT d.nombre_doctor, d.apellido_doctor, c.receta, p.nombre_paciente, p.apellido_paciente from doctores d, consulta c, pacientes p where d.id_doctor=c.id_doctor and p.id_paciente= ?';
-		$params = array($id);
+		$sql = 'SELECT d.nombre_doctor, d.apellido_doctor, c.receta, p.nombre_paciente, p.apellido_paciente from doctores d, consulta c, pacientes p where d.id_doctor=c.id_doctor and c.id_paciente= ? and p.id_paciente =?';
+		$params = array($id,$id);
 		return Database::getRows($sql, $params);
 	}
 }

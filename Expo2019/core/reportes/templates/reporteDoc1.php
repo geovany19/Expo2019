@@ -50,6 +50,17 @@
 			$this->SetY(-15);
 			$this->SetFont('Courier','B', 10);
 			$this->Cell(0,10, utf8_decode('Página ').$this->PageNo(),0,0,'C' );
-		}		
+		}	
+		
+		function foot(){
+			//$this->SetY(-20);
+			$this->SetFont('Courier','B', 10);
+			$this->Cell(0,10, utf8_decode('Direccion: Tonacatepeque'),0,0,'R' );
+			$this->Ln(3.5);
+			$this->Cell(0,10, utf8_decode('TEL: 2290-0987'),0,0,'R' );
+			$this->Ln(3);
+			$this->Cell(0,10, utf8_decode('clinica@outlook.com'),0,0,'R' );
+
+		}
 	}
 ?>

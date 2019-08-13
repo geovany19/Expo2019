@@ -6,7 +6,7 @@ require_once('../../models/private/usuarios.php');
 
     //Se obtiene la fecha
     ini_set('date.timezone', 'America/El_Salvador');
-    $pdf = new PDF();
+    $pdf = new PDF('P','mm','Letter');
     $usuario = new Usuarios();
     $pdf->head('');
     $pdf->Ln(5);

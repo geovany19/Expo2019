@@ -197,8 +197,10 @@ function barGraph(canvas, xAxis, yAxis, legend, title)
     });
 }
 
+//función utilizada para gráficos lineales
 function lineGraph(canvas, xAxis, yAxis, legend, title)
 {
+    //arreglo que define los colores del gráfico de manera aleatoria
     let colors = [];
     for (i = 0; i < xAxis.length; i++) {
         colors.push('#' + (Math.random().toString(16)).substring(2, 8));
@@ -211,9 +213,24 @@ function lineGraph(canvas, xAxis, yAxis, legend, title)
             datasets: [{
                 label: legend,
                 data: yAxis,
+                //el color de fondo de se define en base al valor que arreglo envía
                 backgroundColor: colors,
-                borderColor: '#000000',
-                borderWidth: 1
+                //define el color del borde de la línea
+                borderColor: '#138CC9',
+                //color del borde de los puntos del gráfico
+                pointBorderColor: '#000002',
+                //grosor del borde en píxeles
+                borderWidth: 3,
+                //propiedad que determina si el gráfico tendrá color de relleno
+                fill: false,
+                //curva de tensión de la línea, al establecer 0 se dibujan líneas rectas
+                lineTension: 0,
+                //radio en píxeles de los puntos del gráfico
+                pointRadius: 5,
+                //radio en píxeles de los puntos del gráfico al hacer "hover" o poner el mouse sobre determinado punto
+                pointHoverRadius: 10,
+                //ancho en píxeles del borde de los puntos del gráfico
+                pointBorderWidth: 2
             }]
         },
         options: {
@@ -228,7 +245,7 @@ function lineGraph(canvas, xAxis, yAxis, legend, title)
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        stepSize: 100
+                        stepSize: 100,
                     }
                 }]
             }

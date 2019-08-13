@@ -195,11 +195,11 @@ dashboard_helper::nav();
     		</div>
 			<div class="col-md-6 mb-6">
       			<label for="fecha_fin">Seleccione Fecha Final</label>
-      			<input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
+      			<input type="date" class="form-control" id="fecha_fin" name="fecha_fin" max=<?php echo date('Y-m-d') ?> required>
 			</div>
 			</div>
 			<div class="modal-footer justify-content-center aling-items-center">
-			<button onclick="reportePacientes()" type="button" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Generar reporte" ><i class='material-icons'>assignment</i></button>
+			<button   onclick="reportePacientes()" type="button" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Generar reporte" ><i class='material-icons'>assignment</i></button>
 			</div>
 		</form>
       </div>

@@ -156,4 +156,11 @@ class Consultas extends Validator
         $params = array($this->mes);
         return Database::getRows($sql, $params);
     }
+    
+    public function consultasMensualesHoras()
+    {
+        $sql = 'SELECT Hora, CantidadCitas FROM (SELECT HOUR(hora_cita) AS Hora, COUNT(cn.id_cita) AS CantidadCitas FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 AND MONTH(fecha_cita) = ? GROUP BY Hora ORDER BY Hora LIMIT 10) COUNTTABLE';
+        $params = array($this->mes);
+        return Database::getRows($sql, $params);
+    }
 }

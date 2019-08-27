@@ -7,7 +7,9 @@ require_once("../helpers/validator.php");
 require_once("../models/dashboard/pacientes.php");
 
 ini_set('date.timezone', 'America/El_Salvador');
+//declaramos la fecha de hoy para validar.
 $today = date('Y-m-d');
+//Hacemos la validacion de las fechas que concuerden con lo ingresado y que no sea mayor que la fecha de hoy.
 if( $_GET['fechaini'] < $today && $_GET['fechafin'] < $today && $_GET['fechaini'] < $_GET['fechafin']  ){
   $pdf = new PDF('L','mm','Letter');
   $paciente = new Pacientes();

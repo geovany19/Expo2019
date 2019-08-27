@@ -1,7 +1,7 @@
 <?php
 	require_once('../../../libraries/fpdf181/fpdf.php');
 	
-	
+	session_start();
 	class PDF extends FPDF
 	{
 		private $title;
@@ -19,7 +19,7 @@
 			$this->SetFont('Courier','B',15);
 			$this->SetTextColor(255,255,255);
 			$this->SetFillColor(66,139,202);
-			$this->Cell(125,13, utf8_decode($this->title),0,0,'C',true);
+			$this->Cell(140,13, utf8_decode($this->title),0,0,'C',true);
 			$this->Ln(15);
 
 		}
@@ -30,7 +30,8 @@
 			$this->SetFont('Courier','',10);
 			$this->SetTextColor(0, 0, 0);
 			$this->SetFillColor(255,255,255);
-			$this->Cell(85,10, utf8_decode(date('G:i:s j/n/Y') ),0,0,'L',true);
+			$this->Cell(90,10, utf8_decode(date('G:i:s j/n/Y') ),0,0,'L',true);
+			$this->Cell(90,10, utf8_decode ('Paciente: '.$_SESSION['nombrePaciente'].' '.$_SESSION['apellidoPaciente']),0,0,'R',true);
 			$this->Ln(5);
 		}
 		

@@ -171,11 +171,13 @@ class Pacientes extends Validator
 	//métodos para manejar la sesión del usuario
 	public function checkPaciente()
 	{
-		$sql = 'SELECT id_paciente FROM pacientes WHERE usuario_paciente = ?';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente FROM pacientes WHERE usuario_paciente = ?';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->idpaciente = $data['id_paciente'];
+			$this->nombre = $data['nombre_paciente'];
+			$this->apellido = $data['apellido_paciente'];
 			return true;
 		} else {
 			return false;

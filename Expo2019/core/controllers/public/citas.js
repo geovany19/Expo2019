@@ -7,7 +7,7 @@ $(document).ready(function() {
   //Función para obtener y mostrar los registros disponibles
   function showTableCitas() {
     $.ajax({
-      url: apiCitas + "read",
+      url: apiCitas + "getByPaciente",
       type: "post",
       data: null,
       datatype: "json"
@@ -41,8 +41,7 @@ $(document).ready(function() {
       }
       content += `
           <tr>
-              <td>${row.nombre_doctor}</td>
-              <td>${row.nombre_paciente}</td>
+              <td>${row.nombre_doctor} ${row.apellido_doctor}</td>
               <td>${row.fecha_cita}</td>
               <td>${row.hora_cita}</td>
               <td>${row.estado}</td>

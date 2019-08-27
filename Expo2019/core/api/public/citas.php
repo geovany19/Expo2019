@@ -17,6 +17,18 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay citas registrados';
             }
             break;
+        case 'getByPaciente':
+            if ($cita->setIdpaciente($_SESSION['idPaciente'])) {
+                if ($result['dataset'] = $cita->getCitaByPaciente()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay citas registrados';
+                }
+            } else {
+                $result['exception'] = 'Paciente incorrecto';
+            }
+            
+            break;
         case 'cancelarCita':
             if ($cita->setIdestado(3)) {
 

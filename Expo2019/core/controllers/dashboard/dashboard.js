@@ -25,7 +25,6 @@ function chartConsultasFecha(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 //declaración del arreglo para el eje X
                 let fechas = [];
@@ -35,7 +34,6 @@ function chartConsultasFecha(){
                     //parametros de la base de datos que reciben lo arreglos
                     fechas.push(row.NombreMes);
                     cantidad.push(row.CantidadCitas);
-
                 });
                 //determina el tipo de gráfico y los párametros que recibe, id del canva, arreglo para el eje X, arreglo para el eje Y
                 //lectura del dato, y título del gráfico
@@ -47,7 +45,6 @@ function chartConsultasFecha(){
         }else{
             console.log(response);
         }
-
     })
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
@@ -67,7 +64,6 @@ function chartConsultasHora(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let horas = [];
                 let cantidad = [];
@@ -103,8 +99,6 @@ function chartCitasCanceladas(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
-
             if(result.status){
                 let nombre = [];
                 let cantidad = [];
@@ -143,8 +137,6 @@ function chartCitasRealizadas(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
-
             if(result.status){
                 let nombre = [];
                 let cantidad = [];
@@ -180,7 +172,6 @@ function chartCalificacionesDoctores(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let nombre = [];
                 let promedio = [];
@@ -215,7 +206,6 @@ function chartCitasEspecialidad(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let especialidad = [];
                 let citas = [];
@@ -250,7 +240,6 @@ $('#grafico1').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let fechas = [];
                 let cantidad = [];
@@ -287,7 +276,6 @@ $('#grafico2').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let fechas = [];
                 let consultas = [];
@@ -324,7 +312,6 @@ $('#grafico3').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let nombre = [];
                 let consultas = [];
@@ -361,7 +348,6 @@ $('#grafico4').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let mes = [];
                 let citas = [];
@@ -397,7 +383,6 @@ $('#grafico5').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let estado = [];
                 let citas = [];
@@ -433,7 +418,6 @@ $('#grafico6').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            console.log(result);
             if(result.status){
                 let horas = [];
                 let consultas = [];

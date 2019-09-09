@@ -15,6 +15,7 @@ require_once('../../models/public/citas.php');
     $pdf->SetTextColor(255,255,255);
     $data = $citas->reporteCitas();   
     $fecha = '';
+
     foreach($data as $datos) {
         if(utf8_decode($datos['fecha']) != $fecha){
             $pdf->SetFillColor(66,139,202);

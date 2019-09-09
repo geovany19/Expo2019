@@ -336,6 +336,10 @@ if (isset($_GET['action'])) {
                     if ($usuario->checkPaciente()) {
                         if ($usuario->setClave($_POST['clave'])) {
                             if ($usuario->checkPassword()) {
+                                $_SESSION['idPaciente'] = $usuario->getId();
+                                $_SESSION['nombrePaciente'] = $usuario->getNombre();
+                                $_SESSION['apellidoPaciente'] = $usuario->getApellido();
+                                
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
                             } else {

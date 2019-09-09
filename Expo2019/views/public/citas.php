@@ -15,7 +15,6 @@ public_helper::navbar();
                     <thead>
                         <tr>
                             <th>Doctor</th>
-                            <th>Paciente</th>
                             <th>Dia de la cita</th>
                             <th>Hora de la cita</th>
                             <th>Estado</th>

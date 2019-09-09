@@ -109,6 +109,13 @@ class Citas extends Validator
 		return Database::getRows($sql, $params);
 	}
 
+	public function getCitaByPaciente()
+	{
+		$sql = 'SELECT cita.id_cita, pacientes.nombre_paciente, pacientes.apellido_paciente, doctores.nombre_doctor, doctores.apellido_doctor, cita.fecha_cita, cita.hora_cita, especialidad.nombre_especialidad, cita.id_estado, estado_cita.estado from estado_cita, cita, doctores, pacientes, especialidad WHERE cita.id_paciente = pacientes.id_paciente AND cita.id_doctor = doctores.id_doctor AND especialidad.id_especialidad = doctores.id_especialidad AND cita.id_paciente = 1 AND estado_cita.id_estado = cita.id_estado ORDER BY cita.fecha_cita';
+		$params = array($this->id_paciente);
+		return Database::getRows($sql, $params);
+	}
+
 	public function createCita()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);

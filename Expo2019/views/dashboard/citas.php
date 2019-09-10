@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Citas");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Citas");
+dashboardHelper::nav();
 ?>
 <main>
     <h1 class="text-center">Historial de citas</h1>
@@ -24,5 +24,5 @@ dashboard_helper::nav();
     </div>
 </main>
 <?php
-dashboard_helper::footer('disponibilidad.js');
+dashboardHelper::footer('disponibilidad.js');
 ?>

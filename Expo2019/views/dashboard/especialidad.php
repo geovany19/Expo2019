@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Especialidad");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Especialidad");
+dashboardHelper::nav();
 ?>
 <main>
 	<h1 class="text-center">Especialidades</h1>
@@ -112,5 +112,5 @@ dashboard_helper::nav();
   </div>
 </div>
 <?php
-dashboard_helper::footer('especialidades.js');
+dashboardHelper::footer('especialidades.js');
 ?>

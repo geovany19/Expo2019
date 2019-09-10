@@ -1,12 +1,12 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Registrarse");
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Registrarse");
 ?>
 
 <body id="body-registrarse">
 	<main class="container">
 		<h2 class="text-center">Registrate</h2>
-		<form method="post" id="form-register" class="needs-validation" novalidate>
+		<form method="post" id="form-register" class="needs-validation" autocomplete="off" novalidate>
 			<div class="form-row">
 				<div class="form-group col-sm-12 col-md-6">
 					<label for="nombres">Nombres</label>
@@ -61,5 +61,5 @@ dashboard_helper::head("Registrarse");
 		</form>
 	</main>
 	<?php
-	dashboard_helper::footer('registrarse.js');
+	dashboardHelper::footer('registrarse.js');
 	?>

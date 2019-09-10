@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Pacientes");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Pacientes");
+dashboardHelper::nav();
 ?>
 <main>
 		<h1 class="text-center">Pacientes</h1>
@@ -47,7 +47,7 @@ dashboard_helper::nav();
         </button>
       </div>
       <div class="modal-body">
-	  <form class="needs-validation" id="form-create" novalidate>
+	  <form class="needs-validation" id="form-create" autocomplete="off"novalidate>
 			<div class="row">
 			<div class="col-md-6 mb-4">
 				  	<label for="create_nombres">Nombre</label>
@@ -207,5 +207,5 @@ dashboard_helper::nav();
   </div>
 </div>
 <?php
-dashboard_helper::footer('pacientes.js');
+dashboardHelper::footer('pacientes.js');
 ?>

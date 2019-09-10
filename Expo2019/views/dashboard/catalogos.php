@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Dashboard");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Dashboard");
+dashboardHelper::nav();
 ?>
 
         <div class="container">
@@ -379,5 +379,5 @@ dashboard_helper::nav();
         </div>
     </div>
 <?php
-dashboard_helper::footer();
+dashboardHelper::footer();
 ?>

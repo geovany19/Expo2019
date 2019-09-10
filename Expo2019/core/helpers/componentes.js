@@ -189,7 +189,7 @@ function barGraph(canvas, xAxis, yAxis, legend, title)
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        stepSize: 100
+                        stepSize: 10
                     }
                 }]
             }

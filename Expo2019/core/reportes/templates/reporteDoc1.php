@@ -52,7 +52,8 @@
 			$this->Cell(0,10, utf8_decode('Página ').$this->PageNo(),0,0,'C' );
 		}	
 		
-		function foot(){
+		function foot()
+		{
 			//$this->SetY(-20);
 			$this->SetFont('Courier','B', 10);
 			$this->Cell(0,10, utf8_decode('Direccion: Tonacatepeque'),0,0,'R' );

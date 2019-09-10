@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Doctores");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Doctores");
+dashboardHelper::nav();
 ?>
 <main>
 	<h1 class="text-center">Doctores</h1>
@@ -198,5 +198,5 @@ dashboard_helper::nav();
   </div>
 </div>
 <?php
-dashboard_helper::footer('doctores.js');
+dashboardHelper::footer('doctores.js');
 ?>

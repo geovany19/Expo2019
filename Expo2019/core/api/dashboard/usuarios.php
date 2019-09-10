@@ -2,12 +2,18 @@
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/dashboard/usuarios.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../../libraries/PHPMailer-master/src/Exception.php';
+require '../../../libraries/PHPMailer-master/src/PHPMailer.php';
+require '../../../libraries/PHPMailer-master/src/SMTP.php';
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
     session_start();
     $usuario = new Usuario;
-    $result = array('status' => 0, 'message' => null, 'exception' => null);
+    $result = array('status' => 0, 'message' => null, 'exception' => null, 'session' => 1);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
@@ -96,26 +102,30 @@ if (isset($_GET['action'])) {
                             if ($usuario->checkPassword()) {
                                 if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
                                     if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($usuario->changePassword()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Contraseña cambiada correctamente';
+                                        if ($_POST['clave_actual_1'] != $_POST['clave_nueva_1']) {
+                                            if ($usuario->changePassword()) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Contraseña cambiada correctamente';
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Operación fallida';
+                                            $result['exception'] = 'La nueva contraseña no puede ser igual a la actual';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave nueva menor a 6 caracteres';
+                                        $result['exception'] = 'Contraseña nueva menor a 8 caracteres';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves nuevas diferentes';
+                                    $result['exception'] = 'Contraseña nuevas diferentes';
                                 }
                             } else {
-                                $result['exception'] = 'Clave actual incorrecta';
+                                $result['exception'] = 'Contraseña actual incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Clave actual menor a 6 caracteres xd';
+                            $result['exception'] = 'Contraseña actual menor a 8 caracteres';
                         }
                     } else {
-                        $result['exception'] = 'Claves actuales diferentes';
+                        $result['exception'] = 'Contraseñas actuales diferentes';
                     }
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
@@ -201,7 +211,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-            print_r($_POST);
+                print_r($_POST);
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($usuario->getUser()) {
@@ -297,45 +307,137 @@ if (isset($_GET['action'])) {
                 break;
             case 'register':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombre($_POST['nombres'])) {
-                    if ($usuario->setApellido($_POST['apellidos'])) {
-                        if ($usuario->setCorreo($_POST['correo'])) {
-                            if ($usuario->setUsuario($_POST['usuario'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->setFecha($_POST['fecha'])) {
-                                            if ($usuario->setEstado($_POST['create_estado']) ? 1 : 2) {
-                                                if ($usuario->createUsuario()) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Registro realizado correctamente';
+                if ($_POST['g-recaptcha-response']) {
+
+                    if ($usuario->setNombre($_POST['nombres'])) {
+                        if ($usuario->setApellido($_POST['apellidos'])) {
+                            if ($usuario->setCorreo($_POST['correo'])) {
+                                if ($usuario->setUsuario($_POST['usuario'])) {
+                                    if ($_POST['clave1'] == $_POST['clave2']) {
+                                        if ($usuario->setClave($_POST['clave1'])) {
+                                            if ($usuario->setFecha($_POST['fecha'])) {
+                                                if ($usuario->setEstado($_POST['create_estado']) ? 1 : 2) {
+                                                    if ($_POST['usuario'] != $_POST['clave1']) {
+                                                        if ($usuario->createUsuario()) {
+                                                            $result['status'] = 1;
+                                                            $result['message'] = 'Registro realizado correctamente';
+                                                        } else {
+                                                            $result['exception'] = 'Operación fallida';
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'El nombre de usuario no puede ser igual a la contraseña.';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Operación fallida';
+                                                    $result['exception'] = 'Estado incorrecto. No se pudo registrar el usuario';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Estado incorrecto. No se pudo registrar el usuario';
+                                                $result['exception'] = 'Fecha no válida. No se pudo registrar el usuario';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida. No se pudo registrar el usuario';
+                                            $result['exception'] = 'Clave menor a 6 caracteres xd. No se pudo registrar el usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres xd. No se pudo registrar el usuario';
+                                        $result['exception'] = 'Claves diferentes. No se pudo registrar el usuario';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes. No se pudo registrar el usuario';
+                                    $result['exception'] = 'Alias incorrecto. No se pudo registrar el usuario';
                                 }
                             } else {
-                                $result['exception'] = 'Alias incorrecto. No se pudo registrar el usuario';
+                                $result['exception'] = 'Correo incorrecto. No se pudo registrar el usuario';
                             }
                         } else {
-                            $result['exception'] = 'Correo incorrecto. No se pudo registrar el usuario';
+                            $result['exception'] = 'Apellidos incorrectos. No se pudo registrar el usuario';
                         }
                     } else {
-                        $result['exception'] = 'Apellidos incorrectos. No se pudo registrar el usuario';
+                        $result['exception'] = 'Nombres incorrectos. No se pudo registrar el usuario';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos. No se pudo registrar el usuario';
+                    $result['exception'] = 'Desbes comprobar que eres humano';
                 }
                 break;
+                case 'enviarCorreo':
+                    $_POST = $usuario->validateForm($_POST);
+                    if($usuario->setEmail($_POST['email-name'])) {
+                        if($usuario->getEmailUser()){
+                            $token = md5(uniqid(rand(), true)); 
+                            if($usuario->setToken($token)) {
+                                if($usuario->updateToken()) {
+                                    if($emailusuario = $usuario->getCorreo()) {
+                                        $result['status'] = 1;
+                                        $mail = new PHPMailer(true);
+                                        $mail ->charSet = "UTF-8";
+                                            try {
+                                                //Server settings
+                                                $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                                $mail->isSMTP();                                            // Set mailer to use SMTP
+                                                $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                                                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                                $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
+                                                $mail->Password   = 'Sismed12345';                               // SMTP password
+                                                $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                                $mail->Port       = 587;                                    // TCP port to connect to
+
+                                                //Recipients
+                                                $mail->setFrom('soportetecnicosismed@gmail.com', 'Soporte Técnico de SISMED');
+                                                $mail->addAddress($emailusuario);     // Add a recipient
+                                                
+                                                // Content
+                                                $mail->isHTML(true);                                  // Set email format to HTML
+                                                $mail->Subject = 'Restablecimiento de contraseña';
+                                                $mail->Body    = 'Hemos recibido una solicitud de restablecimiento de la contraseña de tu cuenta.
+                                                Para restablecer tu contraseña haz click <a href="http://localhost/MocherosOnline/mocheros/views/dashboard/contrasenas.php?token='.$token.'">en este enlace</<a>.
+                                                Si no has realizado ninguna solicitud, ignora este correo.';
+
+                                                $mail->send();
+                                                echo 'Message has been sent';
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Se ha enviado el correo de recuperación de contraseña';
+                                            } catch (Exception $e) {
+                                                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                            }
+                                    } else {
+                                        $result['exception'] = 'Error al obtener el correo';  
+                                    }                                
+                                } else {
+                                    $result['exception'] = 'Error al asignar el token';
+                                }  
+                            } else{
+                                $result['exception'] = 'Error al generar el token';
+                            }  
+                        } else{
+                            $result['exception'] = 'Correo no existe';
+                        }   
+                    }  else {
+                        $result['exception'] = 'Correo invalido';
+                    }
+                    break;
+                    case 'recoverPassword':
+                    $_POST = $usuario->validateForm($_POST);
+                    if($usuario->setToken($_POST['token'])) {
+                        if($usuario->getUserByToken()) {
+                            if ($_POST['new_pwd'] == $_POST['pwd_confirmed']) {
+                                $password = $usuario->setClave($_POST['new_pwd']);
+                                if ($password[0]) {
+                                    if ($usuario->changePasswordByToken()) { 
+                                        $result['status'] = 1;
+                                    } else {
+                                        $result['exception'] = 'Operación fallida';
+                                    }
+                                } else {
+                                    $result['exception'] = $password[1];
+                                }
+                            } else {
+                                $result['exception'] = 'Claves diferentes';
+                                
+                            } 
+                        } else {
+                            $result['exception'] = 'Error al obtener los datos del usuario';
+                        }
+                    } else {
+                        $result['exception'] = 'Error al setear el token';
+                    }
+                    
+                    break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
@@ -344,10 +446,12 @@ if (isset($_GET['action'])) {
                             if ($usuario->checkPassword()) {
                                 $_SESSION['idUsuario'] = $usuario->getId();
                                 $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                $_SESSION['nombreUsuario'] = $usuario->getNombre();
+                                $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
                                 $result['message'] = 'Autenticación correcta';
                             } else {
-                                $result['exception'] = 'Clave inexistente';
+                                $result['exception'] = 'Contraseña inexistente';
                             }
                         } else {
                             $result['exception'] = 'Clave menor a 6 caracteres';

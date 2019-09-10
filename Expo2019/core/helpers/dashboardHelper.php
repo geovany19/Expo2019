@@ -1,5 +1,5 @@
 <?php
-class dashboard_helper
+class dashboardHelper
 {
 	public static function head($title)
 	{
@@ -50,6 +50,7 @@ class dashboard_helper
 	public static function nav()
 	{
 		if (isset($_SESSION['idUsuario'])) {
+			include ('../../core/api/dashboard/sesion.php');
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registrarse.php') {
 				print('
@@ -174,6 +175,7 @@ class dashboard_helper
 				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>-->
 				<script type="text/javascript" src="../../resources/js/pdfmake.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/vfs_fonts.js"></script>
+				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				<script type="text/javascript" src="../../core/helpers/componentes.js"></script>

@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Disponibilidad");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Disponibilidad");
+dashboardHelper::nav();
 ?>
 <main>
     <h1 class="text-center">Disponibilidades</h1>
@@ -160,5 +160,5 @@ dashboard_helper::nav();
   </div>
 </div>
 <?php
-dashboard_helper::footer('disponibilidad.js');
+dashboardHelper::footer('disponibilidad.js');
 ?>

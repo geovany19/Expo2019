@@ -1,7 +1,7 @@
 <?php
-include "../../core/helpers/dashboard_helper.php";
-dashboard_helper::head("Editar perfil");
-dashboard_helper::nav();
+include "../../core/helpers/dashboardHelper.php";
+dashboardHelper::head("Editar perfil");
+dashboardHelper::nav();
 ?>
 <main>
     <div class="container">
@@ -102,5 +102,5 @@ dashboard_helper::nav();
     </div>
 </div>
 <?php
-dashboard_helper::footer('account.js');
+dashboardHelper::footer('account.js');
 ?>

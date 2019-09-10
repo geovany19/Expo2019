@@ -102,6 +102,37 @@ class Validator
             }
         }
     }
+    
+    //función para validar contraseña
+	public function validatePassword($value)
+	{   
+        $error;
+		if (strlen($value) > 7 && strlen($value) < 61) {
+            if (preg_match('#[0-9]+#', $value)) {
+                if (preg_match('#[a-z]+#', $value)) {
+                    if (preg_match('#[A-Z]+#', $value)) {
+                        if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,100}$/", $value)) {
+                            return array(true, "");
+                        }else{
+                            $error = "La contraseña debe contener al menos un caracter especial";
+                            return array(false, $error);
+                        }
+                    }else{
+                        $error = "La contraseña debe contener al menos una letra mayúscula";
+                        return array(false, $error);
+                    }
+                }else{
+                    $error = "La contraseña debe contener al menos una letra minúscula";
+                    return array(false, $error);
+                }
+            }else{
+                $error = "La contraseña debe contener al menos un número";
+                return array(false, $error);
+            }		
+		} else {
+			return array(false, "");
+		}
+    }
 
     public function validateEmail($email)
     {
@@ -169,15 +200,6 @@ class Validator
     public function validateDate($value)
     {
         if (!preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $value)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function validatePassword($value)
-    {
-        if (strlen($value) > 5) {
             return true;
         } else {
             return false;

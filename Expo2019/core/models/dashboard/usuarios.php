@@ -12,6 +12,8 @@ class Usuario extends Validator
 	private $foto = null;
 	private $ruta = '../../../resources/img/dashboard/usuarios/';
 	private $idestado = null;
+	private $intentos = null;
+	private $token = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -91,12 +93,13 @@ class Usuario extends Validator
 
 	public function setClave($value)
 	{
-		if ($this->validatePassword($value)) {
-			$this->clave = $value;
-			return true;
-		} else {
-			return false;
-		}
+		$validator = $this->validatePassword($value);
+        if ($validator[0]) {
+            $this->clave = $value;
+            return array(true, '');
+        } else {
+            return array(false, $validator[1]);
+        }
 	}
 
 	public function getClave()
@@ -154,6 +157,36 @@ class Usuario extends Validator
 		return $this->idestado;
 	}
 
+	public function setIntentos($value)
+	{
+		if ($this->validateNumeric($value)) {
+			$this->intentos = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getIntentos()
+	{
+		return $this->intentos;
+    }
+
+    public function setToken($value)
+    {
+        if ($this->validateAlphaNumeric($value, 1, 32)) {
+            $this->token = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
@@ -199,7 +232,7 @@ class Usuario extends Validator
 	public function readUsuarios()
 	{
 		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a ORDER BY apellido_usuario';
-		$params = array($_SESSION['idUsuario']);
+		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
 
@@ -245,4 +278,39 @@ class Usuario extends Validator
 		$params = array($this->idusuario);
 		return Database::executeRow($sql, $params);
 	}
+
+	public function changePasswordByToken()
+    {
+        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        $sql = 'UPDATE usuarios SET Clave = ? WHERE Token = ?';
+        $params = array($hash, $this->token);
+        return Database::executeRow($sql, $params);
+	}
+	
+	public function getUserByToken()
+	{
+		$sql = 'SELECT IdUsuario FROM usuarios WHERE Token = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['IdUsuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function updateToken()
+	{
+		$sql = 'UPDATE usuarios SET Token = ? WHERE Email = ?';
+		$params = array($this->token, $this->email);
+		return Database::executeRow($sql, $params);
+    }
+    
+    public function getEmailUser()
+	{
+		$sql = 'SELECT Email FROM usuarios WHERE Email = ?';
+		$params = array($this->email);
+		return Database::getRow($sql, $params);
+    }
 }

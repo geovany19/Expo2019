@@ -17,7 +17,7 @@ if( $_GET['fechaini'] < $today && $_GET['fechafin'] < $today && $_GET['fechaini'
   $pdf->head('REPORTE DE PACIENTES');
   $pdf->date();
   $pdf->SetFont('Arial','B', '10');
-  $pdf ->SetFillColor(115,168,189);
+  $pdf ->SetFillColor(115,20,189);
   $pdf ->SetTextColor(255,255,255);
   $pdf->Cell(25);
   

@@ -78,7 +78,7 @@ class private_helper
 			}
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php') {
+			if ($filename != 'index.php' && $filename != 'correo.php' ) {
 				header('location: index.php');
 			} else {
 				print('
@@ -103,7 +103,7 @@ class private_helper
 								</div>
 								<div class="clearfix">
 									<label class="pull-left checkbox-inline"><input type="checkbox"> Recuerdame</label>
-									<a href="#" class="pull-right">¿Olvidaste tu contraseña?</a>
+									<a href="correo.php" class="pull-right">¿Olvidaste tu contraseña?</a>
 								</div>
 							</form>
 						</div>

@@ -22,6 +22,9 @@ dashboardHelper::head("Iniciar sesión");
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
 						</div>
+						<div class="form-group">
+							<h6 class="text-center"><a href="recuperar.php">¿Olvidó su contraseña?</a></h6>
+						</div>
 					</form>
 				</div>
 			</div>

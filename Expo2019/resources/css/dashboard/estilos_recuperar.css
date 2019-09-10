@@ -1,0 +1,163 @@
+#body {
+    background: #8EDAF7;
+    height: 100%;
+}
+
+#main {
+    color: #fff;
+    background: #8edaf7;
+}
+
+.form-control {
+    min-height: 41px;
+    background: #fff;
+    box-shadow: none !important;
+    border-color: #e3e3e3;
+}
+.form-control:focus {
+    border-color: #70c5c0;
+}
+.form-control, .btn {        
+    border-radius: 2px;
+}
+.recover-form {
+    width: 350px;
+    margin: 0 auto;
+    padding: 100px 0 30px;		
+}
+.recover-form form {
+    color: #7a7a7a;
+    border-radius: 2px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    background: #ececec;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;	
+    position: relative;	
+}
+.recover-form h2 {
+    font-size: 22px;
+    margin: 35px 0 25px;
+}
+.recover-form .avatar {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -50px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #70c5c0;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.recover-form .avatar img {
+    width: 100%;
+}	
+.recover-form input[type="checkbox"] {
+    margin-top: 2px;
+}
+.recover-form .btn {        
+    font-size: 16px;
+    font-weight: bold;
+    background: #70c5c0;
+    border: none;
+    margin-bottom: 20px;
+}
+.recover-form .btn:hover, .recover-form .btn:focus {
+    background: #50b8b3;
+    outline: none !important;
+}    
+.recover-form a {
+    color: #fff;
+    text-decoration: underline;
+}
+.recover-form a:hover {
+    text-decoration: none;
+}
+.recover-form form a {
+    color: #7a7a7a;
+    text-decoration: none;
+}
+.recover-form form a:hover {
+    text-decoration: underline;
+}
+
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+
+.page-footer{
+    background-color: #69C6F4;
+    color: #e3e3e3;
+}
+
+.recover-form-registro {
+    width: 700px;
+    margin: 0 auto;
+    padding: 100px 0 30px;		
+}
+.recover-form-registro form {
+    color: #7a7a7a;
+    border-radius: 2px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    background: #ececec;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;	
+    position: relative;	
+}
+.recover-form-registro h2 {
+    font-size: 22px;
+    margin: 35px 0 25px;
+}
+.recover-form-registro .avatar {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -50px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #70c5c0;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.recover-form-registro .avatar img {
+    width: 100%;
+}	
+.recover-form-registro input[type="checkbox"] {
+    margin-top: 2px;
+}
+.recover-form-registro .btn {        
+    font-size: 16px;
+    font-weight: bold;
+    background: #70c5c0;
+    border: none;
+    margin-bottom: 20px;
+}
+.recover-form-registro .btn:hover, .recover-form .btn:focus {
+    background: #50b8b3;
+    outline: none !important;
+}    
+.recover-form-registro a {
+    color: #fff;
+    text-decoration: underline;
+}
+.recover-form-registro a:hover {
+    text-decoration: none;
+}
+.recover-form-registro form a {
+    color: #7a7a7a;
+    text-decoration: none;
+}
+.recover-form-registro form a:hover {
+    text-decoration: underline;
+}

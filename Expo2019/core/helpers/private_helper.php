@@ -28,8 +28,9 @@ class private_helper
             </head>
 			<body>
 		');
-		self::modals();
-		if (isset($_SESSION['idUsuario'])) {
+
+		if (isset($_SESSION['idDoctor'])) {
+			self::modals();
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php') {
 				print('

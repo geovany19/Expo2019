@@ -11,7 +11,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
    //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
-    if (isset($_SESSION['idUsuario']) && $_GET['site'] == 'private') {
+    if (isset($_SESSION['idDoctor']) && $_GET['site'] == 'private') {
         switch ($_GET['action']) {
             case 'set':
                 if($_SESSION['idPaciente'] = $_GET['id']){
@@ -38,7 +38,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
                 
                 case 'readProfile':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
+                if ($usuario->setId($_SESSION['idDoctor'])) {
                     if ($result['dataset'] = $usuario->getUsuario()) {
                         $result['status'] = 1;
                     } else {
@@ -50,7 +50,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
 
                 case 'readCitas':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
+                if ($usuario->setId($_SESSION['idDoctor'])) {
                  if ($result['dataset'] = $usuario->getCita()) {
                     $result['status'] = 1;
                 } else {
@@ -63,7 +63,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
 
                 case 'readCita':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
+                if ($usuario->setId($_SESSION['idDoctor'])) {
                  if ($result['dataset'] = $usuario->getCitas()) {
                     $result['status'] = 1;
                 } else {
@@ -76,7 +76,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
 
                 case 'readCitaspendientes':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
+                if ($usuario->setId($_SESSION['idDoctor'])) {
                  if ($result['dataset'] = $usuario->getCitaspendientes()) {
                     $result['status'] = 1;
                 } else {
@@ -113,7 +113,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
                 
                 case 'editProfile':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
+                if ($usuario->setId($_SESSION['idDoctor'])) {
                     if ($usuario->getUsuario()) {
                         $_POST = $usuario->validateForm($_POST);
                         if ($usuario->setNombres($_POST['profile_nombres'])) {
@@ -147,7 +147,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
 
                 case 'password':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
+                if ($usuario->setId($_SESSION['idDoctor'])) {
                     $_POST = $usuario->validateForm($_POST);
                     if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
                         if ($usuario->setClave($_POST['clave_actual_1'])) {
@@ -184,7 +184,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 case 'create':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setPadecimientos($_POST['padecimientos'])) {
-                    if ($usuario->setId($_SESSION['idUsuario'])) {
+                    if ($usuario->setId($_SESSION['idDoctor'])) {
                         if ($usuario->setId_paciente($_POST['idPaciente'])) {
                                 if ($usuario->setReceta($_POST['receta'])) {
                                     if ($usuario->setPeso($_POST['Peso'])) {
@@ -233,7 +233,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     if ($usuario->checkAlias()) {
                         if ($usuario->setClave($_POST['clave'])) {
                             if ($usuario->checkPassword()) {
-                                $_SESSION['idUsuario'] = $usuario->getId();
+                                $_SESSION['idDoctor'] = $usuario->getId();
                                 $_SESSION['aliasUsuario'] = $usuario->getAlias();
                                 $result['status'] = 1;
                             } else {

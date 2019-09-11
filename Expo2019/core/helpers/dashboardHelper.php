@@ -109,7 +109,9 @@ class dashboardHelper
 								</div>
 							</nav>
 							<main class="container">
+							
 				');
+				
 			} else {
 				header('location: pagina.php');
 			}
@@ -117,15 +119,7 @@ class dashboardHelper
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registrarse.php') {
 				header('location: index.php');
-			} else {
-				print('
-					<nav class="navbar navbar-light bg" id="nav-registrarse">
-						<a class="navbar-brand" href="#">
-							<img src="../../resources/img/dashboard/img4.jpg" width="30" height="30" alt="">
-						</a>
-					</nav>
-				');
-			}
+			} 
 		}
 	}
 

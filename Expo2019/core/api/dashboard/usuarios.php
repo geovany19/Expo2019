@@ -504,7 +504,7 @@ if (isset($_GET['action'])) {
                                 $_SESSION['nombreUsuario'] = $usuario->getNombre();
                                 $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
-                                $result['message'] = 'Autenticación correcta';
+                                $result['message'] = 'Inicio de sesión correcto';
                             } else {
                                 $result['exception'] = 'Contraseña inexistente';
                             }

@@ -1,12 +1,13 @@
 #body {
     background: #8EDAF7;
     height: 100%;
-    background-image: 
+    background-image: url('../../../resources/img/fondo-medico.jpg');
 }
 
 #main {
     color: #fff;
-    background: #8edaf7;
+    /*background: #8edaf7;*/
+    background-image: url('../../../resources/img/fondo-medico.jpg');
 }
 
 #nav-registrarse {

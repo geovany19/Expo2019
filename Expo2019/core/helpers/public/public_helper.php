@@ -14,6 +14,7 @@ class public_helper
 					<meta http-equiv="X-UA-Compatible" content="ie=edge">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/sweetalert2.min.css">
+					<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_recuperar.css">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
 					<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_public.css">
 					<link href="../../resources/js/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">

@@ -24,12 +24,16 @@ class private_helper
 								<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-								<title>SISMED - '.$title.'</title>
+								<title>SISMED - ' . $title . '</title>
             </head>
 			<body>
 		');
-		self::modals();
-		if (isset($_SESSION['idUsuario'])) {
+	}
+
+	public function nav()
+	{
+		if (isset($_SESSION['idDoctor'])) {
+			self::modals();
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php') {
 				print('
@@ -38,7 +42,7 @@ class private_helper
 					<nav id="sidebar">
 						<div class="sidebar-header">
 							<h3>Sismed</h3>
-							<b>'.$_SESSION['aliasUsuario'].'</b>
+							<b>' . $_SESSION['aliasUsuario'] . '</b>
 							<strong>SM</strong>
 						</div>
 						<ul class="list-unstyled components">
@@ -139,12 +143,12 @@ class private_helper
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 				<script type="text/javascript" src="../../core/controllers/private/account.js"></script>
-				<script type="text/javascript" src="../../core/controllers/private/'.$controller.'"></script>
+				<script type="text/javascript" src="../../core/controllers/private/' . $controller . '"></script>
 			</body>
 			</html>
 		');
 	}
-	
+
 	//AQUI EMPIEZAN LOS MODALES 
 
 	public static function modals()
@@ -238,4 +242,3 @@ class private_helper
 		');
 	}
 }
-?>

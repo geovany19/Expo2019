@@ -1,7 +1,7 @@
 <?php
 include "../../core/helpers/private/private_helper.php";
 private_helper::head("Consultas");
-private_helper::navbar();
+private_helper::nav();
 ?>
 <main class="main grey lighten-3">
 	<div id="calificar" class="modal grey lighten-3">

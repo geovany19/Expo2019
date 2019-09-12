@@ -1,6 +1,7 @@
 <?php
 require_once('../../core/helpers/private_helper.php');
 private_helper::headerTemplate('Citas');
+private_helper::nav();
 ?>
 <table class="table" id="table-citas">
   <thead>

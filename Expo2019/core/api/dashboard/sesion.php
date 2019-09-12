@@ -1,7 +1,7 @@
 <?php
 $tiempo_transcurrido = time() - $_SESSION['ultimoAcceso'];
 //comparamos el tiempo transcurrido  
-if ($tiempo_transcurrido >= 5) {
+if ($tiempo_transcurrido >= 300) {
     //si pasaron 5 minutos o más  
     session_destroy(); // destruyo la sesión  
     echo '

@@ -1,6 +1,7 @@
 <?php
 include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Iniciar sesión");
+dashboardHelper::nav();
 ?>
 
 <body id="body">

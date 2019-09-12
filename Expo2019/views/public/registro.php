@@ -1,8 +1,5 @@
 <?php
 include "../../core/helpers/public/public_helper.php";
-?>
-
-<?php
 public_helper::head("Registrarse");
 ?>
 <body id="body">

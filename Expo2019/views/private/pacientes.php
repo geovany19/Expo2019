@@ -1,6 +1,7 @@
 <?php
 require_once('../../core/helpers/private_helper.php');
 private_helper::headerTemplate('Paciente');
+private_helper::nav();
 ?>
 <form id='form-paciente'>
 	<input type="hidden" name="idPaciente" id="idPaciente">

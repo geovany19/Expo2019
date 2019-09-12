@@ -82,14 +82,14 @@ dashboardHelper::nav();
                     </div>
                     <div class="form-group">
                         <label for="clave_nueva_1">Nueva contraseña</label>
-                        <input type="password" class="form-control" id="clave_nueva_1" name="clave_nueva_1" placeholder="Nueva contraseña" required>
+                        <input type="password" class="form-control" id="clave_nueva_1" name="clave_nueva_1" placeholder="Nueva contraseña" minlength="8" maxlength="15" required>
                         <small id="passwordHelp" class="form-text text-muted">La nueva contraseña debe ser de 7-15 caracteres de longitud. Debe contener letras, números.
                             No debe contener espacios, caracteres especiales o emojis, y no debe ser igual a la contraseña actual.</small>
                         <div class="invalid-feedback">Ingrese la nueva contraseña</div>
                     </div>
                     <div class="form-group">
                         <label for="clave_nueva_2">Confirmar nueva contraseña</label>
-                        <input type="password" class="form-control" id="clave_nueva_2" name="clave_nueva_2" placeholder="Confirmar nueva contraseña" required>
+                        <input type="password" class="form-control" id="clave_nueva_2" name="clave_nueva_2" placeholder="Confirmar nueva contraseña" minlength="8" maxlength="15" required>
                         <div class="invalid-feedback">Confirme la contraseña. Asegurese que ambas contraseñas coincidan.</div>
                     </div>
                     <div class="modal-footer justify-content-center aling-items-center">

@@ -355,7 +355,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Desbes comprobar que eres humano';
                 }
                 break;
-                case 'enviarCorreo':
+                case 'verificarCuenta':
                     $_POST = $usuario->validateForm($_POST);
                     if($usuario->setEmail($_POST['email-name'])) {
                         if($usuario->getEmailUser()){
@@ -383,9 +383,64 @@ if (isset($_GET['action'])) {
                                                 
                                                 // Content
                                                 $mail->isHTML(true);                                  // Set email format to HTML
+                                                $mail->Subject = 'Verifica tu cuenta';
+                                                $mail->Body    = 'Tu cuenta ha sido creada, solo falta un paso más, verifica tu cuenta ingresando
+                                                el siguiente código.';
+
+                                                $mail->send();
+                                                echo 'Message has been sent';
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Se ha enviado el correo de recuperación de contraseña';
+                                            } catch (Exception $e) {
+                                                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                            }
+                                    } else {
+                                        $result['exception'] = 'Error al obtener el correo';  
+                                    }                                
+                                } else {
+                                    $result['exception'] = 'Error al asignar el token';
+                                }  
+                            } else{
+                                $result['exception'] = 'Error al generar el token';
+                            }  
+                        } else{
+                            $result['exception'] = 'Correo no existe';
+                        }   
+                    }  else {
+                        $result['exception'] = 'Correo invalido';
+                    }
+                    break;
+                case 'enviarCorreo':
+                    $_POST = $usuario->validateForm($_POST);
+                    if($usuario->setEmail($_POST['email-name'])) {
+                        if($usuario->getEmailUser()){
+                            $token = md5(uniqid(rand(), true)); 
+                            if($usuario->setToken($token)) {
+                                if($usuario->updateToken()) {
+                                    if($emailusuario = $usuario->getCorreo()) {
+                                        $result['status'] = 1;
+                                        $mail = new PHPMailer(true);
+                                        $mail ->charSet = "UTF-8";
+                                            try {
+                                                //Server settings
+                                                $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                                $mail->isSMTP();                                            // Set mailer to use SMTP
+                                                $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                                                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                                $mail->Username   = ' oportetecnicosismed@gmail.com';                     // SMTP username
+                                                $mail->Password   = 'Sismed12345';                               // SMTP password
+                                                $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                                $mail->Port       = 587;                                    // TCP port to connect to
+
+                                                //Recipients
+                                                $mail->setFrom('soportetecnicosismed@gmail.com', 'Soporte Técnico de SISMED');
+                                                $mail->addAddress($emailusuario);     // Add a recipient
+                                                
+                                                // Content
+                                                $mail->isHTML(true);                                  // Set email format to HTML
                                                 $mail->Subject = 'Restablecimiento de contraseña';
                                                 $mail->Body    = 'Hemos recibido una solicitud de restablecimiento de la contraseña de tu cuenta.
-                                                Para restablecer tu contraseña haz click <a href="http://localhost/MocherosOnline/mocheros/views/dashboard/contrasenas.php?token='.$token.'">en este enlace</<a>.
+                                                Para restablecer tu contraseña haz click <a href="http://localhost/Expo2019/Expo2019/views/dashboard/claves.php?token='.$token.'">en este enlace</<a>.
                                                 Si no has realizado ninguna solicitud, ignora este correo.';
 
                                                 $mail->send();
@@ -449,7 +504,7 @@ if (isset($_GET['action'])) {
                                 $_SESSION['nombreUsuario'] = $usuario->getNombre();
                                 $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
-                                $result['message'] = 'Autenticación correcta';
+                                $result['message'] = 'Inicio de sesión correcto';
                             } else {
                                 $result['exception'] = 'Contraseña inexistente';
                             }

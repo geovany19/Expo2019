@@ -1,8 +1,10 @@
 <?php
 class public_helper
 {
-	function head($title)
+	public function head($title)
 	{
+		session_start();
+		ini_set('date.timezone', 'America/El_Salvador');
 		print('
             <!DOCTYPE html>
             <html lang="en">
@@ -24,7 +26,7 @@ class public_helper
 	}
 
 	//Método que contiene el navbar, tiene color azul, las opciones del navbar se pueden adaptar
-	function navbar()
+	/*public function navbar()
 	{
 		print('
 		<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -49,7 +51,7 @@ class public_helper
 				<!-- Nav Item - User Information -->
 				<li class="nav-item dropdown no-arrow">
 					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="mr-2 d-none d-lg-inline text-gray-600 small">Cuenta</span>
+						<span class="mr-2 d-none d-lg-inline text-gray-600 small">Cuenta - <b>' . $_SESSION['nombrePaciente'] .' '. $_SESSION['apellidoPaciente'] . '</b></span>
 					</a>
 					<!-- Dropdown - User Information -->
 					<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -70,6 +72,69 @@ class public_helper
 			</ul>
 		</nav>
         ');
+	}*/
+
+	public static function nav()
+	{
+		if (isset($_SESSION['idPaciente'])) {
+			include ('../../core/api/dashboard/sesion.php');
+			$filename = basename($_SERVER['PHP_SELF']);
+			if ($filename != 'index.php' && $filename != 'registro.php') {
+				print('
+					<body>
+					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Topbar Navbar Left-->
+				
+					<ul class="navbar-nav">
+						<!-- Nav Item - Alerts -->
+						<li class="nav-item dropdown no-arrow mx-1">
+							<h1 class="h3 mb-0 text-gray-500" ><a class="navbar-brand" href="home.php">SISMED</a></h1>
+						</li>
+					</ul>
+				
+					<!-- Topbar Navbar Right-->
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="citas.php">Ver citas <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="doctores.php">Buscar doctores</a>
+						</li>
+		
+						<!-- Nav Item - User Information -->
+						<li class="nav-item dropdown no-arrow">
+							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Cuenta - <b>'.$_SESSION['nombrePaciente'].' '.$_SESSION['apellidoPaciente'].'</b></span>
+							</a>
+							<!-- Dropdown - User Information -->
+							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+								
+								<a class="dropdown-item" href="user.php">
+									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+									Editar perfil
+								</a>
+				
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" onclick="signOff()">
+									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Cerrar sesión
+								</a>
+		
+							</div>
+						</li>
+					</ul>
+				</nav>
+				');
+				
+			} else {
+				header('location: citas.php');
+			}
+		} else {
+			$filename = basename($_SERVER['PHP_SELF']);
+			if ($filename != 'index.php' && $filename != 'registrarse.php') {
+				header('location: index.php');
+			} 
+		}
 	}
 
 	function footer()

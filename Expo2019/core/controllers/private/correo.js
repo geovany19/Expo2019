@@ -1,5 +1,5 @@
 //Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/public/usuario.php?site=public&action=';
+const apiAccount = '../../core/api/private/usuarios.php?site=public&action=';
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -41,7 +41,7 @@ function getParameterByName(name) {
 $('#form-recuperar2').submit(function()
 {   event.preventDefault();
     var token = getParameterByName('token');
-    console.log(token);
+   // console.log(token);
     var password1 = $('#nuevaclave1').val(), password2 = $('#nuevaclave2').val();
     $.ajax({
         url: apiAccount + 'nuevaPassword',

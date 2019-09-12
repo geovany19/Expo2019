@@ -25,7 +25,7 @@ private_helper::nav();
                         </div>
                         <div class="clearfix">
                             <!--<label class="pull-left checkbox-inline"><input type="checkbox"> Recuerdame</label>-->
-                            <a href="#" class="pull-right">¿Olvidaste tu contraseña?</a>
+                            <a href="correo.php" class="pull-right">¿Olvidaste tu contraseña?</a>
                         </div>
                     </form>
                 </div>

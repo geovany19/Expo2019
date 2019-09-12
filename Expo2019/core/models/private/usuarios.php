@@ -18,6 +18,20 @@ class Usuarios extends Validator
 	private $peso = null;
 	private $estatura = null;
 	private $presion = null;
+	private $token = null;
+	//private $tipo = null;
+
+	//Métodos para sobrecarga de propiedades
+	public function setToken($value)
+	{
+		$this->token = $value;
+		return true;
+	}
+
+	public function getToken()
+	{
+		return $this->token;
+	}
 
 	/*aqui va algo de prueba */
 	public function getPeso()
@@ -334,6 +348,33 @@ public function setReceta($value)
 		$sql = 'SELECT d.nombre_doctor, d.apellido_doctor, c.receta, p.nombre_paciente, p.apellido_paciente from doctores d, consulta c, pacientes p where d.id_doctor=c.id_doctor and c.id_paciente= ? and p.id_paciente =?';
 		$params = array($id,$id);
 		return Database::getRows($sql, $params);
+	}
+
+	public function checkCorreo()
+	{
+		$sql = 'SELECT correo_doctor from doctores where correo_doctor=?';
+		$params = array($this->correo);
+		return Database::getRow($sql, $params);
+	}
+
+	public function tokensito()
+	{
+		$sql = 'UPDATE doctores set token_doctor = ? where correo_doctor = ?';
+		$params = array($this->token, $this->correo);
+		return Database::executeRow($sql, $params);
+	}
+	
+	public function getDatosTokensito()
+	{
+		$sql = 'SELECT id_doctor FROM doctores WHERE token_doctor = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->id = $data['id_doctor'];
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 ?>

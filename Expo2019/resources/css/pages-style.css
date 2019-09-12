@@ -1,9 +1,11 @@
+@import "../../resources/fonts/poppins.css";
+
 body {
+    font-family: 'Poppins', sans-serif;
     background-image: url('../img/giphy.gif');
     background-size: cover;
     align-content: center;
     align-items: center;
-    position: 25%;
 }
 
 h1 {

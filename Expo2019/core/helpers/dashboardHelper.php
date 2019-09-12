@@ -39,15 +39,6 @@ class dashboardHelper
         ');
 	}
 
-	public static function navIndex()
-	{
-		print('
-			<nav class="navbar navbar-light bg-light">
-				<a class="navbar-brand mb-0  h1"><img src="../../resources/img/dashboard/img4.jpg" width="30" height="30" class="d-inline-block align-top" alt="">    Sismed</a>
-			</nav>
-		');
-	}
-
 	public static function nav()
 	{
 		if (isset($_SESSION['idUsuario'])) {

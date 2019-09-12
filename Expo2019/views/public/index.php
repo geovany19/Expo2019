@@ -4,6 +4,7 @@ include "../../core/helpers/public/public_helper.php";
 
 <?php
 public_helper::head("Iniciar sesión");
+public_helper::nav();
 ?>
 
 <body id="body">
@@ -26,7 +27,7 @@ public_helper::head("Iniciar sesión");
 							<button type="submit" class="btn btn-primary btn-lg btn-block" href="home.php">Iniciar sesión</button>
 						</div>
 						<div class="clearfix text-center">
-							<label class="pull-left checkbox-inline text-center"><input type="checkbox">Recuerdame</label>
+							<!--<label class="pull-left checkbox-inline text-center"><input type="checkbox">Recuerdame</label>-->
 						</div>
 
 						<div class="text-center">

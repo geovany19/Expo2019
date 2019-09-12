@@ -24,11 +24,14 @@ class private_helper
 								<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-								<title>SISMED - '.$title.'</title>
+								<title>SISMED - ' . $title . '</title>
             </head>
 			<body>
 		');
+	}
 
+	public function nav()
+	{
 		if (isset($_SESSION['idDoctor'])) {
 			self::modals();
 			$filename = basename($_SERVER['PHP_SELF']);
@@ -39,7 +42,7 @@ class private_helper
 					<nav id="sidebar">
 						<div class="sidebar-header">
 							<h3>Sismed</h3>
-							<b>'.$_SESSION['aliasUsuario'].'</b>
+							<b>' . $_SESSION['aliasUsuario'] . '</b>
 							<strong>SM</strong>
 						</div>
 						<ul class="list-unstyled components">
@@ -81,40 +84,6 @@ class private_helper
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php') {
 				header('location: index.php');
-			} else {
-				print('
-				<header>
-				<main id="main">
-				<div class="row">
-					<div class="col col-sm-12">
-						<div class="login-form" >
-							<form  method="post" id="login-1">
-								<div class="avatar">
-									<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
-								</div>
-								<h2 class="text-center">Iniciar sesión</h2>
-								<div class="form-group">
-									<input type="text" id="name" name="name" class="form-control validate" placeholder="Nombre de usuario" required="required">
-								</div>
-								<div class="form-group">
-									<input type="password" class="form-control validate" id="clave" name="clave" placeholder="Contraseña" required="required">
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
-								</div>
-								<div class="clearfix">
-									<label class="pull-left checkbox-inline"><input type="checkbox"> Recuerdame</label>
-									<a href="#" class="pull-right">¿Olvidaste tu contraseña?</a>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				</header>
-				<main>
-					
-				');
-				
 			}
 		}
 	}
@@ -140,12 +109,12 @@ class private_helper
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 				<script type="text/javascript" src="../../core/controllers/private/account.js"></script>
-				<script type="text/javascript" src="../../core/controllers/private/'.$controller.'"></script>
+				<script type="text/javascript" src="../../core/controllers/private/' . $controller . '"></script>
 			</body>
 			</html>
 		');
 	}
-	
+
 	//AQUI EMPIEZAN LOS MODALES 
 
 	public static function modals()
@@ -239,4 +208,3 @@ class private_helper
 		');
 	}
 }
-?>

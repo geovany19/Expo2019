@@ -1,7 +1,7 @@
 <?php
 include "../../core/helpers/public/public_helper.php";
 public_helper::head("Citas");
-public_helper::navbar();
+public_helper::nav();
 ?>
 
 <main class="container">

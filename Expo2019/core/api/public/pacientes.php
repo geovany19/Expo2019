@@ -339,7 +339,7 @@ if (isset($_GET['action'])) {
                                 $_SESSION['idPaciente'] = $usuario->getId();
                                 $_SESSION['nombrePaciente'] = $usuario->getNombre();
                                 $_SESSION['apellidoPaciente'] = $usuario->getApellido();
-                                
+                                $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
                             } else {

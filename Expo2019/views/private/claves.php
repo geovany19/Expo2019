@@ -7,20 +7,20 @@ dashboardHelper::head("Restablecer contraseña");
     <main id="main">
         <div class="row">
             <div class="col col-sm-12">
-                <div class="recover-form">
-                    <form method="post" id="form-correo" autocomplete="off">
+                <div class="claves-form">
+                    <form method="post" id="form-recuperar2" autocomplete="off">
                         <div class="avatar">
                             <img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
                         </div>
                         <h2 class="text-center">Restablecer contraseña</h2>
                         <div class="form-group">
-                            <input type="text" id="correo" class="form-control" name="correo" placeholder="Correo electrónico" required="required">
+                            <input type="password" id="nuevaclave1" class="form-control" name="nuevaclave1" placeholder="Nueva contraseña" required="required">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="correorecuperar()">Enviar correo</button>
+                            <input type="password" id="nuevaclave2" class="form-control" name="nuevaclave2" placeholder="Confirmar contraseña" required="required">
                         </div>
                         <div class="form-group">
-                            <h6 class="text-center"><a href="index.php">Volver al inicio</a></h6>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Restablecer contraseña</button>
                         </div>
                     </form>
                 </div>

@@ -5,7 +5,7 @@ require_once('../../../core/models/private/usuarios.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once( '../../../libraries/PHPMailer/src/Exception.php');
+require_once('../../../libraries/PHPMailer/src/Exception.php');
 require_once('../../../libraries/PHPMailer/src/PHPMailer.php');
 require_once('../../../libraries/PHPMailer/src/SMTP.php');
 
@@ -284,8 +284,8 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                         $mail->isHTML(true);                                  // Set email format to HTML
                                         $mail->Subject = 'Recuperacion de clave';
                                        // $mail->Body    = 'Puede hacer click';
-                                        $mail->Body    = '<a href="http://localhost/Expo2019/Expo2019/views/private/recuperarContra.php?token='.$token.'">aqui</<a>';
-                                        $mail->AddEmbeddedImage('../../resources/img/dashboard/img2.jpg', 'logo_sismed', 'img2.jpg');
+                                        $mail->Body    = '<a href="http://localhost/Expo2019/Expo2019/views/private/claves.php?token='.$token.'">aqui</<a>';
+                                       // $mail->AddEmbeddedImage('../../resources/img/dashboard/img2.jpg', 'logo_sismed', 'img2.jpg');
                                         $mail->send();
                                         echo 'Message has been sent';
                                     } catch (Exception $e) {
@@ -313,15 +313,15 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     if($usuario->getDatosTokensito()){
                         if ($_POST['nueva_contrasena'] == $_POST['nueva_contrasena2']) {
                             $resultado = $usuario->setClave($_POST['nueva_contrasena']);
-                                    if ($resultado[0]) {
+                                  //  if ($resultado[0]) {
                                         if ($usuario->changePassword()) {
                                             $result['status'] = 1;
                                         } else {
                                             $result['exception'] = 'Operación fallida';
                                         }
-                                    } else {
-                                        $result['exception'] = $resultado[1];
-                                    }
+                                  //  } else {
+                                 //      $result['exception'] = $resultado[1];
+                                   // }
                         } else {
                             $result['exception'] = 'Claves diferentes';
                             

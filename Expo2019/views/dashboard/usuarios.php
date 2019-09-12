@@ -44,7 +44,7 @@ dashboardHelper::nav();
         </button>
       </div>
       <div class="modal-body">
-	  <form class="needs-validation" id="form-create" novalidate>
+	  <form class="needs-validation" id="form-create" autocomplete="off" novalidate>
 			<div class="row">
 			<div class="col-md-6 mb-4">
 				  <i class="material-icons prefix">person</i>
@@ -110,7 +110,7 @@ dashboardHelper::nav();
 			</div>
 			<div class="modal-body">
 				<img id="foto" height="75">
-				<form id="form-update" enctype="multipart/form-data">
+				<form id="form-update" enctype="multipart/form-data" autocomplete="off">
 					<input type="hidden" id="id_usuario" name="id_usuario">
 					<input type="hidden" id="foto_usuario" name="foto_usuario">
 					<div class="form-group">

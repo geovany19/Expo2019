@@ -118,7 +118,7 @@ dashboardHelper::nav();
 				<div class="d-flex justify-content-center" >
 					<img id="foto" class="img-fluid" width="100">
 				</div>
-				<form id="form-update" enctype="multipart/form-data">
+				<form id="form-update" enctype="multipart/form-data" autocomplete="off">
 				<input type="hidden" id="id_paciente" name="id_paciente">
 	  			<input type="hidden" id="foto_paciente" name="foto_paciente">
 					<div class="form-group">
@@ -185,7 +185,7 @@ dashboardHelper::nav();
       </div>
       <div class="modal-body">
 							
-	  <form class="needs-validation" id="form-reportes" novalidate>
+	  <form class="needs-validation" id="form-reportes" autocomplete="off" novalidate>
 	  <div class="d-flex justify-content-center">
 	  </div>	
 			<div class="row">

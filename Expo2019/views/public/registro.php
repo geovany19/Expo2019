@@ -7,7 +7,7 @@ public_helper::head("Registrarse");
 		<div class="row">
 			<div class="col col-sm-12">
 				<div class="login-form-registro">
-					<form method="post" id="registro-form">
+					<form method="post" id="registro-form" autocomplete="off">
 						<div class="avatar">
 							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
 						</div>

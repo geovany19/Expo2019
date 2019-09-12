@@ -32,7 +32,7 @@ dashboardHelper::nav();
         </button>
       </div>
       <div class="modal-body">
-	  <form class="needs-validation" id="form-create" novalidate>
+	  <form class="needs-validation" id="form-create" autocomplete="off" novalidate>
 			<div class="row">
 			<div class="col-md-6 mb-4">
 				  <i class="material-icons prefix">person</i>
@@ -99,7 +99,7 @@ dashboardHelper::nav();
       </div>
       <div class="modal-body">
 							
-	  <form class="needs-validation" id="form-update" novalidate>
+	  <form class="needs-validation" id="form-update" autocomplete="off" novalidate>
 	  <div class="d-flex justify-content-center">
 			  <img id="foto" class="img-fluid" width="100">
 	  </div>	

@@ -8,7 +8,7 @@ dashboardHelper::head("Restablecer contraseña");
         <div class="row">
             <div class="col col-sm-12">
                 <div class="claves-form">
-                    <form method="post" id="form-recuperar" autocomplete="off">
+                    <form method="post" id="form-claves" autocomplete="off">
                         <div class="avatar">
                             <img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
                         </div>

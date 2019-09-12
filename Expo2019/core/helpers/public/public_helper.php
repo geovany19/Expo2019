@@ -77,7 +77,7 @@ class public_helper
 	public static function nav()
 	{
 		if (isset($_SESSION['idPaciente'])) {
-			include ('../../core/api/dashboard/sesion.php');
+			include ('../../core/api/public/sesion.php');
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registro.php') {
 				print('

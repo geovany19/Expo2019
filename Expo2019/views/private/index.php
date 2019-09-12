@@ -9,7 +9,7 @@ private_helper::nav();
         <div class="row">
             <div class="col col-sm-12">
                 <div class="login-form">
-                    <form method="post" id="login-1">
+                    <form method="post" id="login-1" autocomplete="off">
                         <div class="avatar">
                             <img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
                         </div>

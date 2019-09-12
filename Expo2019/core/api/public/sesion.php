@@ -6,7 +6,7 @@ if ($tiempo_transcurrido >= 10) {
     session_destroy(); // destruyo la sesión  
     echo '
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../../core/helpers/functions.js"></script>
+    <script type="text/javascript" src="../helpers/functions.js"></script>
     <script>
     swal({
         title: "Advertencia",
@@ -18,7 +18,7 @@ if ($tiempo_transcurrido >= 10) {
     })
     .then(function(value){
         if (value) {
-            location.href = "../../views/dashboard/index.php";
+            location.href = "../../views/public/index.php";
         }
     });
     </script>';

@@ -17,7 +17,7 @@ private_helper::nav();
 								<input placeholder="Comentario sobre el paciente" id="comentario" type="text" class="validate">
 								<label for="comentario">Comentario</label>
 							</div>
-							<form>
+							<form autocomplete="off">
 								<p class="clasificacion">
 									<input id="radio1" type="radio" name="estrellas" value="5">
 									<!--

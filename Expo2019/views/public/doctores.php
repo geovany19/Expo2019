@@ -40,7 +40,7 @@ public_helper::nav();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="modalCrearCita" method="post">
+            <form id="modalCrearCita" method="post" autocomplete="off">
                 <input type="hidden" name="idDoctor" id="idDoctor" required>
                 <div class="modal-body">
                     <div class="form-row">

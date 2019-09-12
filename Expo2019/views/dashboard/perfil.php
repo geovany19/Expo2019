@@ -25,7 +25,7 @@ dashboardHelper::nav();
                 <div class="d-flex justify-content-center" >
 					<img id="foto" class="img-fluid" width="100">
 				</div>
-                <form id="form-profile" enctype="multipart/form-data">
+                <form id="form-profile" enctype="multipart/form-data" autocomplete="off">
                     <input type="hidden" id="id_usuario" name="id_usuario">
                     <input type="hidden" id="foto_usuario" name="foto_usuario">
                     <div class="form-group">
@@ -69,7 +69,7 @@ dashboardHelper::nav();
                 <h5 class="modal-title" id="exampleModalLongTitle">Modificar contraseña</h5>
             </div>
             <div class="modal-body">
-                <form id="form-password" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <form id="form-password" enctype="multipart/form-data" class="needs-validation" autocomplete="off" novalidate>
                     <div class="form-group">
                         <label for="clave_actual_1">Contraseña actual</label>
                         <input type="password" class="form-control" class="form-control is-valid" id="clave_actual_1" name="clave_actual_1" aria-describedby="emailHelp" placeholder="Contraseña actual" required>

@@ -39,7 +39,7 @@ dashboardHelper::nav();
 				<h5 class="modal-title" id="exampleModalLongTitle">Actualizar usuario</h5>
 			</div>
 			<div class="modal-body">
-				<form id="form-create" enctype="multipart/form-data">
+				<form id="form-create" enctype="multipart/form-data" autocomplete="off">
 					<div class="form-group">
 						<label for="create_especialidad">Especialidad</label>
 						<input type="text" class="form-control" class="form-control is-valid" id="create_especialidad" name="create_especialidad" placeholder="Especialidad" maxlength="25">
@@ -65,7 +65,7 @@ dashboardHelper::nav();
 				<h5 class="modal-title" id="exampleModalLongTitle">Actualizar usuario</h5>
 			</div>
 			<div class="modal-body">
-				<form id="form-update" enctype="multipart/form-data">
+				<form id="form-update" enctype="multipart/form-data" autocomplete="off">
 					<input type="hidden" class="form-control" id="id_especialidad" name="id_especialidad">
 					<div class="form-group">
 						<label for="update_nombre">Especialidad</label>
@@ -94,7 +94,7 @@ dashboardHelper::nav();
       </div>
       <div class="modal-body">
 							
-	  <form class="needs-validation" id="formEspecialidad">
+	  <form class="needs-validation" id="formEspecialidad" autocomplete="off">
 	  	<div class="d-flex justify-content-center">
 			<div class="row">
 				<div class="form-group">

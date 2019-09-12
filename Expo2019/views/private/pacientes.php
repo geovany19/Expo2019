@@ -3,7 +3,7 @@ require_once('../../core/helpers/private_helper.php');
 private_helper::headerTemplate('Paciente');
 private_helper::nav();
 ?>
-<form id='form-paciente'>
+<form id='form-paciente' autocomplete="off">
 	<input type="hidden" name="idPaciente" id="idPaciente">
 	<input type="hidden" name="idCita" id="idCita">
 	<input type="hidden" name="idEstado" id="idEstado">

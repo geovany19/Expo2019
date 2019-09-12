@@ -79,7 +79,7 @@
 				right: 'prev,next today'
 			},
 			editable: true,
-			firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+			firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
 			selectable: true,
 			defaultView: 'month',
 			
@@ -213,6 +213,10 @@
         monthNamesShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
         dayNames: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         dayNamesShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+        /*monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+        monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+        dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+        dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],*/
         buttonText: {
             prev: "<span class='fc-text-arrow'>‹</span>",
             next: "<span class='fc-text-arrow'>›</span>",
@@ -222,6 +226,10 @@
             month: 'month',
             week: 'week',
             day: 'day'
+            /*today: 'hoy',
+            month: 'mes',
+            week: 'semana',
+            day: 'día'*/
         },
         
         // jquery-ui theming

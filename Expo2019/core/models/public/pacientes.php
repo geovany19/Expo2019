@@ -188,7 +188,7 @@ class Pacientes extends Validator
 	//métodos para manejar la sesión del usuario
 	public function checkPaciente()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente FROM pacientes WHERE usuario_paciente = ?';
+		/*$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente FROM pacientes WHERE usuario_paciente = ?';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -198,15 +198,81 @@ class Pacientes extends Validator
 			return true;
 		} else {
 			return false;
+		}*/
+		$sql = 'SELECT id_paciente, cuenta_bloqueada FROM pacientes WHERE usuario_paciente = ?';
+		$params = array($this->usuario);
+		$data = Database::getRow($sql, $params);
+
+		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+
+		$nueva_fecha = strtotime ( date($data['cuenta_bloqueada']) .'+ 24 hours'  ) ;
+
+		if ($data) {
+			if($data['cuenta_bloqueada']){
+				if($fecha_actual<$nueva_fecha){
+					return 2;
+				}else{
+					$this->idpaciente = $data['id_paciente'];				
+					return 1;
+				}
+			}else{
+				$this->idpaciente = $data['id_paciente'];				
+				return 1;
+			}
+		} else {
+			return 0;
 		}
 	}
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_paciente FROM pacientes WHERE id_paciente = ?';
+		/*$sql = 'SELECT contrasena_paciente FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		$data = Database::getRow($sql, $params);
 		if ($this->clave = $data['contrasena_paciente']) {
+			return true;
+		} else {
+			return false;
+		}*/
+
+		$sql = 'SELECT contrasena_paciente, clave_actualizada FROM pacientes WHERE id_paciente = ?';
+		$params = array($this->idpaciente);
+		$data = Database::getRow($sql, $params);
+
+		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+
+		$nueva_fecha = strtotime(date($data['clave_actualizada']).'+ 90 days') ;
+			
+		if (password_verify($this->clave, $data['contrasena_paciente'])) {
+			if($fecha_actual>$nueva_fecha){
+				return 1;
+			}else{
+				return 2;
+			}
+				
+		} else {
+			return 0;
+		}
+	}
+
+	public function checkTipo()
+	{
+		$sql = 'SELECT doctores.id_doctor, usuarios_a.id_usuario FROM doctores, usuarios_a WHERE usuario_doctor = ? OR usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$params = array($this->usuario, $this->usuario);
+		$data = Database::getRows($sql, $params);
+		if ($data) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function blockAccount()
+	{
+		$sql = 'UPDATE pacientes set cuenta_bloqueada = ? WHERE usuario_paciente = ?';
+		$params = array(date('Y-m-d'), $this->getUsuario());
+		$data = Database::executeRow($sql, $params);
+		if ($data) {
 			return true;
 		} else {
 			return false;
@@ -250,7 +316,7 @@ class Pacientes extends Validator
 			return false;
 		}
 	}
-	
+
 	public function getPaciente()
 	{
 		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente FROM pacientes WHERE id_paciente = ?';

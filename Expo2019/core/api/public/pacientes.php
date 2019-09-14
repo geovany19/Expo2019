@@ -345,38 +345,62 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombres incorrectos';
                 }
             break;
+            case 'block':
+                if($usuario->setUsuario($_POST['usuario'])){
+                    $us = $usuario->blockAccount($_POST['usuario']);
+                    if($us){
+                        $result['status'] = 1;
+                        $result['exception'] = $us;
+                    }else{
+                        $result['status'] = 2;
+                    }
+                }else{
+                    $result['status'] = 3;
+                }
+                break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
-                    if ($usuario->checkPaciente()) {
-                        if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                $_SESSION['idPaciente'] = $usuario->getId();
-                                $_SESSION['nombrePaciente'] = $usuario->getNombre();
-                                $_SESSION['apellidoPaciente'] = $usuario->getApellido();
-                                $_SESSION['ultimoAcceso'] = time();
-                                $result['status'] = 1;
-                                $result['message'] = 'Inicio de sesión correcto';
-                            } else {
-                                $result['exception'] = 'Contraseña inexistente';
+                    switch($usuario->checkPaciente()){
+                        case 0:
+                            if($usuario->checkTipo()) {
+                                $result['exception'] = 'El tipo de usuario es diferente';
+                            } else{
+                                    $result['exception'] = 'Usuario inexistente';
                             }
-                        } else {
-                            $result['exception'] = 'Contraseña menor a 6 caracteres';
-                        }
-                    } else {
-                        $result['exception'] = 'Usuario inexistente';
-                    }
+                            break;
+                        case 1:
+                            
+                                if ($usuario->setClave($_POST['clave'])) {
+                                    switch($usuario->checkPassword()){
+                                        case 0:
+                                            $result['exception'] = 'Clave inexistente';
+                                            break;
+                                        case 1:
+                                            $result['exception'] = 'Actualiza tu contraseña';
+                                            $result['status'] = 5;
+                                            break;
+                                        case 2:
+                                            $_SESSION['idPaciente'] = $usuario->getId();
+                                            $_SESSION['usuarioPaciente'] = $usuario->getUsuario();
+                                            $_SESSION['nombresPaciente'] = $usuario->getNombre();
+                                            $_SESSION['apellidosPaciente'] = $usuario->getApellido();
+                                            $_SESSION['ultimoAccesoPaciente'] = time();
+                                            $result['status'] = 1;
+                                            break;
+                                    }
+                                    } else {
+                                        $result['exception'] = 'Contraseña menor a 6 caracteres';
+                                    }
+                            break;
+                        case 2:
+                            $result['status'] = 4;
+                            break;
+                    } 
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Alias incorrecto';
                 }
-                break;
-            case 'logout':
-                if (session_destroy()) {
-                    header('location: ../../../views/public/');
-                } else {
-                    header('location: ../../../views/public/home.php');
-                }
-                break;
+            break;
             default:
                 exit('Acción no disponible 2');
         }

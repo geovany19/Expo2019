@@ -1,5 +1,5 @@
 <?php
-$tiempo_transcurrido = time() - $_SESSION['ultimoAcceso'];
+$tiempo_transcurrido = time() - $_SESSION['ultimoAccesoPaciente'];
 //comparamos el tiempo transcurrido  
 if ($tiempo_transcurrido >= 10) {
     //si pasaron 5 minutos o más  
@@ -24,6 +24,6 @@ if ($tiempo_transcurrido >= 10) {
     </script>';
     //header('location: index.php');
 } else {  
-    $_SESSION['ultimoAcceso'] = time();
+    $_SESSION['ultimoAccesoPaciente'] = time();
 }
 ?>

@@ -111,6 +111,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombres incorrectos';
                 }
                 break;
+                
             case 'get':
                 if ($doctor->setId($_POST['id_doctor'])) {
                     if ($result['dataset'] = $doctor->getDoctor()) {

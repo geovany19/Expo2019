@@ -182,6 +182,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombres incorrectos';
                 }
                 break;
+            
             case 'get':
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($result['dataset'] = $usuario->getUser()) {
@@ -290,32 +291,46 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Hola';
                 }
                 break;
-            case 'register':
+                case 'register':
+                $recaptcha = $_POST["g-recaptcha-response"];
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setNombre($_POST['nombres'])) {
                     if ($usuario->setApellido($_POST['apellidos'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
                             if ($usuario->setUsuario($_POST['usuario'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->setFecha($_POST['fecha'])) {
-                                            if ($usuario->setEstado($_POST['create_estado']) ? 1 : 2) {
-                                                if ($usuario->createUsuario()) {
-                                                    $result['status'] = 1;
+                                if ($usuario->setFecha($_POST['fecha'])) {
+                                    if ($usuario->setEstatura($_POST['estatura'])) {
+                                        if ($usuario->setPeso($_POST['peso'])) {
+                                            if ($_POST['clave1'] != $_POST['usuario']) {
+                                                if ($_POST['clave1'] == $_POST['clave2']) {
+                                                    $resultado = $usuario->setClave($_POST['clave1']);
+                                                    if ($resultado[0]) {
+                                                        if (!$recaptcha) {
+                                                            $result['exception'] = 'Comprobacion vacia';  
+                                                        } else {
+                                                            if ($usuario->createPaciente()) {
+                                                                $result['status'] = 1;
+                                                            } else {
+                                                                $result['exception'] = 'Operación fallida';
+                                                            }
+                                                            } 
+                                                    } else {
+                                                        $result['exception'] = $resultado[1];
+                                                    } 
                                                 } else {
-                                                    $result['exception'] = 'Operación fallida';
+                                                    $result['exception'] = 'Claves diferentes';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Estado incorrecto';
+                                                $result['exception'] = 'Clave incorrecta, igual al alias';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Peso incorrecto'; 
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Estatura incorrecta';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Fecha inválida';
                                 }
                             } else {
                                 $result['exception'] = 'Alias incorrecto';
@@ -329,7 +344,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Nombres incorrectos';
                 }
-                break;
+            break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {

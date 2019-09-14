@@ -99,12 +99,12 @@
     color: #e3e3e3;
 }
 
-.login-form-registro {
+.form-registro {
     width: 700px;
     margin: 0 auto;
     padding: 100px 0 30px;		
 }
-.login-form-registro form {
+.form-registro form {
     color: #7a7a7a;
     border-radius: 2px;
     margin-bottom: 15px;
@@ -114,11 +114,11 @@
     padding: 30px;	
     position: relative;	
 }
-.login-form-registro h2 {
+.form-registro h2 {
     font-size: 22px;
     margin: 35px 0 25px;
 }
-.login-form-registro .avatar {
+.form-registro .avatar {
     position: absolute;
     margin: 0 auto;
     left: 0;
@@ -132,34 +132,34 @@
     padding: 15px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
-.login-form-registro .avatar img {
+.form-registro .avatar img {
     width: 100%;
 }	
-.login-form-registro input[type="checkbox"] {
+.form-registro input[type="checkbox"] {
     margin-top: 2px;
 }
-.login-form-registro .btn {        
+.form-registro .btn {        
     font-size: 16px;
     font-weight: bold;
     background: #70c5c0;
     border: none;
     margin-bottom: 20px;
 }
-.login-form-registro .btn:hover, .login-form .btn:focus {
+.form-registro .btn:hover, .login-form .btn:focus {
     background: #50b8b3;
     outline: none !important;
 }    
-.login-form-registro a {
+.form-registro a {
     color: #fff;
     text-decoration: underline;
 }
-.login-form-registro a:hover {
+.form-registro a:hover {
     text-decoration: none;
 }
-.login-form-registro form a {
+.form-registro form a {
     color: #7a7a7a;
     text-decoration: none;
 }
-.login-form-registro form a:hover {
+.form-registro form a:hover {
     text-decoration: underline;
 }

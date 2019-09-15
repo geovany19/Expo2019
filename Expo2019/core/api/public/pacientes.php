@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $usuario = new Pacientes;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idUsuario'])) {
+    if (isset($_SESSION['idPaciente'])) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
@@ -20,7 +20,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $usuario->getUser()) {
+                    if ($result['dataset'] = $usuario->getUsuario()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -182,6 +182,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombres incorrectos';
                 }
                 break;
+            
             case 'get':
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($result['dataset'] = $usuario->getUser()) {
@@ -290,32 +291,46 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Hola';
                 }
                 break;
-            case 'register':
+                case 'register':
+                $recaptcha = $_POST["g-recaptcha-response"];
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setNombre($_POST['nombres'])) {
                     if ($usuario->setApellido($_POST['apellidos'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
                             if ($usuario->setUsuario($_POST['usuario'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->setFecha($_POST['fecha'])) {
-                                            if ($usuario->setEstado($_POST['create_estado']) ? 1 : 2) {
-                                                if ($usuario->createUsuario()) {
-                                                    $result['status'] = 1;
+                                if ($usuario->setFecha($_POST['fecha'])) {
+                                    if ($usuario->setEstatura($_POST['estatura'])) {
+                                        if ($usuario->setPeso($_POST['peso'])) {
+                                            if ($_POST['clave1'] != $_POST['usuario']) {
+                                                if ($_POST['clave1'] == $_POST['clave2']) {
+                                                    $resultado = $usuario->setClave($_POST['clave1']);
+                                                    if ($resultado[0]) {
+                                                        if (!$recaptcha) {
+                                                            $result['exception'] = 'Comprobacion vacia';  
+                                                        } else {
+                                                            if ($usuario->createPaciente()) {
+                                                                $result['status'] = 1;
+                                                            } else {
+                                                                $result['exception'] = 'Operación fallida';
+                                                            }
+                                                            } 
+                                                    } else {
+                                                        $result['exception'] = $resultado[1];
+                                                    } 
                                                 } else {
-                                                    $result['exception'] = 'Operación fallida';
+                                                    $result['exception'] = 'Claves diferentes';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Estado incorrecto';
+                                                $result['exception'] = 'Clave incorrecta, igual al alias';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'Peso incorrecto'; 
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Estatura incorrecta';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Fecha inválida';
                                 }
                             } else {
                                 $result['exception'] = 'Alias incorrecto';
@@ -329,39 +344,63 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Nombres incorrectos';
                 }
+            break;
+            case 'block':
+                if($usuario->setUsuario($_POST['usuario'])){
+                    $us = $usuario->blockAccount($_POST['usuario']);
+                    if($us){
+                        $result['status'] = 1;
+                        $result['exception'] = $us;
+                    }else{
+                        $result['status'] = 2;
+                    }
+                }else{
+                    $result['status'] = 3;
+                }
                 break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
-                    if ($usuario->checkPaciente()) {
-                        if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                $_SESSION['idPaciente'] = $usuario->getId();
-                                $_SESSION['nombrePaciente'] = $usuario->getNombre();
-                                $_SESSION['apellidoPaciente'] = $usuario->getApellido();
-                                $_SESSION['ultimoAcceso'] = time();
-                                $result['status'] = 1;
-                                $result['message'] = 'Inicio de sesión correcto';
-                            } else {
-                                $result['exception'] = 'Contraseña inexistente';
+                    switch($usuario->checkPaciente()){
+                        case 0:
+                            if($usuario->checkTipo()) {
+                                $result['exception'] = 'El tipo de usuario es diferente';
+                            } else{
+                                    $result['exception'] = 'Usuario inexistente';
                             }
-                        } else {
-                            $result['exception'] = 'Contraseña menor a 6 caracteres';
-                        }
-                    } else {
-                        $result['exception'] = 'Usuario inexistente';
-                    }
+                            break;
+                        case 1:
+                            
+                                if ($usuario->setClave($_POST['clave'])) {
+                                    switch($usuario->checkPassword()){
+                                        case 0:
+                                            $result['exception'] = 'Clave inexistente';
+                                            break;
+                                        case 1:
+                                            $result['exception'] = 'Actualiza tu contraseña';
+                                            $result['status'] = 5;
+                                            break;
+                                        case 2:
+                                            $_SESSION['idPaciente'] = $usuario->getId();
+                                            $_SESSION['usuarioPaciente'] = $usuario->getUsuario();
+                                            $_SESSION['nombresPaciente'] = $usuario->getNombre();
+                                            $_SESSION['apellidosPaciente'] = $usuario->getApellido();
+                                            $_SESSION['ultimoAccesoPaciente'] = time();
+                                            $result['status'] = 1;
+                                            break;
+                                    }
+                                    } else {
+                                        $result['exception'] = 'Contraseña menor a 6 caracteres';
+                                    }
+                            break;
+                        case 2:
+                            $result['status'] = 4;
+                            break;
+                    } 
                 } else {
-                    $result['exception'] = 'Usuario incorrecto';
+                    $result['exception'] = 'Alias incorrecto';
                 }
-                break;
-            case 'logout':
-                if (session_destroy()) {
-                    header('location: ../../../views/public/');
-                } else {
-                    header('location: ../../../views/public/home.php');
-                }
-                break;
+            break;
             default:
                 exit('Acción no disponible 2');
         }

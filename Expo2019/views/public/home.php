@@ -49,7 +49,6 @@ public_helper::nav();
             </div>
         </div>
     </div>
-
 </main>
 
 <?php

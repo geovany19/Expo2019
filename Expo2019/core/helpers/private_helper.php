@@ -15,6 +15,7 @@ class private_helper
 								<meta http-equiv="X-UA-Compatible" content="ie=edge">	
 								<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
+								<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
 								<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
@@ -42,7 +43,7 @@ class private_helper
 					<nav id="sidebar">
 						<div class="sidebar-header">
 							<h3>Sismed</h3>
-							<b>' . $_SESSION['aliasUsuario'] . '</b>
+							<b>' . $_SESSION['aliasDoctor'] . '</b>
 							<strong>SM</strong>
 						</div>
 						<ul class="list-unstyled components">

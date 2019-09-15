@@ -23,6 +23,11 @@ private_helper::nav();
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
                         </div>
+
+                        <div class="form-group text-center">
+							<p class="text-center">¿No estás registrado? <a href="registro.php">¡Registrate aquí!</a></p>
+						</div>
+                        
                         <div class="clearfix">
                             <!--<label class="pull-left checkbox-inline"><input type="checkbox"> Recuerdame</label>-->
                             <a href="correo.php" class="pull-right">¿Olvidaste tu contraseña?</a>

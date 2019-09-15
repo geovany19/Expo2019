@@ -50,6 +50,10 @@ public_helper::nav();
         </div>
     </div>
 
+    <?php
+        public_helper::modals();
+    ?>
+        
 </main>
 
 <?php

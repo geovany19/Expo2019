@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    showSelectEstadosReport('estado-pedidosreport', null);
+    //showSelectEstadosReport('estado-pedidosreport', null);
 })
 /*
 *   Función para manejar los mensajes de notificación al usuario.
@@ -447,7 +447,7 @@ function showSelectEstadosReport(idSelect, value)
     })
     .fail(function(jqXHR){
         //Se muestran en consola los posibles errores de la solicitud AJAX
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        //console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
 

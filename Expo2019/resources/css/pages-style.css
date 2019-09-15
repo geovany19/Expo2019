@@ -1,3 +1,35 @@
+@import "../../resources/fonts/poppins.css";
+
 body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('../img/giphy.gif');
+    background-size: cover;
+    align-content: center;
+    align-items: center;
+}
+
+h1 {
+    align-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 80pt;
+    text-align: center;
+}
+
+h3 {
+    color: #fff;
+    font-size: 40pt;
+    text-align: center;
+}
+
+h5 {
+    color: #fff;
+    font-size: 15pt;
+    text-align: center;
+}
+
+.imagen {
+    align-content: center;
+    width: 50%;
     
 }

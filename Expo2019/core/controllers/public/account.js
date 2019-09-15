@@ -1,5 +1,5 @@
 //Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/public/pacientes.php?site=dashboard&action=';
+const apiAccount = '../../core/api/public/pacientes.php?site=public&action=';
 
 //Función para cerrar la sesión del usuario
 function signOff()
@@ -43,12 +43,11 @@ function modalProfile()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#profile_nombres').val(result.dataset.nombres_usuario);
-                $('#profile_apellidos').val(result.dataset.apellidos_usuario);
-                $('#profile_correo').val(result.dataset.correo_usuario);
-                $('#profile_alias').val(result.dataset.alias_usuario);
-                M.updateTextFields();
-                $('#modal-profile').modal('open');
+                $('#modalEditar').modal();
+                $('#profile_nombres').val(result.dataset.nombre_paciente);
+                $('#profile_apellidos').val(result.dataset.apellido_paciente);
+                $('#profile_correo').val(result.dataset.correo_paciente);
+                $('#profile_usuario').val(result.dataset.usuario_paciente);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -78,7 +77,6 @@ $('#form-profile').submit(function()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-profile').modal('close');
                 sweetAlert(1, 'Perfil modificado correctamente', 'main.php');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -109,10 +107,38 @@ $('#form-password').submit(function()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-password').modal('close');
-                sweetAlert(1, 'Contraseña cambiada correctamente', 'main.php');
+                sweetAlert(1, 'Contraseña cambiada correctamente', 'home.php');
             } else {
                 sweetAlert(2, result.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        //Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+
+$('#form-registro').submit(function()
+{
+    event.preventDefault();
+    $.ajax({
+        url: apiAccount + 'register',
+        type: 'post',
+        data: $('#form-registro').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const dataset = JSON.parse(response);
+            //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
+            if (dataset.status) {
+                sweetAlert(1, 'Usuario registrado correctamente', 'index.php');
+            } else {
+                sweetAlert(2, dataset.exception, null);
             }
         } else {
             console.log(response);

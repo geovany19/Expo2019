@@ -1,7 +1,7 @@
 <?php
-$tiempo_transcurrido = time() - $_SESSION['ultimoAcceso'];
+$tiempo_transcurrido = time() - $_SESSION['ultimoAccesoPaciente'];
 //comparamos el tiempo transcurrido  
-if ($tiempo_transcurrido >= 10) {
+if ($tiempo_transcurrido >= 600) {
     //si pasaron 5 minutos o más  
     session_destroy(); // destruyo la sesión  
     echo '
@@ -24,6 +24,6 @@ if ($tiempo_transcurrido >= 10) {
     </script>';
     //header('location: index.php');
 } else {  
-    $_SESSION['ultimoAcceso'] = time();
+    $_SESSION['ultimoAccesoPaciente'] = time();
 }
 ?>

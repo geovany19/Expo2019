@@ -6,6 +6,8 @@ $(document).ready(function()
 //Constante para establecer la ruta y parámetros de comunicación con la API
 const apiSesion = '../../core/api/public/pacientes.php?action=';
 
+var attempts = 0;
+
 //Función para verificar si existen usuarios en el sitio privado
 function checkUsuarios()
 {
@@ -34,6 +36,7 @@ function checkUsuarios()
 }
 
 //Función para validar el usuario al momento de iniciar sesión
+
 $('#form-sesion').submit(function()
 {
     event.preventDefault();
@@ -48,9 +51,37 @@ $('#form-sesion').submit(function()
         if (isJSONString(response)) {
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
-            if (dataset.status) {
+            if (dataset.status == 1) {
                 sweetAlert(1, 'Autenticación correcta', 'home.php');
+            }else if(dataset.status == 5){
+                sweetAlert(3, dataset.exception,'recuperar.php');
+
+            }else if(dataset.status == 4){
+                sweetAlert(3, 'Cuenta bloqueada',null);
+
             } else {
+                attempts++
+                if(attempts==3){
+                    attempts=0
+                    $.ajax({
+                        url: apiSesion + 'block',
+                        type: 'post',
+                        data: $('#form-sesion').serialize(),
+                        datatype: 'json'
+                    }).done(response=>{
+                        if (isJSONString(response)) {
+                        const dataset = JSON.parse(response);
+                        if(dataset.status == 1){
+                            sweetAlert(3, 'Cuenta bloqueada',null);
+                        }else{
+                            sweetAlert(2, 'lol',null);
+                        }
+
+                        }else{
+                            console.log(response)
+                        }
+                    })
+                }
                 sweetAlert(2, dataset.exception, null);
             }
         } else {
@@ -62,3 +93,4 @@ $('#form-sesion').submit(function()
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
+

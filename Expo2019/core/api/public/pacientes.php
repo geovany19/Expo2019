@@ -19,8 +19,8 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readProfile':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $usuario->getUsuario()) {
+                if ($usuario->setId($_SESSION['idPaciente'])) {
+                    if ($result['dataset'] = $usuario->getPaciente()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';
@@ -81,38 +81,46 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Usuario incorrecto';
                 }
                 break;
-            case 'password':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
-                    $_POST = $usuario->validateForm($_POST);
-                    if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
-                        if ($usuario->setClave($_POST['clave_actual_1'])) {
-                            if ($usuario->checkPassword()) {
-                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($usuario->changePassword()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Contraseña cambiada correctamente';
+                case 'password':
+                    if ($usuario->setId($_SESSION['idPaciente'])) {
+                        $_POST = $usuario->validateForm($_POST);
+                        if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
+                            if ($usuario->setClave($_POST['clave_actual_1'])) {
+                                if ($usuario->checkPassword()) {
+                                    if($_POST['clave_nueva_1'] != $_SESSION['usuarioPaciente']){
+                                    if($_POST['clave_actual_1'] != $_POST['clave_nueva_1']){
+                                    if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                        $resultado = $usuario->setClave($_POST['clave_nueva_1']);
+                                        if ($resultado[0]) {
+                                            if ($usuario->changePassword()) {
+                                                $result['status'] = 1;
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Operación fallida';
+                                            $result['exception'] = $resultado[1];
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave nueva menor a 6 caracteres';
+                                        $result['exception'] = 'Claves nuevas diferentes';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves nuevas diferentes';
+                                    $result['exception'] = 'Clave nueva igual a la actual';
+                                }
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual al alias usuario';
+                                }
+                                } else {
+                                    $result['exception'] = 'Clave actual incorrecta';
                                 }
                             } else {
-                                $result['exception'] = 'Clave actual incorrecta';
+                                $result['exception'] = 'Clave actual menor a 6 caracteres';
                             }
                         } else {
-                            $result['exception'] = 'Clave actual menor a 6 caracteres';
+                            $result['exception'] = 'Claves actuales diferentes';
                         }
                     } else {
-                        $result['exception'] = 'Claves actuales diferentes';
+                        $result['exception'] = 'Usuario incorrecto';
                     }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
                 break;
             case 'read':
                 if ($result['dataset'] = $usuario->readPacientes()) {

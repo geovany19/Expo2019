@@ -23,18 +23,23 @@ public_helper::nav();
 						<div class="form-group">
 							<input type="password" class="form-control" name="clave" placeholder="Contraseña" required="required">
 						</div>
+						
+						<div class="form-group text-center">
+							<a href="#" class="text-center">¿Olvidaste tu contraseña?</a> 
+						</div>
+
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-lg btn-block" href="home.php">Iniciar sesión</button>
 						</div>
 						<div class="clearfix text-center">
 							<!--<label class="pull-left checkbox-inline text-center"><input type="checkbox">Recuerdame</label>-->
-						</div>
-
-						<div class="text-center">
-							<a href="#" class="text-center">¿Olvidaste tu contraseña?</a> 
+						</div
+						
+						<div class="form-group text-center">
+							<p class="text-center">¿No estás registrado? <a href="registro.php">¡Registrate aquí!</a></p>
 						</div>
 					</form>
-					<p class="text-center small">¿No estás registrado? <a href="registro.php">¡Registrate aquí!</a></p>
+					
 				</div>
 			</div>
 		</div>

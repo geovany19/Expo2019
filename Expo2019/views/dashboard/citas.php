@@ -24,5 +24,5 @@ dashboardHelper::nav();
     </div>
 </main>
 <?php
-dashboardHelper::footer('disponibilidad.js');
+dashboardHelper::footer('citas.js');
 ?>

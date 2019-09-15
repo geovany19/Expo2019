@@ -14,6 +14,7 @@ function signOff()
     })
     .then(function(value){
         if (value) {
+            //offline();
             location.href = apiCuenta + 'logout';
         }
     });

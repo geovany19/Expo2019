@@ -22,7 +22,6 @@ function checkUsuarios()
             const dataset = JSON.parse(response);
             // Se comprueba que no hay usuarios registrados para redireccionar al registro del primer usuario
             if (!dataset.status) {
-                alert('hola');
                 sweetAlert(3, dataset.message, 'registrarse.php');
             }
         } else {
@@ -53,10 +52,10 @@ $('#form-sesion').submit(function()
             if (dataset.status) {
                 sweetAlert(1, dataset.message, 'pagina.php');
             } else {
-                sweetAlert(2, dataset.exception, null);
+                sweetAlert(2, dataset.exception, 'index.php');
             }
         } else {
-            alert('xd')
+            //alert('xd')
             console.log(response);
         }
     })

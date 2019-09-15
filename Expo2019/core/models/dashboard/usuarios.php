@@ -14,6 +14,7 @@ class Usuario extends Validator
 	private $idestado = null;
 	private $intentos = null;
 	private $token = null;
+	private $sesion = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -185,7 +186,22 @@ class Usuario extends Validator
     public function getToken()
     {
         return $this->token;
-    }
+	}
+	
+	public function setSession($value)
+	{
+		if ($value == '1' || $value == '2') {
+			$this->sesion = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getSession()
+	{
+		return $this->sesion;
+	}
 
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
@@ -193,6 +209,19 @@ class Usuario extends Validator
 		$sql = 'SELECT id_usuario FROM usuarios_a WHERE usuario_usuario = ?';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['id_usuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function checkOffline()
+	{
+		$sql = 'SELECT id_sesion FROM usuarios_a WHERE usuario_usuario = ? AND id_sesion = ?';
+		$params = array($this->usuario, 2);
+		$data = Database::executeRow($sql, $params);
 		if ($data) {
 			$this->idusuario = $data['id_usuario'];
 			return true;
@@ -230,9 +259,15 @@ class Usuario extends Validator
 	//Método para setear 
 	public function setOffline()
 	{
-		$sql = 'UPDATE usuarios_a SET id_sesion = ?';
-		$params = array(2);
-		Database::executeRow($sql, $params);
+		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE id_usuario = ?';
+		$params = array(2, $_SESSION['idUsuario']);
+		$data = Database::executeRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['id_usuario'];
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function changePassword()

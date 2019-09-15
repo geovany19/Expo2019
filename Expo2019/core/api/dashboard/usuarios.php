@@ -19,8 +19,10 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
             case 'logout':
-                $_SESSION['idUsuario'] = $usuario->getId();
-                if ($usuario->setOffline() && session_unset()) {
+                $sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE id_usuario = ?';
+                $params = array(2, $_SESSION['idUsuario']);
+                Database::executeRow($sql, $params);
+                if (session_unset()) {
                     header('location: ../../../views/dashboard/');
                 } else {
                     header('location: ../../../views/dashboard/pagina.php');
@@ -508,23 +510,23 @@ if (isset($_GET['action'])) {
                 if ($usuario->setUsuario($_POST['usuario'])) {
                     if ($usuario->checkUser()) {
                         if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                //if ($usuario->setOnline()) {
+                            //if ($usuario->checkPassword()) {
                                 $_SESSION['idUsuario'] = $usuario->getId();
+                                $_SESSION['estadoSesion'] = $usuario->getSession();
                                 $_SESSION['aliasUsuario'] = $usuario->getUsuario();
-                                $_SESSION['nombreUsuario'] = $usuario->getNombre();
-                                $_SESSION['ultimoAcceso'] = time();
-                                $result['status'] = 1;
-                                $result['message'] = 'Inicio de sesión correcto';
-                                $usuario->setOnline();
-                                /*} else {
-                                    $result['exception'] = 'No se pudo setear el estado de la sesión';
-                                }*/
-                            } else {
+                                if ($usuario->checkOffline()) {
+                                    $_SESSION['ultimoAcceso'] = time();
+                                    $result['status'] = 1;
+                                    $result['message'] = 'Inicio de sesión correcto';
+                                    $usuario->setOnline();
+                                } else {
+                                    $result['exception'] = 'El usuario ya posee una sesión iniciada';
+                                }
+                            /*} else {
                                 $result['exception'] = 'Contraseña inexistente';
-                            }
+                            }*/
                         } else {
-                            $result['exception'] = 'Clave menor a 6 caracteres';
+                            $result['exception'] = 'Contraseña menor a 8 caracteres';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';

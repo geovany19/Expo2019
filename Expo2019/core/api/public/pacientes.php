@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $usuario = new Pacientes;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-    if (isset($_SESSION['idUsuario'])) {
+    if (isset($_SESSION['idPaciente'])) {
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
@@ -20,7 +20,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($result['dataset'] = $usuario->getUser()) {
+                    if ($result['dataset'] = $usuario->getUsuario()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Usuario inexistente';

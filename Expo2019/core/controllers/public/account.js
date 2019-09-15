@@ -1,5 +1,5 @@
 //Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/public/pacientes.php?site=dashboard&action=';
+const apiAccount = '../../core/api/public/pacientes.php?site=public&action=';
 
 //Función para cerrar la sesión del usuario
 function signOff()

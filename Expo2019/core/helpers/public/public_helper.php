@@ -3,7 +3,6 @@ class public_helper
 {
 	public function head($title)
 	{
-		session_start();
 		ini_set('date.timezone', 'America/El_Salvador');
 		print('
             <!DOCTYPE html>
@@ -77,10 +76,12 @@ class public_helper
 
 	public static function nav()
 	{
+		session_start();
 		if (isset($_SESSION['idPaciente'])) {
 			include ('../../core/api/public/sesion.php');
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registro.php') {
+				self::modals();
 				print('
 					<body>
 					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -105,12 +106,12 @@ class public_helper
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Cuenta - <b>'.$_SESSION['nombresPaciente'].' '.$_SESSION['apellidosPaciente'].'</b></span>
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Cuenta - <b>'.$_SESSION['usuarioPaciente'].'</b></span>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								
-								<a class="dropdown-item" href="user.php">
+								<a data-toggle="modal" class="dropdown-item" href="#editarPerfil">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Editar perfil
 								</a>
@@ -127,12 +128,10 @@ class public_helper
 				</nav>
 				');
 				
-			} else {
-				header('location: citas.php');
 			}
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registrarse.php') {
+			if ($filename != 'index.php' && $filename != 'registro.php') {
 				header('location: index.php');
 			} 
 		}
@@ -150,6 +149,89 @@ class public_helper
 			</footer>
         ');
 	}
+
+	function modals()
+	{
+		print('
+			<div class="modal fade" id="modalEditar" role="dialog">
+				<div class="modal-dialog modal-lg">
+				
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Editar Perfil</h4>
+						</div>
+
+						<div class="modal-body">
+
+							<ul class="nav nav-tabs" role="tablist" id="tabsEditar">
+								<li role="presentation" class="active"><a href="#cambiarDatos" aria-controls="cambiarDatos" role="tab" data-toggle="tab">Editar datos</a></li>
+								<li role="presentation"><a href="#cambiarContra" aria-controls="cambiarContra" role="tab" data-toggle="tab">Cambiar contraseña</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div  class="tab-panel " id="cambiarDatos">
+									<form method="post" id="form-profile" autocomplete="off">
+										<div class="form-row">
+											<div class="form-group col-sm-12 col-md-6">
+												<label for="nombres">Nombres</label>
+												<input id="nombres" type="text" name="nombres" class="form-control" placeholder="Nombres" maxlength="25" required>
+												<div class="invalid-feedback">Ingrese sus nombres</div>
+											</div>
+											<div class="form-group col-sm-12 col-md-6">
+												<label for="apellidos">Apellidos</label>
+												<input id="apellidos" type="text" name="apellidos" class="form-control" placeholder="Apellidos" maxlength="25" required>
+												<div class="invalid-feedback">Ingrese sus apellidos</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label for="correo">Correo electrónico</label>
+												<input id="correo" type="email" name="correo" class="form-control" placeholder="Correo electrónico" maxlength="100" required>
+												<div class="invalid-feedback">Ingrese su correo electrónico</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label for="usuario">Nombre de usuario</label>
+												<input id="usuario" type="text" name="usuario" class="form-control" placeholder="Nombre de usuario" maxlength="25" required>
+												<div class="invalid-feedback">Ingrese su nombre se usuario</div>
+											</div>
+										</div>
+											
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-lg btn-block">Cambiar datos</button>
+										</div>
+									</form>
+								</div>
+
+
+								<div  class="tab-panel" id="cambiarContra">
+									<form method="post" id="form-contra" autocomplete="off">
+										<div class="form-group col-md-6">
+											<label for="clave1">Contraseña</label>
+											<input type="password" class="form-control" id="clave1" name="clave1" placeholder="Contraseña" maxlength="15" required>
+											<small id="passwordHelp" class="form-text text-muted">La contraseña debe ser de 7-15 caracteres de longitud. Debe contener letras, números y no debe contener espacios, caracteres especiales o emojis</small>
+											<div class="invalid-feedback">Ingrese una contraseña</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="clave2">Confirmar contraseña</label>
+											<input type="password" class="form-control" id="clave2" name="clave2" placeholder="Confirmar contraseña" maxlength="15" required>
+											<div class="invalid-feedback">No ha confirmado la contraseña</div>
+										</div>
+
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-lg btn-block">Cambiar contraseña</button>
+										</div>
+									</form>
+								</div>
+
+							</div>
+						</div>
+				
+				</div>
+			</div>
+        ');
+	}
+
 	function scripts($controller){
 
 		$scri = '
@@ -159,8 +241,8 @@ class public_helper
 				<script src="../../resources/js/datatables/jquery.dataTables.js"></script>
 				<script src="../../resources/js/datatables/dataTables.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/inicializacion.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables-demo.js"></script>
-				<script type="text/javascript" src="../../resources/js/sweetalert2.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../core/controllers/public/account.js"></script>
 			</body>

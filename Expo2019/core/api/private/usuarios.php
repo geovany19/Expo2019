@@ -127,7 +127,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                 if ($usuario->setCorreo($_POST['profile_correo'])) {
                                     if ($usuario->setAlias($_POST['profile_alias'])) {
                                         if ($usuario->updateUsuario()) {
-                                            $_SESSION['aliasUsuario'] = $_POST['profile_alias'];
+                                            $_SESSION['aliasDoctor'] = $_POST['profile_alias'];
                                             $result['status'] = 1;
                                         } else {
                                             $result['exception'] = 'Operación fallida';
@@ -152,16 +152,18 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
 
-                case 'password':
+              /*  case 'password':
                 if ($usuario->setId($_SESSION['idDoctor'])) {
                     $_POST = $usuario->validateForm($_POST);
                     if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
                         if ($usuario->setClave($_POST['clave_actual_1'])) {
                             if ($usuario->checkPassword()) {
-                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($usuario->changePassword()) {
-                                            $result['status'] = 1;
+                                if($_POST['clave_nueva_1'] != $_SESSION['aliasUsuario']){
+                                    if($_POST['clave_actual_1'] != $_POST['clave_nueva_1']){
+                                         if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                             if ($usuario->setClave($_POST['clave_nueva_1'])) {
+                                                if ($usuario->changePassword()) {
+                                                     $result['status'] = 1;
                                         } else {
                                             $result['exception'] = 'Operación fallida';
                                         }
@@ -170,8 +172,11 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                     }
                                 } else {
                                     $result['exception'] = 'Claves nuevas diferentes';
-                                }
-                            } else {
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual a la actual';
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual al alias usuario';
+                                } else {
                                 $result['exception'] = 'Clave actual incorrecta';
                             }
                         } else {
@@ -183,8 +188,49 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
-                break;
+                break;*/
 
+                case 'password':
+                    if ($usuario->setId($_SESSION['idDoctor'])) {
+                        $_POST = $usuario->validateForm($_POST);
+                        if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
+                            if ($usuario->setClave($_POST['clave_actual_1'])) {
+                                if ($usuario->checkPassword()) {
+                                    if($_POST['clave_nueva_1'] != $_SESSION['aliasDoctor']){
+                                    if($_POST['clave_actual_1'] != $_POST['clave_nueva_1']){
+                                    if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                        $resultado = $usuario->setClave($_POST['clave_nueva_1']);
+                                        if ($resultado[0]) {
+                                            if ($usuario->changePassword()) {
+                                                $result['status'] = 1;
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
+                                        } else {
+                                            $result['exception'] = $resultado[1];
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Claves nuevas diferentes';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual a la actual';
+                                }
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual al alias usuario';
+                                }
+                                } else {
+                                    $result['exception'] = 'Clave actual incorrecta';
+                                }
+                            } else {
+                                $result['exception'] = 'Clave actual menor a 6 caracteres';
+                            }
+                        } else {
+                            $result['exception'] = 'Claves actuales diferentes';
+                        }
+                    } else {
+                        $result['exception'] = 'Usuario incorrecto';
+                    }
+                break;
 
                 //crear cita 
                 case 'create':
@@ -232,28 +278,108 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
             }
         }
         else{
-        switch ($_GET['action']) {          
-            case 'login':
+        switch ($_GET['action']) {     
+            case 'register':
+                $recaptcha = $_POST["g-recaptcha-response"];
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setAlias($_POST['name'])) {
-                    if ($usuario->checkAlias()) {
-                        if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                $_SESSION['idDoctor'] = $usuario->getId();
-                                $_SESSION['aliasUsuario'] = $usuario->getAlias();
-                                $result['status'] = 1;
+                if ($usuario->setNombres($_POST['nombres'])) {
+                    if ($usuario->setApellidos($_POST['apellidos'])) {
+                        if ($usuario->setCorreo($_POST['correo'])) {
+                            if ($usuario->setAlias($_POST['usuario'])) {
+                                if ($usuario->setFecha($_POST['fecha'])) {
+                                    if ($_POST['clave1'] != $_POST['usuario']) {
+                                        if ($_POST['clave1'] == $_POST['clave2']) {
+                                            $resultado = $usuario->setClave($_POST['clave1']);
+                                            if ($resultado[0]) {
+                                                if (!$recaptcha) {
+                                                    $result['exception'] = 'Comprobacion vacia';  
+                                                } else {
+                                                    if ($usuario->createDoctores()) {
+                                                        $result['status'] = 1;
+                                                    } else {
+                                                        $result['exception'] = 'Operación fallida';
+                                                    }
+                                                    } 
+                                            } else {
+                                                $result['exception'] = $resultado[1];
+                                            } 
+                                        } else {
+                                            $result['exception'] = 'Claves diferentes';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Clave incorrecta, igual al alias';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Fecha inválida';
+                                }
                             } else {
-                                $result['exception'] = 'Clave inexistente';
+                                $result['exception'] = 'Alias incorrecto';
                             }
                         } else {
-                            $result['exception'] = 'Clave menor a 6 caracteres';
+                            $result['exception'] = 'Correo incorrecto';
                         }
                     } else {
-                        $result['exception'] = 'Alias inexistente';
+                        $result['exception'] = 'Apellidos incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Alias incorrecto';
+                    $result['exception'] = 'Nombres incorrectos';
                 }
+            break;     
+            case 'block':
+                    if($usuario->setAlias($_POST['name'])){
+                        $us = $usuario->blockAccount($_POST['name']);
+                        if($us){
+                            $result['status'] = 1;
+                            $result['exception'] = $us;
+                        }else{
+                            $result['status'] = 2;
+                        }
+                    }else{
+                        $result['status'] = 3;
+                    }
+                    break;
+                case 'login':
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($usuario->setAlias($_POST['name'])) {
+                        switch($usuario->checkAlias()){
+                            case 0:
+                                if($usuario->checkTipo()) {
+                                    $result['exception'] = 'El tipo de usuario es diferente';
+                                } else{
+                                        $result['exception'] = 'Usuario inexistente';
+                                }
+                                break;
+                            case 1:
+                                
+                                    if ($usuario->setClave($_POST['clave'])) {
+                                        switch($usuario->checkPassword()){
+                                            case 0:
+                                                $result['exception'] = 'Clave inexistente';
+                                                break;
+                                            case 1:
+                                                $result['exception'] = 'Actualiza tu contraseña';
+                                                $result['status'] = 5;
+                                                break;
+                                            case 2:
+                                                $_SESSION['idDoctor'] = $usuario->getId();
+                                                $_SESSION['aliasDoctor'] = $usuario->getAlias();
+                                                $_SESSION['nombresDoctor'] = $usuario->getNombres();
+                                                $_SESSION['apellidosDoctor'] = $usuario->getApellidos();
+                                                $_SESSION['ultimoAccesoDoctor'] = time();
+                                                $result['status'] = 1;
+                                                break;
+                                        }
+                                        } else {
+                                            $result['exception'] = 'Contraseña menor a 6 caracteres';
+                                        }
+                                break;
+                            case 2:
+                                $result['status'] = 4;
+                                break;
+                        } 
+                    } else {
+                        $result['exception'] = 'Alias incorrecto';
+                    }
                 break;
                 case 'correito':
                 $_POST = $usuario->validateForm($_POST);
@@ -313,15 +439,15 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     if($usuario->getDatosTokensito()){
                         if ($_POST['nueva_contrasena'] == $_POST['nueva_contrasena2']) {
                             $resultado = $usuario->setClave($_POST['nueva_contrasena']);
-                                  //  if ($resultado[0]) {
+                                    if ($resultado[0]) {
                                         if ($usuario->changePassword()) {
                                             $result['status'] = 1;
                                         } else {
                                             $result['exception'] = 'Operación fallida';
                                         }
-                                  //  } else {
-                                 //      $result['exception'] = $resultado[1];
-                                   // }
+                                    } else {
+                                       $result['exception'] = $resultado[1];
+                                    }
                         } else {
                             $result['exception'] = 'Claves diferentes';
                             

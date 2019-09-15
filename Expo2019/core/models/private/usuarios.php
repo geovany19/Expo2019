@@ -19,9 +19,23 @@ class Usuarios extends Validator
 	private $estatura = null;
 	private $presion = null;
 	private $token = null;
-	//private $tipo = null;
 
 	//Métodos para sobrecarga de propiedades
+	public function setTipo($value)
+	{
+		if ($this->validateId($value)) {
+			$this->tipo = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getTipo()
+	{
+		return $this->tipo;
+	}
+
 	public function setToken($value)
 	{
 		$this->token = $value;
@@ -191,6 +205,22 @@ public function setReceta($value)
 		return $this->correo;
 	}
 
+	public function setFecha($value)
+	{
+		if ($this->validateDate($value)) {
+			$this->fecha = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFecha()
+	{
+		return $this->fecha;
+	}
+
+
 	public function setAlias($value)
 	{
 		if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -208,27 +238,66 @@ public function setReceta($value)
 
 	public function setClave($value)
 	{
-		if ($this->validatePassword($value)) {
+		$val = $this->validatePassword2($value);
+		if ($val[0]) {
 			$this->clave = $value;
-			return true;
+			return array(true,'');
 		} else {
-			return false;
+			return array(false, $val[1]);
 		}
 	}
 
+
 	public function getClave()
 	{
-		return $this->clave;
+		return $this->clave; 
 	}
 
 	// Métodos para manejar la sesión del usuario
 	public function checkAlias()
 	{
-		$sql = 'SELECT id_doctor FROM doctores WHERE usuario_doctor = ?';
-		$params = array($this->alias);
+		/*$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente FROM pacientes WHERE usuario_paciente = ?';
+		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
-			$this->id = $data['id_doctor'];
+			$this->idpaciente = $data['id_paciente'];
+			$this->nombre = $data['nombre_paciente'];
+			$this->apellido = $data['apellido_paciente'];
+			return true;
+		} else {
+			return false;
+		}*/
+		$sql = 'SELECT id_doctor, cuenta_bloqueada FROM doctores WHERE usuario_doctor = ?';
+		$params = array($this->alias);
+		$data = Database::getRow($sql, $params);
+
+		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+
+		$nueva_fecha = strtotime ( date($data['cuenta_bloqueada']) .'+ 24 hours'  ) ;
+
+		if ($data) {
+			if($data['cuenta_bloqueada']){
+				if($fecha_actual<$nueva_fecha){
+					return 2;
+				}else{
+					$this->id = $data['id_doctor'];				
+					return 1;
+				}
+			}else{
+				$this->id = $data['id_doctor'];				
+				return 1;
+			}
+		} else {
+			return 0;
+		}
+	}
+
+	public function checkTipo()
+	{
+		$sql = 'SELECT pacientes.id_paciente, usuarios_a.id_usuario FROM pacientes, usuarios_a WHERE usuario_paciente = ? OR usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$params = array($this->alias, $this->alias);
+		$data = Database::getRows($sql, $params);
+		if ($data) {
 			return true;
 		} else {
 			return false;
@@ -237,16 +306,34 @@ public function setReceta($value)
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_doctor FROM doctores WHERE id_doctor = ?';
-		$params = array($this->id);
+		/*$sql = 'SELECT contrasena_paciente FROM pacientes WHERE id_paciente = ?';
+		$params = array($this->idpaciente);
 		$data = Database::getRow($sql, $params);
-		if (password_verify($this->clave, $data['contrasena_doctor'])) {
+		if ($this->clave = $data['contrasena_paciente']) {
 			return true;
 		} else {
 			return false;
+		}*/
+
+		$sql = 'SELECT contrasena_doctor, clave_actualizada FROM doctores WHERE id_doctor = ?';
+		$params = array($this->id);
+		$data = Database::getRow($sql, $params);
+
+		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+
+		$nueva_fecha = strtotime(date($data['clave_actualizada']).'+ 90 days') ;
+			
+		if (password_verify($this->clave, $data['contrasena_doctor'])) {
+			if($fecha_actual>$nueva_fecha){
+				return 1;
+			}else{
+				return 2;
+			}
+				
+		} else {
+			return 0;
 		}
 	}
-	
 	public function getUsuario()
 	{
 		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor  FROM doctores WHERE id_doctor = ?';
@@ -372,6 +459,32 @@ public function setReceta($value)
 		if ($data) {
 			$this->id = $data['id_doctor'];
 			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function blockAccount()
+	{
+		$sql = 'UPDATE doctores set cuenta_bloqueada = ? WHERE usuario_doctor = ?';
+		$params = array(date('Y-m-d'), $this->getUsuario());
+		$data = Database::executeRow($sql, $params);
+		if ($data) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function createDoctores()
+	{
+		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, id_estado) VALUES(?, ?, ?, ?, ?, ?, 1)';
+		$params = array($this->nombres, $this->apellidos, $this->correo, $this->alias, $hash, $this->fecha);
+		if(Database::executeRow($sql, $params)) {
+			$sql = 'UPDATE doctores SET clave_actualizada = ? WHERE id_doctor = ?';
+			$params = array(date('Y-m-d'), Database::getLastRowId());
+			return Database::executeRow($sql, $params);
 		} else {
 			return false;
 		}

@@ -152,16 +152,18 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
 
-                case 'password':
+              /*  case 'password':
                 if ($usuario->setId($_SESSION['idDoctor'])) {
                     $_POST = $usuario->validateForm($_POST);
                     if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
                         if ($usuario->setClave($_POST['clave_actual_1'])) {
                             if ($usuario->checkPassword()) {
-                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($usuario->changePassword()) {
-                                            $result['status'] = 1;
+                                if($_POST['clave_nueva_1'] != $_SESSION['aliasUsuario']){
+                                    if($_POST['clave_actual_1'] != $_POST['clave_nueva_1']){
+                                         if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                             if ($usuario->setClave($_POST['clave_nueva_1'])) {
+                                                if ($usuario->changePassword()) {
+                                                     $result['status'] = 1;
                                         } else {
                                             $result['exception'] = 'Operación fallida';
                                         }
@@ -170,7 +172,51 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                     }
                                 } else {
                                     $result['exception'] = 'Claves nuevas diferentes';
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual a la actual';
+                                } else {
+                                    $result['exception'] = 'Clave nueva igual al alias usuario';
+                                } else {
+                                $result['exception'] = 'Clave actual incorrecta';
+                            }
+                        } else {
+                            $result['exception'] = 'Clave actual menor a 6 caracteres';
+                        }
+                    } else {
+                        $result['exception'] = 'Claves actuales diferentes';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
+                break;*/
+                case 'password':
+                if ($usuario->setId($_SESSION['idDoctor'])) {
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
+                        if ($usuario->setClave($_POST['clave_actual_1'])) {
+                            if ($usuario->checkPassword()) {
+                                if($_POST['clave_nueva_1'] != $_SESSION['aliasUsuario']){
+                                if($_POST['clave_actual_1'] != $_POST['clave_nueva_1']){
+                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                    $resultado = $usuario->setClave($_POST['clave_nueva_1']);
+                                    if ($resultado[0]) {
+                                        if ($usuario->changePassword()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                        $result['exception'] = $resultado[1];
+                                    }
+                                } else {
+                                    $result['exception'] = 'Claves nuevas diferentes';
                                 }
+                            } else {
+                                $result['exception'] = 'Clave nueva igual a la actual';
+                            }
+                            } else {
+                                $result['exception'] = 'Clave nueva igual al alias usuario';
+                            }
                             } else {
                                 $result['exception'] = 'Clave actual incorrecta';
                             }
@@ -237,16 +283,21 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setAlias($_POST['name'])) {
                     if ($usuario->checkAlias()) {
-                        if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                $_SESSION['idDoctor'] = $usuario->getId();
-                                $_SESSION['aliasUsuario'] = $usuario->getAlias();
+                        if ($usuario->checkTipo()) { 
+                            if ($usuario->setClave($_POST['clave'])) {
+                                if ($usuario->checkPassword()) {
+                                    $_SESSION['idDoctor'] = $usuario->getId();
+                                    $_SESSION['aliasUsuario'] = $usuario->getAlias();
+                                    $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
                             } else {
                                 $result['exception'] = 'Clave inexistente';
                             }
                         } else {
                             $result['exception'] = 'Clave menor a 6 caracteres';
+                        }
+                        } else {
+                            $result['exception'] = 'Su usuario ya existe en otra interfaz';
                         }
                     } else {
                         $result['exception'] = 'Alias inexistente';
@@ -313,15 +364,15 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     if($usuario->getDatosTokensito()){
                         if ($_POST['nueva_contrasena'] == $_POST['nueva_contrasena2']) {
                             $resultado = $usuario->setClave($_POST['nueva_contrasena']);
-                                  //  if ($resultado[0]) {
+                                    if ($resultado[0]) {
                                         if ($usuario->changePassword()) {
                                             $result['status'] = 1;
                                         } else {
                                             $result['exception'] = 'Operación fallida';
                                         }
-                                  //  } else {
-                                 //      $result['exception'] = $resultado[1];
-                                   // }
+                                    } else {
+                                       $result['exception'] = $resultado[1];
+                                    }
                         } else {
                             $result['exception'] = 'Claves diferentes';
                             

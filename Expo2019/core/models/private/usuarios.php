@@ -19,9 +19,24 @@ class Usuarios extends Validator
 	private $estatura = null;
 	private $presion = null;
 	private $token = null;
-	//private $tipo = null;
+	private $tipo = null;
 
 	//Métodos para sobrecarga de propiedades
+	public function setTipo($value)
+	{
+		if ($this->validateId($value)) {
+			$this->tipo = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getTipo()
+	{
+		return $this->tipo;
+	}
+
 	public function setToken($value)
 	{
 		$this->token = $value;
@@ -218,7 +233,7 @@ public function setReceta($value)
 
 	public function getClave()
 	{
-		return $this->clave;
+		return $this->clave; 
 	}
 
 	// Métodos para manejar la sesión del usuario
@@ -229,6 +244,18 @@ public function setReceta($value)
 		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->id = $data['id_doctor'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function checkTipo()
+	{
+		$sql = 'SELECT id_tipo FROM usuarios WHERE alias_usuario = ? and id_tipo = 2';
+		$params = array($this->alias);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
 			return true;
 		} else {
 			return false;

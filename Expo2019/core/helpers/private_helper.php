@@ -134,7 +134,7 @@ class private_helper
 			  </div>
 
 			  <div class="modal-body">
-				<form method="post" id="form-profile">
+				<form method="post" id="form-profile" autocomplete="off">
 				  <div class="form-group">
 					<label for="profile_nombres" class="col-form-label">Nombres: </label>
 					<input id="profile_nombres" type="text" name="profile_nombres" class="form-control" required/>
@@ -176,7 +176,7 @@ class private_helper
 			  </div>
 
 			  <div class="modal-body">
-			  	<form method="post" id="form-password">
+			  	<form method="post" id="form-password" autocomplete="off">
 				  <div class="form-group">
 					<label for="clave_actual_1" class="col-form-label">Clave:</label>
 					<input id="clave_actual_1" type="password" name="clave_actual_1" class="form-control" required/>

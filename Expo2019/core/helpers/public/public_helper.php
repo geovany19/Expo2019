@@ -110,10 +110,10 @@ class public_helper
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-								<i  class="dropdown-item" onClick="showModal()">
+								<a  class="dropdown-item" onClick="modalProfile()">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Editar perfil
-								</i>
+								</a>
 				
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" onclick="signOff()">
@@ -158,8 +158,9 @@ class public_helper
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Editar Perfil</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							
 						</div>
 
 						<div class="modal-body">
@@ -178,48 +179,74 @@ class public_helper
 									<form method="post" id="form-profile" autocomplete="off">
 										<div class="form-row">
 											<div class="form-group col-sm-12 col-md-6">
-												<label for="nombres">Nombres</label>
-												<input id="nombres" type="text" name="nombres" class="form-control" placeholder="Nombres" maxlength="25" required>
+												<label for="profile_nombres">Nombres</label>
+												<input id="profile_nombres" type="text" name="profile_nombres" class="form-control" placeholder="Nombres" maxlength="25" required>
 												<div class="invalid-feedback">Ingrese sus nombres</div>
 											</div>
 											<div class="form-group col-sm-12 col-md-6">
-												<label for="apellidos">Apellidos</label>
-												<input id="apellidos" type="text" name="apellidos" class="form-control" placeholder="Apellidos" maxlength="25" required>
+												<label for="profile_apellidos">Apellidos</label>
+												<input id="profile_apellidos" type="text" name="profile_apellidos" class="form-control" placeholder="Apellidos" maxlength="25" required>
 												<div class="invalid-feedback">Ingrese sus apellidos</div>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="correo">Correo electrónico</label>
-												<input id="correo" type="email" name="correo" class="form-control" placeholder="Correo electrónico" maxlength="100" required>
+												<label for="profile_correo">Correo electrónico</label>
+												<input id="profile_correo" type="email" name="profile_correo" class="form-control" placeholder="Correo electrónico" maxlength="100" required>
 												<div class="invalid-feedback">Ingrese su correo electrónico</div>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="usuario">Nombre de usuario</label>
-												<input id="usuario" type="text" name="usuario" class="form-control" placeholder="Nombre de usuario" maxlength="25" required>
+												<label for="profile_usuario">Nombre de usuario</label>
+												<input id="profile_usuario" type="text" name="profile_usuario" class="form-control" placeholder="Nombre de usuario" maxlength="25" required>
 												<div class="invalid-feedback">Ingrese su nombre se usuario</div>
 											</div>
 										</div>
 											
 										<div class="form-group">
-											<button type="submit" class="btn btn-primary btn-lg btn-block">Cambiar datos</button>
+											<button type="submit" class="btn btn-primary float-right">Cambiar datos</button>
 										</div>
 									</form>
 								</div>
 								<div class="tab-pane fade " id="cambiarContra" role="tabpanel" aria-labelledby="cambiarContra-tab">
-									<form method="post" id="form-contra" autocomplete="off">
-										<div class="form-group col-md-6">
-											<label for="clave1">Contraseña</label>
-											<input type="password" class="form-control" id="clave1" name="clave1" placeholder="Contraseña" maxlength="15" required>
-											<small id="passwordHelp" class="form-text text-muted">La contraseña debe ser de 7-15 caracteres de longitud. Debe contener letras, números y no debe contener espacios, caracteres especiales o emojis</small>
-											<div class="invalid-feedback">Ingrese una contraseña</div>
-										</div>
-										<div class="form-group col-md-6">
-											<label for="clave2">Confirmar contraseña</label>
-											<input type="password" class="form-control" id="clave2" name="clave2" placeholder="Confirmar contraseña" maxlength="15" required>
-											<div class="invalid-feedback">No ha confirmado la contraseña</div>
+									<form method="post" id="form-password" autocomplete="off">
+										
+										<div class="form-row">
+											<div class="form-group col-md-12">
+												<h5 class="text-center">Contraseña actual</h5>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label for="clave_actual_1">Contraseña</label>
+												<input type="password" class="form-control" id="clave_actual_1" name="clave_actual_1" placeholder="Contraseña actual" maxlength="15" required>
+												<div class="invalid-feedback">Ingrese su contraseña actual</div>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label for="clave_actual_2">Confirmar contraseña</label>
+												<input type="password" class="form-control" id="clave_actual_2" name="clave_actual_2" placeholder="Confirmar contraseña" maxlength="15" required>
+												<div class="invalid-feedback">No ha confirmado la contraseña</div>
+											</div>
 										</div>
 
+										<div class="form-row">
+											<div class="form-group col-md-12">
+												<h5 class="text-center">Contraseña nueva</h5>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label for="clave_nueva_1">Contraseña</label>
+												<input type="password" class="form-control" id="clave_nueva_1" name="clave_nueva_1" placeholder="Contraseña nueva" maxlength="15" required>
+												<small id="passwordHelp" class="form-text text-muted">La contraseña debe ser mayor a 8  carácteres de longitud. Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial, no debe contener espacios</small>
+												<div class="invalid-feedback">Lea los requisitos</div>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label for="clave_nueva_2">Confirmar contraseña</label>
+												<input type="password" class="form-control" id="clave_nueva_2" name="clave_nueva_2" placeholder="Confirmar contraseña" maxlength="15" required>
+												<div class="invalid-feedback">No ha confirmado la contraseña</div>
+											</div>
+										</div>
+										
 										<div class="form-group">
-											<button type="submit" class="btn btn-primary btn-lg btn-block">Cambiar contraseña</button>
+											<button type="submit" class="btn btn-primary float-right">Cambiar contraseña</button>
 										</div>
 									</form>
 								</div>
@@ -236,13 +263,12 @@ class public_helper
 		$scri = '
 				
 				<script type="text/javascript" src="../../resources/js/jquery-3.3.1.min.js"></script>
-				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				<script src="../../resources/js/datatables/jquery.dataTables.js"></script>
 				<script src="../../resources/js/datatables/dataTables.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/bootstrap.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/inicializacion.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables-demo.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				<script type="text/javascript" src="../../core/controllers/public/account.js"></script>
 			</body>
 		</html>

@@ -43,12 +43,11 @@ function modalProfile()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#profile_nombres').val(result.dataset.nombres_usuario);
-                $('#profile_apellidos').val(result.dataset.apellidos_usuario);
-                $('#profile_correo').val(result.dataset.correo_usuario);
-                $('#profile_alias').val(result.dataset.alias_usuario);
-                M.updateTextFields();
-                $('#modal-profile').modal('open');
+                $('#modalEditar').modal();
+                $('#profile_nombres').val(result.dataset.nombre_paciente);
+                $('#profile_apellidos').val(result.dataset.apellido_paciente);
+                $('#profile_correo').val(result.dataset.correo_paciente);
+                $('#profile_usuario').val(result.dataset.usuario_paciente);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -78,7 +77,6 @@ $('#form-profile').submit(function()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-profile').modal('close');
                 sweetAlert(1, 'Perfil modificado correctamente', 'main.php');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -109,8 +107,7 @@ $('#form-password').submit(function()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                $('#modal-password').modal('close');
-                sweetAlert(1, 'Contraseña cambiada correctamente', 'main.php');
+                sweetAlert(1, 'Contraseña cambiada correctamente', 'home.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

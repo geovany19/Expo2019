@@ -36,7 +36,7 @@ public_helper::head("Registrarse");
 							<div class="form-group col-md-6">
 								<label for="clave1">Contraseña</label>
 								<input type="password" class="form-control" id="clave1" name="clave1" placeholder="Contraseña" maxlength="15" required>
-								<small id="passwordHelp" class="form-text text-muted">La contraseña debe ser de 7-15 caracteres de longitud. Debe contener letras, números y no debe contener espacios, caracteres especiales o emojis</small>
+								<small id="passwordHelp" class="form-text text-muted">La contraseña debe ser mayor a 8  carácteres de longitud. Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial, no debe contener espacios</small>
 								<div class="invalid-feedback">Ingrese una contraseña</div>
 							</div>
 							<div class="form-group col-md-6">

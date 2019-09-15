@@ -49,8 +49,8 @@ public_helper::nav();
             </div>
         </div>
     </div>
-    <?php
 
+    <?php
         public_helper::modals();
     ?>
         

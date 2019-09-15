@@ -81,7 +81,6 @@ class public_helper
 			include ('../../core/api/public/sesion.php');
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registro.php') {
-				self::modals();
 				print('
 					<body>
 					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -110,11 +109,11 @@ class public_helper
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								
-								<a data-toggle="modal" class="dropdown-item" href="#editarPerfil">
+
+								<i  class="dropdown-item" onClick="showModal()">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Editar perfil
-								</a>
+								</i>
 				
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" onclick="signOff()">
@@ -153,7 +152,7 @@ class public_helper
 	function modals()
 	{
 		print('
-			<div class="modal fade" id="modalEditar" role="dialog">
+			<div class="modal fade"  tabindex="-1" id="modalEditar" role="dialog">
 				<div class="modal-dialog modal-lg">
 				
 					<!-- Modal content-->
@@ -166,13 +165,16 @@ class public_helper
 						<div class="modal-body">
 
 							<ul class="nav nav-tabs" role="tablist" id="tabsEditar">
-								<li role="presentation" class="active"><a href="#cambiarDatos" aria-controls="cambiarDatos" role="tab" data-toggle="tab">Editar datos</a></li>
-								<li role="presentation"><a href="#cambiarContra" aria-controls="cambiarContra" role="tab" data-toggle="tab">Cambiar contraseña</a></li>
+								<li class="nav-item well">
+									<a class="nav-link active" href="#cambiarDatos" aria-controls="cambiarDatos" role="tab" data-toggle="tab">Editar datos</a>
+								</li>
+								<li class="nav-item well">
+									<a class="nav-link" href="#cambiarContra" aria-controls="cambiarContra" role="tab" data-toggle="tab">Cambiar contraseña</a>
+								</li>
 							</ul>
 
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div  class="tab-panel " id="cambiarDatos">
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="cambiarDatos" role="tabpanel" aria-labelledby="cambiarDatos-tab">
 									<form method="post" id="form-profile" autocomplete="off">
 										<div class="form-row">
 											<div class="form-group col-sm-12 col-md-6">
@@ -202,9 +204,7 @@ class public_helper
 										</div>
 									</form>
 								</div>
-
-
-								<div  class="tab-panel" id="cambiarContra">
+								<div class="tab-pane fade " id="cambiarContra" role="tabpanel" aria-labelledby="cambiarContra-tab">
 									<form method="post" id="form-contra" autocomplete="off">
 										<div class="form-group col-md-6">
 											<label for="clave1">Contraseña</label>
@@ -223,8 +223,7 @@ class public_helper
 										</div>
 									</form>
 								</div>
-
-							</div>
+							</div>		
 						</div>
 				
 				</div>

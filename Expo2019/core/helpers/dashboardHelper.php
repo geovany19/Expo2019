@@ -69,7 +69,7 @@ class dashboardHelper
 											<li><a href="pacientes.php">Pacientes</a></li>
 											<li><a href="usuarios.php">Usuarios</a></li>
 											<li><a href="especialidad.php">Especialidades</a></li>
-											<li><a href="disponibilidad.php">Horarios</a></li>
+											<li><a href="citas.php">Citas</a></li>
 										</ul>
 									</li>
 									<li>
@@ -150,6 +150,7 @@ class dashboardHelper
 				<script type="text/javascript" src="../../resources/js/Chart.js"></script>
 				<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 				<script type="text/javascript" src="../../resources/js/inicializacion.js"></script>
+				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
 				<!--<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/select.bootstrap4.min.js"></script>

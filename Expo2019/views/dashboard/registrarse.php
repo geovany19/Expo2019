@@ -53,7 +53,10 @@ dashboardHelper::head("Registrarse");
 				<div class="form-group col-sm-12">
 					<input type="hidden" id="create_estado" name="create_estado" value="1">
 				</div>
-				<div class="form-group">
+				<div class="col col-sm-12 col-md-6 justify-content-center aling-items-center">
+                    <div class="g-recaptcha" data-sitekey="6LfCX7gUAAAAABs_YA6LKtoAEP9eK35Jaa9eMDGX"></div>
+                </div>
+				<div class="form-group col col-sm-12 justify-content-center aling-items-center">
 					<button type="submit" class="btn btn-primary">Registrarse</button>
 					<a href="index.php">Volver al inicio</a>
 				</div>

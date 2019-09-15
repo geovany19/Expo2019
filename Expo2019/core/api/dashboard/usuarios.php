@@ -2,12 +2,13 @@
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/dashboard/usuarios.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../../libraries/PHPMailer-master/src/Exception.php';
-require '../../../libraries/PHPMailer-master/src/PHPMailer.php';
-require '../../../libraries/PHPMailer-master/src/SMTP.php';
+require '../../../libraries/PHPMailer/src/Exception.php';
+require '../../../libraries/PHPMailer/src/PHPMailer.php';
+require '../../../libraries/PHPMailer/src/SMTP.php';
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
@@ -18,10 +19,21 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
             case 'logout':
-                if (session_destroy()) {
+                $_SESSION['idUsuario'] = $usuario->getId();
+                if ($usuario->setOffline() && session_unset()) {
                     header('location: ../../../views/dashboard/');
                 } else {
                     header('location: ../../../views/dashboard/pagina.php');
+                }
+                break;
+            case 'setOffline':
+                if ($usuario->setOffline()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Seteo offline correcto';
+                    session_unset();
+                    header('location: ../../../views/dashboard/');
+                } else {
+                    $result['exception'] = 'No fue posible setear offline';
                 }
                 break;
             case 'readProfile':
@@ -308,7 +320,6 @@ if (isset($_GET['action'])) {
             case 'register':
                 $_POST = $usuario->validateForm($_POST);
                 if ($_POST['g-recaptcha-response']) {
-
                     if ($usuario->setNombre($_POST['nombres'])) {
                         if ($usuario->setApellido($_POST['apellidos'])) {
                             if ($usuario->setCorreo($_POST['correo'])) {
@@ -355,156 +366,160 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Desbes comprobar que eres humano';
                 }
                 break;
-                case 'verificarCuenta':
-                    $_POST = $usuario->validateForm($_POST);
-                    if($usuario->setEmail($_POST['email-name'])) {
-                        if($usuario->getEmailUser()){
-                            $token = md5(uniqid(rand(), true)); 
-                            if($usuario->setToken($token)) {
-                                if($usuario->updateToken()) {
-                                    if($emailusuario = $usuario->getCorreo()) {
-                                        $result['status'] = 1;
-                                        $mail = new PHPMailer(true);
-                                        $mail ->charSet = "UTF-8";
-                                            try {
-                                                //Server settings
-                                                $mail->SMTPDebug = 2;                                       // Enable verbose debug output
-                                                $mail->isSMTP();                                            // Set mailer to use SMTP
-                                                $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-                                                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
-                                                $mail->Password   = 'Sismed12345';                               // SMTP password
-                                                $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                                                $mail->Port       = 587;                                    // TCP port to connect to
+            case 'verificarCuenta':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setEmail($_POST['email-name'])) {
+                    if ($usuario->getEmailUser()) {
+                        $token = md5(uniqid(rand(), true));
+                        if ($usuario->setToken($token)) {
+                            if ($usuario->updateToken()) {
+                                if ($emailusuario = $usuario->getCorreo()) {
+                                    $result['status'] = 1;
+                                    $mail = new PHPMailer(true);
+                                    $mail->charSet = "UTF-8";
+                                    try {
+                                        //Server settings
+                                        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                        $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
+                                        $mail->Password   = 'Sismed12345';                               // SMTP password
+                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                        $mail->Port       = 587;                                    // TCP port to connect to
 
-                                                //Recipients
-                                                $mail->setFrom('soportetecnicosismed@gmail.com', 'Soporte Técnico de SISMED');
-                                                $mail->addAddress($emailusuario);     // Add a recipient
-                                                
-                                                // Content
-                                                $mail->isHTML(true);                                  // Set email format to HTML
-                                                $mail->Subject = 'Verifica tu cuenta';
-                                                $mail->Body    = 'Tu cuenta ha sido creada, solo falta un paso más, verifica tu cuenta ingresando
+                                        //Recipients
+                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'Soporte Técnico de SISMED');
+                                        $mail->addAddress($emailusuario);     // Add a recipient
+
+                                        // Content
+                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                        $mail->Subject = 'Verifica tu cuenta';
+                                        $mail->Body    = 'Tu cuenta ha sido creada, solo falta un paso más, verifica tu cuenta ingresando
                                                 el siguiente código.';
 
-                                                $mail->send();
-                                                echo 'Message has been sent';
-                                                $result['status'] = 1;
-                                                $result['message'] = 'Se ha enviado el correo de recuperación de contraseña';
-                                            } catch (Exception $e) {
-                                                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                                            }
-                                    } else {
-                                        $result['exception'] = 'Error al obtener el correo';  
-                                    }                                
-                                } else {
-                                    $result['exception'] = 'Error al asignar el token';
-                                }  
-                            } else{
-                                $result['exception'] = 'Error al generar el token';
-                            }  
-                        } else{
-                            $result['exception'] = 'Correo no existe';
-                        }   
-                    }  else {
-                        $result['exception'] = 'Correo invalido';
-                    }
-                    break;
-                case 'enviarCorreo':
-                    $_POST = $usuario->validateForm($_POST);
-                    if($usuario->setEmail($_POST['email-name'])) {
-                        if($usuario->getEmailUser()){
-                            $token = md5(uniqid(rand(), true)); 
-                            if($usuario->setToken($token)) {
-                                if($usuario->updateToken()) {
-                                    if($emailusuario = $usuario->getCorreo()) {
+                                        $mail->send();
+                                        echo 'Message has been sent';
                                         $result['status'] = 1;
-                                        $mail = new PHPMailer(true);
-                                        $mail ->charSet = "UTF-8";
-                                            try {
-                                                //Server settings
-                                                $mail->SMTPDebug = 2;                                       // Enable verbose debug output
-                                                $mail->isSMTP();                                            // Set mailer to use SMTP
-                                                $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-                                                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                $mail->Username   = ' oportetecnicosismed@gmail.com';                     // SMTP username
-                                                $mail->Password   = 'Sismed12345';                               // SMTP password
-                                                $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                                                $mail->Port       = 587;                                    // TCP port to connect to
-
-                                                //Recipients
-                                                $mail->setFrom('soportetecnicosismed@gmail.com', 'Soporte Técnico de SISMED');
-                                                $mail->addAddress($emailusuario);     // Add a recipient
-                                                
-                                                // Content
-                                                $mail->isHTML(true);                                  // Set email format to HTML
-                                                $mail->Subject = 'Restablecimiento de contraseña';
-                                                $mail->Body    = 'Hemos recibido una solicitud de restablecimiento de la contraseña de tu cuenta.
-                                                Para restablecer tu contraseña haz click <a href="http://localhost/Expo2019/Expo2019/views/dashboard/claves.php?token='.$token.'">en este enlace</<a>.
-                                                Si no has realizado ninguna solicitud, ignora este correo.';
-
-                                                $mail->send();
-                                                echo 'Message has been sent';
-                                                $result['status'] = 1;
-                                                $result['message'] = 'Se ha enviado el correo de recuperación de contraseña';
-                                            } catch (Exception $e) {
-                                                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                                            }
-                                    } else {
-                                        $result['exception'] = 'Error al obtener el correo';  
-                                    }                                
-                                } else {
-                                    $result['exception'] = 'Error al asignar el token';
-                                }  
-                            } else{
-                                $result['exception'] = 'Error al generar el token';
-                            }  
-                        } else{
-                            $result['exception'] = 'Correo no existe';
-                        }   
-                    }  else {
-                        $result['exception'] = 'Correo invalido';
-                    }
-                    break;
-                    case 'recoverPassword':
-                    $_POST = $usuario->validateForm($_POST);
-                    if($usuario->setToken($_POST['token'])) {
-                        if($usuario->getUserByToken()) {
-                            if ($_POST['new_pwd'] == $_POST['pwd_confirmed']) {
-                                $password = $usuario->setClave($_POST['new_pwd']);
-                                if ($password[0]) {
-                                    if ($usuario->changePasswordByToken()) { 
-                                        $result['status'] = 1;
-                                    } else {
-                                        $result['exception'] = 'Operación fallida';
+                                        $result['message'] = 'Se ha enviado el correo de recuperación de contraseña';
+                                    } catch (Exception $e) {
+                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                                     }
                                 } else {
-                                    $result['exception'] = $password[1];
+                                    $result['exception'] = 'Error al obtener el correo';
                                 }
                             } else {
-                                $result['exception'] = 'Claves diferentes';
-                                
-                            } 
+                                $result['exception'] = 'Error al asignar el token';
+                            }
                         } else {
-                            $result['exception'] = 'Error al obtener los datos del usuario';
+                            $result['exception'] = 'Error al generar el token';
                         }
                     } else {
-                        $result['exception'] = 'Error al setear el token';
+                        $result['exception'] = 'Correo no existe';
                     }
-                    
-                    break;
+                } else {
+                    $result['exception'] = 'Correo invalido';
+                }
+                break;
+            case 'enviarCorreo':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setEmail($_POST['email-name'])) {
+                    if ($usuario->getEmailUser()) {
+                        $token = md5(uniqid(rand(), true));
+                        if ($usuario->setToken($token)) {
+                            if ($usuario->updateToken()) {
+                                if ($emailusuario = $usuario->getCorreo()) {
+                                    $result['status'] = 1;
+                                    $mail = new PHPMailer(true);
+                                    $mail->charSet = "UTF-8";
+                                    try {
+                                        //Server settings
+                                        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                        $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                        $mail->Username   = ' oportetecnicosismed@gmail.com';                     // SMTP username
+                                        $mail->Password   = 'Sismed12345';                               // SMTP password
+                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                        $mail->Port       = 587;                                    // TCP port to connect to
+
+                                        //Recipients
+                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'Soporte Técnico de SISMED');
+                                        $mail->addAddress($emailusuario);     // Add a recipient
+
+                                        // Content
+                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                        $mail->Subject = 'Restablecimiento de contraseña';
+                                        $mail->Body    = 'Hemos recibido una solicitud de restablecimiento de la contraseña de tu cuenta.
+                                                Para restablecer tu contraseña haz click <a href="http://localhost/Expo2019/Expo2019/views/dashboard/claves.php?token=' . $token . '">en este enlace</<a>.
+                                                Si no has realizado ninguna solicitud, ignora este correo.';
+
+                                        $mail->send();
+                                        echo 'Message has been sent';
+                                        $result['status'] = 1;
+                                        $result['message'] = 'Se ha enviado el correo de recuperación de contraseña';
+                                    } catch (Exception $e) {
+                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                    }
+                                } else {
+                                    $result['exception'] = 'Error al obtener el correo';
+                                }
+                            } else {
+                                $result['exception'] = 'Error al asignar el token';
+                            }
+                        } else {
+                            $result['exception'] = 'Error al generar el token';
+                        }
+                    } else {
+                        $result['exception'] = 'Correo no existe';
+                    }
+                } else {
+                    $result['exception'] = 'Correo invalido';
+                }
+                break;
+            case 'recoverPassword':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setToken($_POST['token'])) {
+                    if ($usuario->getUserByToken()) {
+                        if ($_POST['new_pwd'] == $_POST['pwd_confirmed']) {
+                            $password = $usuario->setClave($_POST['new_pwd']);
+                            if ($password[0]) {
+                                if ($usuario->changePasswordByToken()) {
+                                    $result['status'] = 1;
+                                } else {
+                                    $result['exception'] = 'Operación fallida';
+                                }
+                            } else {
+                                $result['exception'] = $password[1];
+                            }
+                        } else {
+                            $result['exception'] = 'Claves diferentes';
+                        }
+                    } else {
+                        $result['exception'] = 'Error al obtener los datos del usuario';
+                    }
+                } else {
+                    $result['exception'] = 'Error al setear el token';
+                }
+
+                break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
                     if ($usuario->checkUser()) {
                         if ($usuario->setClave($_POST['clave'])) {
                             if ($usuario->checkPassword()) {
+                                //if ($usuario->setOnline()) {
                                 $_SESSION['idUsuario'] = $usuario->getId();
                                 $_SESSION['aliasUsuario'] = $usuario->getUsuario();
                                 $_SESSION['nombreUsuario'] = $usuario->getNombre();
                                 $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
+                                $usuario->setOnline();
+                                /*} else {
+                                    $result['exception'] = 'No se pudo setear el estado de la sesión';
+                                }*/
                             } else {
                                 $result['exception'] = 'Contraseña inexistente';
                             }

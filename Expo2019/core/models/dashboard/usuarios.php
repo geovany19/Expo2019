@@ -213,6 +213,28 @@ class Usuario extends Validator
 		}
 	}
 
+	//Método para setear el estado de la sesión en línea, recibe el id y el nombre de usuario
+	public function setOnline()
+	{
+		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';
+		$params = array(1, $this->usuario);
+		$data = Database::executeRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['id_usuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	//Método para setear 
+	public function setOffline()
+	{
+		$sql = 'UPDATE usuarios_a SET id_sesion = ?';
+		$params = array(2);
+		Database::executeRow($sql, $params);
+	}
+
 	public function changePassword()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
@@ -312,5 +334,5 @@ class Usuario extends Validator
 		$sql = 'SELECT Email FROM usuarios WHERE Email = ?';
 		$params = array($this->email);
 		return Database::getRow($sql, $params);
-    }
+	}
 }

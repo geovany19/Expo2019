@@ -12,6 +12,7 @@ class Pacientes extends Validator
 	private $peso = null;
 	private $estatura = null;
 	private $estado = null;
+	private $token = null;
 	private $ruta = '../../resources/img/pacientes/';
 
 	public function setId($value)
@@ -185,6 +186,17 @@ class Pacientes extends Validator
 		return $this->ruta;
 	}
 
+	public function setToken($value)
+	{
+		$this->token = $value;
+		return true;
+	}
+
+	public function getToken()
+	{
+		return $this->token;
+	}
+
 	//métodos para manejar la sesión del usuario
 	public function checkPaciente()
 	{
@@ -235,7 +247,7 @@ class Pacientes extends Validator
 			return false;
 		}*/
 
-		$sql = 'SELECT contrasena_paciente, clave_actualizada FROM pacientes WHERE id_paciente = ?';
+		$sql = 'SELECT contrasena_paciente, clave_actualizada, id_sesion FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		$data = Database::getRow($sql, $params);
 
@@ -247,7 +259,11 @@ class Pacientes extends Validator
 			if($fecha_actual>$nueva_fecha){
 				return 1;
 			}else{
-				return 2;
+				if($data['id_sesion'] == 2){
+					return 2;
+				} else {
+					return 3;
+				}
 			}
 				
 		} else {
@@ -265,6 +281,13 @@ class Pacientes extends Validator
 		} else {
 			return false;
 		}
+	}
+
+	public function checkCorreo()
+	{
+		$sql = 'SELECT correo_paciente from pacientes where correo_paciente = ?';
+		$params = array($this->correo);
+		return Database::getRow($sql, $params);
 	}
 
 	public function blockAccount()
@@ -287,6 +310,39 @@ class Pacientes extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
+	public function setOnline()
+	{
+		$sql = 'UPDATE pacientes SET id_sesion = 1 WHERE usuario_paciente = ?';
+		$params = array($this->usuario);
+		$data = Database::executeRow($sql, $params);
+	}
+
+	public function setOffline()
+	{
+		$sql = 'UPDATE pacientes SET id_sesion = 2 WHERE id_paciente = ?';
+		$params = array($_SESSION['idPaciente']);
+		$data = Database::executeRow($sql, $params);
+	}
+
+	public function setTokenRecuperar()
+	{
+		$sql = 'UPDATE pacientes set token_paciente = ? where correo_paciente = ?';
+		$params = array($this->token, $this->correo);
+		return Database::executeRow($sql, $params);
+	}
+	
+	public function getTokenRecuperar()
+	{
+		$sql = 'SELECT id_paciente FROM pacientes WHERE token_paciente = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idpaciente = $data['id_paciente'];
+			return true;
+		} else {
+			return false;
+		}
+	}
 	//métodos para manejar cruds
 
 	public function readPacientes()

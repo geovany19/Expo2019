@@ -231,7 +231,7 @@ class Usuario extends Validator
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion, id_estado FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
@@ -240,10 +240,12 @@ class Usuario extends Validator
 			if ($fecha_actual>$nueva_fecha) {
 				return 1;
 			} else {
-				if ($data['id_sesion'] == 2) {
+				if ($data['id_sesion'] == 2 && $data['id_estado'] == 1) {
 					return 2;
-				} else {
+				} else if ($data['id_sesion'] == 1) {
 					return 3;
+				} else if ($data['id_estado'] == 0) {
+					return 4;
 				}
 			}	
 		} else {
@@ -359,21 +361,21 @@ class Usuario extends Validator
 
 	public function checkCorreo()
 	{
-		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario=?';
+		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario = ?';
 		$params = array($this->correo);
 		return Database::getRow($sql, $params);
 	}
 
 	public function tokensito()
 	{
-		$sql = 'UPDATE usuarios_a set token_usuarios = ? where correo_usuario = ?';
+		$sql = 'UPDATE usuarios_a set token_usuario = ? where correo_usuario = ?';
 		$params = array($this->token, $this->correo);
 		return Database::executeRow($sql, $params);
 	}
 	
 	public function getDatosTokensito()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuarios = ?';
+		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuario = ?';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {

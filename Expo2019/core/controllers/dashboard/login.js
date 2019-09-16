@@ -49,11 +49,17 @@ $('#form-sesion').submit(function () {
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status == 1) {
                 sweetAlert(1, 'Autenticación correcta', 'pagina.php');
+            } else if (dataset.status == 4) {
+                sweetAlert(3, 'Cuenta bloqueada', null);
+
             } else if (dataset.status == 5) {
                 sweetAlert(3, dataset.exception, 'recuperar.php');
 
-            } else if (dataset.status == 4) {
-                sweetAlert(3, 'Cuenta bloqueada', null);
+            } else if (dataset.status == 6) {
+                sweetAlert(3, dataset.exception, 'sesion.php');
+
+            } else if (dataset.status == 7) {
+                sweetAlert(3, dataset.exception, 'verificacion.php');
 
             } else {
                 attempts++

@@ -1,5 +1,5 @@
 //Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/dashboard/usuarios.php?site=public&action=';
+const apiAccount = '../../core/api/dashboard/usuarios.php?&action=';
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

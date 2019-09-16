@@ -36,7 +36,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
                 case 'logout':
-                if (session_destroy()) {
+                if (session_unset()) {
                     header('location: ../../../views/private/');
                 } else {
                     header('location: ../../../views/private/agenda.php');
@@ -271,7 +271,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                      $result['exception'] = 'Nombre incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Nombre incorrecto';
+                    $result['exception'] = 'incorrecto';
                 }
                 break;
 

@@ -37,13 +37,14 @@ class Validator
     }
 
     public function validateForm($fields)
-    {
-        foreach ($fields as $index => $value) {
-            $value = trim($value);
-            $fields[$index] = $value;
-        }
-        return $fields;
-    }
+	{
+		foreach ($fields as $index => $value) {
+            //HTML ENTITIES 
+			$value = htmlentities(trim($value));
+			$fields[$index] = $value;
+		}
+		return $fields;
+	}
 
     public function validateId($value)
     {

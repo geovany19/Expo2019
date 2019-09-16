@@ -57,7 +57,6 @@ class private_helper
 								<ul class="collapse list-unstyled" id="homeSubmenu">
 									<li><a href="citas.php">Realizadas</a></li>
 									<li><a href="citas_pendientes.php">Pendientes</a></li>
-									<li><a href="" >Horarios de disponibilidad</a></li>
 								</ul>
 							</li>
 							<li><a href="#" onclick="signOff()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
@@ -147,15 +146,15 @@ class private_helper
 				  </div>
 
 				  <div class="form-group">
-					<label for="profile_alias" class="col-form-label">Usuario: </label>
+					<label for="profile_alias" class="col-form-label">Nombre usuario: </label>
 					<input id="profile_alias" type="text" name="profile_alias" class="form-control" required/>
 				  </div>
 
 				  <div class="form-group">
-					<label for="profile_correo" class="col-form-label">Apellidos: </label>
+					<label for="profile_correo" class="col-form-label">Correo electrónico: </label>
 					<input id="profile_correo" type="email" name="profile_correo" class="form-control" required/>
 				  </div>
-				  <button type="submit" class="btn btn-primary">Send message</button>
+				  <button type="submit" class="btn btn-primary">Modificar</button>
 				</form>
 			  </div>
 
@@ -177,28 +176,26 @@ class private_helper
 			  </div>
 
 			  <div class="modal-body">
-			  	<form method="post" id="form-password" autocomplete="off">
+				  <form method="post" id="form-password" autocomplete="off">
 				  <div class="form-group">
-					<label for="clave_actual_1" class="col-form-label">Clave:</label>
+					<label for="clave_actual_1" class="col-form-label">Contraseña actual:</label>
 					<input id="clave_actual_1" type="password" name="clave_actual_1" class="form-control" required/>
 				  </div>
-				 
 				  <div class="form-group">
-					<label for="clave_actual_2" class="col-form-label">Confirmar clave</label>
+					<label for="clave_actual_2" class="col-form-label">Confirmar contraseña:</label>
 					<input id="clave_actual_2" type="password" name="clave_actual_2" class="form-control" required/>
 				  </div>
-				  <label>CLAVE NUEVA</label>
 				  <div class="form-group">
-					<label for="clave_nueva_1">Clave</label>
+					<label for="clave_nueva_1">Contraseña nueva:</label>
 					<input id="clave_nueva_1" type="password" name="clave_nueva_1" class="form-control" required/>
 				  </div>
 
 				  <div class="form-group">
-					<label for="clave_nueva_2">Confirmar clave</label>
+					<label for="clave_nueva_2">Confirmar contraseña:</label>
 					<input id="clave_nueva_2" type="password" name="clave_nueva_2" class="form-control" required/>
 				
 				  </div>
-				  <button type="submit" class="btn btn-primary">Send message</button>
+				  <button type="submit" class="btn btn-primary">Modificar</button>
 				</form>
 			  </div>
 			  

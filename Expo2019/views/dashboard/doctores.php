@@ -64,6 +64,14 @@ dashboardHelper::nav();
 			<div class="col-md-6 mb-3">
       			<label for="create_usuario">Usuario</label>
       			<input type="text" class="form-control" id="create_usuario" name="create_usuario" required>
+			</div>
+			<div class="col-md-6 mb-3">
+      			<label for="create_usuario">Contraseña</label>
+      			<input type="password" class="form-control" id="create_clave1" name="create_clave1" required>
+			</div>
+			<div class="col-md-6 mb-3">
+      			<label for="create_usuario">Confirmar contraseña</label>
+      			<input type="password" class="form-control" id="create_clave2" name="create_clave2" required>
     		</div>
 			<div class="col-md-6 mb-4">
       			<label for="create_fecha">Fecha de nacimiento</label>

@@ -256,17 +256,6 @@ public function setReceta($value)
 	// Métodos para manejar la sesión del usuario
 	public function checkAlias()
 	{
-		/*$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente FROM pacientes WHERE usuario_paciente = ?';
-		$params = array($this->usuario);
-		$data = Database::getRow($sql, $params);
-		if ($data) {
-			$this->idpaciente = $data['id_paciente'];
-			$this->nombre = $data['nombre_paciente'];
-			$this->apellido = $data['apellido_paciente'];
-			return true;
-		} else {
-			return false;
-		}*/
 		$sql = 'SELECT id_doctor, cuenta_bloqueada FROM doctores WHERE usuario_doctor = ?';
 		$params = array($this->alias);
 		$data = Database::getRow($sql, $params);
@@ -279,9 +268,6 @@ public function setReceta($value)
 			if($data['cuenta_bloqueada']){
 				if($fecha_actual<$nueva_fecha){
 					return 2;
-				}else{
-					$this->id = $data['id_doctor'];				
-					return 1;
 				}
 			}else{
 				$this->id = $data['id_doctor'];				
@@ -290,7 +276,8 @@ public function setReceta($value)
 		} else {
 			return 0;
 		}
-	}
+	}	
+
 
 	public function checkTipo()
 	{
@@ -306,16 +293,7 @@ public function setReceta($value)
 
 	public function checkPassword()
 	{
-		/*$sql = 'SELECT contrasena_paciente FROM pacientes WHERE id_paciente = ?';
-		$params = array($this->idpaciente);
-		$data = Database::getRow($sql, $params);
-		if ($this->clave = $data['contrasena_paciente']) {
-			return true;
-		} else {
-			return false;
-		}*/
-
-		$sql = 'SELECT contrasena_doctor, clave_actualizada FROM doctores WHERE id_doctor = ?';
+		$sql = 'SELECT contrasena_doctor, clave_actualizada, id_sesion FROM doctores WHERE id_doctor = ?';
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 
@@ -327,13 +305,35 @@ public function setReceta($value)
 			if($fecha_actual>$nueva_fecha){
 				return 1;
 			}else{
-				return 2;
-			}
-				
+				if($data['id_sesion'] == 2){
+					return 2;	
+				} else{
+					return 3;
+				}			
+			}			
 		} else {
 			return 0;
 		}
 	}
+
+	public function setOnline(){
+		$sql = 'UPDATE doctores SET id_sesion = ? WHERE usuario_doctor = ?';
+		$params = array(1, $this->alias);
+		$data = Database::executeRow($sql, $params);
+		if($data){
+			$this->id = $data['id_doctor'];
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function setOffline(){
+		$sql = 'UPDATE doctores SET id_sesion = ? WHERE id_doctor = ?';
+		$params = array(2, $_SESSION['idDoctor']);
+		$data = Database::executeRow($sql, $params);
+	}
+
 	public function getUsuario()
 	{
 		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor  FROM doctores WHERE id_doctor = ?';

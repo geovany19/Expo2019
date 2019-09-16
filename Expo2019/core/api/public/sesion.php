@@ -3,7 +3,7 @@ $tiempo_transcurrido = time() - $_SESSION['ultimoAccesoPaciente'];
 //comparamos el tiempo transcurrido  
 if ($tiempo_transcurrido >= 600) {
     //si pasaron 5 minutos o más  
-    session_destroy(); // destruyo la sesión  
+    session_unset(); // destruyo la sesión  
     echo '
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../helpers/functions.js"></script>

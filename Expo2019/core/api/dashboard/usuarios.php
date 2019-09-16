@@ -19,14 +19,14 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
             case 'logout':
-                $_SESSION['idUsuario'] = $usuario->getId();
-                if ($usuario->setOffline() && session_unset()) {
+                $usuario->setOffline();
+                if (session_unset()) {
                     header('location: ../../../views/dashboard/');
                 } else {
                     header('location: ../../../views/dashboard/pagina.php');
                 }
                 break;
-            case 'setOffline':
+                /*case 'setOffline':
                 if ($usuario->setOffline()) {
                     $result['status'] = 1;
                     $result['message'] = 'Seteo offline correcto';
@@ -35,7 +35,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'No fue posible setear offline';
                 }
-                break;
+                break;*/
             case 'readProfile':
                 if ($usuario->setId($_SESSION['idUsuario'])) {
                     if ($result['dataset'] = $usuario->getUser()) {
@@ -112,23 +112,24 @@ if (isset($_GET['action'])) {
                     if ($_POST['clave_actual_1'] == $_POST['clave_actual_2']) {
                         if ($usuario->setClave($_POST['clave_actual_1'])) {
                             if ($usuario->checkPassword()) {
-                                if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                                    if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($_POST['clave_actual_1'] != $_POST['clave_nueva_1']) {
+                                if ($_POST['clave_actual_1'] != $_POST['clave_nueva_1']) {
+                                    if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                                        $resultado = $usuario->setClave($_POST['clave_nueva_1']);
+                                        if ($resultado[0]) {
                                             if ($usuario->changePassword()) {
                                                 $result['status'] = 1;
-                                                $result['message'] = 'Contraseña cambiada correctamente';
+                                                $result['message'] = 'Contraseña actualizada correctamente';
                                             } else {
                                                 $result['exception'] = 'Operación fallida';
                                             }
                                         } else {
-                                            $result['exception'] = 'La nueva contraseña no puede ser igual a la actual';
+                                            $result['exception'] = $resultado[1];
                                         }
                                     } else {
-                                        $result['exception'] = 'Contraseña nueva menor a 8 caracteres';
+                                        $result['exception'] = 'Contraseñas diferentes no coinciden';
                                     }
                                 } else {
-                                    $result['exception'] = 'Contraseña nuevas diferentes';
+                                    $result['exception'] = 'La nueva contraseña no puede ser igual a la actual';
                                 }
                             } else {
                                 $result['exception'] = 'Contraseña actual incorrecta';
@@ -324,31 +325,28 @@ if (isset($_GET['action'])) {
                         if ($usuario->setApellido($_POST['apellidos'])) {
                             if ($usuario->setCorreo($_POST['correo'])) {
                                 if ($usuario->setUsuario($_POST['usuario'])) {
-                                    if ($_POST['clave1'] == $_POST['clave2']) {
-                                        if ($usuario->setClave($_POST['clave1'])) {
-                                            if ($usuario->setFecha($_POST['fecha'])) {
-                                                if ($usuario->setEstado($_POST['create_estado']) ? 1 : 2) {
-                                                    if ($_POST['usuario'] != $_POST['clave1']) {
-                                                        if ($usuario->createUsuario()) {
-                                                            $result['status'] = 1;
-                                                            $result['message'] = 'Registro realizado correctamente';
-                                                        } else {
-                                                            $result['exception'] = 'Operación fallida';
-                                                        }
+                                    if ($usuario->setFecha($_POST['fecha'])) {
+                                        if ($_POST['usuario'] != $_POST['clave1']) {
+                                            if ($_POST['clave1'] == $_POST['clave2']) {
+                                                $resultado = $usuario->setClave($_POST['clave1']);
+                                                if ($resultado[0]) {
+                                                    if ($usuario->createUsuario()) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Registro realizado correctamente';
                                                     } else {
-                                                        $result['exception'] = 'El nombre de usuario no puede ser igual a la contraseña.';
+                                                        $result['exception'] = 'Operación fallida';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Estado incorrecto. No se pudo registrar el usuario';
+                                                    $result['exception'] = $resultado[1];
                                                 }
                                             } else {
-                                                $result['exception'] = 'Fecha no válida. No se pudo registrar el usuario';
+                                                $result['exception'] = 'Las contraseñas no coinciden';
                                             }
                                         } else {
-                                            $result['exception'] = 'Clave menor a 6 caracteres xd. No se pudo registrar el usuario';
+                                            $result['exception'] = 'La contraseña no puede ser igual al nombre de usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Claves diferentes. No se pudo registrar el usuario';
+                                        $result['exception'] = 'Fecha no válida. No se pudo registrar el usuario';
                                     }
                                 } else {
                                     $result['exception'] = 'Alias incorrecto. No se pudo registrar el usuario';
@@ -363,7 +361,19 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Nombres incorrectos. No se pudo registrar el usuario';
                     }
                 } else {
-                    $result['exception'] = 'Desbes comprobar que eres humano';
+                    $result['exception'] = 'Debes comprobar que eres humano';
+                }
+                break;
+            case 'block':
+                if ($usuario->setAlias($_POST['name'])) {
+                    $us = $usuario->blockAccount($_POST['name']);
+                    if ($us) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['status'] = 2;
+                    }
+                } else {
+                    $result['status'] = 3;
                 }
                 break;
             case 'verificarCuenta':
@@ -506,32 +516,79 @@ if (isset($_GET['action'])) {
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
+                    switch ($usuario->checkUser()) {
+                        case 0:
+                            if ($usuario->checkTipo()) {
+                                $result['exception'] = 'El usuario no tiene permitido ingresar a este sitio';
+                            } else {
+                                $result['exception'] = 'Usuario inexistente';
+                            }
+                            break;
+                        case 1:
+                            if ($usuario->setClave($_POST['clave'])) {
+                                switch ($usuario->checkPassword()) {
+                                    case 0:
+                                        $result['exception'] = 'Clave inexistente';
+                                        break;
+                                    case 1:
+                                        $result['exception'] = 'Debes actualizar tu contraseña debido a que 
+                                        ha expirado su vigencia de 90 días';
+                                        $result['status'] = 5;
+                                        break;
+                                    case 2:
+                                        $_SESSION['idUsuario'] = $usuario->getId();
+                                        $_SESSION['nombreUsuario'] = $usuario->getNombre();
+                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                        $_SESSION['apellidosUsuario'] = $usuario->getApellido();
+                                        $result['status'] = 1;
+                                        $result['mensaje'] = 'Inicio de sesión correcto';
+                                        $_SESSION['ultimoAcceso'] = time();
+                                        $usuario->setOnline();
+                                        break;
+                                    case 3:
+                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente. 
+                                        Si deseas restablecer la sesión, haz click en "Restablecer sesion" ubicado en este sitio';
+                                        break;
+                                }
+                            } else {
+                                $result['exception'] = 'Contraseña menor a 8 caracteres';
+                            }
+                            break;
+                        case 2:
+                            $result['status'] = 4;
+                            break;
+                    }
+                } else {
+                    $result['exception'] = 'Alias incorrecto';
+                }
+                /*$_POST = $usuario->validateForm($_POST);
+                if ($usuario->setUsuario($_POST['usuario'])) {
                     if ($usuario->checkUser()) {
                         if ($usuario->setClave($_POST['clave'])) {
-                            if ($usuario->checkPassword()) {
-                                //if ($usuario->setOnline()) {
-                                $_SESSION['idUsuario'] = $usuario->getId();
-                                $_SESSION['aliasUsuario'] = $usuario->getUsuario();
-                                $_SESSION['nombreUsuario'] = $usuario->getNombre();
+                            //if ($usuario->checkPassword()) {
+                            $_SESSION['idUsuario'] = $usuario->getId();
+                            $_SESSION['estadoSesion'] = $usuario->getSession();
+                            $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                            if ($usuario->checkOffline()) {
                                 $_SESSION['ultimoAcceso'] = time();
                                 $result['status'] = 1;
                                 $result['message'] = 'Inicio de sesión correcto';
                                 $usuario->setOnline();
-                                /*} else {
-                                    $result['exception'] = 'No se pudo setear el estado de la sesión';
-                                }*/
                             } else {
+                                $result['exception'] = 'El usuario ya posee una sesión iniciada';
+                            }
+                            /*} else {
                                 $result['exception'] = 'Contraseña inexistente';
                             }
                         } else {
-                            $result['exception'] = 'Clave menor a 6 caracteres';
+                            $result['exception'] = 'Contraseña menor a 8 caracteres';
                         }
                     } else {
                         $result['exception'] = 'Usuario inexistente';
                     }
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
-                }
+                }*/
                 break;
             default:
                 exit('Acción no disponible 2');

@@ -26,6 +26,9 @@ dashboardHelper::nav();
 						<div class="form-group">
 							<h6 class="text-center"><a href="recuperar.php">¿Olvidó su contraseña?</a></h6>
 						</div>
+						<div class="form-group">
+							<h6 class="text-center"><a href="#" onclick="signOff()">Restablecer sesión</a></h6>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -40,5 +43,6 @@ dashboardHelper::nav();
 	<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 	<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 	<script type="text/javascript" src="../../core/controllers/dashboard/login.js"></script>
+	<script type="text/javascript" src="../../core/controllers/dashboard/logout.js"></script>
 </body>
 </html>

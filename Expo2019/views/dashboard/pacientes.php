@@ -67,7 +67,7 @@ dashboardHelper::nav();
     		</div>
 			<div class="col-md-6 mb-4">
       				<label for="create_fecha">Fecha de nacimiento</label>
-      				<input type="date" class="form-control" id="create_fecha" name="create_fecha" required>
+      				<input type="date" class="form-control" id="create_fecha" name="create_fecha" max=<?php echo date('Y-m-d') ?> required>
 			</div>
 			<div class="col-md-6 mb-4">
 					<label for="create_peso">Peso del paciente (kg)</label>
@@ -139,7 +139,7 @@ dashboardHelper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_fecha">Fecha de nacimiento</label>
-						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha de nacimiento">
+						<input type="date" class="form-control" id="update_fecha" name="update_fecha" max=<?php echo date('Y-m-d') ?> placeholder="Fecha de nacimiento">
 					</div>
 					<div class="form-group">
 						<label for="update_archivo">Foto</label>

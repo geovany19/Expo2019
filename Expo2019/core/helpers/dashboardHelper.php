@@ -17,6 +17,7 @@ class dashboardHelper
 				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-select.min.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_recuperar.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/fonts/poppins.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/private/doctores.css">
@@ -42,7 +43,6 @@ class dashboardHelper
 	public static function nav()
 	{
 		if (isset($_SESSION['idUsuario'])) {
-			include ('../../core/api/dashboard/sesion.php');
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registrarse.php') {
 				print('
@@ -92,11 +92,12 @@ class dashboardHelper
 										<i class="fas fa-align-left"></i>
 										<span>Minimizar menú</span>
 									</button>
-									<!--<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+									<h6> Admin:</h6>
+									<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i class="fas fa-align-justify"></i>
 									</button>
 									<div class="collapse navbar-collapse" id="navbarSupportedContent">
-									</div>-->
+									</div>
 								</div>
 							</nav>
 							<main class="container">

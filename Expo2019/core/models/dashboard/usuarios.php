@@ -206,36 +206,69 @@ class Usuario extends Validator
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios_a WHERE usuario_usuario = ?';
+		$sql = 'SELECT id_usuario, cuenta_bloqueada, id_sesion FROM usuarios_a WHERE usuario_usuario = ?';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
+		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+		$nueva_fecha = strtotime (date($data['cuenta_bloqueada']) .'+ 24 hours'  );
+		//$estado_sesion = $data['id_sesion'];
 		if ($data) {
-			$this->idusuario = $data['id_usuario'];
-			return true;
+			if($data['cuenta_bloqueada']) {
+				if($fecha_actual<$nueva_fecha) {
+					return 2;
+				} else {
+					$this->idusuario = $data['id_usuario'];				
+					return 1;
+				}
+			} else {
+				$this->idusuario = $data['id_usuario'];				
+				return 1;
+			}
 		} else {
-			return false;
-		}
-	}
-
-	public function checkOffline()
-	{
-		$sql = 'SELECT id_sesion FROM usuarios_a WHERE usuario_usuario = ? AND id_sesion = ?';
-		$params = array($this->usuario, 2);
-		$data = Database::executeRow($sql, $params);
-		if ($data) {
-			$this->idusuario = $data['id_usuario'];
-			return true;
-		} else {
-			return false;
+			return 0;
 		}
 	}
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_usuario FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		$data = Database::getRow($sql, $params);
+		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+		$nueva_fecha = strtotime(date($data['clave_actualizada']).'+ 90 days') ;
 		if (password_verify($this->clave, $data['contrasena_usuario'])) {
+			if ($fecha_actual>$nueva_fecha) {
+				return 1;
+			} else {
+				if ($data['id_sesion'] == 2) {
+					return 2;
+				} else {
+					return 3;
+				}
+			}	
+		} else {
+			return 0;
+		}
+	}
+
+	public function blockAccount()
+	{
+		$sql = 'UPDATE usuarios_a set cuenta_bloqueada = ? WHERE usuario_usuario = ?';
+		$params = array(date('Y-m-d'), $this->getUsuario());
+		$data = Database::executeRow($sql, $params);
+		if ($data) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function checkTipo()
+	{
+		$sql = 'SELECT usuarios_a.id_usuario FROM usuarios_a WHERE usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$params = array($this->usuario);
+		$data = Database::getRows($sql, $params);
+		if ($data) {
 			return true;
 		} else {
 			return false;
@@ -247,13 +280,7 @@ class Usuario extends Validator
 	{
 		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';
 		$params = array(1, $this->usuario);
-		$data = Database::executeRow($sql, $params);
-		if ($data) {
-			$this->idusuario = $data['id_usuario'];
-			return true;
-		} else {
-			return false;
-		}
+		Database::executeRow($sql, $params);
 	}
 
 	//Método para setear 
@@ -261,13 +288,7 @@ class Usuario extends Validator
 	{
 		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE id_usuario = ?';
 		$params = array(2, $_SESSION['idUsuario']);
-		$data = Database::executeRow($sql, $params);
-		if ($data) {
-			$this->idusuario = $data['id_usuario'];
-			return true;
-		} else {
-			return false;
-		}
+		Database::executeRow($sql, $params);
 	}
 
 	public function changePassword()
@@ -303,8 +324,8 @@ class Usuario extends Validator
 	public function createUsuario()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->idestado);
+		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, 0, 2);
 		return Database::executeRow($sql, $params);
 	}
 

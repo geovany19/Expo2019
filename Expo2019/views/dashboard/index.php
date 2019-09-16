@@ -43,5 +43,6 @@ dashboardHelper::nav();
 	<script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
 	<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 	<script type="text/javascript" src="../../core/controllers/dashboard/login.js"></script>
+	<script type="text/javascript" src="../../core/controllers/dashboard/logout.js"></script>
 </body>
 </html>

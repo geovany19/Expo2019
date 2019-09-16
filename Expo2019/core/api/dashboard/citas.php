@@ -5,7 +5,7 @@ require_once('../../models/dashboard/citas.php');
 
 if (isset($_GET['action'])) {
     session_start();
-    $citas = new Citas;
+    $citas = new Cita;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {

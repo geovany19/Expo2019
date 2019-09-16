@@ -257,7 +257,7 @@ function selectEspecialidad(Select, value){
     .done(function(response){
         if (isJSONString(response)) {
             const result = JSON.parse(response);
-            console.log(response);
+            //console.log(response);
             if (result.status) {
                 let content = '';
                 if (!value) {
@@ -265,7 +265,7 @@ function selectEspecialidad(Select, value){
                 }
                 result.dataset.forEach(function(row){
                     if (row.id_especialidad != value) {
-                        console.log(row.id_especialidad);
+                        //console.log(row.id_especialidad);
                         content += `<option  value="${row.id_especialidad}">${row.nombre_especialidad}</option>`;
                     } else {
                         content += `<option  value="${row.id_especialidad}" selected>${row.nombre_especialidad}</option>`;

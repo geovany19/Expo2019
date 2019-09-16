@@ -25,7 +25,7 @@ public_helper::nav();
 						</div>
 						
 						<div class="form-group text-center">
-							<a href="#" class="text-center">¿Olvidaste tu contraseña?</a> 
+							<a href="recuperar1.php" class="text-center">¿Olvidaste tu contraseña?</a> 
 						</div>
 
 						<div class="form-group">

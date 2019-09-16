@@ -1,5 +1,5 @@
 <?php
-class Citas extends Validator
+class Cita extends Validator
 {
     //Declaración de variables a utilizar
     private $idcita = null;

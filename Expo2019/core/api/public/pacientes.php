@@ -3,6 +3,14 @@ require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/public/pacientes.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../../libraries/PHPMailer/src/Exception.php';
+require '../../../libraries/PHPMailer/src/PHPMailer.php';
+require '../../../libraries/PHPMailer/src/SMTP.php';
+
+
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
     session_start();
@@ -12,11 +20,12 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idPaciente'])) {
         switch ($_GET['action']) {
             case 'logout':
-                if (session_destroy()) {
-                    header('location: ../../../views/public/');
-                } else {
-                    header('location: ../../../views/public/perfil.php');
-                }
+                    $usuario->setOffline();
+                    if (session_unset()) {        
+                        header('location: ../../../views/public/');
+                    } else {
+                        header('location: ../../../views/public/perfil.php');
+                    }
                 break;
             case 'readProfile':
                 if ($usuario->setId($_SESSION['idPaciente'])) {
@@ -385,7 +394,7 @@ if (isset($_GET['action'])) {
                                             $result['exception'] = 'Clave inexistente';
                                             break;
                                         case 1:
-                                            $result['exception'] = 'Actualiza tu contraseña';
+                                            $result['exception'] = 'Debe actualizar su contraseña debido a que ha expirado su vigencia de 90 días';
                                             $result['status'] = 5;
                                             break;
                                         case 2:
@@ -395,10 +404,14 @@ if (isset($_GET['action'])) {
                                             $_SESSION['apellidosPaciente'] = $usuario->getApellido();
                                             $_SESSION['ultimoAccesoPaciente'] = time();
                                             $result['status'] = 1;
+                                            $usuario->setOnline();
+                                            break;
+                                        case 3:
+                                            $result['exception'] = 'El usuario ya posee una sesión iniciada';
                                             break;
                                     }
                                     } else {
-                                        $result['exception'] = 'Contraseña menor a 6 caracteres';
+                                        $result['exception'] = 'Contraseña menor a 8 caracteres';
                                     }
                             break;
                         case 2:
@@ -409,6 +422,87 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Alias incorrecto';
                 }
             break;
+            case 'correoRecuperar':
+                $_POST = $usuario->validateForm($_POST);
+                if($usuario->setCorreo($_POST['correo'])){
+                    if($usuario->checkCorreo()){
+                        $token = uniqid();
+                        if($usuario->setToken($token)){
+                            if($usuario->setTokenRecuperar()){
+                              if($correopaciente = $usuario->getCorreo()){
+                                $mail = new PHPMailer(true);
+                                    try {
+                                        //Server settings
+                                      // Enable verbose debug output
+                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                        $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
+                                        $mail->Password   = 'Sismed12345';                               // SMTP password
+                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                        $mail->Port       = 587;                                    // TCP port to connect to
+
+                                        //Recipients
+                                        $mail->setFrom('soportetecnicosismed@gmail.com');
+                                        $mail->addAddress($correopaciente);     // Add a recipient
+                                        
+                                        // Content
+                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                        $mail->Subject = 'Restablecimiento de contraseña';
+                                       // $mail->Body    = 'Puede hacer click';
+                                        $mail->Body    = 'Hemos recibido una solicitud de restablecimiento de la contraseña de tu cuenta.
+                                        Para restablecer tu contraseña haz click <a href="http://localhost/Expo2019/Expo2019/views/public/recuperar2.php?token=' . $token . '">aquí</<a>.
+                                        Si no has realizado ninguna solicitud, ignora este correo.';
+                                        $mail->send();
+                                        $result['status'] = 1; 
+                                    } catch (Exception $e) {
+
+                                    }
+                              } else {
+                                $result['exception'] = 'Error al obtener el correo';  
+                              } 
+                            } else {
+                                $result['exception'] = 'Error al asignar el token';
+                            }  
+                        } else{
+                            $result['exception'] = 'Error al generar el token';
+                        }  
+                    } else{
+                        $result['exception'] = 'Correo no existe';
+                    }   
+                }  else {
+                    $result['exception'] = 'Correo invalido';
+                }     
+            
+                break;
+
+            case 'recuperarContra':
+                $_POST = $usuario->validateForm($_POST);
+                if($usuario->setToken($_POST['token'])){
+                    if($usuario->getTokenRecuperar()){
+                        if ($_POST['nueva_contrasena'] == $_POST['nueva_contrasena2']) {
+                            $resultado = $usuario->setClave($_POST['nueva_contrasena']);
+                                    if ($resultado[0]) {
+                                        if ($usuario->changePassword()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                        $result['exception'] = $resultado[1];
+                                    }
+                        } else {
+                            $result['exception'] = 'Claves diferentes';
+                            
+                        } 
+                    } else {
+                        $result['exception'] = 'Error al obtener los datos del usuario';
+                    }
+                } else {
+                    $result['exception'] = 'Error al setear el token';
+                }
+                
+                break;
             default:
                 exit('Acción no disponible 2');
         }

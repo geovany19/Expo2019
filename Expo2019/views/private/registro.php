@@ -49,12 +49,6 @@ private_helper::headerTemplate("Registrarse");
 								<input type="date" class="form-control" id="fecha" name="fecha" min="1939-01-01" max="2010-12-31" placeholder="Fecha de nacimiento" required>
 								<div class="invalid-feedback">Ingrese una fecha válida</div>
 							</div>
-							<!--<div class="form-group col-sm-12 col-md-6">
-								<label for="create_archivo">Seleccionar foto de perfil</label>
-								<input type="file" id="create_archivo" name="create_archivo" class="file-input">
-								<small id="passwordHelp" class="form-text text-muted">El archivo debe ser formato .jpg, .png, .gif. Dimensiones máximas 500px x 500px. Tamaño máximo 2MB.</small>
-								<div class="invalid-feedback">Debe seleccionar un archivo.</div>
-							</div>-->
 							<div class="form-group col-sm-12 col-md-6">
                             	<div class="g-recaptcha center" data-sitekey="6Lev7bQUAAAAAByJBru1V29JWpg5oo18d6SFuHKy"></div>
 							</div>

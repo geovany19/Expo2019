@@ -36,8 +36,10 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
                 case 'logout':
-                if (session_destroy()) {
-                    header('location: ../../../views/private/');
+                    $usuario->setOffline();
+                        if (session_unset()) {
+                            $result['status'] = 1;
+                            header('location: ../../../views/private/');                   
                 } else {
                     header('location: ../../../views/private/agenda.php');
                 }
@@ -51,7 +53,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                         $result['exception'] = 'Usuario inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Usuario incorrecto 3';
+                    $result['exception'] = 'Usuario incorrecto';
                 }
                 break;
 
@@ -271,7 +273,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                      $result['exception'] = 'Nombre incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Nombre incorrecto';
+                    $result['exception'] = 'incorrecto';
                 }
                 break;
 
@@ -350,7 +352,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                 }
                                 break;
                             case 1:
-                                
+                              //   if ($usuario->setid($_POST['idDoctor'])) {
                                     if ($usuario->setClave($_POST['clave'])) {
                                         switch($usuario->checkPassword()){
                                             case 0:
@@ -367,6 +369,10 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                                 $_SESSION['apellidosDoctor'] = $usuario->getApellidos();
                                                 $_SESSION['ultimoAccesoDoctor'] = time();
                                                 $result['status'] = 1;
+                                                $usuario->setOnline();
+                                                break;
+                                            case 3: 
+                                                 $result['exception'] = 'El usuario ya posee una sesión iniciada previamente';
                                                 break;
                                         }
                                         } else {

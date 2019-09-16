@@ -40,6 +40,7 @@ private_helper::nav();
 		</div>
 		<textarea type="text" name="receta" id="receta" class="form-control" aria-label="With textarea"></textarea>
 	</div>
+	<br>
 	<button type="submit" class="btn btn-primary">Procesar</button>
 </form>
 <?php

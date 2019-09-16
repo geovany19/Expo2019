@@ -164,6 +164,57 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+            case 'restoreSession':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setUsuario($_POST['usuario'])) {
+                    switch ($usuario->checkUser()) {
+                        case 0:
+                            if ($usuario->checkTipo()) {
+                                $result['exception'] = 'El usuario no tiene permitido ingresar a este sitio';
+                            } else {
+                                $result['exception'] = 'Usuario inexistente';
+                            }
+                            break;
+                        case 1:
+                            if ($usuario->setClave($_POST['clave'])) {
+                                switch ($usuario->checkPassword()) {
+                                    case 0:
+                                        $result['exception'] = 'Clave inexistente';
+                                        break;
+                                    case 1:
+                                        $result['exception'] = 'Debes actualizar tu contraseña debido a que 
+                                        ha expirado su vigencia de 90 días';
+                                        $result['status'] = 5;
+                                        break;
+                                    case 2:
+                                        $_SESSION['idUsuario'] = $usuario->getId();
+                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                        $usuario->restoreSession();
+                                        $result['status'] = 6;
+                                        $result['mensaje'] = 'Inicio de sesión correcto';
+                                        break;
+                                    case 3:
+                                        $_SESSION['idUsuario'] = $usuario->getId();
+                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                        $usuario->restoreSession();
+                                        $result['status'] = 1;
+                                        $result['mensaje'] = 'Restablecimiento de sesión correcto';
+                                        break;
+                                    case 4:
+                                        $result['exception'] = 'Debes activar tu cuenta antes de iniciar sesión por primera vez';
+                                        $result['status'] = 7;
+                                        break;
+                                }
+                            } else {
+                                $result['exception'] = 'Contraseña menor a 8 caracteres';
+                            }
+                            break;
+                        case 2:
+                            $result['status'] = 4;
+                            break;
+                    }
+                }
+                break;
             case 'create':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setNombre($_POST['create_nombre'])) {
@@ -514,7 +565,6 @@ if (isset($_GET['action'])) {
                 }
 
                 break;*/
-
             case 'correo':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setCorreo($_POST['correousu'])) {
@@ -650,11 +700,53 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Alias incorrecto';
                 }
                 break;
-                case 'restoreSession':
+            case 'restoreSession':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
-                    
+                    switch ($usuario->checkUser()) {
+                        case 0:
+                            if ($usuario->checkTipo()) {
+                                $result['exception'] = 'El usuario no tiene permitido ingresar a este sitio';
+                            } else {
+                                $result['exception'] = 'Usuario inexistente';
+                            }
+                            break;
+                        case 1:
+                            if ($usuario->setClave($_POST['clave'])) {
+                                switch ($usuario->checkPassword()) {
+                                    case 0:
+                                        $result['exception'] = 'Clave inexistente';
+                                        break;
+                                    case 1:
+                                        $result['exception'] = 'Debes actualizar tu contraseña debido a que 
+                                        ha expirado su vigencia de 90 días';
+                                        $result['status'] = 5;
+                                        break;
+                                    case 2:
+                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente. 
+                                        Serás redirigido al menú para restablecer sesiones activas';
+                                        $result['status'] = 6;
+                                        break;
+                                    case 3:
+                                        $usuario->restoreSession();
+                                        $result['status'] = 1;
+                                        $result['mensaje'] = 'Restablecimiento de sesión correcto';
+                                        break;
+                                    case 4:
+                                        $result['exception'] = 'Debes activar tu cuenta antes de iniciar sesión por primera vez';
+                                        $result['status'] = 7;
+                                        break;
+                                }
+                            } else {
+                                $result['exception'] = 'Contraseña menor a 8 caracteres';
+                            }
+                            break;
+                        case 2:
+                            $result['status'] = 4;
+                            break;
+                    }
                 }
+                break;
             default:
                 exit('Acción no disponible 2');
         }

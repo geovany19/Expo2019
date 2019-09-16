@@ -17,7 +17,7 @@ dashboardHelper::head("Restablecer contraseña");
                             <input type="text" id="correousu" class="form-control" name="correousu" placeholder="Correo electrónico" required="required">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block"onclick="correorecuperar()">Enviar correo de restablecimiento</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block"onclick="correorecuperar()">Enviar correo</button>
                         </div>
                         <div class="form-group">
                             <h6 class="text-center"><a href="index.php">Volver al inicio</a></h6>

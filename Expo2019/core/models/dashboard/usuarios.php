@@ -294,6 +294,13 @@ class Usuario extends Validator
 		Database::executeRow($sql, $params);
 	}
 
+	public function restoreSession()
+	{
+		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';
+		$params = array(2, $this->usuario);
+		Database::executeRow($sql, $params);
+	}
+
 	public function changePassword()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);

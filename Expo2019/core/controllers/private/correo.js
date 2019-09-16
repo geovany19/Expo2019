@@ -1,5 +1,5 @@
 //Constante para establecer la ruta y parámetros de comunicación con la API
-const apiAccount = '../../core/api/dashboard/usuarios.php?site=public&action=';
+const apiAccount = '../../core/api/private/usuarios.php?site=private&action=';
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -13,7 +13,7 @@ function getParameterByName(name) {
     
     event.preventDefault();
     $.ajax({
-        url: apiAccount + 'correito',
+        url: apiAccount + 'correitousu',
         type: 'post',
         data: $('#form-correo').serialize(),
         datatype: 'json'

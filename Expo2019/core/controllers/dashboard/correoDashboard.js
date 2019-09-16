@@ -10,7 +10,6 @@ function getParameterByName(name) {
 
  function correorecuperar()
 {
-    
     event.preventDefault();
     $.ajax({
         url: apiAccount + 'correo',

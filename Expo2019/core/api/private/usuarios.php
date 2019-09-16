@@ -387,7 +387,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                         $result['exception'] = 'Alias incorrecto';
                     }
                 break;
-                case 'correito':
+                case 'correitousu':
                 $_POST = $usuario->validateForm($_POST);
                 if($usuario->setCorreo($_POST['correo'])){
                     if($usuario->checkCorreo()){

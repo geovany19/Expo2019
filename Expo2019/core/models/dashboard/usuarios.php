@@ -215,6 +215,7 @@ class Usuario extends Validator
 		if ($data) {
 			if($data['cuenta_bloqueada']) {
 				if($fecha_actual<$nueva_fecha) {
+					$this->idusuario = $data['id_usuario'];	
 					return 2;
 				} else {
 					$this->idusuario = $data['id_usuario'];				
@@ -366,18 +367,18 @@ class Usuario extends Validator
 
 	public function tokensito()
 	{
-		$sql = 'UPDATE usuarios_a set token_usuarios = ? where correo_usuario = ?';
+		$sql = 'UPDATE usuarios_a set token_usuario = ? where correo_usuario = ?';
 		$params = array($this->token, $this->correo);
 		return Database::executeRow($sql, $params);
 	}
 	
 	public function getDatosTokensito()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuarios = ?';
+		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuario = ?';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
-			$this->id = $data['id_usuario'];
+			$this->idusuario = $data['id_usuario'];
 			return true;
 		} else {
 			return false;

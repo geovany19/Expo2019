@@ -1,13 +1,13 @@
 <?php
-include "../../core/helpers/dashboardHelper.php";
-dashboardHelper::head("Restablecer contraseña");
+include "../../core/helpers/private_helper.php";
+private_helper::headerTemplate("Restablecer contraseña");
 ?>
 
 <body id="body">
     <main id="main">
         <div class="row">
             <div class="col col-sm-12">
-                <div class="recover-form">
+                <div class="recover-form form-registro">
                     <form method="post" id="form-correo" autocomplete="off">
                         <div class="avatar">
                             <img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">

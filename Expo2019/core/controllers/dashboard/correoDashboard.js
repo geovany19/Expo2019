@@ -13,7 +13,7 @@ function getParameterByName(name) {
     
     event.preventDefault();
     $.ajax({
-        url: apiAccount + 'correito',
+        url: apiAccount + 'correo',
         type: 'post',
         data: $('#form-correo').serialize(),
         datatype: 'json'
@@ -38,7 +38,7 @@ function getParameterByName(name) {
     });
 }
 
-$('#form-recuperar2').submit(function()
+$('#form-recuperar3').submit(function()
 {   event.preventDefault();
     var token = getParameterByName('token');
    // console.log(token);

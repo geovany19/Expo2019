@@ -1,6 +1,6 @@
 <?php
 include "../../core/helpers/dashboardHelper.php";
-dashboardHelper::head("Restablecer contraseña");
+dashboardHelper::head("Verificacion de cuenta");
 ?>
 
 <body id="body">
@@ -8,16 +8,16 @@ dashboardHelper::head("Restablecer contraseña");
         <div class="row">
             <div class="col col-sm-12">
                 <div class="recover-form">
-                    <form method="post" id="form-correo" autocomplete="off">
+                    <form method="post" id="form-verificar" autocomplete="off">
                         <div class="avatar">
                             <img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
                         </div>
                         <h2 class="text-center">Restablecer contraseña</h2>
                         <div class="form-group">
-                            <input type="text" id="correousu" class="form-control" name="correousu" placeholder="Correo electrónico" required="required">
+                            <input type="text" id="correo" class="form-control" name="correo" placeholder="Correo electrónico" required="required">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block"onclick="correorecuperar()">Enviar correo de restablecimiento</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar correo</button>
                         </div>
                         <div class="form-group">
                             <h6 class="text-center"><a href="index.php">Volver al inicio</a></h6>
@@ -35,7 +35,7 @@ dashboardHelper::head("Restablecer contraseña");
     <script type="text/javascript" src="../../resources/js/Chart.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
     <script type="text/javascript" src="../../core/helpers/functions.js"></script>
-    <script type="text/javascript" src="../../core/controllers/dashboard/correoDashboard.js"></script>
+    <script type="text/javascript" src="../../core/controllers/dashboard/login.js"></script>
 </body>
 
 </html>

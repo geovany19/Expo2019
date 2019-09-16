@@ -301,17 +301,44 @@ class Usuario extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function changePasswordByToken()
+	public function checkCorreo()
+	{
+		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario=?';
+		$params = array($this->correo);
+		return Database::getRow($sql, $params);
+	}
+
+	public function tokensito()
+	{
+		$sql = 'UPDATE usuarios_a set token_usuarios = ? where correo_usuario = ?';
+		$params = array($this->token, $this->correo);
+		return Database::executeRow($sql, $params);
+	}
+	
+	public function getDatosTokensito()
+	{
+		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuarios = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->id = $data['id_usuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/*public function changePasswordByToken()
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'UPDATE usuarios SET Clave = ? WHERE Token = ?';
+        $sql = 'UPDATE usuarios SET contrasena_usuario = ? WHERE token_usuarios = ?';
         $params = array($hash, $this->token);
         return Database::executeRow($sql, $params);
 	}
 	
 	public function getUserByToken()
 	{
-		$sql = 'SELECT IdUsuario FROM usuarios WHERE Token = ?';
+		$sql = 'SELECT id_usuario FROM usuarios WHERE token_usuarios = ?';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -324,15 +351,15 @@ class Usuario extends Validator
 	
 	public function updateToken()
 	{
-		$sql = 'UPDATE usuarios SET Token = ? WHERE Email = ?';
+		$sql = 'UPDATE usuarios SET token_usuarios = ? WHERE correo_usuario = ?';
 		$params = array($this->token, $this->email);
 		return Database::executeRow($sql, $params);
     }
     
     public function getEmailUser()
 	{
-		$sql = 'SELECT Email FROM usuarios WHERE Email = ?';
+		$sql = 'SELECT correo_usuario FROM usuarios WHERE correo_usuario = ?';
 		$params = array($this->email);
 		return Database::getRow($sql, $params);
-	}
+	}*/
 }

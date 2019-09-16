@@ -3,12 +3,12 @@ require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
 require_once('../../models/dashboard/usuarios.php');
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-require '../../../libraries/PHPMailer/src/Exception.php';
-require '../../../libraries/PHPMailer/src/PHPMailer.php';
-require '../../../libraries/PHPMailer/src/SMTP.php';
+require_once('../../../libraries/PHPMailer/src/Exception.php');
+require_once('../../../libraries/PHPMailer/src/PHPMailer.php');
+require_once('../../../libraries/PHPMailer/src/SMTP.php');
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
@@ -366,7 +366,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Desbes comprobar que eres humano';
                 }
                 break;
-            case 'verificarCuenta':
+        /*    case 'verificarCuenta':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setEmail($_POST['email-name'])) {
                     if ($usuario->getEmailUser()) {
@@ -421,7 +421,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Correo invalido';
                 }
                 break;
-            case 'enviarCorreo':
+         /*   case 'enviarCorreo':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setEmail($_POST['email-name'])) {
                     if ($usuario->getEmailUser()) {
@@ -502,7 +502,88 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Error al setear el token';
                 }
 
+                break;*/
+
+                case 'correo':
+                $_POST = $usuario->validateForm($_POST);
+                if($usuario->setCorreo($_POST['correousu'])){
+                    if($usuario->checkCorreo()){
+                        $token = uniqid();
+                        if($usuario->setToken($token)){
+                            if($usuario->tokensito()){
+                              if($correousuario = $usuario->getCorreo()){
+                                $result['status'] = 1; 
+                                $mail = new PHPMailer(true);
+                                    try {
+                                        //Server settings
+                                        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                        $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
+                                        $mail->Password   = 'Sismed12345';                               // SMTP password
+                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                        $mail->Port       = 587;                                    // TCP port to connect to
+
+                                        //Recipients
+                                        $mail->setFrom('soportetecnicosismed@gmail.com');
+                                        $mail->addAddress($correousuario);     // Add a recipient
+                                        
+                                        // Content
+                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                        $mail->Subject = 'Recuperacion de clave';
+                                       // $mail->Body    = 'Puede hacer click';
+                                        $mail->Body    = '<a href="http://localhost/Expo2019/Expo2019/views/dashboard/claves.php?token='.$token.'">aqui</<a>';
+                                       // $mail->AddEmbeddedImage('../../resources/img/dashboard/img2.jpg', 'logo_sismed', 'img2.jpg');
+                                        $mail->send();
+                                        echo 'Message has been sent';
+                                    } catch (Exception $e) {
+                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                    }
+                              } else {
+                                $result['exception'] = 'Error al obtener el correo';  
+                              } 
+                            } else {
+                                $result['exception'] = 'Error al asignar el token';
+                            }  
+                        } else{
+                            $result['exception'] = 'Error al generar el token';
+                        }  
+                    } else{
+                        $result['exception'] = 'Correo no existe';
+                    }   
+                }  else {
+                    $result['exception'] = 'Correo invalido';
+                }                
                 break;
+                case 'nuevaPassword':
+                $_POST = $usuario->validateForm($_POST);
+                if($usuario->setToken($_POST['token'])){
+                    if($usuario->getDatosTokensito()){
+                        if ($_POST['nueva_contrasena'] == $_POST['nueva_contrasena2']) {
+                            $resultado = $usuario->setClave($_POST['nueva_contrasena']);
+                                    if ($resultado[0]) {
+                                        if ($usuario->changePassword()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                       $result['exception'] = $resultado[1];
+                                    }
+                        } else {
+                            $result['exception'] = 'Claves diferentes';
+                            
+                        } 
+                    } else {
+                        $result['exception'] = 'Error al obtener los datos del usuario';
+                    }
+                } else {
+                    $result['exception'] = 'Error al setear el token';
+                }
+                
+                break;
+                
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {

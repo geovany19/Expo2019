@@ -8,7 +8,7 @@ dashboardHelper::head("Restablecer contraseña");
         <div class="row">
             <div class="col col-sm-12">
                 <div class="claves-form">
-                    <form method="post" id="form-claves" autocomplete="off">
+                    <form method="post" id="form-recuperar3" autocomplete="off">
                         <div class="avatar">
                             <img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
                         </div>
@@ -35,7 +35,7 @@ dashboardHelper::head("Restablecer contraseña");
     <script type="text/javascript" src="../../resources/js/Chart.js"></script>
     <script type="text/javascript" src="../../resources/js/Chart.bundle.js"></script>
     <script type="text/javascript" src="../../core/helpers/functions.js"></script>
-    <script type="text/javascript" src="../../core/controllers/dashboard/login.js"></script>
+    <script type="text/javascript" src="../../core/controllers/dashboard/correoDashboard.js"></script>
 </body>
 
 </html>

@@ -232,7 +232,7 @@ class Usuario extends Validator
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion, id_estado FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
@@ -241,10 +241,12 @@ class Usuario extends Validator
 			if ($fecha_actual>$nueva_fecha) {
 				return 1;
 			} else {
-				if ($data['id_sesion'] == 2) {
+				if ($data['id_sesion'] == 2 && $data['id_estado'] == 1) {
 					return 2;
-				} else {
+				} else if ($data['id_sesion'] == 1) {
 					return 3;
+				} else if ($data['id_estado'] == 0) {
+					return 4;
 				}
 			}	
 		} else {
@@ -289,6 +291,13 @@ class Usuario extends Validator
 	{
 		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE id_usuario = ?';
 		$params = array(2, $_SESSION['idUsuario']);
+		Database::executeRow($sql, $params);
+	}
+
+	public function restoreSession()
+	{
+		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';
+		$params = array(2, $this->usuario);
 		Database::executeRow($sql, $params);
 	}
 
@@ -360,7 +369,7 @@ class Usuario extends Validator
 
 	public function checkCorreo()
 	{
-		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario=?';
+		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario = ?';
 		$params = array($this->correo);
 		return Database::getRow($sql, $params);
 	}

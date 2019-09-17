@@ -34,12 +34,12 @@ function checkUsuarios() {
 
 var attempts = 0;
 // Función para validar el usuario al momento de iniciar sesión
-$('#form-sesion').submit(function () {
+$('#form-restore').submit(function () {
     event.preventDefault();
     $.ajax({
-        url: api + 'login',
+        url: api + 'restoreSession',
         type: 'post',
-        data: $('#form-sesion').serialize(),
+        data: $('#form-restore').serialize(),
         datatype: 'json'
     })
     .done(function (response) {
@@ -48,10 +48,9 @@ $('#form-sesion').submit(function () {
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status == 1) {
-                sweetAlert(1, 'Autenticación correcta', 'pagina.php');
+                sweetAlert(1, 'Restablecimiento de sesión exitoso', 'index.php');
             } else if (dataset.status == 4) {
                 sweetAlert(3, 'Cuenta bloqueada', null);
-
             } else if (dataset.status == 5) {
                 sweetAlert(3, dataset.exception, 'recuperar.php');
 
@@ -68,13 +67,13 @@ $('#form-sesion').submit(function () {
                     $.ajax({
                         url: apiSesion + 'block',
                         type: 'post',
-                        data: $('#form-sesion').serialize(),
+                        data: $('#form-restore').serialize(),
                         datatype: 'json'
                     }).done(response => {
                         if (isJSONString(response)) {
                             const dataset = JSON.parse(response);
                             if (dataset.status == 1) {
-                                sweetAlert(3, 'Ha superado el máximo de intentos de inicio de sesión permitidos. Cuenta bloqueada por 24 horas', null);
+                                sweetAlert(3, 'Ha superado el máximo de intentos de permitidos. Tu cuenta ha sido bloqueada por 24 horas', null);
                             } else {
                                 sweetAlert(2, 'lol', null);
                             }

@@ -53,7 +53,10 @@ $('#form-sesion').submit(function()
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status == 1) {
                 sweetAlert(1, 'Autenticación correcta', 'home.php');
-            }else if(dataset.status == 5){
+            } else if(dataset.status == 2){
+                sweetAlert(1, 'Logueo correcto','autenticar.php');
+
+            } else if(dataset.status == 5){
                 sweetAlert(3, dataset.exception,'recuperar.php');
 
             }else if(dataset.status == 4){

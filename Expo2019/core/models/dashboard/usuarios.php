@@ -15,6 +15,7 @@ class Usuario extends Validator
 	private $intentos = null;
 	private $token = null;
 	private $sesion = null;
+	private $pin = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -203,6 +204,21 @@ class Usuario extends Validator
 		return $this->sesion;
 	}
 
+	public function setPin($value)
+    {
+        if ($this->validateAlphaNumeric($value, 1, 32)) {
+            $this->pin = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getPin()
+    {
+        return $this->pin;
+	}
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
@@ -231,7 +247,7 @@ class Usuario extends Validator
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion, id_estado FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
@@ -240,7 +256,7 @@ class Usuario extends Validator
 			if ($fecha_actual>$nueva_fecha) {
 				return 1;
 			} else {
-				if ($data['id_sesion'] == 2) {
+				if ($data['id_sesion'] == 2 && $data['id_estado'] == 1) {
 					return 2;
 				} else {
 					return 3;
@@ -250,6 +266,51 @@ class Usuario extends Validator
 			return 0;
 		}
 	}
+
+	public function checkCorreo()
+	{
+		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario = ?';
+		$params = array($this->correo);
+		return Database::getRow($sql, $params);
+	}
+
+	public function setTokenAutenticacion()
+	{
+		$sql = 'UPDATE usuarios_a SET autenticar_usuario = ? WHERE usuario_usuario = ?';
+		$params = array($this->token, $this->usuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteTokenAutenticacion()
+	{
+		$sql = 'UPDATE usuarios_a SET autenticar_usuario = null WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getTokenAutenticacion()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, usuario_usuario, correo_usuario FROM usuarios_a WHERE autenticar_usuario = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['id_usuario'];
+			$this->nombre = $data['nombre_usuario'];
+			$this->apellido = $data['apellido_usuario'];
+			$this->usuario = $data['usuario_usuario'];
+			$this->correo = $data['correo_usuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function autenticarEstado()
+		{
+			$sql = 'UPDATE usuarios_a SET id_estado = 1 where id_usuario = ?';
+			$params = array($this->idusuario);
+			return Database::executeRow($sql, $params);
+		}
 
 	public function blockAccount()
 	{
@@ -331,7 +392,7 @@ class Usuario extends Validator
 
 	public function getUser()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado,pin_usuario FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		return Database::getRow($sql, $params);
 	}
@@ -357,12 +418,6 @@ class Usuario extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function checkCorreo()
-	{
-		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario=?';
-		$params = array($this->correo);
-		return Database::getRow($sql, $params);
-	}
 
 	public function tokensito()
 	{
@@ -373,16 +428,19 @@ class Usuario extends Validator
 	
 	public function getDatosTokensito()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuarios = ?';
+		$sql = 'SELECT id_usuario, correo_usuario FROM usuarios_a WHERE token_usuarios = ?';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->id = $data['id_usuario'];
+			$this->correo = $data['correo_usuario'];
 			return true;
 		} else {
 			return false;
 		}
 	}
+
+
 
 	/*public function changePasswordByToken()
     {

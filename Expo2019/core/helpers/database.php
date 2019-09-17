@@ -10,12 +10,12 @@ class Database
     Método para establecer la conexión con la base de datos utilizando las credenciales respectivas.
     No recibe parámetros y no devuelve ningún valor, capturando las excepciones del servidor de bases de datos.
 */
-    private function connect()
+    private static function connect()
     {
         $server = 'localhost';
         $database = 'sismed';
         $username = 'influencers';
-        $password = 'expo2019';
+        $password = '7qYMx09JdqdTVNHK';
         try {
             @self::$connection = new PDO('mysql:host=' . $server . '; dbname=' . $database . '; charset=utf8', $username, $password);
         } catch (PDOException $error) {
@@ -27,7 +27,7 @@ class Database
     Método para anular la conexión con la base de datos y capturar la información de las excepciones en las sentencias SQL.
     No recibe parámetros y no devuelve ningún valor.
     */
-    private function disconnect()
+    private static function disconnect()
     {
         self::$connection = null;
         $error = self::$statement->errorInfo();
@@ -65,7 +65,7 @@ class Database
      */
     public static function getRow($query, $values)
     {
-        self::connect();
+       self::connect();
         self::$statement = self::$connection->prepare($query);
         self::$statement->execute($values);
         self::disconnect();
@@ -132,7 +132,7 @@ class Database
                 $message = 'Servidor desconocido';
                 break;
             default:
-                //$message = 'Ocurrió un problema, contacte al administrador.';
+                $message = 'Ocurrió un problema, contacte al administrador.';
         }
         return $message;
     }

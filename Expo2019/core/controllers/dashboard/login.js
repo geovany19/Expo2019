@@ -47,10 +47,13 @@ $('#form-sesion').submit(function () {
         if (isJSONString(response)) {
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
+            
             if (dataset.status == 1) {
-                sweetAlert(1, 'Autenticación correcta', 'pagina.php');
+                sweetAlert(1, 'Autenticación correcta', 'verificacion2pasos.php');
+                
             } else if (dataset.status == 5) {
                 sweetAlert(3, dataset.exception, 'recuperar.php');
+                
 
             } else if (dataset.status == 4) {
                 sweetAlert(3, 'Cuenta bloqueada', null);
@@ -60,7 +63,7 @@ $('#form-sesion').submit(function () {
                 if (attempts == 3) {
                     attempts = 0
                     $.ajax({
-                        url: apiSesion + 'block',
+                        url: api + 'block',
                         type: 'post',
                         data: $('#form-sesion').serialize(),
                         datatype: 'json'

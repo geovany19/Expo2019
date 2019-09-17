@@ -238,14 +238,6 @@ class Pacientes extends Validator
 
 	public function checkPassword()
 	{
-		/*$sql = 'SELECT contrasena_paciente FROM pacientes WHERE id_paciente = ?';
-		$params = array($this->idpaciente);
-		$data = Database::getRow($sql, $params);
-		if ($this->clave = $data['contrasena_paciente']) {
-			return true;
-		} else {
-			return false;
-		}*/
 
 		$sql = 'SELECT contrasena_paciente, clave_actualizada, id_sesion, id_estado FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);

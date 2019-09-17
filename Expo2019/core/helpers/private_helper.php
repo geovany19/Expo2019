@@ -33,10 +33,11 @@ class private_helper
 
 	public function nav()
 	{
+
 		if (isset($_SESSION['idDoctor'])) {
 			self::modals();
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php') {
+			if ($filename != 'index.php' && $filename != 'registro.php') {
 				print('
 				<div class="wrapper">
 					<!-- Sidebar  -->
@@ -82,10 +83,9 @@ class private_helper
 			}
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'correo.php' ) {
+			echo("<script>console.log('filename". $filename . "')</script>");
+			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticar.php') {
 				header('location: index.php');
-			} else {
-
 			}
 		}
 	}

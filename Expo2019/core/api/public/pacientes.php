@@ -466,6 +466,7 @@ if (isset($_GET['action'])) {
                         if($usuario->getTokenAutenticacion()) {
                             if($usuario->deleteTokenAutenticacion()) {
                                 if ($usuario->autenticarEstado()) {
+                                    
                                     $_SESSION['idPaciente'] = $usuario->getId();
                                     $_SESSION['usuarioPaciente'] = $usuario->getUsuario();
                                     $_SESSION['nombresPaciente'] = $usuario->getNombre();

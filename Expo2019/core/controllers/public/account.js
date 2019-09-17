@@ -173,7 +173,36 @@ $('#form-autenticar').submit(function()
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status) {
-                sweetAlert(1, 'Usuario autenticado correcto', 'home.php');
+                sweetAlert(1, 'Usuario autenticado correctamente', 'home.php');
+            } else {
+                sweetAlert(2, dataset.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        //Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+
+$('#form-autenticacion').submit(function()
+{
+    event.preventDefault();
+    $.ajax({
+        url: apiAccount + 'autenticacion',
+        type: 'post',
+        data: $('#form-autenticacion').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const dataset = JSON.parse(response);
+            //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
+            if (dataset.status) {
+                sweetAlert(1, 'Autenticación correcta', 'home.php');
             } else {
                 sweetAlert(2, dataset.exception, null);
             }

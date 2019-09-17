@@ -7,7 +7,8 @@ if (isset($_GET['action'])) {
 	session_start();
 	$especialidad = new Especialidad();
 	$result = array('status' => 0, 'message' => null, 'exception' => null);
-	if (isset($_SESSION['idUsuario']) || true) {
+	if (isset($_SESSION['idUsuario'])) {
+		require_once('sesion.php');
 		switch ($_GET['action']) {
 			case 'read':
 				if ($result['dataset'] = $especialidad->readEspecialidad()) {

@@ -8,7 +8,7 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
- function correorecuperar()
+ function correoRecuperar()
 {
     event.preventDefault();
     $.ajax({
@@ -22,8 +22,8 @@ function getParameterByName(name) {
         if (isJSONString(response)) {
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-            if (result.status) {
-                sweetAlert(1, 'correo enviado exitosamente', null);
+            if (result.status == 1) {
+                sweetAlert(1, 'Correo enviado exitosamente. En caso de que no encuentres tu correo, revisa en la bandeja de spma o correo no deseado', null);
             } else {
                 sweetAlert(2, result.exception, null);
             }

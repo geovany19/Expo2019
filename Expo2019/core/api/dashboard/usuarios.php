@@ -18,6 +18,7 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'message' => null, 'exception' => null, 'session' => 1);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario'])) {
+        require_once('sesion.php');
         switch ($_GET['action']) {
             case 'logout':
                 $usuario->setOffline();
@@ -164,6 +165,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+            //caso utilizado para restablecer sesión en caso haya quedado activa
             case 'restoreSession':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
@@ -194,8 +196,6 @@ if (isset($_GET['action'])) {
                                         $result['mensaje'] = 'Inicio de sesión correcto';
                                         break;
                                     case 3:
-                                        $_SESSION['idUsuario'] = $usuario->getId();
-                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
                                         $usuario->restoreSession();
                                         $result['status'] = 1;
                                         $result['mensaje'] = 'Restablecimiento de sesión correcto';
@@ -573,11 +573,12 @@ if (isset($_GET['action'])) {
                         if ($usuario->setToken($token)) {
                             if ($usuario->tokensito()) {
                                 if ($correousuario = $usuario->getCorreo()) {
-                                    $result['status'] = 1;
+                                    //$result['status'] = 1;
                                     $mail = new PHPMailer(true);
+                                    $mail->charSet = "UTF-8";
                                     try {
                                         //Server settings
-                                        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                        // Enable verbose debug output
                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                         $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -597,11 +598,8 @@ if (isset($_GET['action'])) {
                                         $mail->Body    = 'Hemos recibido una solicitud de tu cuenta para restablecer la contraseña. Para restablecer, haz click <a href="http://localhost/Expo2019/Expo2019/views/dashboard/claves.php?token=' . $token . '">aqui</<a>';
                                         // $mail->AddEmbeddedImage('../../resources/img/dashboard/img2.jpg', 'logo_sismed', 'img2.jpg');
                                         $mail->send();
-                                        //echo 'Message has been sent';
                                         $result['status'] = 1;
-                                        $result['message'] = 'Se ha enviado el correo. En caso de que no aparezca en la bandeja de entrada, revisa en la bandeja de correo no deseoado o spam';
                                     } catch (Exception $e) {
-                                        //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                                         $result['exception'] = 'No fue posible enviar el correo. Error :{' . $mail->ErrorInfo . '}';
                                     }
                                 } else {

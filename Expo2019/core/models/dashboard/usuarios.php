@@ -294,6 +294,7 @@ class Usuario extends Validator
 		Database::executeRow($sql, $params);
 	}
 
+	//Método para restablecer la sesion en caso permanezca activa
 	public function restoreSession()
 	{
 		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';

@@ -198,7 +198,7 @@ if (isset($_GET['action'])) {
                                     case 3:
                                         $usuario->restoreSession();
                                         $result['status'] = 1;
-                                        $result['mensaje'] = 'Restablecimiento de sesión correcto';
+                                        $result['mensaje'] = 'Restablecimiento de sesión correcto. Te redigiremos al login';
                                         break;
                                     case 4:
                                         $result['exception'] = 'Debes activar tu cuenta antes de iniciar sesión por primera vez';

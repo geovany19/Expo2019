@@ -76,7 +76,7 @@ function showTable() {
             if (isJSONString(response)) {
                 const result = JSON.parse(response);
                 // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                if (result.sesion) {
+                if (result.session == 1) {
                     if (!result.status) {
                         sweetAlert(4, result.exception, null);
                     }
@@ -141,7 +141,7 @@ $('#form-create').submit(function () {
             if (isJSONString(response)) {
                 const result = JSON.parse(response);
                 // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                if (result.sesion) {
+                if (result.session) {
                     if (result.status) {
                         $('#modal-create').modal('hide');
                         $("#tabla-pacientes").DataTable().destroy();
@@ -179,7 +179,7 @@ function modalUpdate(id) {
             if (isJSONString(response)) {
                 const result = JSON.parse(response);
                 // Se comprueba si el resultado es satisfactorio para mostrar los valores en el formulario, sino se muestra la excepción
-                if (result.sesion) {
+                if (result.session) {
                     if (result.status) {
                         console.log(result.dataset)
                         $('#form-update')[0].reset();
@@ -228,7 +228,7 @@ $('#form-update').submit(function () {
             if (isJSONString(response)) {
                 const result = JSON.parse(response);
                 // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                if (result.sesion) {
+                if (result.session) {
                     if (result.status) {
                         $('#modal-update').modal('hide');
                         $("#tabla-pacientes").DataTable().destroy();
@@ -275,7 +275,7 @@ function confirmDelete(id) {
                         if (isJSONString(response)) {
                             const result = JSON.parse(response);
                             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                            if (result.sesion) {
+                            if (result.session) {
                                 if (result.status) {
                                     $("#tabla-pacientes").DataTable().destroy();
                                     showTable();

@@ -9,7 +9,6 @@ require_once("../models/dashboard/doctores.php");
 $doctor = new Doctores;
 $result = array('status' => 0, 'message' => null, 'exception' => null);
 if (isset($_SESSION['idUsuario'])) {
-	//tu codigo del reporte
 	require_once('../api/dashboard/sesion.php');
 	ini_set('date.timezone', 'America/El_Salvador');
 	$pdf = new PDF('L', 'mm', 'Letter');

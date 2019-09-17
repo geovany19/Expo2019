@@ -14,6 +14,9 @@ dashboardHelper::head("Restablecer sesion");
                         </div>
                         <h2 class="text-center">Restablecer sesion</h2>
                         <div class="form-group">
+                            <p class="text-center">Ingresa tu nombre de usuario y tu contraseña en los respectivos campos</p>
+                        </div>
+                        <div class="form-group">
                             <input type="text" id="usuario" class="form-control" name="usuario" placeholder="Nombre de usuario" required="required">
                         </div>
                         <div class="form-group">

@@ -1,17 +1,17 @@
 <?php
 include "../../core/helpers/public/public_helper.php";
-public_helper::head("Autenticar cuenta");
+public_helper::head("Paso 2: Iniciar sesión");
 ?>
 <body id="body">
 	<main id="main">
 		<div class="row">
 			<div class="col col-sm-12">
 				<div class="form-registro">
-					<form method="post" id="form-autenticar" autocomplete="off">
+					<form method="post" id="form-autenticacion" autocomplete="off">
 						<div class="avatar">
 							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
 						</div>
-						<h2 class="text-center">Autenticar cuenta</h2>
+						<h2 class="text-center">Paso 2: Iniciar sesión</h2>
 						<div class="form-row">
 							<div class="form-group col-md-12">
 								<label for="codigo">Código</label>
@@ -21,7 +21,7 @@ public_helper::head("Autenticar cuenta");
 						</div>
 
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Autenticar</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
 						</div>
 					</form>
 				</div>

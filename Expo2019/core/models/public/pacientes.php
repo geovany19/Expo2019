@@ -262,7 +262,7 @@ class Pacientes extends Validator
 				if ($data['id_estado'] == 0) {
 					return 4;
 				} else {
-					if($data['id_sesion'] == 2){
+					if($data['id_sesion'] == 2 && $data['id_estado'] == 1){
 						return 2;
 					} else {
 						return 3;

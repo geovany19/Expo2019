@@ -33,7 +33,7 @@ function checkUsuarios() {
 }
 
 var attempts = 0;
-// Función para validar el usuario al momento de iniciar sesión
+// Función para restaurar la sesión del usuario
 $('#form-restore').submit(function () {
     event.preventDefault();
     $.ajax({

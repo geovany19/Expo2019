@@ -256,7 +256,7 @@ public function setReceta($value)
 	// Métodos para manejar la sesión del usuario
 	public function checkAlias()
 	{
-		$sql = 'SELECT id_doctor, cuenta_bloqueada FROM doctores WHERE usuario_doctor = ?';
+		$sql = 'SELECT id_doctor, cuenta_bloqueada FROM doctores WHERE usuario_doctor = ? LIMIT 1';
 		$params = array($this->alias);
 		$data = Database::getRow($sql, $params);
 
@@ -281,7 +281,7 @@ public function setReceta($value)
 
 	public function checkTipo()
 	{
-		$sql = 'SELECT pacientes.id_paciente, usuarios_a.id_usuario FROM pacientes, usuarios_a WHERE usuario_paciente = ? OR usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$sql = 'SELECT pacientes.id_paciente, usuarios_a.id_usuario FROM pacientes, usuarios_a WHERE usuario_paciente = ? OR usuario_usuario = ? GROUP BY usuarios_a.id_usuario LIMIT 1';
 		$params = array($this->alias, $this->alias);
 		$data = Database::getRows($sql, $params);
 		if ($data) {
@@ -293,7 +293,7 @@ public function setReceta($value)
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_doctor, clave_actualizada, id_sesion FROM doctores WHERE id_doctor = ?';
+		$sql = 'SELECT contrasena_doctor, clave_actualizada, id_sesion FROM doctores WHERE id_doctor = ? LIMIT 1';
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 
@@ -336,7 +336,7 @@ public function setReceta($value)
 
 	public function getUsuario()
 	{
-		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor  FROM doctores WHERE id_doctor = ?';
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor  FROM doctores WHERE id_doctor = ? LIMIT 1';
 		$params = array($this->id);
 		return Database::getRow($sql, $params);
 	}
@@ -439,7 +439,7 @@ public function setReceta($value)
 
 	public function checkCorreo()
 	{
-		$sql = 'SELECT correo_doctor from doctores where correo_doctor=?';
+		$sql = 'SELECT correo_doctor FROM doctores WHERE correo_doctor=? LIMIT 1';
 		$params = array($this->correo);
 		return Database::getRow($sql, $params);
 	}

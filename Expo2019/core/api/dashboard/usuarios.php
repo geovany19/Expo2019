@@ -365,7 +365,7 @@ if (isset($_GET['action'])) {
             case 'read':
                 if ($usuario->readUsuarios()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Existe al menos un usuario registrado';
+                    $result['exception'] = 'Existe al menos un usuario registrado';
                 } else {
                     $result['message'] = 'No existen usuarios registrados';
                 }
@@ -727,6 +727,7 @@ if (isset($_GET['action'])) {
                                         break;
                                     case 3:
                                         $usuario->restoreSession();
+                                        //session_destroy();
                                         $result['status'] = 1;
                                         $result['mensaje'] = 'Restablecimiento de sesión correcto';
                                         break;

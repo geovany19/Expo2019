@@ -3,7 +3,7 @@
 $tiempo_transcurrido = time() - $_SESSION['ultimoAcceso'];
 
 //comparamos el tiempo transcurrido  
-if ($tiempo_transcurrido >= 300) {
+if ($tiempo_transcurrido >= 600) {
     //si pasaron 5 segundos o más  
     session_unset(); // destruyo la sesión 
     $result['session'] = 0; //envío al usuario a la pag. de autenticación  

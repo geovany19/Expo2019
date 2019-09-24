@@ -217,7 +217,7 @@ class Pacientes extends Validator
 
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
 
-		$nueva_fecha = strtotime ( date($data['cuenta_bloqueada']) .'+ 24 hours'  ) ;
+		$nueva_fecha = strtotime ( date($data['cuenta_bloqueada']) .'+ 1 minute'  ) ;
 
 		if ($data) {
 			if($data['cuenta_bloqueada']){

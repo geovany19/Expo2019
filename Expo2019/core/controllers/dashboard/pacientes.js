@@ -82,7 +82,16 @@ function showTable() {
                     }
                     fillTable(result.dataset);
                 } else {
-                    console.log(response);
+                    //console.log(response);
+                    sweetAlert(4, result.exception, 'index.php');
+                    $.ajax({
+                        url: apiCuenta + 'login',
+                        type: 'post',
+                        data: null,
+                        datatype: 'json'
+                    })
+                    //location.href = apiCuenta + 'logout';
+                    //location.href = '../../views/dashboard/index.php'
                 }
             } else {
                 console.log(response);
@@ -199,7 +208,9 @@ function modalUpdate(id) {
                         sweetAlert(2, result.exception, null);
                     }
                 } else {
-                    console.log(response);
+                    //console.log(response);
+                    sweetAlert(4, result.exception, 'index.php');
+                    location.href = apiCuenta + 'logout';
                 }
             } else {
                 console.log(response);
@@ -228,7 +239,7 @@ $('#form-update').submit(function () {
             if (isJSONString(response)) {
                 const result = JSON.parse(response);
                 // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                if (result.session) {
+                if (result.session == 1) {
                     if (result.status) {
                         $('#modal-update').modal('hide');
                         $("#tabla-pacientes").DataTable().destroy();
@@ -238,7 +249,8 @@ $('#form-update').submit(function () {
                         sweetAlert(2, result.exception, null);
                     }
                 } else {
-                    console.log(response);
+                    //console.log(response);
+                    sweetAlert(4, result.exception, 'index.php');
                 }
             } else {
                 console.log(response);

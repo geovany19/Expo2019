@@ -210,7 +210,7 @@ class Usuario extends Validator
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
-		$nueva_fecha = strtotime (date($data['cuenta_bloqueada']) .'+ 24 hours'  );
+		$nueva_fecha = strtotime (date($data['cuenta_bloqueada']) .'+ 1 minute'  );
 		//$estado_sesion = $data['id_sesion'];
 		if ($data) {
 			if($data['cuenta_bloqueada']) {

@@ -66,7 +66,7 @@ $('#form-sesion').submit(function () {
                 if (attempts == 3) {
                     attempts = 0
                     $.ajax({
-                        url: apiSesion + 'block',
+                        url: api + 'block',
                         type: 'post',
                         data: $('#form-sesion').serialize(),
                         datatype: 'json'

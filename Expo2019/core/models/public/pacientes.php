@@ -423,8 +423,8 @@ class Pacientes extends Validator
 
 	public function updatePaciente()
 	{
-		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ? WHERE id_paciente = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idpaciente);
+		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ? WHERE id_paciente = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->idpaciente);
 		return Database::executeRow($sql, $params);
 	}
 

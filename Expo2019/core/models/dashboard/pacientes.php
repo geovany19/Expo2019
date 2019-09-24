@@ -196,6 +196,12 @@ class Pacientes extends Validator
 			return false;
 		}
 	}
+	public function fillPacientes()
+	{
+		$sql = 'SELECT id_paciente, CONCAT(nombre_paciente,\' \',apellido_paciente) AS NombrePac FROM pacientes';
+		$params = array(null);
+		return Database::getRows($sql, $params);
+	}
 
 	public function readPacientes()
 	{

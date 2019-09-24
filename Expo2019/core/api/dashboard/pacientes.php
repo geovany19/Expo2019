@@ -110,6 +110,13 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No tenemos registrado ningun paciente';
                 }
                 break;
+                case 'fillpaciente':
+                if ($result['dataset'] = $paciente->fillPacientes()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay datos por mostrar';
+                }
+                break;
             case 'search':
                 $_POST = $paciente->validateForm($_POST);
                 if ($_POST['busqueda'] != '') {

@@ -111,7 +111,7 @@ class dashboardHelper
 			}
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registrarse.php') {
+			if ($filename != 'index.php' && $filename != 'registrarse.php' && $filename != 'verificacion2pasos.php') {
 				header('location: index.php');
 			} 
 		}

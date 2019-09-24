@@ -10,6 +10,35 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     switch ($_GET['action']) {
+        case 'create':
+            $_POST = $cita->validateForm($_POST);
+            if ($cita->setIddoctor($_POST['idDoctor'])) {
+                if ($cita->setIdpaciente($_POST['idPaciente'])) {
+                    if ($cita->setFecha($_POST['inputDate'])) {
+                        if ($cita->setHora($_POST['inputTime'])) {
+                            if ($cita->setIdestado(1)) {
+                                if ($cita->createCita()) {
+                            
+                                    $result['status'] = 1;  
+                                } else {
+                                    $result['exception'] = 'Error al crear cita';
+                                }  
+                            } else {
+                                $result['exception'] = 'Error en el estado';
+                            }
+                        } else {
+                            $result['exception'] = 'Error en la hora';
+                        }
+                    } else {
+                        $result['exception'] = 'Error en la fecha';
+                    }
+                } else {
+                    $result['exception'] = 'Error en el paciente';
+                }
+            } else {
+                $result['exception'] = 'Error en el doctor';
+            }
+            break;
         case 'read':
             if ($result['dataset'] = $cita->readCitas()) {
                 $result['status'] = 1;

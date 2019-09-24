@@ -15,6 +15,7 @@ class Usuario extends Validator
 	private $intentos = null;
 	private $token = null;
 	private $sesion = null;
+	private $pin = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -203,6 +204,21 @@ class Usuario extends Validator
 		return $this->sesion;
 	}
 
+	public function setPin($value)
+    {
+        if ($this->validateAlphaNumeric($value, 1, 32)) {
+            $this->pin = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getPin()
+    {
+        return $this->pin;
+	}
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
@@ -232,7 +248,7 @@ class Usuario extends Validator
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion, id_estado FROM usuarios_a WHERE id_usuario = ? LIMIT 1';
+		$sql = 'SELECT contrasena_usuario, clave_actualizada, id_sesion, id_estado FROM usuarios_a WHERE id_usuario = ?';
 		$params = array($this->idusuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
@@ -253,6 +269,51 @@ class Usuario extends Validator
 			return 0;
 		}
 	}
+
+	public function checkCorreo()
+	{
+		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario = ?';
+		$params = array($this->correo);
+		return Database::getRow($sql, $params);
+	}
+
+	public function setTokenAutenticacion()
+	{
+		$sql = 'UPDATE usuarios_a SET autenticar_usuario = ? WHERE usuario_usuario = ?';
+		$params = array($this->token, $this->usuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteTokenAutenticacion()
+	{
+		$sql = 'UPDATE usuarios_a SET autenticar_usuario = null WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getTokenAutenticacion()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, usuario_usuario, correo_usuario FROM usuarios_a WHERE autenticar_usuario = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['id_usuario'];
+			$this->nombre = $data['nombre_usuario'];
+			$this->apellido = $data['apellido_usuario'];
+			$this->usuario = $data['usuario_usuario'];
+			$this->correo = $data['correo_usuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function autenticarEstado()
+		{
+			$sql = 'UPDATE usuarios_a SET id_estado = 1 where id_usuario = ?';
+			$params = array($this->idusuario);
+			return Database::executeRow($sql, $params);
+		}
 
 	public function blockAccount()
 	{
@@ -368,13 +429,6 @@ class Usuario extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function checkCorreo()
-	{
-		$sql = 'SELECT correo_usuario FROM usuarios_a WHERE correo_usuario = ? LIMIT 1';
-		$params = array($this->correo);
-		return Database::getRow($sql, $params);
-	}
-
 	public function tokensito()
 	{
 		$sql = 'UPDATE usuarios_a SET token_usuario = ? WHERE correo_usuario = ?';
@@ -394,6 +448,8 @@ class Usuario extends Validator
 			return false;
 		}
 	}
+
+
 
 	/*public function changePasswordByToken()
     {

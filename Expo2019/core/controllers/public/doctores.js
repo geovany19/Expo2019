@@ -4,6 +4,7 @@ $(document).ready(function()
 })
 
 const apiDoctores = '../../core/api/public/doctores.php?action=';
+const apiCitas = '../../core/api/public/citas.php?action=';
 
 //Función para obtener y mostrar los registros disponibles
 function showTableDoctores()
@@ -64,6 +65,38 @@ function setDoctor(doctor){
     $('#idDoctor').val(doctor);
 }
 
+$('#modalCrearCita').on('submit', (e) => {
+    e.preventDefault();
+
+    $('#crearCita').modal('toggle');
+    $.ajax({
+        url: apiCitas + "create",
+        type: "post",
+        data: new FormData($("#modalCrearCita")[0]),
+        datatype: "json",
+        cache: false,
+        contentType: false,
+        processData: false
+      })
+        .done(function(response) {
+          if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            if (result.status) {
+                $('#modalCrearCita')[0].reset();
+                sweetAlert(1, 'Cita creada correctamente', null );
+            } else {
+                sweetAlert(2, result.exception, null );
+
+            }
+          } else {
+            console.log(response);
+          }
+        })
+        .fail(function(jqXHR) {
+          console.log("Error: " + jqXHR.status + " " + jqXHR.statusText);
+        });
+})
+    
 //VISIBILIDAD QUE CONSIDERO INNECESARIA
 //<td class="d-flex justify-content-center">
 //<div>

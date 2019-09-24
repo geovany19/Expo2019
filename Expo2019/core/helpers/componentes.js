@@ -90,7 +90,7 @@ function fillSelect(api, id, selected)
             } else {
                 $('#' + id).html('<option value="">No hay opciones</option>');
             }
-            $('select').formSelect();
+            //$('select').formSelect();
         } else {
             console.log(response);
         }

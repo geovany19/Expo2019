@@ -11,12 +11,14 @@ require_once('../../../libraries/PHPMailer/src/SMTP.php');
 
 
 //Se comprueba si existe una petición del sitio web y la acción a realizar, de lo contrario se muestra una página de error
+//if (isset($_GET['action'])) {
 if (isset($_GET['site']) && isset($_GET['action'])) {
     session_start();
     $usuario = new Usuarios;
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
    //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
+   //if (isset($_SESSION['idDoctor])) {
     if (isset($_SESSION['idDoctor']) && $_GET['site'] == 'private') {
         switch ($_GET['action']) {
             case 'set':

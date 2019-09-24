@@ -194,7 +194,7 @@ class Doctores extends Validator
 
 	public function getDoctor()
 	{
-		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor,id_estado, id_especialidad FROM doctores WHERE id_doctor = ?';
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, foto_doctor,id_estado, id_especialidad FROM doctores WHERE id_doctor = ? LIMIT 1';
 		$params = array($this->iddoctor);
 		return Database::getRow($sql, $params);
 	}

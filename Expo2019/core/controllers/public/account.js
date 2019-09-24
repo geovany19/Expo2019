@@ -85,7 +85,7 @@ $('#form-profile').submit(function()
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                sweetAlert(1, 'Perfil modificado correctamente', 'main.php');
+                sweetAlert(1, 'Perfil modificado correctamente', 'home.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

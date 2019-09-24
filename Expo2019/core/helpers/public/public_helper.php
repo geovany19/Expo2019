@@ -152,6 +152,42 @@ class public_helper
 	function modals()
 	{
 		print('
+			<!--Modal crear cita -->
+			<div class="modal fade" id="crearCita" tabindex="-1" role="dialog" aria-labelledby="modalCita" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title text-primary" id="modalEditBrandTitle">Crear cita</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form id="modalCrearCita" method="post" autocomplete="off">
+							<input type="hidden" name="idDoctor" id="idDoctor" required>
+							<input type="hidden" name="idPaciente" id="idPaciente" required value="'.$_SESSION['idPaciente'].'">
+							<div class="modal-body">
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="inputDate">Fecha</label>
+										<input type="date" class="form-control" id="inputDate"  name="inputDate" required>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputTime">Hora</label>
+										<input type="time" class="form-control" id="inputTime" name="inputTime" required>
+									</div>
+								</div>
+
+							</div>
+							<div class="modal-footer justify-content-right">
+								<button type="submit" class="btn btn-primary btn-icon-split float-right">
+									<span class="text">Guardar</span>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
 			<div class="modal fade"  tabindex="-1" id="modalEditar" role="dialog">
 				<div class="modal-dialog modal-lg">
 				

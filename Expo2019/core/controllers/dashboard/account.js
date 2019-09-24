@@ -117,7 +117,7 @@ $('#form-password').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-password').modal('hide');
-                sweetAlert(1, result.message, 'perfil.php');
+                sweetAlert(1, result.message, 'pagina.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

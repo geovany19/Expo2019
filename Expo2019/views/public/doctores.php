@@ -32,44 +32,6 @@ public_helper::nav();
     <?php
             public_helper::modals();
     ?>
-    <!--Modal crear cita -->
-    <div class="modal fade" id="crearCita" tabindex="-1" role="dialog" aria-labelledby="modalCita" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-primary" id="modalEditBrandTitle">Crear cita</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="modalCrearCita" method="post" autocomplete="off">
-                    <input type="hidden" name="idDoctor" id="idDoctor" required>
-                    <div class="modal-body">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputDate">Fecha</label>
-                                <input type="date" class="form-control" id="inputDate" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputTime">Hora</label>
-                                <input type="time" class="form-control" id="inputTime" required>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-info btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-save"></i>
-                            </span>
-                            <span class="text">Guardar</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </main>
 
 

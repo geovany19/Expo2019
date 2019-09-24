@@ -10,6 +10,8 @@ use PHPMailer\PHPMailer\Exception;
 require_once('../../../libraries/PHPMailer/src/Exception.php');
 require_once('../../../libraries/PHPMailer/src/PHPMailer.php');
 require_once('../../../libraries/PHPMailer/src/SMTP.php');
+$mail = new PHPMailer();
+
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
@@ -18,6 +20,7 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'message' => null, 'exception' => null, 'session' => 1);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario'])) {
+        require_once('sesion.php');
         switch ($_GET['action']) {
             case 'logout':
                 $usuario->setOffline();
@@ -164,6 +167,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+            //caso utilizado para restablecer sesión en caso haya quedado activa
             case 'restoreSession':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
@@ -194,11 +198,9 @@ if (isset($_GET['action'])) {
                                         $result['mensaje'] = 'Inicio de sesión correcto';
                                         break;
                                     case 3:
-                                        $_SESSION['idUsuario'] = $usuario->getId();
-                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
                                         $usuario->restoreSession();
                                         $result['status'] = 1;
-                                        $result['mensaje'] = 'Restablecimiento de sesión correcto';
+                                        $result['mensaje'] = 'Restablecimiento de sesión correcto. Te redigiremos al login';
                                         break;
                                     case 4:
                                         $result['exception'] = 'Debes activar tu cuenta antes de iniciar sesión por primera vez';
@@ -276,7 +278,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
-                print_r($_POST);
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setId($_POST['id_usuario'])) {
                     if ($usuario->getUser()) {
@@ -365,7 +366,7 @@ if (isset($_GET['action'])) {
             case 'read':
                 if ($usuario->readUsuarios()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Existe al menos un usuario registrado';
+                    $result['exception'] = 'Existe al menos un usuario registrado';
                 } else {
                     $result['message'] = 'No existen usuarios registrados';
                 }
@@ -417,8 +418,8 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'block':
-                if ($usuario->setAlias($_POST['name'])) {
-                    $us = $usuario->blockAccount($_POST['name']);
+                if ($usuario->setUsuario($_POST['usuario'])) {
+                    $us = $usuario->blockAccount($_POST['usuario']);
                     if ($us) {
                         $result['status'] = 1;
                     } else {
@@ -573,11 +574,12 @@ if (isset($_GET['action'])) {
                         if ($usuario->setToken($token)) {
                             if ($usuario->tokensito()) {
                                 if ($correousuario = $usuario->getCorreo()) {
-                                    $result['status'] = 1;
+                                    //$result['status'] = 1;
                                     $mail = new PHPMailer(true);
+                                    $mail->charSet = "UTF-8";
                                     try {
                                         //Server settings
-                                        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                                        // Enable verbose debug output
                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                         $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -597,11 +599,8 @@ if (isset($_GET['action'])) {
                                         $mail->Body    = 'Hemos recibido una solicitud de tu cuenta para restablecer la contraseña. Para restablecer, haz click <a href="http://localhost/Expo2019/Expo2019/views/dashboard/claves.php?token=' . $token . '">aqui</<a>';
                                         // $mail->AddEmbeddedImage('../../resources/img/dashboard/img2.jpg', 'logo_sismed', 'img2.jpg');
                                         $mail->send();
-                                        //echo 'Message has been sent';
                                         $result['status'] = 1;
-                                        $result['message'] = 'Se ha enviado el correo. En caso de que no aparezca en la bandeja de entrada, revisa en la bandeja de correo no deseoado o spam';
                                     } catch (Exception $e) {
-                                        //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                                         $result['exception'] = 'No fue posible enviar el correo. Error :{' . $mail->ErrorInfo . '}';
                                     }
                                 } else {
@@ -669,23 +668,49 @@ if (isset($_GET['action'])) {
                                         $result['status'] = 5;
                                         break;
                                     case 2:
-                                        $_SESSION['idUsuario'] = $usuario->getId();
-                                        $_SESSION['nombreUsuario'] = $usuario->getNombre();
-                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
-                                        $_SESSION['apellidosUsuario'] = $usuario->getApellido();
-                                        $result['status'] = 1;
-                                        $result['mensaje'] = 'Inicio de sesión correcto';
-                                        $_SESSION['ultimoAcceso'] = time();
-                                        $usuario->setOnline();
+                                    //generamos un codigo ramdom de 6 digitos que sera nuestro acceso de verificacion
+                                    $token_autenticacion = mt_rand(100000, 999999);
+                                    if($usuario->setToken($token_autenticacion)) {
+                                        if($usuario->setTokenAutenticacion()) {
+                                            if($usuario->getTokenAutenticacion()) {
+                                                $correo = $usuario->getCorreo();
+                                                $mail = new PHPMailer(true);
+                                                $mail->charSet = "UTF-8";
+                                                try {     
+                                                    $mail->isSMTP();                                            // Set mailer to use SMTP
+                                                    $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+                                                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                                    $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
+                                                    $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                                    $mail->Port       = 587;
+                                                    //Recipients
+                                                    $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                    $mail->addAddress($correo);
+                                                    // Content
+                                                    $mail->CharSet = "UTF-8";
+                                                    $mail->isHTML(true);                                  // Set email format to HTML
+                                                    $mail->Subject = 'Código de inicio de sesión';
+                                                    $mail->Body    = 'Tu código de activación es: '.$token_autenticacion;
+                                                    $mail->send();
+                                                    $result['status'] = 1;
+                                                    $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                                    } catch (Exception $e) {
+                                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Error al obtener los datos de la cuenta';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Error al asignar el token';
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Error al setear el token';
+                                        }
                                         break;
                                     case 3:
-                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente. 
-                                        Serás redirigido al menú para restablecer sesiones activas';
-                                        $result['status'] = 6;
-                                        break;
-                                    case 4:
-                                        $result['exception'] = 'Debes activar tu cuenta antes de iniciar sesión por primera vez';
-                                        $result['status'] = 7;
+                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente.' ; 
+                                      // Si deseas restablecer la sesión, haz click en "Restablecer sesion" ubicado en este sitio
                                         break;
                                 }
                             } else {
@@ -700,53 +725,34 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Alias incorrecto';
                 }
                 break;
-            case 'restoreSession':
+                case 'autenticacion':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setUsuario($_POST['usuario'])) {
-                    switch ($usuario->checkUser()) {
-                        case 0:
-                            if ($usuario->checkTipo()) {
-                                $result['exception'] = 'El usuario no tiene permitido ingresar a este sitio';
-                            } else {
-                                $result['exception'] = 'Usuario inexistente';
-                            }
-                            break;
-                        case 1:
-                            if ($usuario->setClave($_POST['clave'])) {
-                                switch ($usuario->checkPassword()) {
-                                    case 0:
-                                        $result['exception'] = 'Clave inexistente';
-                                        break;
-                                    case 1:
-                                        $result['exception'] = 'Debes actualizar tu contraseña debido a que 
-                                        ha expirado su vigencia de 90 días';
-                                        $result['status'] = 5;
-                                        break;
-                                    case 2:
-                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente. 
-                                        Serás redirigido al menú para restablecer sesiones activas';
-                                        $result['status'] = 6;
-                                        break;
-                                    case 3:
-                                        $usuario->restoreSession();
-                                        $result['status'] = 1;
-                                        $result['mensaje'] = 'Restablecimiento de sesión correcto';
-                                        break;
-                                    case 4:
-                                        $result['exception'] = 'Debes activar tu cuenta antes de iniciar sesión por primera vez';
-                                        $result['status'] = 7;
-                                        break;
+                    if($usuario->setToken($_POST['codigo'])) {
+                        if($usuario->getTokenAutenticacion()) {
+                            if($usuario->deleteTokenAutenticacion()) {
+                                if ($usuario->autenticarEstado()) {
+                                    $usuario->setOnline();
+                                    $_SESSION['idUsuario'] = $usuario->getId();
+                                    $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                    $_SESSION['nombresUsuario'] = $usuario->getNombre();
+                                    $_SESSION['apellidosUsuario'] = $usuario->getApellido();
+                                    $_SESSION['ultimoAcceso'] = time();
+                                    $result['status'] = 1;
+                                } else {
+                                    $result['exception'] = 'No pudimos actualizar su sesion';
                                 }
                             } else {
-                                $result['exception'] = 'Contraseña menor a 8 caracteres';
+                                $result['exception'] = 'Error al eliminar el token';
                             }
-                            break;
-                        case 2:
-                            $result['status'] = 4;
-                            break;
+                            
+                        } else {
+                            $result['exception'] = 'Código incorrecto';
+                        }
+                    } else {
+                        $result['exception'] = 'Error al setear el token';
                     }
-                }
                 break;
+
             default:
                 exit('Acción no disponible 2');
         }

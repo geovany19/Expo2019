@@ -7,7 +7,7 @@ require_once('../../models/dashboard/pacientes.php');
 if (isset($_GET['action'])) {
     session_start();
     $paciente = new Pacientes;
-    $result = array('status' => 0, 'message' => null, 'exception' => null);
+    $result = array('status' => 0, 'message' => null, 'exception' => null, 'session' => 1);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario'])) {
         require_once('sesion.php');
@@ -108,6 +108,13 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                 } else {
                     $result['exception'] = 'No tenemos registrado ningun paciente';
+                }
+                break;
+                case 'fillpaciente':
+                if ($result['dataset'] = $paciente->fillPacientes()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['exception'] = 'No hay datos por mostrar';
                 }
                 break;
             case 'search':

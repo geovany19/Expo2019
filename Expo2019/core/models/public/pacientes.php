@@ -211,13 +211,13 @@ class Pacientes extends Validator
 		} else {
 			return false;
 		}*/
-		$sql = 'SELECT id_paciente, cuenta_bloqueada FROM pacientes WHERE usuario_paciente = ?';
+		$sql = 'SELECT id_paciente, cuenta_bloqueada FROM pacientes WHERE usuario_paciente = ? LIMIT 1';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
 
-		$nueva_fecha = strtotime ( date($data['cuenta_bloqueada']) .'+ 24 hours'  ) ;
+		$nueva_fecha = strtotime ( date($data['cuenta_bloqueada']) .'+ 1 minute'  ) ;
 
 		if ($data) {
 			if($data['cuenta_bloqueada']){
@@ -239,7 +239,7 @@ class Pacientes extends Validator
 	public function checkPassword()
 	{
 
-		$sql = 'SELECT contrasena_paciente, clave_actualizada, id_sesion, id_estado FROM pacientes WHERE id_paciente = ?';
+		$sql = 'SELECT contrasena_paciente, clave_actualizada, id_sesion, id_estado FROM pacientes WHERE id_paciente = ? LIMIT 1';
 		$params = array($this->idpaciente);
 		$data = Database::getRow($sql, $params);
 
@@ -254,7 +254,7 @@ class Pacientes extends Validator
 				if ($data['id_estado'] == 0) {
 					return 4;
 				} else {
-					if($data['id_sesion'] == 2){
+					if($data['id_sesion'] == 2 && $data['id_estado'] == 1){
 						return 2;
 					} else {
 						return 3;
@@ -268,7 +268,7 @@ class Pacientes extends Validator
 
 	public function checkTipo()
 	{
-		$sql = 'SELECT doctores.id_doctor, usuarios_a.id_usuario FROM doctores, usuarios_a WHERE usuario_doctor = ? OR usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$sql = 'SELECT doctores.id_doctor, usuarios_a.id_usuario FROM doctores, usuarios_a WHERE usuario_doctor = ? OR usuario_usuario = ? GROUP BY usuarios_a.id_usuario LIMIT 1';
 		$params = array($this->usuario, $this->usuario);
 		$data = Database::getRows($sql, $params);
 		if ($data) {
@@ -280,7 +280,7 @@ class Pacientes extends Validator
 
 	public function checkCorreo()
 	{
-		$sql = 'SELECT correo_paciente from pacientes where correo_paciente = ?';
+		$sql = 'SELECT correo_paciente FROM pacientes WHERE correo_paciente = ? LIMIT 1';
 		$params = array($this->correo);
 		return Database::getRow($sql, $params);
 	}
@@ -328,7 +328,7 @@ class Pacientes extends Validator
 	
 	public function getTokenRecuperar()
 	{
-		$sql = 'SELECT id_paciente FROM pacientes WHERE token_paciente = ?';
+		$sql = 'SELECT id_paciente FROM pacientes WHERE token_paciente = ? LIMIT 1';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -355,7 +355,7 @@ class Pacientes extends Validator
 
 	public function getTokenAutenticacion()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, usuario_paciente, correo_paciente FROM pacientes WHERE autenticar_paciente = ?';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, usuario_paciente, correo_paciente FROM pacientes WHERE autenticar_paciente = ? LIMIT 1';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -408,15 +408,15 @@ class Pacientes extends Validator
 
 	public function getPaciente()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente FROM pacientes WHERE id_paciente = ?';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente FROM pacientes WHERE id_paciente = ? LIMIT 1';
 		$params = array($this->idpaciente);
 		return Database::getRow($sql, $params);
 	}
 
 	public function updatePaciente()
 	{
-		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ? WHERE id_paciente = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idpaciente);
+		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ? WHERE id_paciente = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->idpaciente);
 		return Database::executeRow($sql, $params);
 	}
 

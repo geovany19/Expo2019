@@ -74,7 +74,7 @@ class dashboardHelper
 									</li>
 									<li>
 										<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-											<i class="fas fa-user"></i> Cuenta - <b>' . $_SESSION['aliasUsuario'] . '</b>
+											<i class="fas fa-user"></i> Mi cuenta</b>
 										</a>
 										<ul class="collapse list-unstyled" id="pageSubmenu">
 											<li>
@@ -92,10 +92,12 @@ class dashboardHelper
 										<i class="fas fa-align-left"></i>
 										<span>Minimizar menú</span>
 									</button>
-									<h6> Admin:</h6>
-									<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+									<div class="badge badge-secondary text-wrap d-inline-block d-lg-none mr-auto" style="width: auto;">
+										Cuenta: ' . $_SESSION['aliasUsuario'] . '
+									</div>
+									<!--<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i class="fas fa-align-justify"></i>
-									</button>
+									</button>-->
 									<div class="collapse navbar-collapse" id="navbarSupportedContent">
 									</div>
 								</div>
@@ -109,7 +111,7 @@ class dashboardHelper
 			}
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registrarse.php') {
+			if ($filename != 'index.php' && $filename != 'registrarse.php' && $filename != 'verificacion2pasos.php') {
 				header('location: index.php');
 			} 
 		}

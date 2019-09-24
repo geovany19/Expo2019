@@ -40,8 +40,40 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'editProfile':
-                if ($usuario->setId($_SESSION['idUsuario'])) {
-                    if ($usuario->getUser()) {
+                if ($usuario->setId($_SESSION['idPaciente'])) {
+                    if ($usuario->getPaciente()) {
+                        $_POST = $usuario->validateForm($_POST);
+                        if ($usuario->setNombre($_POST['profile_nombres'])) {
+                            if ($usuario->setApellido($_POST['profile_apellidos'])) {
+                                if ($usuario->setCorreo($_POST['profile_correo'])) {
+                                    if ($usuario->setUsuario($_POST['profile_usuario'])) {
+                                         if ($usuario->updatePaciente()) {
+                                                $result['status'] = 1;  
+                                            }   else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Nombre de usuario incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Correo incorrecto';
+                                }
+                            } else {
+                                $result['exception'] = 'Apellidos incorrectos';
+                            }
+                        } else {
+                            $result['exception'] = 'Nombres incorrectos';
+                        }
+                    } else {
+                        $result['exception'] = 'Paciente inexistente';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
+                break;
+            /**case 'editProfile':
+                if ($usuario->setId($_SESSION['idPaciente'])) {
+                    if ($usuario->getPaciente()) {
                         $_POST = $usuario->validateForm($_POST);
                         if ($usuario->setNombre($_POST['profile_nombres'])) {
                             if ($usuario->setApellido($_POST['profile_apellidos'])) {
@@ -85,12 +117,12 @@ if (isset($_GET['action'])) {
                             $result['exception'] = 'Nombres incorrectos';
                         }
                     } else {
-                        $result['exception'] = 'Usuario inexistente';
+                        $result['exception'] = 'Paciente inexistente';
                     }
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
-                break;
+                break;**/
                 case 'password':
                     if ($usuario->setId($_SESSION['idPaciente'])) {
                         $_POST = $usuario->validateForm($_POST);
@@ -398,13 +430,47 @@ if (isset($_GET['action'])) {
                                             $result['status'] = 5;
                                             break;
                                         case 2:
-                                            $_SESSION['idPaciente'] = $usuario->getId();
-                                            $_SESSION['usuarioPaciente'] = $usuario->getUsuario();
-                                            $_SESSION['nombresPaciente'] = $usuario->getNombre();
-                                            $_SESSION['apellidosPaciente'] = $usuario->getApellido();
-                                            $_SESSION['ultimoAccesoPaciente'] = time();
-                                            $result['status'] = 1;
-                                            $usuario->setOnline();
+                                        //$_SESSION['idPaciente'] = $usuario->getId();
+                                        //$_SESSION['usuarioPaciente'] = $usuario->getUsuario();
+                                        //$_SESSION['nombresPaciente'] = $usuario->getNombre();
+                                        //$_SESSION['apellidosPaciente'] = $usuario->getApellido();
+                                        //$_SESSION['ultimoAccesoPaciente'] = time();
+                                        //$result['status'] = 1;
+                                        $token_autenticacion = mt_rand(100000, 999999);
+                                        if($usuario->setToken($token_autenticacion)) {
+                                            if($usuario->setTokenAutenticacion()) {
+                                                if($usuario->getTokenAutenticacion()) {
+                                                    $correo = $usuario->getCorreo();
+                                                    try {
+                                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                                        $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+                                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                                        $mail->Port       = 587;
+                                                        //Recipients
+                                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                        $mail->addAddress($correo);
+                                                        // Content
+                                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                                        $mail->Subject = 'Código de inicio de sesión';
+                                                        $mail->Body    = 'Tu código de activación es: '.$token_autenticacion;
+                                                        $mail->send();
+                                                        $result['status'] = 1;
+                                                        $_SESSION['aliasPaciente'] = $usuario->getUsuario();
+                                                        } catch (Exception $e) {
+                                                            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Error al obtener los datos de la cuenta';
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Error al asignar el token';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Error al setear el token';
+                                            }
                                             break;
                                         case 3:
                                             $result['exception'] = 'El usuario ya posee una sesión iniciada';
@@ -466,7 +532,7 @@ if (isset($_GET['action'])) {
                         if($usuario->getTokenAutenticacion()) {
                             if($usuario->deleteTokenAutenticacion()) {
                                 if ($usuario->autenticarEstado()) {
-                                    
+                                    $usuario->setOnline();
                                     $_SESSION['idPaciente'] = $usuario->getId();
                                     $_SESSION['usuarioPaciente'] = $usuario->getUsuario();
                                     $_SESSION['nombresPaciente'] = $usuario->getNombre();

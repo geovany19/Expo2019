@@ -47,13 +47,13 @@ $('#form-sesion').submit(function () {
         if (isJSONString(response)) {
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
+            
             if (dataset.status == 1) {
-                sweetAlert(1, 'Autenticación correcta', 'pagina.php');
-            } else if (dataset.status == 4) {
-                sweetAlert(3, 'Cuenta bloqueada', null);
-
+                sweetAlert(1, 'Autenticación correcta', 'verificacion2pasos.php');
+                
             } else if (dataset.status == 5) {
                 sweetAlert(3, dataset.exception, 'recuperar.php');
+                
 
             } else if (dataset.status == 6) {
                 sweetAlert(3, dataset.exception, 'sesion.php');
@@ -66,7 +66,7 @@ $('#form-sesion').submit(function () {
                 if (attempts == 3) {
                     attempts = 0
                     $.ajax({
-                        url: apiSesion + 'block',
+                        url: api + 'block',
                         type: 'post',
                         data: $('#form-sesion').serialize(),
                         datatype: 'json'
@@ -91,6 +91,35 @@ $('#form-sesion').submit(function () {
         }
     })
     .fail(function (jqXHR) {
+        //Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+
+$('#form-correo').submit(function()
+{
+    event.preventDefault();
+    $.ajax({
+        url: api + 'correo',
+        type: 'post',
+        data: $('#form-correo').serialize(),
+        datatype: 'json'
+    })
+    .done(function(response){
+        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status == 1) {
+                sweetAlert(1, 'Correo enviado exitosamente', null);
+            } else {
+                sweetAlert(2, result.exception, null);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
         //Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });

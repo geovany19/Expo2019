@@ -7,9 +7,10 @@ require_once('../../models/dashboard/doctores.php');
 if (isset($_GET['action'])) {
     session_start();
     $doctor = new Doctores;
-    $result = array('status' => 0, 'message' => null, 'exception' => null);
+    $result = array('status' => 0, 'message' => null, 'exception' => null, 'session' => 1);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idUsuario'])) {
+        require_once('sesion.php');
         switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {

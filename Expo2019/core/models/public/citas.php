@@ -118,7 +118,7 @@ class Citas extends Validator
 
 	public function createCita()
 	{
-		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		// $hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO cita(id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES(?,?,?,?,?)';
 		$params = array($this->id_doctor, $this->id_paciente, $this->fecha, $this->hora, $this->id_estado);
 		return Database::executeRow($sql, $params);
@@ -126,7 +126,7 @@ class Citas extends Validator
 
 	public function getCita()
 	{
-		$sql = 'SELECT id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ?';
+		$sql = 'SELECT id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ? LIMIT 1';
 		$params = array($this->id_cita);
 		return Database::getRow($sql, $params);
 	}

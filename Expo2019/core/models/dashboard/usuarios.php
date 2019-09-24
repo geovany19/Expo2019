@@ -15,6 +15,7 @@ class Usuario extends Validator
 	private $intentos = null;
 	private $token = null;
 	private $sesion = null;
+	private $pin = null;
 
 	//Métodos para la sobre carga de propiedades
 	public function setId($value)
@@ -203,14 +204,29 @@ class Usuario extends Validator
 		return $this->sesion;
 	}
 
+	public function setPin($value)
+    {
+        if ($this->validateAlphaNumeric($value, 1, 32)) {
+            $this->pin = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getPin()
+    {
+        return $this->pin;
+	}
+
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
-		$sql = 'SELECT id_usuario, cuenta_bloqueada, id_sesion FROM usuarios_a WHERE usuario_usuario = ?';
+		$sql = 'SELECT id_usuario, cuenta_bloqueada, id_sesion FROM usuarios_a WHERE usuario_usuario = ? LIMIT 1';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
-		$nueva_fecha = strtotime (date($data['cuenta_bloqueada']) .'+ 24 hours'  );
+		$nueva_fecha = strtotime (date($data['cuenta_bloqueada']) .'+ 1 minute'  );
 		//$estado_sesion = $data['id_sesion'];
 		if ($data) {
 			if($data['cuenta_bloqueada']) {
@@ -254,6 +270,51 @@ class Usuario extends Validator
 		}
 	}
 
+	public function checkCorreo()
+	{
+		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario = ?';
+		$params = array($this->correo);
+		return Database::getRow($sql, $params);
+	}
+
+	public function setTokenAutenticacion()
+	{
+		$sql = 'UPDATE usuarios_a SET autenticar_usuario = ? WHERE usuario_usuario = ?';
+		$params = array($this->token, $this->usuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteTokenAutenticacion()
+	{
+		$sql = 'UPDATE usuarios_a SET autenticar_usuario = null WHERE id_usuario = ?';
+		$params = array($this->idusuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getTokenAutenticacion()
+	{
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, usuario_usuario, correo_usuario FROM usuarios_a WHERE autenticar_usuario = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idusuario = $data['id_usuario'];
+			$this->nombre = $data['nombre_usuario'];
+			$this->apellido = $data['apellido_usuario'];
+			$this->usuario = $data['usuario_usuario'];
+			$this->correo = $data['correo_usuario'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function autenticarEstado()
+		{
+			$sql = 'UPDATE usuarios_a SET id_estado = 1 where id_usuario = ?';
+			$params = array($this->idusuario);
+			return Database::executeRow($sql, $params);
+		}
+
 	public function blockAccount()
 	{
 		$sql = 'UPDATE usuarios_a set cuenta_bloqueada = ? WHERE usuario_usuario = ?';
@@ -268,7 +329,7 @@ class Usuario extends Validator
 
 	public function checkTipo()
 	{
-		$sql = 'SELECT usuarios_a.id_usuario FROM usuarios_a WHERE usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$sql = 'SELECT usuarios_a.id_usuario FROM usuarios_a WHERE usuario_usuario = ? GROUP BY usuarios_a.id_usuario LIMIT 1';
 		$params = array($this->usuario);
 		$data = Database::getRows($sql, $params);
 		if ($data) {
@@ -294,6 +355,7 @@ class Usuario extends Validator
 		Database::executeRow($sql, $params);
 	}
 
+	//Método para restablecer la sesion en caso permanezca activa
 	public function restoreSession()
 	{
 		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';
@@ -341,7 +403,7 @@ class Usuario extends Validator
 
 	public function getUser()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a WHERE id_usuario = ? LIMIT 1';
 		$params = array($this->idusuario);
 		return Database::getRow($sql, $params);
 	}
@@ -367,23 +429,16 @@ class Usuario extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	public function checkCorreo()
-	{
-		$sql = 'SELECT correo_usuario from usuarios_a where correo_usuario = ?';
-		$params = array($this->correo);
-		return Database::getRow($sql, $params);
-	}
-
 	public function tokensito()
 	{
-		$sql = 'UPDATE usuarios_a set token_usuario = ? where correo_usuario = ?';
+		$sql = 'UPDATE usuarios_a SET token_usuario = ? WHERE correo_usuario = ?';
 		$params = array($this->token, $this->correo);
 		return Database::executeRow($sql, $params);
 	}
 	
 	public function getDatosTokensito()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuario = ?';
+		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuario = ? LIMIT 1';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -393,6 +448,8 @@ class Usuario extends Validator
 			return false;
 		}
 	}
+
+
 
 	/*public function changePasswordByToken()
     {

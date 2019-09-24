@@ -153,7 +153,7 @@ $('#form-create').submit(function () {
                 if (result.session) {
                     if (result.status) {
                         $('#modal-create').modal('hide');
-                        $("#tabla-pacientes").DataTable().destroy();
+                        $("#table-body").DataTable().destroy();
                         $('#form-create')[0].reset();
                         showTable();
                         sweetAlert(1, result.message, null);
@@ -242,7 +242,7 @@ $('#form-update').submit(function () {
                 if (result.session == 1) {
                     if (result.status) {
                         $('#modal-update').modal('hide');
-                        $("#tabla-pacientes").DataTable().destroy();
+                        $("#table-body").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {

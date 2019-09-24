@@ -2,6 +2,7 @@ $(document).ready(function () {
     // checkUsuarios();
 })
 
+var attempts = 0;
 
 //Constante para establecer la ruta y parámetros de comunicación con la API
 const apiSesion = '../../core/api/private/usuarios.php?site=private&action=';
@@ -107,7 +108,7 @@ $('#login-1').submit(function()
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status == 1) {
-                sweetAlert(1, 'Autenticación correcta', 'agenda.php');
+                sweetAlert(1, 'Paso 1, Completo', 'autenticacion.php');
             } else if(dataset.status == 2){
                 sweetAlert(1, 'Logueo correcto','autenticar.php');
 

@@ -86,7 +86,7 @@ class private_helper
 			
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'correo.php' ) {
+			if ($filename != 'index.php' && $filename != 'correo.php' && $filename != 'autenticar.php' &&  $filename != 'autenticacion.php' ) {
 				header('location: index.php');
 			}
 		}

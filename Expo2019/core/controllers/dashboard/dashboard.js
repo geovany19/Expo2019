@@ -25,22 +25,26 @@ function chartConsultasFecha(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            if(result.status){
-                //declaración del arreglo para el eje X
-                let fechas = [];
-                //declaración del arreglo para el eje Y
-                let cantidad = [];
-                result.dataset.forEach(function(row){
-                    //parametros de la base de datos que reciben lo arreglos
-                    fechas.push(row.NombreMes);
-                    cantidad.push(row.CantidadCitas);
-                });
-                //determina el tipo de gráfico y los párametros que recibe, id del canva, arreglo para el eje X, arreglo para el eje Y
-                //lectura del dato, y título del gráfico
-                lineGraph('chartConsultasFecha', fechas, cantidad, 'Consultas', 'Consultas realizadas')
-                
-            }else{
-                $('#chartProductosCat').remove();
+            if (result.session) {
+                if(result.status){
+                    //declaración del arreglo para el eje X
+                    let fechas = [];
+                    //declaración del arreglo para el eje Y
+                    let cantidad = [];
+                    result.dataset.forEach(function(row){
+                        //parametros de la base de datos que reciben lo arreglos
+                        fechas.push(row.NombreMes);
+                        cantidad.push(row.CantidadCitas);
+                    });
+                    //determina el tipo de gráfico y los párametros que recibe, id del canva, arreglo para el eje X, arreglo para el eje Y
+                    //lectura del dato, y título del gráfico
+                    lineGraph('chartConsultasFecha', fechas, cantidad, 'Consultas', 'Consultas realizadas')
+                    
+                }else{
+                    $('#chartProductosCat').remove();
+                }
+            } else {
+                console.log(response)
             }
         }else{
             console.log(response);

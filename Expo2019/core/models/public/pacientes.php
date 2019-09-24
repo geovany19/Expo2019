@@ -247,7 +247,7 @@ class Pacientes extends Validator
 			return false;
 		}*/
 
-		$sql = 'SELECT contrasena_paciente, clave_actualizada, id_sesion FROM pacientes WHERE id_paciente = ?';
+		$sql = 'SELECT contrasena_paciente, clave_actualizada, id_sesion, id_estado FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		$data = Database::getRow($sql, $params);
 
@@ -259,13 +259,16 @@ class Pacientes extends Validator
 			if($fecha_actual>$nueva_fecha){
 				return 1;
 			}else{
-				if($data['id_sesion'] == 2){
-					return 2;
+				if ($data['id_estado'] == 0) {
+					return 4;
 				} else {
-					return 3;
+					if($data['id_sesion'] == 2 && $data['id_estado'] == 1){
+						return 2;
+					} else {
+						return 3;
+					}
 				}
-			}
-				
+			}			
 		} else {
 			return 0;
 		}
@@ -343,6 +346,44 @@ class Pacientes extends Validator
 			return false;
 		}
 	}
+
+	public function setTokenAutenticacion()
+	{
+		$sql = 'UPDATE pacientes SET autenticar_paciente = ? WHERE usuario_paciente = ?';
+		$params = array($this->token, $this->usuario);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteTokenAutenticacion()
+	{
+		$sql = 'UPDATE pacientes SET autenticar_paciente = null WHERE id_paciente = ?';
+		$params = array($this->idpaciente);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getTokenAutenticacion()
+	{
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, usuario_paciente, correo_paciente FROM pacientes WHERE autenticar_paciente = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->idpaciente = $data['id_paciente'];
+			$this->nombre = $data['nombre_paciente'];
+			$this->apellido = $data['apellido_paciente'];
+			$this->usuario = $data['usuario_paciente'];
+			$this->correo = $data['correo_paciente'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function autenticarEstado()
+		{
+			$sql = 'UPDATE pacientes SET id_estado = 1 where id_paciente = ?';
+			$params = array($this->idpaciente);
+			return Database::executeRow($sql, $params);
+		}
 	//métodos para manejar cruds
 
 	public function readPacientes()
@@ -362,7 +403,7 @@ class Pacientes extends Validator
 	public function createPaciente()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, estatura_paciente, peso_paciente, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
+		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, estatura_paciente, peso_paciente, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 2)';
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->estatura, $this->peso);
 		if(Database::executeRow($sql, $params)) {
 			$sql = 'UPDATE pacientes SET clave_actualizada = ? WHERE id_paciente = ?';

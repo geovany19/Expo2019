@@ -222,7 +222,7 @@ class Usuario extends Validator
 	// Métodos para manejar la sesión del usuario
 	public function checkUser()
 	{
-		$sql = 'SELECT id_usuario, cuenta_bloqueada, id_sesion FROM usuarios_a WHERE usuario_usuario = ?';
+		$sql = 'SELECT id_usuario, cuenta_bloqueada, id_sesion FROM usuarios_a WHERE usuario_usuario = ? LIMIT 1';
 		$params = array($this->usuario);
 		$data = Database::getRow($sql, $params);
 		$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
@@ -231,6 +231,7 @@ class Usuario extends Validator
 		if ($data) {
 			if($data['cuenta_bloqueada']) {
 				if($fecha_actual<$nueva_fecha) {
+					$this->idusuario = $data['id_usuario'];	
 					return 2;
 				} else {
 					$this->idusuario = $data['id_usuario'];				
@@ -258,8 +259,10 @@ class Usuario extends Validator
 			} else {
 				if ($data['id_sesion'] == 2 && $data['id_estado'] == 1) {
 					return 2;
-				} else {
+				} else if ($data['id_sesion'] == 1) {
 					return 3;
+				} else if ($data['id_estado'] == 0) {
+					return 4;
 				}
 			}	
 		} else {
@@ -326,7 +329,7 @@ class Usuario extends Validator
 
 	public function checkTipo()
 	{
-		$sql = 'SELECT usuarios_a.id_usuario FROM usuarios_a WHERE usuario_usuario = ? GROUP BY usuarios_a.id_usuario';
+		$sql = 'SELECT usuarios_a.id_usuario FROM usuarios_a WHERE usuario_usuario = ? GROUP BY usuarios_a.id_usuario LIMIT 1';
 		$params = array($this->usuario);
 		$data = Database::getRows($sql, $params);
 		if ($data) {
@@ -349,6 +352,14 @@ class Usuario extends Validator
 	{
 		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE id_usuario = ?';
 		$params = array(2, $_SESSION['idUsuario']);
+		Database::executeRow($sql, $params);
+	}
+
+	//Método para restablecer la sesion en caso permanezca activa
+	public function restoreSession()
+	{
+		$sql = 'UPDATE usuarios_a SET id_sesion = ? WHERE usuario_usuario = ?';
+		$params = array(2, $this->usuario);
 		Database::executeRow($sql, $params);
 	}
 
@@ -392,7 +403,7 @@ class Usuario extends Validator
 
 	public function getUser()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado,pin_usuario FROM usuarios_a WHERE id_usuario = ?';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a WHERE id_usuario = ? LIMIT 1';
 		$params = array($this->idusuario);
 		return Database::getRow($sql, $params);
 	}
@@ -418,22 +429,20 @@ class Usuario extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-
 	public function tokensito()
 	{
-		$sql = 'UPDATE usuarios_a set token_usuarios = ? where correo_usuario = ?';
+		$sql = 'UPDATE usuarios_a SET token_usuario = ? WHERE correo_usuario = ?';
 		$params = array($this->token, $this->correo);
 		return Database::executeRow($sql, $params);
 	}
 	
 	public function getDatosTokensito()
 	{
-		$sql = 'SELECT id_usuario, correo_usuario FROM usuarios_a WHERE token_usuarios = ?';
+		$sql = 'SELECT id_usuario FROM usuarios_a WHERE token_usuario = ? LIMIT 1';
 		$params = array($this->token);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
-			$this->id = $data['id_usuario'];
-			$this->correo = $data['correo_usuario'];
+			$this->idusuario = $data['id_usuario'];
 			return true;
 		} else {
 			return false;

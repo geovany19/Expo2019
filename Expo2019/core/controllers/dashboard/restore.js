@@ -33,13 +33,13 @@ function checkUsuarios() {
 }
 
 var attempts = 0;
-// Función para validar el usuario al momento de iniciar sesión
-$('#form-sesion').submit(function () {
+// Función para restaurar la sesión del usuario
+$('#form-restore').submit(function () {
     event.preventDefault();
     $.ajax({
-        url: api + 'login',
+        url: api + 'restoreSession',
         type: 'post',
-        data: $('#form-sesion').serialize(),
+        data: $('#form-restore').serialize(),
         datatype: 'json'
     })
     .done(function (response) {
@@ -47,13 +47,12 @@ $('#form-sesion').submit(function () {
         if (isJSONString(response)) {
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
-            
             if (dataset.status == 1) {
-                sweetAlert(1, 'Autenticación correcta', 'verificacion2pasos.php');
-                
+                sweetAlert(1, 'Restablecimiento de sesión exitoso', 'index.php');
+            } else if (dataset.status == 4) {
+                sweetAlert(3, 'Cuenta bloqueada', null);
             } else if (dataset.status == 5) {
                 sweetAlert(3, dataset.exception, 'recuperar.php');
-                
 
             } else if (dataset.status == 6) {
                 sweetAlert(3, dataset.exception, 'sesion.php');
@@ -66,15 +65,15 @@ $('#form-sesion').submit(function () {
                 if (attempts == 3) {
                     attempts = 0
                     $.ajax({
-                        url: api + 'block',
+                        url: apiSesion + 'block',
                         type: 'post',
-                        data: $('#form-sesion').serialize(),
+                        data: $('#form-restore').serialize(),
                         datatype: 'json'
                     }).done(response => {
                         if (isJSONString(response)) {
                             const dataset = JSON.parse(response);
                             if (dataset.status == 1) {
-                                sweetAlert(3, 'Ha superado el máximo de intentos de inicio de sesión permitidos. Cuenta bloqueada por 24 horas', null);
+                                sweetAlert(3, 'Ha superado el máximo de intentos de permitidos. Tu cuenta ha sido bloqueada por 24 horas', null);
                             } else {
                                 sweetAlert(2, 'lol', null);
                             }
@@ -91,35 +90,6 @@ $('#form-sesion').submit(function () {
         }
     })
     .fail(function (jqXHR) {
-        //Se muestran en consola los posibles errores de la solicitud AJAX
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-    });
-})
-
-$('#form-correo').submit(function()
-{
-    event.preventDefault();
-    $.ajax({
-        url: api + 'correo',
-        type: 'post',
-        data: $('#form-correo').serialize(),
-        datatype: 'json'
-    })
-    .done(function(response){
-        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-        if (isJSONString(response)) {
-            const result = JSON.parse(response);
-            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-            if (result.status == 1) {
-                sweetAlert(1, 'Correo enviado exitosamente', null);
-            } else {
-                sweetAlert(2, result.exception, null);
-            }
-        } else {
-            console.log(response);
-        }
-    })
-    .fail(function(jqXHR){
         //Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });

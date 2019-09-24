@@ -5,7 +5,7 @@ require_once('../../models/dashboard/citas.php');
 
 if (isset($_GET['action'])) {
     session_start();
-    $citas = new Cita;
+    $citas = new Citas;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     if (isset($_SESSION['idUsuario'])) {
         switch ($_GET['action']) {
@@ -99,6 +99,7 @@ if (isset($_GET['action'])) {
                 $_POST = $citas->validateForm($_POST);
                 if ($citas->setIdcita($_POST['id_cita'])) {
                     if ($citas->getCita()) {
+                        if ($citas->setIddoctor($_POST['update_doctor'])){
                         if ($citas->setIdpaciente($_POST['update_paciente'])) {
                             if ($citas->setFecha($_POST['update_fecha'])) {
                                 if ($citas->setHora($_POST['update_hora'])) {
@@ -117,7 +118,10 @@ if (isset($_GET['action'])) {
                         } else {
                             $result['exceptio'] = 'Paciente erroneo';
                         }
-                    } else {
+                    }else{
+                        $result['exception'] = 'Doctor erroneo';
+                    }
+                } else {
                         $result['exception'] = 'Cita incorrecta';
                     }
                 } else {

@@ -11,13 +11,13 @@ require_once('../../../libraries/PHPMailer/src/SMTP.php');
 
 $mail = new PHPMailer(true);
 //Se comprueba si existe una petición del sitio web y la acción a realizar, de lo contrario se muestra una página de error
-if (isset($_GET['site']) && isset($_GET['action'])) {
+if (isset($_GET['action'])) {
     session_start();
     $usuario = new Usuarios;
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
    //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
-    if (isset($_SESSION['idDoctor']) && $_GET['site'] == 'private') {
+    if (isset($_SESSION['idDoctor'])) {
         switch ($_GET['action']) {
             case 'set':
                 if($_SESSION['idPaciente'] = $_GET['id']){
@@ -277,6 +277,30 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 }
                 break;
 
+                //AUTENTICACION 
+                case 'autenticacion':
+                $_POST = $usuario->validateForm($_POST);
+                    if($usuario->setToken($_POST['codigo'])) {
+                        if($usuario->getTokenAutenticacion()) {
+                            if($usuario->deleteTokenAutenticacion()) {
+                                if ($usuario->autenticarEstado()) {
+                                    $usuario->setOnline();
+                                    $result['status'] = 1;
+                                } else {
+                                    $result['exception'] = 'No pudimos actualizar su sesion';
+                                }
+                            } else {
+                                $result['exception'] = 'Error al eliminar el token';
+                            }
+                            
+                        } else {
+                            $result['exception'] = 'Código incorrecto';
+                        }
+                    } else {
+                        $result['exception'] = 'Error al setear el token';
+                    }
+                break;
+
             }
         }
         else{
@@ -444,7 +468,10 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                                         $mail->Body    = 'Tu código de activación es: '.$token_autenticacion;
                                                         $mail->send();
                                                         $result['status'] = 2;
+                                                        $_SESSION['idDoctor'] = $usuario->getId();
                                                         $_SESSION['aliasDoctor'] = $usuario->getAlias();
+                                                        $_SESSION['nombresDoctor'] = $usuario->getNombres();
+                                                        $_SESSION['apellidosDoctor'] = $usuario->getApellidos();
                                                         } catch (Exception $e) {
                                                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                                                         }
@@ -471,35 +498,6 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     $result['exception'] = 'Alias incorrecto';
                 }
             break;
-
-                //AUTENTICACION 
-                case 'autenticacion':
-                $_POST = $usuario->validateForm($_POST);
-                    if($usuario->setToken($_POST['codigo'])) {
-                        if($usuario->getTokenAutenticacion()) {
-                            if($usuario->deleteTokenAutenticacion()) {
-                                if ($usuario->autenticarEstado()) {
-                                    $usuario->setOnline();
-                                    $_SESSION['idDoctor'] = $usuario->getId();
-                                    $_SESSION['aliasDoctor'] = $usuario->getAlias();
-                                    $_SESSION['nombresDoctor'] = $usuario->getNombres();
-                                    $_SESSION['apellidosDoctor'] = $usuario->getApellidos();
-                                    $_SESSION['ultimoAccesoDoctor'] = time();
-                                    $result['status'] = 1;
-                                } else {
-                                    $result['exception'] = 'No pudimos actualizar su sesion';
-                                }
-                            } else {
-                                $result['exception'] = 'Error al eliminar el token';
-                            }
-                            
-                        } else {
-                            $result['exception'] = 'Código incorrecto';
-                        }
-                    } else {
-                        $result['exception'] = 'Error al setear el token';
-                    }
-                break;
 
                 case 'correitousu':
                 $_POST = $usuario->validateForm($_POST);

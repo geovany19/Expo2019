@@ -270,7 +270,7 @@ public function setReceta($value)
 					return 2;
 				}
 			}else{
-				$this->id = $data['id_doctor'];				
+				$this->id = $data['id_doctor'];
 				return 1;
 			}
 		} else {
@@ -293,7 +293,7 @@ public function setReceta($value)
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_doctor, clave_actualizada, id_sesion, id_estado FROM doctores WHERE id_doctor = ?';
+		$sql = 'SELECT contrasena_doctor, clave_actualizada,id_doctor, id_sesion, id_estado, nombre_doctor, apellido_doctor FROM doctores WHERE id_doctor = ?';
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 
@@ -302,13 +302,18 @@ public function setReceta($value)
 		$nueva_fecha = strtotime(date($data['clave_actualizada']).'+ 90 days') ;
 			
 		if (password_verify($this->clave, $data['contrasena_doctor'])) {
-			if($fecha_actual>$nueva_fecha){
+			if ($fecha_actual>$nueva_fecha) {
 				return 1;
-			}else{
+			} else {
 				if ($data['id_estado'] == 0) {
+					$this->id = $data['id_doctor'];
+					$this->nombres = $data['nombre_doctor'];
+					$this->apellidos = $data['apellido_doctor'];
 					return 4;
 				} else {
-					if($data['id_sesion'] == 2){
+					if ($data['id_sesion'] == 2) {
+						$this->nombres = $data['nombre_doctor'];
+						$this->apellidos = $data['apellido_doctor'];
 						return 2;
 					} else {
 						return 3;

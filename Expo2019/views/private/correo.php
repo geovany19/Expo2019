@@ -1,6 +1,7 @@
 <?php
-include "../../core/helpers/private_helper.php";
-private_helper::headerTemplate("Restablecer contraseña");
+require_once('../../core/helpers/private_helper.php');
+private_helper::headerTemplate('Correo');
+private_helper::nav();
 ?>
 
 <body id="body">

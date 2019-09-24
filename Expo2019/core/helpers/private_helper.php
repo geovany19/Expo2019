@@ -12,17 +12,17 @@ class private_helper
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-								<meta http-equiv="X-UA-Compatible" content="ie=edge">	
-								<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/font-awesome.min.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
-								<link rel="stylesheet" type="text/css" href="../../resources/css/private/calendario.css">
-								<!-- Font Awesome JS -->
+				<meta http-equiv="X-UA-Compatible" content="ie=edge">	
+				<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/dashboard/estilos_admin.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/public/estilos_login.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/material-icons.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/font-awesome.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
+				<link rel="stylesheet" type="text/css" href="../../resources/css/private/calendario.css">
+				<!-- Font Awesome JS -->
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 				<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 								<title>SISMED - ' . $title . '</title>
@@ -33,11 +33,10 @@ class private_helper
 
 	public function nav()
 	{
-
 		if (isset($_SESSION['idDoctor'])) {
 			self::modals();
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registro.php') {
+			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticar.php'  && $filename != 'claves.php'  && $filename != 'correo.php') {
 				print('
 				<div class="wrapper">
 					<!-- Sidebar  -->
@@ -79,12 +78,14 @@ class private_helper
 					</nav>
 				');
 			} else {
-				header('location: agenda.php');
+				if ($filename != 'agenda.php' && $filename != 'autenticar.php') {
+					header('location: agenda.php');
+				}
 			}
+			
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			echo("<script>console.log('filename". $filename . "')</script>");
-			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticar.php') {
+			if ($filename != 'index.php' && $filename != 'correo.php' ) {
 				header('location: index.php');
 			}
 		}
@@ -208,3 +209,4 @@ class private_helper
 		');
 	}
 }
+?>

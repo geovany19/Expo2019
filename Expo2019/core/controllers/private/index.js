@@ -128,12 +128,12 @@ $('#login-1').submit(function()
                         datatype: 'json'
                     }).done(response=>{
                         if (isJSONString(response)) {
-                        const dataset = JSON.parse(response);
-                        if(dataset.status == 1){
-                            sweetAlert(3, 'Cuenta bloqueada',null);
-                        }else{
-                            sweetAlert(2, 'lol',null);
-                        }
+                            const dataset = JSON.parse(response);
+                            if(dataset.status == 1){
+                                sweetAlert(3, 'Cuenta bloqueada',null);
+                            } else{
+                                sweetAlert(2, response,null);
+                            }
 
                         }else{
                             console.log(response)

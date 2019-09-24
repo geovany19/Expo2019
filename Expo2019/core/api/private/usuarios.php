@@ -444,7 +444,7 @@ if (isset($_GET['action'])) {
                                         case 3:
                                             $result['exception'] = 'El usuario ya posee una sesión iniciada';
                                             break;
-                                        case 4:   
+                                        case 4:
                                         $token_autenticacion = mt_rand(100000, 999999);
                                         if($usuario->setToken($token_autenticacion)) {
                                             if($usuario->setTokenAutenticacion()) {

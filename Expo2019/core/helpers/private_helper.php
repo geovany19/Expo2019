@@ -34,9 +34,10 @@ class private_helper
 	public function nav()
 	{
 		if (isset($_SESSION['idDoctor'])) {
-			self::modals();
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticar.php'  && $filename != 'claves.php'  && $filename != 'correo.php') {
+				
+				self::modals();
 				print('
 				<div class="wrapper">
 					<!-- Sidebar  -->

@@ -164,15 +164,16 @@ class public_helper
 						</div>
 						<form id="modalCrearCita" method="post" autocomplete="off">
 							<input type="hidden" name="idDoctor" id="idDoctor" required>
+							<input type="hidden" name="idPaciente" id="idPaciente" required value="'.$_SESSION['idPaciente'].'">
 							<div class="modal-body">
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="inputDate">Fecha</label>
-										<input type="date" class="form-control" id="inputDate" required>
+										<input type="date" class="form-control" id="inputDate"  name="inputDate" required>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="inputTime">Hora</label>
-										<input type="time" class="form-control" id="inputTime" required>
+										<input type="time" class="form-control" id="inputTime" name="inputTime" required>
 									</div>
 								</div>
 

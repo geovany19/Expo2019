@@ -425,8 +425,8 @@ public function setReceta($value)
 
 	public function insertConsulta()
 	{
-		$sql = 'INSERT INTO consulta (padecimientos, id_doctor, id_paciente, receta, peso, estatura, presion, id_cita) VALUES (?,?,?,?,?,?,?,?)';
-		$params = array($this->padecimientos, $this->id, $this->id_paciente,$this->receta, $this->peso, $this->estatura, $this->presion, $this->id_cita);
+		$sql = 'INSERT INTO consulta (padecimientos, id_doctor, id_paciente, receta, id_cita) VALUES (?,?,?,?,?)';
+		$params = array($this->padecimientos, $this->id, $this->id_paciente,$this->receta, $this->id_cita);
 		return Database::executeRow($sql, $params);
 	}
 

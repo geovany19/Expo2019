@@ -167,6 +167,51 @@ class private_helper
 		</div>
 
 
+		<div class="modal fade" id="modal-c" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">	
+					<div class="modal-body">
+						<form id="crear-consulta">
+							<input type="hidden" class="form-control" name="idPaciente" id="idPaciente" readonly>
+							<input type="hidden" class="form-control" name="idDoctor" id="idD" readonly>
+							<input type="text" class="form-control" name="idCita" id="idCi" readonly>
+							<div class="form-row">
+								<div class="form-group col-md-12">
+									<label for="paciente">Paciente</label>
+									<input type="text" class="form-control" id="paciente" name="paciente" readonly>
+								</div>
+								<div class="form-group col-md-12">
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="fecha">Fecha</label>
+										<input type="date" class="form-control" id="fecha" name="fecha" value="" readonly>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="hora">Hora</label>
+										<input type="text" class="form-control" id="hora" name="hora" value="" readonly>
+									</div>
+								</div>
+								
+								</div>
+							</div>
+							<div class="form-group">
+							<label for="padecimientos">Padecimientos</label>
+							<input type="text" class="form-control" id="padecimientos" name="padecimientos" placeholder="Padecimientos">
+							</div>
+							<div class="form-group">
+							<label for="receta">Receta</label>
+							<input type="text" class="form-control" id="receta" name="receta" placeholder="Receta">
+							</div>
+
+
+							<button type="submit" class="btn btn-primary">Guardar</button>
+					</form>
+					</div>	
+				</div>
+			</div>
+		</div>
+
+
 
 		<div class="modal fade" id="modal-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 		  <div class="modal-dialog" role="document">

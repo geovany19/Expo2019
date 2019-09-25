@@ -445,12 +445,12 @@ if (isset($_GET['action'])) {
                                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                                         $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
                                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
-                                                        $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
                                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                                                         $mail->Port       = 587;
                                                         //Recipients
-                                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);
                                                         // Content
                                                         $mail->isHTML(true);                                  // Set email format to HTML
@@ -486,12 +486,12 @@ if (isset($_GET['action'])) {
                                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                                         $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
                                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
-                                                        $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
                                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                                                         $mail->Port       = 587;
                                                         //Recipients
-                                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);
                                                         // Content
                                                         $mail->isHTML(true);                                  // Set email format to HTML
@@ -568,13 +568,13 @@ if (isset($_GET['action'])) {
                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                         $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
-                                        $mail->Password   = 'Sismed12345';                               // SMTP password
+                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                        $mail->Password   = 'Soportesismed123';                                // SMTP password
                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                                         $mail->Port       = 587;                                    // TCP port to connect to
 
                                         //Recipients
-                                        $mail->setFrom('soportetecnicosismed@gmail.com');
+                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                         $mail->addAddress($correopaciente);     // Add a recipient
                                         
                                         // Content

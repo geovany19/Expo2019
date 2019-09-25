@@ -2,6 +2,7 @@
 require_once('../../../core/helpers/database.php');
 require_once('../../../core/helpers/validator.php');
 require_once('../../../core/models/private/usuarios.php');
+require_once('../../../core/models/public/citas.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -14,6 +15,7 @@ $mail = new PHPMailer(true);
 if (isset($_GET['action'])) {
     session_start();
     $usuario = new Usuarios;
+    $cita = new Citas;
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
    //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
@@ -24,7 +26,7 @@ if (isset($_GET['action'])) {
                     header('location: ../../../views/private/pacientes.php');
                 }
                 break;
-                case 'readPaciente':
+            case 'readPaciente':
                 if($usuario->setId($_SESSION['idPaciente'])){
                     if($result['dataset'] = $usuario->readPaciente()){
                         $result['status'] = 1;
@@ -35,7 +37,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Paciente incorrecto';
                 }
                 break;
-                case 'logout':
+            case 'logout':
                     $usuario->setOffline();
                         if (session_unset()) {
                             $result['status'] = 1;
@@ -45,7 +47,24 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 
-                case 'readProfile':
+            case 'obtenerCita':
+                $_POST = $cita->validateForm($_POST);
+                if($cita->setFecha($_POST['fecha'])){
+                    if($cita->setIddoctor($_POST['doctor'])){
+                        if($result['dataset'] = $cita->obtenerCita()){
+                            $result['status'] = 1;
+                        }else{
+                            $result['exception'] = 'Obtener cita error';
+                        }
+                    }else{
+                        $result['exception'] = 'Doctor invalido';
+                    }
+                }else{
+                    $result['exception'] = 'Fecha invalida';
+                }
+                break;
+
+            case 'readProfile':
                 if ($usuario->setId($_SESSION['idDoctor'])) {
                     if ($result['dataset'] = $usuario->getUsuario()) {
                         $result['status'] = 1;
@@ -55,7 +74,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
-                break;
+            break;
 
                 case 'readCitas':
                 if ($usuario->setId($_SESSION['idDoctor'])) {

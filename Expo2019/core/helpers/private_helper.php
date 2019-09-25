@@ -28,6 +28,8 @@ class private_helper
 								<title>SISMED - ' . $title . '</title>
             </head>
 			<body>
+		<input type="hidden" value='.$_SESSION['idDoctor'].' id="idDoctor">
+		
 		');
 	}
 
@@ -104,7 +106,7 @@ class private_helper
 				<script type="text/javascript" src="../../resources/js/fontawesome.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
-				
+				<script src="../../resources/js/momentjs.js"></script>
 
 				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
 				

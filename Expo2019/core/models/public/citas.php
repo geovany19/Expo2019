@@ -115,15 +115,25 @@ class Citas extends Validator
 		$params = array($this->id_paciente);
 		return Database::getRows($sql, $params);
 	}
-
+	
 	public function createCita()
 	{
 		// $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO cita(id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES(?,?,?,?,?)';
+		//$sql = 'INSERT INTO cita(id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES(?,?,?,?,?)';
+		$sql = 'INSERT INTO cita( id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES (?,?,?,?,?)';
 		$params = array($this->id_doctor, $this->id_paciente, $this->fecha, $this->hora, $this->id_estado);
 		return Database::executeRow($sql, $params);
 	}
-
+	
+	public function obtenerCita()
+	{
+		// $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		//$sql = 'INSERT INTO cita(id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES(?,?,?,?,?)';
+		$sql = 'SELECT c.id_cita, c.id_doctor, p.nombre_paciente, c.id_paciente, c.fecha_cita, c.hora_cita, c.id_estado FROM cita c INNER JOIN pacientes p ON c.id_paciente = p.id_paciente WHERE c.fecha_cita = ? and c.id_doctor = ?';
+		$params = array( $this->fecha, $this->id_doctor);
+		return Database::getRows($sql, $params);
+	}
+	
 	public function getCita()
 	{
 		$sql = 'SELECT id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ? LIMIT 1';

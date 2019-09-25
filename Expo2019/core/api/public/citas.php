@@ -16,7 +16,7 @@ if (isset($_GET['action'])) {
                 if ($cita->setIdpaciente($_POST['idPaciente'])) {
                     if ($cita->setFecha($_POST['inputDate'])) {
                         if ($cita->setHora($_POST['inputTime'])) {
-                            if ($cita->setIdestado(1)) {
+                            if ($cita->setIdestado(2)) {
                                 if ($cita->createCita()) {
                             
                                     $result['status'] = 1;  

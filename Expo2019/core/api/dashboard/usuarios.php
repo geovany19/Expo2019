@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once('../../../libraries/PHPMailer/src/Exception.php');
 require_once('../../../libraries/PHPMailer/src/PHPMailer.php');
 require_once('../../../libraries/PHPMailer/src/SMTP.php');
-$mail = new PHPMailer();
+$mail = new PHPMailer(true);
 
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error

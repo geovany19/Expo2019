@@ -46,7 +46,7 @@ $(document).ready(function() {
               <td>${row.hora_cita}</td>
               <td>${row.estado}</td>
               <td class="d-flex justify-content-center">${
-                row.id_estado == 1
+                row.id_estado == 2
                   ? '<div class="d-flex justify-content-center" style="align-items: center;"><button type="button" class="btn btn-danger ml-3" onclick="cancelarCita(' +
                     row.id_cita +
                     ')">Cancelar cita</button></div>'

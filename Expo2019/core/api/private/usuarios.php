@@ -2,6 +2,7 @@
 require_once('../../../core/helpers/database.php');
 require_once('../../../core/helpers/validator.php');
 require_once('../../../core/models/private/usuarios.php');
+require_once('../../../core/models/public/citas.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -15,6 +16,7 @@ $mail = new PHPMailer(true);
 if (isset($_GET['action'])) {
     session_start();
     $usuario = new Usuarios;
+    $cita = new Citas;
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
@@ -26,8 +28,8 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readPaciente':
-                if ($usuario->setId($_SESSION['idPaciente'])) {
-                    if ($result['dataset'] = $usuario->readPaciente()) {
+                if($usuario->setId($_SESSION['idPaciente'])){
+                    if($result['dataset'] = $usuario->readPaciente()){
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Paciente inexistente';
@@ -37,12 +39,29 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'logout':
-                $usuario->setOffline();
-                if (session_unset()) {
-                    $result['status'] = 1;
-                    header('location: ../../../views/private/');
+                    $usuario->setOffline();
+                        if (session_unset()) {
+                            $result['status'] = 1;
+                            header('location: ../../../views/private/');                   
                 } else {
                     header('location: ../../../views/private/agenda.php');
+                }
+                break;
+                
+            case 'obtenerCita':
+                $_POST = $cita->validateForm($_POST);
+                if($cita->setFecha($_POST['fecha'])){
+                    if($cita->setIddoctor($_POST['doctor'])){
+                        if($result['dataset'] = $cita->obtenerCita()){
+                            $result['status'] = 1;
+                        }else{
+                            $result['exception'] = 'Obtener cita error';
+                        }
+                    }else{
+                        $result['exception'] = 'Doctor invalido';
+                    }
+                }else{
+                    $result['exception'] = 'Fecha invalida';
                 }
                 break;
 
@@ -56,7 +75,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
-                break;
+            break;
 
             case 'readCitas':
                 if ($usuario->setId($_SESSION['idDoctor'])) {
@@ -238,10 +257,8 @@ if (isset($_GET['action'])) {
                 if ($usuario->setPadecimientos($_POST['padecimientos'])) {
                     if ($usuario->setId($_SESSION['idDoctor'])) {
                         if ($usuario->setId_paciente($_POST['idPaciente'])) {
-                            if ($usuario->setReceta($_POST['receta'])) {
-                                if ($usuario->setPeso($_POST['Peso'])) {
-                                    if ($usuario->setEstatura($_POST['Estatura'])) {
-                                        if ($usuario->setPresion($_POST['presion'])) {
+                                if ($usuario->setReceta($_POST['receta'])) {
+
                                             if ($usuario->setId_cita($_POST['idCita'])) {
                                                 if ($usuario->insertConsulta() && $usuario->updateEstadocita()) {
                                                     $result['status'] = 1;
@@ -250,17 +267,8 @@ if (isset($_GET['action'])) {
                                                 }
                                             } else {
                                                 $result['exception'] = 'Categoría incorrecta 1';
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Categoría incorrecta 2';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Precio incorrecto';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Descripción incorrecta';
-                                }
-                            } else {
+                                            }                     
+                             } else {
                                 $result['exception'] = 'Nombre incorrecto';
                             }
                         } else {
@@ -410,15 +418,16 @@ if (isset($_GET['action'])) {
                                                     $correo = $usuario->getCorreo();
 
                                                     try {
+                                                        
                                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                                         $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
                                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
-                                                        $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
                                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                                                         $mail->Port       = 587;
                                                         //Recipients
-                                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);
                                                         // Content
                                                         $mail->isHTML(true);                                  // Set email format to HTML
@@ -453,12 +462,12 @@ if (isset($_GET['action'])) {
                                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                                         $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
                                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
-                                                        $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
                                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                                                        $mail->Port       = 587;
+                                                        $mail->Port       = 25;
                                                         //Recipients
-                                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);
                                                         // Content
                                                         $mail->isHTML(true);                                  // Set email format to HTML
@@ -533,13 +542,13 @@ if (isset($_GET['action'])) {
                                         $mail->isSMTP();                                            // Set mailer to use SMTP
                                         $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                     // SMTP username
-                                        $mail->Password   = 'Sismed12345';                               // SMTP password
+                                        $mail->Username   = 'sismedtecnico@gmail.com';                     // SMTP username
+                                        $mail->Password   = 'Soportesismed123';                               // SMTP password
                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                                         $mail->Port       = 587;                                    // TCP port to connect to
 
                                         //Recipients
-                                        $mail->setFrom('soportetecnicosismed@gmail.com');
+                                        $mail->setFrom('sismedtecnico@gmail.com');
                                         $mail->addAddress($correousuario);     // Add a recipient
 
                                         // Content

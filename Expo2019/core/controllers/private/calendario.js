@@ -3,8 +3,10 @@
     var eventos = new Object();
 
     var cita  = [];
+
     $(document).ready(function() {
-	    var date = new Date();
+        var date = new Date();
+        
 		var d = date.getDate();
 		var m = date.getMonth();
         var y = date.getFullYear();
@@ -71,7 +73,7 @@
 	
 		/* initialize the calendar
 		-----------------------------------------------------------------*/
-
+        
 		var calendar =  $('#calendar').fullCalendar({
 			header: {
 				left: 'title',

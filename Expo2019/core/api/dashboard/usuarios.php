@@ -167,7 +167,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            //caso utilizado para restablecer sesión en caso haya quedado activa
+                //caso utilizado para restablecer sesión en caso haya quedado activa
             case 'restoreSession':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
@@ -217,41 +217,68 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-            case 'create':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombre($_POST['create_nombre'])) {
-                    if ($usuario->setApellido($_POST['create_apellido'])) {
-                        if ($usuario->setCorreo($_POST['create_correo'])) {
-                            if ($usuario->setUsuario($_POST['create_alias'])) {
-                                if ($_POST['create_clave1'] == $_POST['create_clave2']) {
-                                    if ($usuario->setClave($_POST['create_clave1'])) {
-                                        if ($usuario->setFecha($_POST['create_fecha'])) {
-                                            if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                if ($usuario->setFoto($_FILES['create_archivo'], null)) {
+                /*
+                                    if ($_POST['usuario'] != $_POST['clave1']) {
+                                            if ($_POST['clave1'] == $_POST['clave2']) {
+                                                $resultado = $usuario->setClave($_POST['clave1']);
+                                                if ($resultado[0]) {
                                                     if ($usuario->createUsuario()) {
                                                         $result['status'] = 1;
-                                                        if ($usuario->saveFile($_FILES['create_archivo'], $usuario->getRuta(), $usuario->getFoto())) {
-                                                            $result['message'] = 'Usuario creado correctamente';
-                                                        } else {
-                                                            $result['message'] = 'Usuario no creado. No se guardó el archivo';
-                                                        }
+                                                        $result['message'] = 'Registro realizado correctamente';
                                                     } else {
                                                         $result['exception'] = 'Operación fallida';
                                                     }
                                                 } else {
-                                                    $result['exception'] = $usuario->getImageError();
+                                                    $result['exception'] = $resultado[1];
                                                 }
                                             } else {
-                                                $result['exception'] = 'Seleccione una imagen';
+                                                $result['exception'] = 'Las contraseñas no coinciden';
                                             }
                                         } else {
-                                            $result['exception'] = 'Fecha no válida';
+                                            $result['exception'] = 'La contraseña no puede ser igual al nombre de usuario';
+                                        }
+                                    */
+            //Caso para crear que debés pasar
+                                    case 'create':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setNombre($_POST['create_nombre'])) {
+                    if ($usuario->setApellido($_POST['create_apellido'])) {
+                        if ($usuario->setCorreo($_POST['create_correo'])) {
+                            if ($usuario->setUsuario($_POST['create_usuario'])) {
+                                if ($usuario->setFecha($_POST['create_fecha'])) {
+                                    if ($usuario->setEstado(isset($_POST['create_estado']) ? 1 : 0)) {
+                                        if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
+                                            if ($usuario->setFoto($_FILES['create_archivo'], null)) {
+                                                if ($_POST['create_usuario'] != $_POST['create_clave1']) {
+                                                    if ($_POST['create_clave1'] == $_POST['create_clave2']) {
+                                                        $resultado = $usuario->setClave($_POST['create_clave1']);
+                                                        if ($resultado[0]) {
+                                                            if ($usuario->createUsuario()) {
+                                                                $result['status'] = 1;
+                                                                $result['message'] = 'Usuario creado correctamente';
+                                                            } else {
+                                                                $result['exception'] = 'Operación fallida';
+                                                            }
+                                                        } else {
+                                                            $result['exception'] = $resultado[1];
+                                                        }
+                                                    } else {
+                                                        $result['exception'] = 'Las contraseñas no coinciden';
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'La contraseña no puede ser igual al nombre de usuario';
+                                                }
+                                            } else {
+                                                $result['exception'] = $usuario->getImageError();
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Seleccione una imagen';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres lol. No se pudo crear el perfil';
+                                        $result['exception'] = 'Estado incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes. No se pudo crear el perfil';
+                                    $result['exception'] = 'Fecha no válida';
                                 }
                             } else {
                                 $result['exception'] = 'Usuario incorrecto. No se pudo crear el perfil';
@@ -345,6 +372,7 @@ if (isset($_GET['action'])) {
                         if ($usuario->getUser()) {
                             if ($usuario->deleteUsuario()) {
                                 $result['status'] = 1;
+                                $result['message'] = 'Usuario eliminado correctamente';
                             } else {
                                 $result['exception'] = 'Operación fallida';
                             }
@@ -668,35 +696,35 @@ if (isset($_GET['action'])) {
                                         $result['status'] = 5;
                                         break;
                                     case 2:
-                                    //generamos un codigo ramdom de 6 digitos que sera nuestro acceso de verificacion
-                                    $token_autenticacion = mt_rand(100000, 999999);
-                                    if($usuario->setToken($token_autenticacion)) {
-                                        if($usuario->setTokenAutenticacion()) {
-                                            if($usuario->getTokenAutenticacion()) {
-                                                $correo = $usuario->getCorreo();
-                                                $mail = new PHPMailer(true);
-                                                $mail->charSet = "UTF-8";
-                                                try {     
-                                                    $mail->isSMTP();                                            // Set mailer to use SMTP
-                                                    $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
-                                                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                                    $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
-                                                    $mail->Password   = 'Sismed12345';                             // SMTP password
-                                                    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                                                    $mail->Port       = 587;
-                                                    //Recipients
-                                                    $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
-                                                    $mail->addAddress($correo);
-                                                    // Content
-                                                    $mail->CharSet = "UTF-8";
-                                                    $mail->isHTML(true);                                  // Set email format to HTML
-                                                    $mail->Subject = 'Código de inicio de sesión';
-                                                    $mail->Body    = 'Tu código de activación es: '.$token_autenticacion;
-                                                    $mail->send();
-                                                    $result['status'] = 1;
-                                                    $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                        //generamos un codigo ramdom de 6 digitos que sera nuestro acceso de verificacion
+                                        $token_autenticacion = mt_rand(100000, 999999);
+                                        if ($usuario->setToken($token_autenticacion)) {
+                                            if ($usuario->setTokenAutenticacion()) {
+                                                if ($usuario->getTokenAutenticacion()) {
+                                                    $correo = $usuario->getCorreo();
+                                                    //$mail = new PHPMailer(true);
+                                                    $mail->charSet = "UTF-8";
+                                                    try {
+                                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                                        $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+                                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                                        $mail->Username   = 'soportetecnicosismed@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Sismed12345';                             // SMTP password
+                                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                                        $mail->Port       = 587;
+                                                        //Recipients
+                                                        $mail->setFrom('soportetecnicosismed@gmail.com', 'SISMED');
+                                                        $mail->addAddress($correo);
+                                                        // Content
+                                                        $mail->CharSet = "UTF-8";
+                                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                                        $mail->Subject = 'Código de inicio de sesión';
+                                                        $mail->Body    = 'Tu código de activación es: ' . $token_autenticacion;
+                                                        $mail->send();
+                                                        $result['status'] = 1;
+                                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
                                                     } catch (Exception $e) {
-                                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                                        $result['exception'] = "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
                                                     }
                                                 } else {
                                                     $result['exception'] = 'Error al obtener los datos de la cuenta';
@@ -709,8 +737,8 @@ if (isset($_GET['action'])) {
                                         }
                                         break;
                                     case 3:
-                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente.' ; 
-                                      // Si deseas restablecer la sesión, haz click en "Restablecer sesion" ubicado en este sitio
+                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente.';
+                                        // Si deseas restablecer la sesión, haz click en "Restablecer sesion" ubicado en este sitio
                                         break;
                                 }
                             } else {
@@ -725,32 +753,31 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Alias incorrecto';
                 }
                 break;
-                case 'autenticacion':
+            case 'autenticacion':
                 $_POST = $usuario->validateForm($_POST);
-                    if($usuario->setToken($_POST['codigo'])) {
-                        if($usuario->getTokenAutenticacion()) {
-                            if($usuario->deleteTokenAutenticacion()) {
-                                if ($usuario->autenticarEstado()) {
-                                    $usuario->setOnline();
-                                    $_SESSION['idUsuario'] = $usuario->getId();
-                                    $_SESSION['aliasUsuario'] = $usuario->getUsuario();
-                                    $_SESSION['nombresUsuario'] = $usuario->getNombre();
-                                    $_SESSION['apellidosUsuario'] = $usuario->getApellido();
-                                    $_SESSION['ultimoAcceso'] = time();
-                                    $result['status'] = 1;
-                                } else {
-                                    $result['exception'] = 'No pudimos actualizar su sesion';
-                                }
+                if ($usuario->setToken($_POST['codigo'])) {
+                    if ($usuario->getTokenAutenticacion()) {
+                        if ($usuario->deleteTokenAutenticacion()) {
+                            if ($usuario->autenticarEstado()) {
+                                $usuario->setOnline();
+                                $_SESSION['idUsuario'] = $usuario->getId();
+                                $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                $_SESSION['nombresUsuario'] = $usuario->getNombre();
+                                $_SESSION['apellidosUsuario'] = $usuario->getApellido();
+                                $_SESSION['ultimoAcceso'] = time();
+                                $result['status'] = 1;
                             } else {
-                                $result['exception'] = 'Error al eliminar el token';
+                                $result['exception'] = 'No pudimos actualizar su sesion';
                             }
-                            
                         } else {
-                            $result['exception'] = 'Código incorrecto';
+                            $result['exception'] = 'Error al eliminar el token';
                         }
                     } else {
-                        $result['exception'] = 'Error al setear el token';
+                        $result['exception'] = 'Código incorrecto';
                     }
+                } else {
+                    $result['exception'] = 'Error al setear el token';
+                }
                 break;
 
             default:

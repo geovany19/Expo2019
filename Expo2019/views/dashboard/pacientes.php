@@ -43,7 +43,7 @@ dashboardHelper::nav();
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-center aling-items-center">
-        <h5 class="modal-title" id="modalcreate">Crear Pacientes</h5>
+        <h5 class="modal-title" id="modalcreate">Crear paciente</h5>
         </button>
       </div>
       <div class="modal-body">

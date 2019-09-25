@@ -122,6 +122,8 @@ function modalcreate()
     $('#form-create')[0].reset();
     $('#modal-create').modal('show');
 }
+
+//el controlador está bien, en caso necesités usarlo, es este
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
 {

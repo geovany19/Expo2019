@@ -393,11 +393,12 @@ class Usuario extends Validator
 		return Database::getRows($sql, $params);
 	}
 
+	//modelo para crear usuarios
 	public function createUsuario()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, 0, 2);
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->idestado, 2);
 		return Database::executeRow($sql, $params);
 	}
 

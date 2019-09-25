@@ -270,7 +270,7 @@ public function setReceta($value)
 					return 2;
 				}
 			}else{
-				$this->id = $data['id_doctor'];				
+				$this->id = $data['id_doctor'];
 				return 1;
 			}
 		} else {
@@ -293,7 +293,7 @@ public function setReceta($value)
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT contrasena_doctor, clave_actualizada, id_sesion FROM doctores WHERE id_doctor = ? LIMIT 1';
+		$sql = 'SELECT contrasena_doctor, clave_actualizada,id_doctor, id_sesion, id_estado, nombre_doctor, apellido_doctor FROM doctores WHERE id_doctor = ?';
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 
@@ -302,14 +302,23 @@ public function setReceta($value)
 		$nueva_fecha = strtotime(date($data['clave_actualizada']).'+ 90 days') ;
 			
 		if (password_verify($this->clave, $data['contrasena_doctor'])) {
-			if($fecha_actual>$nueva_fecha){
+			if ($fecha_actual>$nueva_fecha) {
 				return 1;
-			}else{
-				if($data['id_sesion'] == 2){
-					return 2;	
-				} else{
-					return 3;
-				}			
+			} else {
+				if ($data['id_estado'] == 0) {
+					$this->id = $data['id_doctor'];
+					$this->nombres = $data['nombre_doctor'];
+					$this->apellidos = $data['apellido_doctor'];
+					return 4;
+				} else {
+					if ($data['id_sesion'] == 2) {
+						$this->nombres = $data['nombre_doctor'];
+						$this->apellidos = $data['apellido_doctor'];
+						return 2;
+					} else {
+						return 3;
+					}
+				}
 			}			
 		} else {
 			return 0;
@@ -479,7 +488,7 @@ public function setReceta($value)
 	public function createDoctores()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, id_estado) VALUES(?, ?, ?, ?, ?, ?, 1)';
+		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, id_estado, is_sesion) VALUES(?, ?, ?, ?, ?, ?, 0, 2)';
 		$params = array($this->nombres, $this->apellidos, $this->correo, $this->alias, $hash, $this->fecha);
 		if(Database::executeRow($sql, $params)) {
 			$sql = 'UPDATE doctores SET clave_actualizada = ? WHERE id_doctor = ?';
@@ -489,5 +498,44 @@ public function setReceta($value)
 			return false;
 		}
 	}
+
+	//AUTENTIFICAR
+	public function setTokenAutenticacion()
+	{
+		$sql = 'UPDATE doctores SET autenticar_doctor = ? WHERE usuario_doctor = ?';
+		$params = array($this->token, $this->alias);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function deleteTokenAutenticacion()
+	{
+		$sql = 'UPDATE doctores SET autenticar_doctor = null WHERE id_doctor = ?';
+		$params = array($this->id);
+		return Database::executeRow($sql, $params);
+	}
+
+	public function getTokenAutenticacion()
+	{
+		$sql = 'SELECT id_doctor, nombre_doctor, apellido_doctor, usuario_doctor, correo_doctor FROM doctores WHERE autenticar_doctor = ?';
+		$params = array($this->token);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->id = $data['id_doctor'];
+			$this->nombre = $data['nombre_doctor'];
+			$this->apellido = $data['apellido_doctor'];
+			$this->alias = $data['usuario_doctor'];
+			$this->correo = $data['correo_doctor'];
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function autenticarEstado()
+		{
+			$sql = 'UPDATE doctores SET id_estado = 1 where id_doctor = ?';
+			$params = array($this->id);
+			return Database::executeRow($sql, $params);
+		}
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
-include "../../core/helpers/dashboardHelper.php";
-dashboardHelper::head("Restablecer contraseña");
+require_once('../../core/helpers/private_helper.php');
+private_helper::headerTemplate('Claves');
+private_helper::nav();
 ?>
 
 <body id="body">

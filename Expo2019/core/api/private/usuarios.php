@@ -430,6 +430,7 @@ if (isset($_GET['action'])) {
                                                         $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);
                                                         // Content
+                                                        $mail->CharSet = "UTF-8";
                                                         $mail->isHTML(true);                                  // Set email format to HTML
                                                         $mail->Subject = 'Código de inicio de sesión';
                                                         $mail->Body    = 'Tu código de activación es: ' . $token_autenticacion;
@@ -470,6 +471,7 @@ if (isset($_GET['action'])) {
                                                         $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);
                                                         // Content
+                                                        $mail->CharSet = "UTF-8";
                                                         $mail->isHTML(true);                                  // Set email format to HTML
                                                         $mail->Subject = 'Código de inicio de sesión';
                                                         $mail->Body    = 'Tu código de activación es: ' . $token_autenticacion;
@@ -552,6 +554,7 @@ if (isset($_GET['action'])) {
                                         $mail->addAddress($correousuario);     // Add a recipient
 
                                         // Content
+                                        $mail->CharSet = "UTF-8";
                                         $mail->isHTML(true);                                  // Set email format to HTML
                                         $mail->Subject = 'Recuperacion de clave';
                                         // $mail->Body    = 'Puede hacer click';

@@ -26,9 +26,6 @@ dashboardHelper::nav();
 						<div class="form-group">
 							<h6 class="text-center"><a href="recuperar.php">¿Olvidó su contraseña?</a></h6>
 						</div>
-						<div class="form-group">
-							<h6 class="text-center"><a href="verificacion.php">prueba</a></h6>
-						</div>
 					</form>
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class private_helper
 {
 	public static function headerTemplate($title)

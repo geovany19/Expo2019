@@ -367,7 +367,7 @@ public function setReceta($value)
 
 	public function getCitas()
 	{
-		$sql = 'SELECT c.id_cita, p.nombre_paciente,p.id_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=1 and c.id_doctor=? GROUP by p.id_paciente';
+		$sql = 'SELECT c.id_cita, p.nombre_paciente,p.id_paciente, c.fecha_cita, c.hora_cita from cita c, pacientes p, estado_cita e WHERE p.id_paciente=c.id_paciente and c.id_estado=1 and c.id_doctor=? GROUP by c.hora_cita, c.fecha_cita';
 		$params = array($this->id);
 		return Database::getRows($sql, $params);
 	}
@@ -488,7 +488,7 @@ public function setReceta($value)
 	public function createDoctores()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, id_estado, is_sesion) VALUES(?, ?, ?, ?, ?, ?, 0, 2)';
+		$sql = 'INSERT INTO doctores(nombre_doctor, apellido_doctor, correo_doctor, usuario_doctor, contrasena_doctor, fecha_nacimiento, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, 0, 2)';
 		$params = array($this->nombres, $this->apellidos, $this->correo, $this->alias, $hash, $this->fecha);
 		if(Database::executeRow($sql, $params)) {
 			$sql = 'UPDATE doctores SET clave_actualizada = ? WHERE id_doctor = ?';

@@ -14,17 +14,15 @@ public_helper::nav();
                 <div style="">
                     <h2 class="text-center">SISMED</h2>
                     <h5>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium,
-                        reiciendis enim eius, architecto nemo sequi amet unde quaerat
-                        distinctio dolorem ex illum incidunt quidem mollitia. Libero quam
-                        earum atque suscipit.
+                        SISMED brindandote la comodidad y la satisfaccion de poder efectuar tus citas medicas en pocos minutos,
+                        sin hacer filas y sin estresarse, resuelve todos tus problemas con sismed , la mejor opcion para ti.
                     </h5>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <!--<div class="container">
         <div class="row justify-content-center">
             <div class="card" style="width: 17rem;">
                 <img style="object-fit: cover" height="230px" width="100%" src="https://media.wired.com/photos/5a25b07469e4a92363d488e4/master/pass/16-CyberPowerPC-Gaming-Desktop-SOURCE-Amazon.jpg" alt="Card image cap">
@@ -47,7 +45,7 @@ public_helper::nav();
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <?php

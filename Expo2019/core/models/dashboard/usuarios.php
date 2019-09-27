@@ -95,7 +95,7 @@ class Usuario extends Validator
 
 	public function setClave($value)
 	{
-		$validator = $this->validatePassword($value);
+		$validator = $this->validatePassword2($value);
         if ($validator[0]) {
             $this->clave = $value;
             return array(true, '');
@@ -394,12 +394,26 @@ class Usuario extends Validator
 	}
 
 	//modelo para crear usuarios
-	public function createUsuario()
+	/*public function createUsuario()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->idestado, 2);
 		return Database::executeRow($sql, $params);
+	}**/
+
+	public function createUsuario()
+	{
+		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
+		$sql = 'INSERT INTO usuarios_a(nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, contrasena_usuario, fecha_nacimiento, foto_usuario, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, 0, 2)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto);
+		if(Database::executeRow($sql, $params)) {
+			$sql = 'UPDATE usuarios_a SET clave_actualizada = ? WHERE id_usuario = ?';
+			$params = array(date('Y-m-d'), Database::getLastRowId());
+			return Database::executeRow($sql, $params);
+		} else {
+			return false;
+		}
 	}
 
 	public function getUser()

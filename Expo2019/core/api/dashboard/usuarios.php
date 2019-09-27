@@ -539,7 +539,9 @@ if (isset($_GET['action'])) {
                 break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setUsuario($_POST['usuario'])) {
+
+                $v = $usuario->setUsuario($_POST['usuario']);
+                if ($v == 1) {
                     switch ($usuario->checkUser()) {
                         case 0:
                             if ($usuario->checkTipo()) {
@@ -549,7 +551,8 @@ if (isset($_GET['action'])) {
                             }
                             break;
                         case 1:
-                            if ($usuario->setClave($_POST['clave'])) {
+                        
+                        if ($usuario->setClave($_POST['clave'])) {
                                 switch ($usuario->checkPassword()) {
                                     case 0:
                                         $result['exception'] = 'Clave inexistente';
@@ -564,7 +567,8 @@ if (isset($_GET['action'])) {
                                         $token_autenticacion = mt_rand(100000, 999999);
                                         if ($usuario->setToken($token_autenticacion)) {
                                             if ($usuario->setTokenAutenticacion()) {
-                                                if ($usuario->getTokenAutenticacion()) {
+                                                if ($usuario->getTokenAutenticacion()) 
+                                                {
                                                     $correo = $usuario->getCorreo();
                                                     //$mail = new PHPMailer(true);
                                                     $mail->charSet = "UTF-8";
@@ -603,6 +607,44 @@ if (isset($_GET['action'])) {
                                     case 3:
                                         $result['exception'] = 'El usuario ya posee una sesión iniciada previamente.';
                                         // Si deseas restablecer la sesión, haz click en "Restablecer sesion" ubicado en este sitio
+                                        break;
+                                    case 4:
+                                        $token_autenticacion = mt_rand(100000, 999999);
+                                        if ($usuario->setToken($token_autenticacion)) {
+                                            if ($usuario->setTokenAutenticacion()) {
+                                                if ($usuario->getTokenAutenticacion()) {
+                                                    $correo = $usuario->getCorreo();
+
+                                                    try {
+                                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                                        $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+                                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
+                                                        $mail->SMTPSecure = 'tls';                                                 // Enable TLS encryption, `ssl` also accepted
+                                                        $mail->Port       = 587;
+                                                        //Recipients
+                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
+                                                        $mail->addAddress($correo);
+                                                        // Content
+                                                        $mail->CharSet = "UTF-8";
+                                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                                        $mail->Subject = 'Código de inicio de sesión';
+                                                        $mail->Body    = 'Tu código de activación es: ' . $token_autenticacion;
+                                                        $mail->send();
+                                                        $result['status'] = 1;
+                                                    } catch (Exception $e) {
+                                                        $result['exception'] = "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Error al obtener los datos de la cuenta';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Error al asignar el token';
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Error al setear el token';
+                                        }
                                         break;
                                 }
                             } else {

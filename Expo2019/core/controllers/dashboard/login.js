@@ -47,7 +47,6 @@ $('#form-sesion').submit(function () {
         if (isJSONString(response)) {
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
-            
             if (dataset.status == 1) {
                 sweetAlert(1, 'Autenticación correcta', 'verificacion2pasos.php');
                 

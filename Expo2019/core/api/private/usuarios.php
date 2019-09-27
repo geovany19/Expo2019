@@ -269,16 +269,16 @@ if (isset($_GET['action'])) {
                                                 $result['exception'] = 'Categoría incorrecta 1';
                                             }                     
                              } else {
-                                $result['exception'] = 'Nombre incorrecto';
+                                $result['exception'] = 'receta';
                             }
                         } else {
-                            $result['exception'] = 'Nombre incorrecto';
+                            $result['exception'] = 'paciente';
                         }
                     } else {
-                        $result['exception'] = 'Nombre incorrecto';
+                        $result['exception'] = 'id incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'incorrecto';
+                    $result['exception'] = 'padecimientos';
                 }
                 break;
 
@@ -466,7 +466,7 @@ if (isset($_GET['action'])) {
                                                         $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
                                                         $mail->Password   = 'Soportesismed123';                             // SMTP password
                                                         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                                                        $mail->Port       = 25;
+                                                        $mail->Port       = 587;
                                                         //Recipients
                                                         $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
                                                         $mail->addAddress($correo);

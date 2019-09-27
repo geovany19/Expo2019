@@ -3,7 +3,7 @@ $(document).ready(function()
     showForm();
  });
 
- const api = '../../core/api/private/usuarios.php?site=private&action=';
+ const api = '../../core/api/private/usuarios.php?action=';
 
  function showForm(){
     $.ajax({

@@ -123,21 +123,21 @@ class Consultas extends Validator
     //utiliza una sub consulta para obtener los datos del mes, para luego obtener y mostar el nombre del mes y la cantidad de citas
     public function consultasPorFecha()
     {
-        $sql = 'SELECT NumeroMes, NombreMes, CantidadCitas FROM (SELECT MONTH(fecha_cita) AS NumeroMes, COUNT(cn.id_cita) AS CantidadCitas, m.mes AS NombreMes FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 4 AND MONTH(fecha_cita) = id_mes GROUP BY NumeroMes ORDER BY NumeroMes LIMIT 10) COUNTTABLE';
+        $sql = 'SELECT NumeroMes, NombreMes, CantidadCitas FROM (SELECT MONTH(fecha_cita) AS NumeroMes, COUNT(cn.id_cita) AS CantidadCitas, m.mes AS NombreMes FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 1 AND MONTH(fecha_cita) = id_mes GROUP BY NumeroMes ORDER BY NumeroMes LIMIT 10) COUNTTABLE';
         $params = array(null);
         return Database::getRows($sql, $params);
     }
 
     public function consultasPorHorario()
     {
-        $sql = 'SELECT Hora, CantidadCitas FROM (SELECT HOUR(hora_cita) AS Hora, COUNT(cn.id_cita) AS CantidadCitas FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 GROUP BY Hora ORDER BY Hora LIMIT 10) COUNTTABLE';
+        $sql = 'SELECT Hora, CantidadCitas FROM (SELECT HOUR(hora_cita) AS Hora, COUNT(cn.id_cita) AS CantidadCitas FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 1 GROUP BY Hora ORDER BY Hora LIMIT 10) COUNTTABLE';
         $params = array(null);
         return Database::getRows($sql, $params);
     }
 
     public function consultasConFechas()
     {
-        $sql = 'SELECT NumeroMes, NombreMes, CantidadCitas FROM (SELECT MONTH(fecha_cita) AS NumeroMes, COUNT(cn.id_cita) AS CantidadCitas, m.mes AS NombreMes FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 4 AND MONTH(fecha_cita) = id_mes AND fecha_cita BETWEEN ? AND ? GROUP BY NumeroMes ORDER BY NumeroMes LIMIT 10) COUNTTABLE';
+        $sql = 'SELECT NumeroMes, NombreMes, CantidadCitas FROM (SELECT MONTH(fecha_cita) AS NumeroMes, COUNT(cn.id_cita) AS CantidadCitas, m.mes AS NombreMes FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 1 AND MONTH(fecha_cita) = id_mes AND fecha_cita BETWEEN ? AND ? GROUP BY NumeroMes ORDER BY NumeroMes LIMIT 10) COUNTTABLE';
         $params = array($this->fecha1, $this->fecha2);
         return Database::getRows($sql, $params);
     }
@@ -152,14 +152,14 @@ class Consultas extends Validator
 
     public function consultasMensualesDoc()
     {
-        $sql = 'SELECT COUNT(id_consulta) AS Consultas, nombre_doctor, apellido_doctor FROM consulta c INNER JOIN cita ci USING(id_cita) INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE MONTH(fecha_cita) = ? AND ci.id_estado = 4 GROUP BY c.id_doctor ORDER BY Consultas DESC LIMIT 10';
+        $sql = 'SELECT COUNT(id_consulta) AS Consultas, nombre_doctor, apellido_doctor FROM consulta c INNER JOIN cita ci USING(id_cita) INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE MONTH(fecha_cita) = ? AND ci.id_estado = 1 GROUP BY c.id_doctor ORDER BY Consultas DESC LIMIT 10';
         $params = array($this->mes);
         return Database::getRows($sql, $params);
     }
     
     public function consultasMensualesHoras()
     {
-        $sql = 'SELECT Hora, CantidadCitas FROM (SELECT HOUR(hora_cita) AS Hora, COUNT(cn.id_cita) AS CantidadCitas FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 4 AND MONTH(fecha_cita) = ? GROUP BY Hora ORDER BY Hora LIMIT 10) COUNTTABLE';
+        $sql = 'SELECT Hora, CantidadCitas FROM (SELECT HOUR(hora_cita) AS Hora, COUNT(cn.id_cita) AS CantidadCitas FROM cita c INNER JOIN consulta cn USING(id_cita) INNER JOIN estado_cita e ON c.id_estado = e.id_estado WHERE c.id_estado = 1 AND MONTH(fecha_cita) = ? GROUP BY Hora ORDER BY Hora LIMIT 10) COUNTTABLE';
         $params = array($this->mes);
         return Database::getRows($sql, $params);
     }

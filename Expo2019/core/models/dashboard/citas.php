@@ -176,7 +176,7 @@ class Citas extends Validator
     //método para mostrar la cantidad de consultas de cada doctor, no recibe parámetros 
     public function showCitasRealizadas()
     {
-        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 4 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
+        $sql = 'SELECT nombre_doctor, apellido_doctor, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 1 GROUP BY nombre_doctor ORDER BY CitasRealizadas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }
@@ -184,7 +184,7 @@ class Citas extends Validator
     //método para mostrar las consultas realizadas por cada especialidad. no recibe parámetros
     public function showCitasEspecialidad()
     {
-        $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 4 GROUP BY nombre_especialidad ORDER BY CitasRealizadas DESC LIMIT 10';
+        $sql = 'SELECT c.id_doctor, nombre_especialidad, COUNT(id_consulta) AS CitasRealizadas FROM consulta c INNER JOIN cita ci ON c.id_cita = ci.id_cita INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON ci.id_estado = e.id_estado WHERE ci.id_estado = 1 GROUP BY nombre_especialidad ORDER BY CitasRealizadas DESC LIMIT 10';
         $params = array(null);
         return Database::getRows($sql, $params);
     }

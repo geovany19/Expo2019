@@ -4,6 +4,7 @@ require_once('../../helpers/validator.php');
 require_once('../../models/dashboard/citas.php');
 
 if (isset($_GET['action'])) {
+    ini_set('date.timezone', 'America/El_Salvador');
     session_start();
     $citas = new Citas;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
@@ -64,15 +65,23 @@ if (isset($_GET['action'])) {
                 if ($citas->setIddoctor($_POST['create_doctor'])) {
                     if ($citas->setIdpaciente($_POST['create_paciente'])) {
                         if ($citas->setFecha($_POST['create_fecha'])) {
-                            if ($citas->setHora($_POST['create_hora'])) {
-                                if ($citas->createCita()) {
-                                    $result['status'] = 1;
-                                    $result['message'] = 'Cita creada correctamente';
+                            if ($_POST['create_fecha'] >= date('Y-m-d')) {
+                                if ($citas->setHora($_POST['create_hora'])) {
+                                    if ($_POST['create_hora'] = date('G:i') && $_POST['create_fecha'] >= date('Y-m-d')) {
+                                        if ($citas->createCita()) {
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Cita creada correctamente';
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'No se puede crear una cita en la hora establecida';
+                                    }
                                 } else {
-                                    $result['exception'] = 'Operación fallida';
+                                    $result['exception'] = 'La hora ingresada no es válida';
                                 }
                             } else {
-                                $result['exception'] = 'La hora ingresada no es válida';
+                                $result['exception'] = 'No se puede agendar una cita en la fecha establecida';
                             }
                         } else {
                             $result['exception'] = 'La fecha ingresada no es válida';
@@ -103,11 +112,13 @@ if (isset($_GET['action'])) {
                         if ($citas->setIdpaciente($_POST['update_paciente'])) {
                             if ($citas->setFecha($_POST['update_fecha'])) {
                                 if ($citas->setHora($_POST['update_hora'])) {
-                                    if ($citas->updateCita()) {
-                                        $result['status'] = 1;
-                                        $result['message'] = 'Cita modificada correctamente';
-                                    } else {
-                                        $result['exception'] = 'Operación fallida';
+                                    if ($citas->setIdestado($_POST['update_estado'])) {
+                                        if ($citas->updateCita()) {
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Cita modificada correctamente';
+                                        } else {
+                                            $result['exception'] = 'Operación fallida';
+                                        }
                                     }
                                 } else {
                                     $result['exception'] = 'La hora ingresada no es válida';

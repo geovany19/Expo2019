@@ -103,7 +103,7 @@ class Citas extends Validator
 
     public function readCitas()
     {
-        $sql = 'SELECT id_cita, fecha_cita, hora_cita, d.nombre_doctor, d.apellido_doctor, p.nombre_paciente, p.apellido_paciente, estado FROM cita c INNER JOIN doctores d ON d.id_doctor = c.id_doctor INNER JOIN pacientes p ON p.id_paciente = c.id_paciente INNER JOIN estado_cita e ON e.id_estado = c.id_estado ORDER BY id_cita ASC';
+        $sql = 'SELECT id_cita, fecha_cita, hora_cita, d.nombre_doctor, d.apellido_doctor, p.nombre_paciente, p.apellido_paciente, c.id_estado, estado FROM cita c INNER JOIN doctores d ON d.id_doctor = c.id_doctor INNER JOIN pacientes p ON p.id_paciente = c.id_paciente INNER JOIN estado_cita e ON e.id_estado = c.id_estado ORDER BY id_cita ASC';
         $params = array(null);
         return Database::getRows($sql, $params);
 }
@@ -113,12 +113,39 @@ class Citas extends Validator
 		$sql = 'SELECT id_cita, fecha_cita, hora_cita, d.nombre_doctor, d.apellido_doctor, p.nombre_paciente, p.apellido_paciente, estado FROM cita c INNER JOIN doctores d ON d.id_doctor = c.id_doctor INNER JOIN pacientes p ON p.id_paciente = c.id_paciente INNER JOIN estado_cita e ON e.id_estado = c.id_estado WHERE fecha_cita LIKE ? OR nombre_paciente LIKE ? OR apellido_paciente LIKE ? AND id_doctor = ? ORDER BY fecha_cita DESC ';
 		$params = array("%$value%", "%$value%", "%$value%", $this->iddoctor);
 		return Database::getRows($sql, $params);
+    }
+    
+    public function checkCita()
+	{
+		$sql = 'SELECT id_cita, id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ?';
+		$params = array($this->idcita);
+		$data = Database::executeRow($sql, $params);
+		$fecha_actual = strtotime(date('d-m-Y H:i:00',time()));
+		$fecha_maxima = strtotime(date($data['fecha_cita']).'- 1 day');
+		$hora_actual = strtotime(date('G:i:s'));
+        $hora_maxima = strtotime($data['hora_cita'].'- 2 hours');
+        $estado_cita = $data['id_estado'];
+		if ($fecha_actual > $fecha_maxima && $hora_actual > $hora_maxima) {
+			return 7;
+		} else if ($fecha_actual > $fecha_maxima) {
+			return 6;
+		} else if ($hora_maxima > $hora_actual) {
+			return 5;
+		} else if ($estado_cita == 1 && $fecha_actual > $data['fecha_cita']) {
+            return 4;
+        } else if ($estado_cita == 3 && $fecha_actual > $data['fecha_cita']) {
+            return 3;
+        } else if ($estado_cita == 4) {
+            return 2;
+        } else {
+            return 1;
+        }
 	}
 
 	public function createCita()
 	{
 		$sql = 'INSERT INTO cita (id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES (?, ?, ?, ?, ?)';
-		$params = array($this->iddoctor, $this->idpaciente, $this->fecha, $this->hora, 1);
+		$params = array($this->iddoctor, $this->idpaciente, $this->fecha, $this->hora, 2);
 		return Database::executeRow($sql, $params);
 	}
 
@@ -193,7 +220,7 @@ class Citas extends Validator
     //recibe como parámetro el id de la especialidad a través del select en pagina.php
     public function showCitasEspecialidadParam()
     {
-        $sql = 'SELECT NombreMes, Mes, Citas, Especialidad FROM (SELECT c.id_doctor, es.id_especialidad, nombre_especialidad AS Especialidad, COUNT(id_cita) AS Citas, MONTH(fecha_cita) AS Mes, m.mes AS NombreMes FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 4 AND es.id_especialidad = ? AND MONTH(fecha_cita) = id_mes GROUP BY Mes ORDER BY Mes LIMIT 10) COUNTTABLE';
+        $sql = 'SELECT NombreMes, Mes, Citas, Especialidad FROM (SELECT c.id_doctor, es.id_especialidad, nombre_especialidad AS Especialidad, COUNT(id_cita) AS Citas, MONTH(fecha_cita) AS Mes, m.mes AS NombreMes FROM cita c INNER JOIN doctores d ON c.id_doctor = d.id_doctor INNER JOIN especialidad es ON d.id_especialidad = es.id_especialidad INNER JOIN estado_cita e ON c.id_estado = e.id_estado INNER JOIN meses m WHERE c.id_estado = 1 AND es.id_especialidad = ? AND MONTH(fecha_cita) = id_mes GROUP BY Mes ORDER BY Mes LIMIT 10) COUNTTABLE';
         $params = array($this->especialidad);
         return Database::getRows($sql, $params);
     }

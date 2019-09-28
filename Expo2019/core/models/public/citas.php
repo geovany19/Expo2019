@@ -109,6 +109,33 @@ class Citas extends Validator
 		return Database::getRows($sql, $params);
 	}
 
+	public function checkCita()
+	{
+		$sql = 'SELECT id_cita, id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ?';
+		$params = array($this->id_cita);
+		$data = Database::executeRow($sql, $params);
+		$fecha_actual = strtotime(date('d-m-Y H:i:00',time()));
+		$fecha_maxima = strtotime(date($data['fecha_cita']));
+		$hora_actual = strtotime(date('G:i:s'));
+        $hora_maxima = strtotime($data['hora_cita'].'- 2 hours');
+        $estado_cita = $data['id_estado'];
+		if ($hora_actual > $hora_maxima) {
+			return 7;
+		} else if ($fecha_actual > $fecha_maxima) {
+			return 6;
+		} else if ($hora_maxima > $hora_actual) {
+			return 5;
+		} else if ($estado_cita == 1 && $fecha_actual > $data['fecha_cita']) {
+            return 4;
+        } else if ($estado_cita == 3 && $fecha_actual > $data['fecha_cita']) {
+            return 3;
+        } else if ($estado_cita == 4) {
+            return 2;
+        } else {
+            return 1;
+        }
+	}
+
 	public function getCitaByPaciente()
 	{
 		$sql = 'SELECT cita.id_cita, pacientes.nombre_paciente, pacientes.apellido_paciente, doctores.nombre_doctor, doctores.apellido_doctor, cita.fecha_cita, cita.hora_cita, especialidad.nombre_especialidad, cita.id_estado, estado_cita.estado from estado_cita, cita, doctores, pacientes, especialidad WHERE cita.id_paciente = pacientes.id_paciente AND cita.id_doctor = doctores.id_doctor AND especialidad.id_especialidad = doctores.id_especialidad AND cita.id_paciente = ? AND estado_cita.id_estado = cita.id_estado ORDER BY cita.fecha_cita';

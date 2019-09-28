@@ -18,10 +18,10 @@ $(document).ready(function()
             const resultado = JSON.parse(response);
             //Se comprueba que no hay usuarios registrados para redireccionar al registro del primer usuario
             if (resultado.status) {
-                console.log(resultado.dataset.id_estado);
+                console.log(resultado.dataset);
                 $('#form-paciente')[0].reset;
                 $('#idEstado').val(resultado.dataset.id_estado);
-                $('#idPaciente').val(resultado.dataset.id_paciente);
+                $('#idPaciente2').val(resultado.dataset.id_paciente);
                 $('#idCita').val(resultado.dataset.id_cita);
                 $('#nombrePaciente').val(resultado.dataset.nombre_paciente);                
             }
@@ -53,7 +53,7 @@ $(document).ready(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
-                sweetAlert(1, 'Cita realizada exitosamanete', '../../core/reportes/private/reporteReceta.php?id='+$('#idPaciente').val());
+                window.open('../../core/reportes/private/reporteReceta.php?id='+$('#idPaciente2').val());
             } else {
                 sweetAlert(2, result.exception, null);
             }

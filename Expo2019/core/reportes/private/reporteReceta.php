@@ -16,13 +16,16 @@ require_once('../../models/private/usuarios.php');
     $pdf->SetTextColor(0,0,0);
     $pdf->header();
     $data = $usuario->reporteReceta1($_GET['id']);  
+    if (!$data) {
+      exit('No hay recetas');
+    }
     $last = count($data) - 1;
     $pdf->date();            
         $pdf->SetFont('Courier','B','10');
         $pdf->SetFillColor(255,255,255);
         $pdf->SetTextColor(0,0,0);
         $pdf->Cell(35,10, utf8_decode('Nombres doctor: '),'',0,'B',true);
-        $pdf->Cell(15,10, utf8_decode($data[$last ]['nombre_doctor']),'',0,'C',true);
+        $pdf->Cell(15,10, utf8_decode($data[$last]['nombre_doctor']),'',0,'C',true);
          $pdf->Cell(15,10, utf8_decode($data[$last]['apellido_doctor']),'',1,'C',true);
         $pdf->Ln(0.5);
         $pdf->Cell(40,10, utf8_decode('Nombres paciente:'),'',0,'B',true);

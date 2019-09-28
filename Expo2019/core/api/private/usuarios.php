@@ -256,7 +256,7 @@ if (isset($_GET['action'])) {
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setPadecimientos($_POST['padecimientos'])) {
                     if ($usuario->setId($_SESSION['idDoctor'])) {
-                        if ($usuario->setId_paciente($_POST['idPaciente'])) {
+                        if ($usuario->setId_paciente($_POST['idPaciente2'])) {
                                 if ($usuario->setReceta($_POST['receta'])) {
 
                                             if ($usuario->setId_cita($_POST['idCita'])) {

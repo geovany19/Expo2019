@@ -6,6 +6,7 @@ $(document).ready(function () {
 const apiCitas = '../../core/api/dashboard/citas.php?action=';
 const anexodoct = '../../core/api/dashboard/doctores.php?action=';
 const anexopaci = '../../core/api/dashboard/pacientes.php?action=';
+const estados = '../../core/api/dasboard/estadoCita.php?action=';
 //Función para llenar la tabla con los registros
 function fillTable(rows)
 {
@@ -126,8 +127,9 @@ $('#form-search').submit(function()
 function modalCreate()
 {
     $('#form-create')[0].reset();
-    fillSelect(anexodoct + 'fill','create_doctor', null)
+    fillSelect(anexodoct + 'fill', 'create_doctor', null)
     fillSelect(anexopaci + 'fillpaciente', 'create_paciente',null);
+    fillSelect(estados + 'fill', 'create_estado', null);
     $('#modal-create').modal('show');
 }
 
@@ -190,6 +192,7 @@ function modalUpdate(id)
                 $('#update_hora').val(result.dataset.hora_cita);
                 fillSelect(anexodoct + 'fill', 'update_doctor', result.dataset.id_doctor);
                 fillSelect(anexopaci + 'fillpaciente', 'update_paciente',result.dataset.id_paciente);
+                fillSelect(estados + 'fill', 'update_estado',result.dataset.id_estado);
                 $('#modal-update').modal('show');
             } else {
                 sweetAlert(2, result.exception, null);
@@ -273,6 +276,7 @@ function SelectDoctor(Select, value){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+
 // Función para eliminar un registro seleccionado
 function confirmDelete(id)
 {

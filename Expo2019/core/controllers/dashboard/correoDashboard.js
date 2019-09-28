@@ -23,7 +23,7 @@ function getParameterByName(name) {
             const result = JSON.parse(response);
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status == 1) {
-                sweetAlert(1, 'Correo enviado exitosamente. En caso de que no encuentres tu correo, revisa en la bandeja de spma o correo no deseado', null);
+                sweetAlert(1, 'Correo enviado exitosamente. En caso de que no encuentres tu correo, revisa en la bandeja de spam o correo no deseado', null);
             } else {
                 sweetAlert(2, result.exception, null);
             }

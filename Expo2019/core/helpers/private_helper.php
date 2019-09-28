@@ -174,7 +174,7 @@ class private_helper
 				<div class="modal-content">	
 					<div class="modal-body">
 						<form id="crear-consulta">
-							<input type="hidden" class="form-control" name="idPaciente" id="idPaciente" readonly>
+							<input type="hidden" class="form-control" name="idPaciente" id="idPaciente">
 							<input type="hidden" class="form-control" name="idDoctor" id="idD" readonly>
 							<input type="text" class="form-control" name="idCita" id="idCi" readonly>
 							<div class="form-row">

@@ -239,7 +239,7 @@ if (isset($_GET['action'])) {
                                         }
                                     */
             //Caso para crear que debés pasar
-                                    case 'create':
+                case 'create':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setNombre($_POST['create_nombre'])) {
                     if ($usuario->setApellido($_POST['create_apellido'])) {
@@ -535,7 +535,6 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Error al setear el token';
                 }
-
                 break;
             case 'login':
                 $_POST = $usuario->validateForm($_POST);

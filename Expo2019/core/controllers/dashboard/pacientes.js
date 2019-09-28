@@ -22,6 +22,7 @@ function fillTable(rows) {
                 <td>${row.fecha_nacimiento}</td>
                 <td>${row.peso_paciente}</td>
                 <td>${row.estatura_paciente}</td>
+                <td>${row.telefono_paciente}</td>
                 <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_paciente})" class="blue-text tooltipped" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>

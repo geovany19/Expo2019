@@ -244,7 +244,7 @@ $('#form-update').submit(function () {
                         $('#modal-update').modal('hide');
                         $("#table-body").DataTable().destroy();
                         showTable();
-                        sweetAlert(1, result.message, null);
+                        sweetAlert(1, result.message, 'pacientes.php');
                     } else {
                         sweetAlert(2, result.exception, null);
                     }

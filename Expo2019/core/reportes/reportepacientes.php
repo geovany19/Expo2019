@@ -46,7 +46,7 @@ if (isset($_SESSION['idUsuario'])) {
 				$pdf->Cell(37,30,utf8_decode($pacientes['apellido_paciente']),1,0,'C',true);
 				$pdf->Cell(37,30,utf8_decode($pacientes['usuario_paciente']),1,0,'C',true);
 				$pdf->Cell(37,30,utf8_decode($pacientes['fecha_nacimiento']),1,0,'C',true);
-				$pdf->Cell(37,30,$pdf->Image(($ruta.$pacientes['foto_paciente']),$pdf->getX()+5, $pdf->getY()+3, 25),1,0,'C');
+				$pdf->Cell(37,30,$pdf->Image(($ruta . $pacientes['foto_paciente']),$pdf->getX()+5, $pdf->getY()+3, 25),1,0,'C');
 				$pdf->Ln();
 		
 		}

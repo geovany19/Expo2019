@@ -191,11 +191,11 @@ dashboardHelper::nav();
 			<div class="row">
 			<div class="col-md-6 mb-4">
 				  <label for="fecha_inicio">Seleccione Fecha Inicial</label>
-      			<input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+      			<input type="date" class="form-control" id="fechaini" name="fechaini" required>
     		</div>
 			<div class="col-md-6 mb-6">
       			<label for="fecha_fin">Seleccione Fecha Final</label>
-      			<input type="date" class="form-control" id="fecha_fin" name="fecha_fin" max=<?php echo date('Y-m-d') ?> required>
+      			<input type="date" class="form-control" id="fechafin" name="fechafin" max=<?php echo date('Y-m-d') ?> required>
 			</div>
 			</div>
 			<div class="modal-footer justify-content-center aling-items-center">

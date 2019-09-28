@@ -276,6 +276,7 @@ function SelectDoctor(Select, value){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+
 // Función para eliminar un registro seleccionado
 function confirmDelete(id)
 {

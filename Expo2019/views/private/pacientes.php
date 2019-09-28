@@ -4,7 +4,7 @@ private_helper::headerTemplate('Paciente');
 private_helper::nav();
 ?>
 <form id='form-paciente' autocomplete="off">
-	<input type="text" name="idPaciente" id="idPaciente">
+	<input type="text" name="idPaciente2" id="idPaciente2">
 	<input type="text" name="idCita" id="idCita">
 	<input type="text" name="idEstado" id="idEstado">
 	<div class="form-group">

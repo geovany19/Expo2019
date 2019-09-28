@@ -93,7 +93,7 @@ dashboardHelper::nav();
                         <canvas id="chartConsultasMensualesDoc"></canvas>
                     </div>
                 </div>
-                <div class="col col-sm-12 col-md-6">
+                <!--<div class="col col-sm-12 col-md-6">
                     <h5>Gráfico de citas por especialidad</h5>
                     <form id="grafico4" method="post" class="col col-sm-12">
                         <label>Seleccione una especialidad</label>
@@ -103,7 +103,7 @@ dashboardHelper::nav();
                     <div id="chartCitasParam" hidden>
                         <canvas id="chartCitasEspecialidadParam"></canvas>
                     </div>
-                </div>
+                </div>-->
                 <div class="col col-sm-12 col-md-6">
                     <h5>Estadísticas de citas por doctor</h5>
                     <form id="grafico5" method="post" class="col col-sm-12">

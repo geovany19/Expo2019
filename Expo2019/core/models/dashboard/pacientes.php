@@ -11,6 +11,7 @@ class Pacientes extends Validator
 	private $foto = null;
 	private $peso = null;
 	private $estatura = null;
+	private $telefono = null;
 	private $idestado = null;
 	private $ruta = '../../../resources/img/dashboard/pacientes/';
 
@@ -179,6 +180,11 @@ class Pacientes extends Validator
 		return $this->idestado;
 	}
 
+	public function setTelefono(Type $var = null)
+	{
+		# code...
+	}
+
 	public function getRuta()
 	{
 		return $this->ruta;
@@ -205,7 +211,7 @@ class Pacientes extends Validator
 
 	public function readPacientes()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes ORDER BY id_paciente ASC';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, telefono_paciente, id_estado FROM pacientes ORDER BY id_paciente ASC';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}

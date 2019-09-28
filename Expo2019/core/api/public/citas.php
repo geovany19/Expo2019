@@ -62,13 +62,13 @@ if (isset($_GET['action'])) {
         case 'cancelarCita':
             if ($cita->setIdestado(3)) {
                 if ($cita->setIdcita($_POST['id_cita'])) {
-                    /*if ($cita->updateEstado()) {
+                    if ($cita->updateEstado()) {
                         $result['status'] = 1;
                         $result['exception'] = 'Operación fallida';
                     } else {
                         $result['exception'] = 'Operación fallida';
-                    }*/
-                    switch ($cita->checkCita()) {
+                    }
+                    /*switch ($cita->checkCita()) {
                         case 1:
                             if ($cita->updateEstado()) {
                                 $result['status'] = 1;
@@ -103,7 +103,7 @@ if (isset($_GET['action'])) {
                             $result['status'] = 7;
                             $result['exception'] = 'Ya no es posible cancelar la cita';
                             break;
-                    }
+                    }*/
                 } else {
                     $result['exception'] = 'Cita incorrecta';
                 }

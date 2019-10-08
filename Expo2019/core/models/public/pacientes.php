@@ -11,6 +11,7 @@ class Pacientes extends Validator
 	private $foto = null;
 	private $peso = null;
 	private $estatura = null;
+	private $telefono = null;
 	private $estado = null;
 	private $token = null;
 	private $ruta = '../../resources/img/pacientes/';
@@ -164,6 +165,21 @@ class Pacientes extends Validator
 	public function getEstatura()
 	{
 		return $this->estatura;
+	}
+
+	public function setTelefono($value)
+	{
+		if ($this->validatePhoneNumber($value)) {
+			$this->telefono = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getTelefono()
+	{
+		return $this->telefono;
 	}
 
 	public function setIdestado($value)
@@ -380,7 +396,7 @@ class Pacientes extends Validator
 
 	public function readPacientes()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes ORDER BY apellido_paciente';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, telefono_paciente, id_estado FROM pacientes ORDER BY apellido_paciente';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -395,8 +411,8 @@ class Pacientes extends Validator
 	public function createPaciente()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, estatura_paciente, peso_paciente, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 2)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->estatura, $this->peso);
+		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, estatura_paciente, peso_paciente, telefono_paciente, id_estado, id_sesion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->estatura, $this->peso, $this->telefono, 0, 2);
 		if(Database::executeRow($sql, $params)) {
 			$sql = 'UPDATE pacientes SET clave_actualizada = ? WHERE id_paciente = ?';
 			$params = array(date('Y-m-d'), Database::getLastRowId());
@@ -408,15 +424,15 @@ class Pacientes extends Validator
 
 	public function getPaciente()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente FROM pacientes WHERE id_paciente = ? LIMIT 1';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, telefono_paciente FROM pacientes WHERE id_paciente = ? LIMIT 1';
 		$params = array($this->idpaciente);
 		return Database::getRow($sql, $params);
 	}
 
 	public function updatePaciente()
 	{
-		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ? WHERE id_paciente = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->idpaciente);
+		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, telefono_paciente = ? WHERE id_paciente = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->telefono, $this->idpaciente);
 		return Database::executeRow($sql, $params);
 	}
 

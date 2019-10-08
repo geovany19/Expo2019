@@ -23,6 +23,7 @@ function fillTable(rows)
                 <td>${row.correo_doctor}</td>
                 <td>${row.usuario_doctor}</td>
                 <td>${row.fecha_nacimiento}</td>
+                <td>${row.telefono_doctor}</td>
                 <td>${row.nombre_especialidad}</td>
                 <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>//
                 <td>
@@ -161,7 +162,7 @@ $('#form-create').submit(function()
                 $('#modal-create').modal('hide');
                 $("#tabla-doctores").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, null);
+                sweetAlert(1, result.message, 'doctores.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -242,7 +243,7 @@ $('#form-update').submit(function()
                 $('#modal-update').modal('hide');
                 $("#tabla-doctores").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, null);
+                sweetAlert(1, result.message, 'doctores.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

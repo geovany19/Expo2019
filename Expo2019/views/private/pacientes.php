@@ -4,9 +4,9 @@ private_helper::headerTemplate('Paciente');
 private_helper::nav();
 ?>
 <form id='form-paciente' autocomplete="off">
-	<input type="text" name="idPaciente2" id="idPaciente2">
-	<input type="text" name="idCita" id="idCita">
-	<input type="text" name="idEstado" id="idEstado">
+	<input type="hidden" name="idPaciente2" id="idPaciente2">
+	<input type="hidden" name="idCita" id="idCita">
+	<input type="hidden" name="idEstado" id="idEstado">
 	<div class="form-group">
 		<label for="Nombre" class="col-form-label">Nombre paciente:</label>
 		<input type="text" name="nombrePaciente" id="nombrePaciente" class="form-control" required />

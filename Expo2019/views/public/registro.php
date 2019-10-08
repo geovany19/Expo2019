@@ -57,15 +57,20 @@ public_helper::head("Registrarse");
 							</div>-->
 							<div class="form-group col-sm-12 col-md-6">
 								<label for="estatura">Estatura</label>
-								<input id="estatura" type="text" name="estatura" class="form-control" placeholder="Estatura" maxlength="3">
+								<input id="estatura" type="number" name="estatura" class="form-control" placeholder="Estatura" maxlength="3">
 								<small id="estaturaHelp" class="form-text text-muted">Debe ingresar su estatura en centímetros, en caso de que no la conozca deje el campo vacío.</small>
 								<div class="invalid-feedback">Ingrese su estatura en centímetros</div>
 							</div>
 							<div class="form-group col-sm-12 col-md-6">
 								<label for="peso">Peso</label>
-								<input id="peso" type="text" name="peso" class="form-control" placeholder="Peso" maxlength="3">
+								<input id="peso" type="number" name="peso" class="form-control" placeholder="Peso" maxlength="3">
 								<small id="pesoHelp" class="form-text text-muted">Debe ingresar su peso en libras, en caso de que no lo conozca deje el campo vacío</small>
 								<div class="invalid-feedback">Ingrese su peso en libras</div>
+							</div>
+							<div class="form-group col-sm-12 col-md-6">
+								<label for="telefono">Telefono</label>
+								<input id="telefono" type="text" name="telefono" class="form-control" placeholder="Teléfono" minlength="8" maxlength="8">
+								<div class="invalid-feedback">Ingrese correctamente el número de teléfono</div>
 							</div>
 							<div class="form-group col-sm-12 col-md-6">
                             	<div class="g-recaptcha center" data-sitekey="6Lev7bQUAAAAAByJBru1V29JWpg5oo18d6SFuHKy"></div>

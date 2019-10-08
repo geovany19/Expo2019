@@ -31,7 +31,7 @@
 			$this->SetTextColor(0, 0, 0);
 			$this->SetFillColor(255,255,255);
 			$this->Cell(90,10, utf8_decode(date('G:i:s j/n/Y') ),0,0,'L',true);
-			$this->Cell(90,10, utf8_decode ('Paciente: '.$_SESSION['nombrePaciente'].' '.$_SESSION['apellidoPaciente']),0,0,'R',true);
+			$this->Cell(90,10, utf8_decode ('Paciente: '.$_SESSION['nombresPaciente'].' '.$_SESSION['apellidosPaciente']),0,0,'R',true);
 			$this->Ln(5);
 		}
 		

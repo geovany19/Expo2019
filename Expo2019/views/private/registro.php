@@ -49,6 +49,11 @@ private_helper::headerTemplate("Registrarse");
 								<input type="date" class="form-control" id="fecha" name="fecha" min="1939-01-01" max="2010-12-31" placeholder="Fecha de nacimiento" required>
 								<div class="invalid-feedback">Ingrese una fecha válida</div>
 							</div>
+							<div class="form-group col-md-6">
+								<label for="telefono">Teléfono</label>
+								<input type="text" class="form-control" id="telefono" name="telefono" minlength="8" maxlength="8" placeholder="Teléfono" required>
+								<div class="invalid-feedback">Ingrese un número de teléfono</div>
+							</div>
 							<div class="form-group col-sm-12 col-md-6">
                             	<div class="g-recaptcha center" data-sitekey="6Lev7bQUAAAAAByJBru1V29JWpg5oo18d6SFuHKy"></div>
 							</div>

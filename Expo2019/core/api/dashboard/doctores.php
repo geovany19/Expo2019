@@ -73,31 +73,35 @@ if (isset($_GET['action'])) {
                                     if ($_POST['create_usuario'] != $_POST['create_clave1']) {
                                         if ($doctor->setClave($_POST['create_clave1'])) {
                                             if ($doctor->setFecha($_POST['create_fecha'])) {
-                                                if ($doctor->setIdespecialidad($_POST['create_especialidad'])) {
-                                                    if ($doctor->setIdestado(isset($_POST['create_estado']) ? 1 : 0)) {
-                                                        if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
-                                                            if ($doctor->setFoto($_FILES['create_archivo'], null)) {
-                                                                if ($doctor->createDoctor()) {
-                                                                    $result['status'] = 1;
-                                                                    if ($doctor->saveFile($_FILES['create_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
-                                                                        $result['message'] = 'Doctor creado correctamente';
+                                                if ($doctor->setTelefono($_POST['create_telefono'])) {
+                                                    if ($doctor->setIdespecialidad($_POST['create_especialidad'])) {
+                                                        if ($doctor->setIdestado(isset($_POST['create_estado']) ? 1 : 0)) {
+                                                            if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
+                                                                if ($doctor->setFoto($_FILES['create_archivo'], null)) {
+                                                                    if ($doctor->createDoctor()) {
+                                                                        $result['status'] = 1;
+                                                                        if ($doctor->saveFile($_FILES['create_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
+                                                                            $result['message'] = 'Doctor creado correctamente';
+                                                                        } else {
+                                                                            $result['message'] = 'Doctor no creado. No se guardó el archivo';
+                                                                        }
                                                                     } else {
-                                                                        $result['message'] = 'Doctor no creado. No se guardó el archivo';
+                                                                        $result['exception'] = 'Operación fallida';
                                                                     }
                                                                 } else {
-                                                                    $result['exception'] = 'Operación fallida';
+                                                                    $result['exception'] = $doctor->getImageError();
                                                                 }
                                                             } else {
-                                                                $result['exception'] = $doctor->getImageError();
+                                                                $result['exception'] = 'Seleccione una imagen';
                                                             }
                                                         } else {
-                                                            $result['exception'] = 'Seleccione una imagen';
+                                                            $result['exception'] = 'Error con el estado';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Error con el estado';
+                                                        $result['exception'] = 'Error con la especialidad';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Error con la especialidad';
+                                                    $result['exception'] = 'Teléfono no válido';
                                                 }
                                             } else {
                                                 $result['exception'] = 'Fecha no válida';
@@ -145,40 +149,44 @@ if (isset($_GET['action'])) {
                                 if ($doctor->setCorreo($_POST['update_correo'])) {
                                     if ($doctor->setUsuario($_POST['update_usuario'])) {
                                         if ($doctor->setFecha($_POST['update_fecha'])) {
-                                            if ($doctor->setIdespecialidad($_POST['update_especialidad'])) {
-                                                if ($doctor->setIdestado(isset($_POST['update_estado']) ? 1 : 0)) {
-                                                    if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                        if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_doctor'])) {
-                                                            $archivo = true;
-                                                        } else {
-                                                            $result['exception'] = $producto->getImageError();
-                                                            $archivo = false;
-                                                        }
-                                                    } else {
-                                                        if (!$doctor->setFoto(null, $_POST['foto_doctor'])) {
-                                                            $result['exception'] = $doctor->getImageError();
-                                                        }
-                                                        $archivo = false;
-                                                    }
-                                                    if ($doctor->updateDoctor()) {
-                                                        $result['status'] = 1;
-                                                        if ($archivo) {
-                                                            if ($doctor->saveFile($_FILES['update_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
-                                                                $result['message'] = 'Doctor modificado correctamente';
+                                            if ($doctor->setTelefono($_POST['update_telefono'])) {
+                                                if ($doctor->setIdespecialidad($_POST['update_especialidad'])) {
+                                                    if ($doctor->setIdestado(isset($_POST['update_estado']) ? 1 : 0)) {
+                                                        if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
+                                                            if ($doctor->setFoto($_FILES['update_archivo'], $_POST['foto_doctor'])) {
+                                                                $archivo = true;
                                                             } else {
-                                                                $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                                $result['exception'] = $producto->getImageError();
+                                                                $archivo = false;
                                                             }
                                                         } else {
-                                                            $result['message'] = 'Doctor modificado. No se subió ningún archivo';
+                                                            if (!$doctor->setFoto(null, $_POST['foto_doctor'])) {
+                                                                $result['exception'] = $doctor->getImageError();
+                                                            }
+                                                            $archivo = false;
+                                                        }
+                                                        if ($doctor->updateDoctor()) {
+                                                            $result['status'] = 1;
+                                                            if ($archivo) {
+                                                                if ($doctor->saveFile($_FILES['update_archivo'], $doctor->getRuta(), $doctor->getFoto())) {
+                                                                    $result['message'] = 'Doctor modificado correctamente';
+                                                                } else {
+                                                                    $result['message'] = 'Doctor modificado. No se guardó el archivo';
+                                                                }
+                                                            } else {
+                                                                $result['message'] = 'Doctor modificado. No se subió ningún archivo';
+                                                            }
+                                                        } else {
+                                                            $result['exception'] = 'Operación fallida';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Operación fallida';
+                                                        $result['exception'] = 'Error con el estado';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Error con el estado';
+                                                    $result['exception'] = 'Error con la especialidad';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Error con la especialidad';
+                                                $result['exception'] = 'Teléfono no válido';
                                             }
                                         } else {
                                             $result['exception'] = 'Fecha no válida';

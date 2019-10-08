@@ -189,16 +189,26 @@ class Validator
     
     public function validateWeight($value)
     {
-        if (preg_match('/^[0-9]{1,3}+(?:\.[0-9]{1,2})?$/', $value)) {
+        /*if (preg_match('/^[0-9]{1,3}+(?:\.[0-9]{1,2})?$/', $value)) {
 			return true;
 		} else {
 			return false;
-		}
+        }*/
+        return true;
     }
 
     public function validateAlphanumeric($value, $minimum, $maximum)
     {
         if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\.]{'.$minimum.','.$maximum.'}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function validatePhoneNumber($value)
+    {
+        if (preg_match('/^([0-9]{8})$/',$value)) {
             return true;
         } else {
             return false;

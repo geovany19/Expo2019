@@ -351,27 +351,31 @@ if (isset($_GET['action'])) {
                                 if ($usuario->setFecha($_POST['fecha'])) {
                                     if ($usuario->setEstatura($_POST['estatura'])) {
                                         if ($usuario->setPeso($_POST['peso'])) {
-                                            if ($_POST['clave1'] != $_POST['usuario']) {
-                                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                                    $resultado = $usuario->setClave($_POST['clave1']);
-                                                    if ($resultado[0]) {
-                                                        if (!$recaptcha) {
-                                                            $result['exception'] = 'Comprobacion vacia';  
-                                                        } else {
-                                                            if ($usuario->createPaciente()) {
-                                                                $result['status'] = 1;
+                                            if ($usuario->setTelefono($_POST['telefono'])) {
+                                                if ($_POST['clave1'] != $_POST['usuario']) {
+                                                    if ($_POST['clave1'] == $_POST['clave2']) {
+                                                        $resultado = $usuario->setClave($_POST['clave1']);
+                                                        if ($resultado[0]) {
+                                                            if (!$recaptcha) {
+                                                                $result['exception'] = 'Comprobacion vacia';  
                                                             } else {
-                                                                $result['exception'] = 'Operación fallida';
-                                                            }
-                                                            } 
+                                                                if ($usuario->createPaciente()) {
+                                                                    $result['status'] = 1;
+                                                                } else {
+                                                                    $result['exception'] = 'Operación fallida';
+                                                                }
+                                                                } 
+                                                        } else {
+                                                            $result['exception'] = $resultado[1];
+                                                        } 
                                                     } else {
-                                                        $result['exception'] = $resultado[1];
-                                                    } 
+                                                        $result['exception'] = 'Claves diferentes';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Claves diferentes';
+                                                    $result['exception'] = 'Clave incorrecta, igual al alias';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Clave incorrecta, igual al alias';
+                                                $result['exception'] = 'Teléfono incorrecto';
                                             }
                                         } else {
                                             $result['exception'] = 'Peso incorrecto'; 

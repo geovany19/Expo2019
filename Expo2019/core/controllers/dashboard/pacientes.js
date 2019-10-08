@@ -203,6 +203,7 @@ function modalUpdate(id) {
                         $('#foto').attr('src', '../../resources/img/dashboard/pacientes/' + result.dataset.foto_paciente);
                         $('#update_peso').val(result.dataset.peso_paciente);
                         $('#update_estatura').val(result.dataset.estatura_paciente);
+                        $('#update_telefono').val(result.dataset.telefono_paciente);
                         (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                         $('#modal-update').modal('show');
                     } else {
@@ -292,7 +293,7 @@ function confirmDelete(id) {
                                 if (result.status) {
                                     $("#tabla-pacientes").DataTable().destroy();
                                     showTable();
-                                    sweetAlert(1, result.message, null);
+                                    sweetAlert(1, result.message, 'pacientes.php');
                                 } else {
                                     sweetAlert(2, result.exception, null);
                                 }

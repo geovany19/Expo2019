@@ -16,6 +16,7 @@ class Usuarios extends Validator
 	private $id_cita = null;
 	private $receta = null;
 	private $peso = null;
+	private $telefono = null;
 	private $estatura = null;
 	private $presion = null;
 	private $token = null;
@@ -251,6 +252,21 @@ public function setReceta($value)
 	public function getClave()
 	{
 		return $this->clave; 
+	}
+
+	public function setTelefono($value)
+	{
+		if ($this->validatePhoneNumber($value)) {
+			$this->telefono = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getTelefono()
+	{
+		return $this->telefono;
 	}
 
 	// Métodos para manejar la sesión del usuario

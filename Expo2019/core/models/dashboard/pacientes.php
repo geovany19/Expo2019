@@ -180,9 +180,19 @@ class Pacientes extends Validator
 		return $this->idestado;
 	}
 
-	public function setTelefono(Type $var = null)
+	public function setTelefono($value)
 	{
-		# code...
+		if ($this->validatePhoneNumber($value)) {
+			$this->telefono = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getTelefono()
+	{
+		return $this->telefono;
 	}
 
 	public function getRuta()
@@ -226,22 +236,22 @@ class Pacientes extends Validator
 	public function createPaciente()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->peso, $this->estatura, $this->idestado);
+		$sql = 'INSERT INTO pacientes(nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, telefono_paciente, id_estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $hash, $this->fecha, $this->foto, $this->peso, $this->estatura, $this->telefono, $this->idestado);
 		return Database::executeRow($sql, $params);
 	}
 
 	public function getPaciente()
 	{
-		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, id_estado FROM pacientes WHERE id_paciente = ?';
+		$sql = 'SELECT id_paciente, nombre_paciente, apellido_paciente, correo_paciente, usuario_paciente, contrasena_paciente, fecha_nacimiento, foto_paciente, peso_paciente, estatura_paciente, telefono_paciente, id_estado FROM pacientes WHERE id_paciente = ?';
 		$params = array($this->idpaciente);
 		return Database::getRow($sql, $params);
 	}
 
 	public function updatePaciente()
 	{
-		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ?, id_estado = ? WHERE id_paciente = ?';
-		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->idestado, $this->idpaciente);
+		$sql = 'UPDATE pacientes SET nombre_paciente = ?, apellido_paciente = ?, correo_paciente = ?, usuario_paciente = ?, fecha_nacimiento = ?, foto_paciente = ?, telefono_paciente = ?, id_estado = ? WHERE id_paciente = ?';
+		$params = array($this->nombre, $this->apellido, $this->correo, $this->usuario, $this->fecha, $this->foto, $this->telefono, $this->idestado, $this->idpaciente);
 		return Database::executeRow($sql, $params);
 	}
 

@@ -260,7 +260,8 @@ if (isset($_GET['action'])) {
                                 if ($usuario->setReceta($_POST['receta'])) {
 
                                             if ($usuario->setId_cita($_POST['idCita'])) {
-                                                if ($usuario->insertConsulta() && $usuario->updateEstadocita()) {
+                                                if ($usuario->insertConsulta()) {
+                                                    $usuario->updateEstadocita();
                                                     $result['status'] = 1;
                                                 } else {
                                                     $result['exception'] = 'Operación fallida';
@@ -295,23 +296,27 @@ if (isset($_GET['action'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
                             if ($usuario->setAlias($_POST['usuario'])) {
                                 if ($usuario->setFecha($_POST['fecha'])) {
-                                    if ($_POST['clave1'] != $_POST['usuario']) {
-                                        if ($_POST['clave1'] == $_POST['clave2']) {
-                                            $resultado = $usuario->setClave($_POST['clave1']);
-                                            if ($resultado[0]) {
-                                                if ($usuario->createDoctores()) {
-                                                    $result['status'] = 1;
+                                    if ($usuario->setTelefono($_POST['telefono'])) {
+                                        if ($_POST['clave1'] != $_POST['usuario']) {
+                                            if ($_POST['clave1'] == $_POST['clave2']) {
+                                                $resultado = $usuario->setClave($_POST['clave1']);
+                                                if ($resultado[0]) {
+                                                    if ($usuario->createDoctores()) {
+                                                        $result['status'] = 1;
+                                                    } else {
+                                                        $result['exception'] = 'Operación fallida';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Operación fallida';
+                                                    $result['exception'] = $resultado[1];
                                                 }
                                             } else {
-                                                $result['exception'] = $resultado[1];
+                                                $result['exception'] = 'Claves diferentes';
                                             }
                                         } else {
-                                            $result['exception'] = 'Claves diferentes';
+                                            $result['exception'] = 'Clave incorrecta, igual al alias';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave incorrecta, igual al alias';
+                                        $result['exception'] = 'Teléfono incorrecto';
                                     }
                                 } else {
                                     $result['exception'] = 'Fecha inválida';

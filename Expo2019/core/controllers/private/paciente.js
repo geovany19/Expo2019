@@ -53,7 +53,10 @@ $(document).ready(function()
             const result = JSON.parse(response);
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
+                sweetAlert(1, 'Cita realizada exitosamanete', 'agenda.php');
                 window.open('../../core/reportes/private/reporteReceta.php?id='+$('#idPaciente2').val());
+                
+                
             } else {
                 sweetAlert(2, result.exception, null);
             }

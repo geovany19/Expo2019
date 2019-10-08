@@ -135,7 +135,7 @@ $('#form-create').submit(function()
                 $('#modal-create').modal('hide');
                 $("#tabla-especialidades").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, null);
+                sweetAlert(1, result.message, 'especialidades.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -237,7 +237,7 @@ $('#form-update').submit(function()
                 $('#modal-update').modal('hide');
                 $("#tabla-especialidades").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, null);
+                sweetAlert(1, result.message, 'especialidades.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -280,7 +280,7 @@ function confirmDelete(id)
                     if (result.status) {
                     $("#tabla-especialidades").DataTable().destroy();
                         showTable();
-                        sweetAlert(1, result.message, null);
+                        sweetAlert(1, result.message, 'especialidades.php');
                     } else {
                         sweetAlert(2, result.exception, null);
                     }

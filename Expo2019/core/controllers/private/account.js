@@ -59,7 +59,7 @@ $('#form-registro').submit(function()
 
 
 
-
+/*
 $('#crear-consulta').submit(function()
 {
     event.preventDefault();
@@ -89,7 +89,7 @@ $('#crear-consulta').submit(function()
         //Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Errors: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
-})
+})*/
 
 
 

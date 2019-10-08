@@ -18,7 +18,7 @@ $(document).ready(function() {
 					const result = JSON.parse(response);
 					//Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
 					if (result.status) {
-						fillTableCitas(result.dataset);
+						fillTableCitas(result.dataset, result.id_paciente);
 					}
 				} else {
 					console.log(response);
@@ -31,7 +31,7 @@ $(document).ready(function() {
 	}
 	
 	//Función para llenar tabla con los datos de los registros
-	function fillTableCitas(rows) {
+	function fillTableCitas(rows, id) {
 		let content = "";
 		//Se recorren las filas para armar el cuerpo de la tabla y se utiliza comilla invertida para escapar los caracteres especiales
 		rows.forEach(function(row) {
@@ -50,13 +50,21 @@ $(document).ready(function() {
 									? '<div class="d-flex justify-content-center" style="align-items: center;"><button type="button" class="btn btn-danger ml-3" onclick="cancelarCita(' +
 										row.id_cita +
 										')">Cancelar cita</button></div>'
-									: ""
+									: (row.id_estado == 1) ?
+									'<div class="d-flex justify-content-center" style="align-items: center;"><button type="button" class="btn btn-primary ml-3" onclick="getReceta(' +
+										id +
+										')">Ver receta</button></div>'
+										: ""
 							}</td>
 					</tr>
 					`;
 		});
 		$("#tbody-citas").html(content);
 		renderDataTable("#dataTableCitas");
+	}
+
+	function getReceta(id) {
+		sweetAlert(1, 'Mostrando receta', '../../core/reportes/private/reporteReceta.php?id='+id);
 	}
 	
 	function cancelarCita(id) {

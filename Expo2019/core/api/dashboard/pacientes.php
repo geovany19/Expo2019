@@ -110,7 +110,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No tenemos registrado ningun paciente';
                 }
                 break;
-                case 'fillpaciente':
+            case 'fillpaciente':
                 if ($result['dataset'] = $paciente->fillPacientes()) {
                     $result['status'] = 1;
                 } else {
@@ -129,7 +129,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-                case 'create':
+            case 'create':
                 $_POST = $paciente->validateForm($_POST);
                 if ($paciente->setNombre($_POST['create_nombres'])) {
                     if ($paciente->setApellido($_POST['create_apellidos'])) {
@@ -140,24 +140,28 @@ if (isset($_GET['action'])) {
                                         if ($paciente->setFoto($_FILES['create_archivo'], null)) {
                                             if ($paciente->setPeso($_POST['create_peso'])) {
                                                 if ($paciente->setEstatura($_POST['create_estatura'])) {
-                                                    if ($paciente->setIdestado(isset($_POST['create_estado']) ? 1 : 0)) {
-                                                        if ($paciente->createPaciente()) {
-                                                            $result['status'] = 1;
-                                                            if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
-                                                                $result['message'] = 'Paciente creado correctamente';
+                                                    if ($paciente->setTelefono($_POST['create_telefono'])) {
+                                                        if ($paciente->setIdestado(isset($_POST['create_estado']) ? 1 : 0)) {
+                                                            if ($paciente->createPaciente()) {
+                                                                $result['status'] = 1;
+                                                                if ($paciente->saveFile($_FILES['create_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
+                                                                    $result['message'] = 'Paciente creado correctamente';
+                                                                } else {
+                                                                    $result['message'] = 'Paciente no creado. No se guardó el archivo';
+                                                                }
                                                             } else {
-                                                                $result['message'] = 'Paciente no creado. No se guardó el archivo';
+                                                                $result['exception'] = 'Operación fallida';
                                                             }
                                                         } else {
-                                                            $result['exception'] = 'Operación fallida';
+                                                            $result['exception'] = 'Estado incorrecto';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Estado incorrecto';
+                                                        $result['exception'] = 'Teléfono incorrecto';
                                                     }
-                                                }else {
+                                                } else {
                                                     $result['exception'] = 'Estatura incorrecta';
                                                 }
-                                            }else {
+                                            } else {
                                                 $result['exception'] = 'Peso incorrecto';
                                             }
                                         } else {
@@ -204,37 +208,41 @@ if (isset($_GET['action'])) {
                                         if ($paciente->setFecha($_POST['update_fecha'])) {
                                             if ($paciente->setPeso($_POST['update_peso'])) {
                                                 if ($paciente->setEstatura($_POST['update_estatura'])) {
-                                                    if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 0)) {
-                                                        if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
-                                                            if ($paciente->setFoto($_FILES['update_archivo'], $_POST['foto_paciente'])) {
-                                                                $archivo = true;
-                                                            } else {
-                                                                $result['exception'] = $producto->getImageError();
-                                                                $archivo = false;
-                                                            }
-                                                        } else {
-                                                            if (!$paciente->setFoto(null, $_POST['foto_paciente'])) {
-                                                                $result['exception'] = $paciente->getImageError();
-                                                            }
-                                                            $archivo = false;
-                                                        }
-                                                        if ($paciente->updatePaciente()) {
-                                                            $result['status'] = 1;
-                                                            if ($archivo) {
-                                                                if ($paciente->saveFile($_FILES['update_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
-                                                                    $result['message'] = 'Paciente modificado correctamente';
+                                                    if ($paciente->setTelefono($_POST['update_telefono'])) {
+                                                        if ($paciente->setIdestado(isset($_POST['update_estado']) ? 1 : 0)) {
+                                                            if (is_uploaded_file($_FILES['update_archivo']['tmp_name'])) {
+                                                                if ($paciente->setFoto($_FILES['update_archivo'], $_POST['foto_paciente'])) {
+                                                                    $archivo = true;
                                                                 } else {
-                                                                    $result['message'] = 'Paciente modificado. No se guardó el archivo';
+                                                                    $result['exception'] = $producto->getImageError();
+                                                                    $archivo = false;
                                                                 }
                                                             } else {
-                                                                $result['message'] = 'Paciente modificado. No se subió ningún archivo';
+                                                                if (!$paciente->setFoto(null, $_POST['foto_paciente'])) {
+                                                                    $result['exception'] = $paciente->getImageError();
+                                                                }
+                                                                $archivo = false;
                                                             }
-                                                        } else {
-                                                            $result['exception'] = 'Operación fallida. No se pudo actualizar el paciente';
+                                                            if ($paciente->updatePaciente()) {
+                                                                $result['status'] = 1;
+                                                                if ($archivo) {
+                                                                    if ($paciente->saveFile($_FILES['update_archivo'], $paciente->getRuta(), $paciente->getFoto())) {
+                                                                        $result['message'] = 'Paciente modificado correctamente';
+                                                                    } else {
+                                                                        $result['message'] = 'Paciente modificado. No se guardó el archivo';
+                                                                    }
+                                                                } else {
+                                                                    $result['message'] = 'Paciente modificado. No se subió ningún archivo';
+                                                                }
+                                                            } else {
+                                                                $result['exception'] = 'Operación fallida. No se pudo actualizar el paciente';
+                                                            }
                                                         }
+                                                    } else {
+                                                        $result['exception'] = 'Estatura no válida';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Estatura no válida';
+                                                    $result['exception'] = 'Teléfono incorrecto';
                                                 }
                                             } else {
                                                 $result['exception'] = 'Peso no válido. No se pudo actualizar el paciente';

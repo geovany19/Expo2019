@@ -51,6 +51,7 @@ if (isset($_GET['action'])) {
             if ($cita->setIdpaciente($_SESSION['idPaciente'])) {
                 if ($result['dataset'] = $cita->getCitaByPaciente()) {
                     $result['status'] = 1;
+                    $result['id_paciente'] = $_SESSION['idPaciente'];
                 } else {
                     $result['exception'] = 'No hay citas registrados';
                 }

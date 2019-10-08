@@ -1,5 +1,5 @@
 //Constante para establecer la ruta y parámetros de comunicación con la API
-const apiConsulta = '../../core/api/private/usuarios.php?&action=';
+/*const apiConsulta = '../../core/api/private/usuarios.php?&action=';
 
 ;((e)=>{
     let id = document.getElementById('idDoctor').value
@@ -50,4 +50,4 @@ const apiConsulta = '../../core/api/private/usuarios.php?&action=';
         console.log('Errors: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
     
-})()
+})()*/

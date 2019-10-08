@@ -27,6 +27,7 @@ dashboardHelper::nav();
 					<th scope="col">Correo</th>
 					<th scope="col">Usuario</th>
 					<th scope="col">Fecha de nacimiento</th>
+					<th scope="col">Teléfono</th>
 					<th scope="col">Especialidad</th>
 					<th scope="col">Estado</th>
 					<th scope="col">Acciones</th>
@@ -76,6 +77,10 @@ dashboardHelper::nav();
 			<div class="col-md-6 mb-4">
       			<label for="create_fecha">Fecha de nacimiento</label>
       			<input type="date" class="form-control" id="create_fecha" name="create_fecha" required>
+			</div>
+			<div class="col-md-6 mb-4">
+      			<label for="create_fecha">Teléfono</label>
+      			<input type="text" class="form-control" id="create_telefono" name="create_telefono" minlength="8" maxlength="8" required>
     		</div>
 			<div class="col-md-6 mb-4">
 				<label>Especialidad</label>
@@ -120,7 +125,7 @@ dashboardHelper::nav();
       </div>
       <div class="modal-body">
 							
-	  <form class="needs-validation" id="form-update" autocomplete="off" novalidate>
+	  <form class="needs-validation" id="form-update" autocomplete="off">
 	  <div class="d-flex justify-content-center">
 			  <img id="foto" class="img-fluid" width="100">
 	  </div>	
@@ -146,10 +151,14 @@ dashboardHelper::nav();
 			<div class="col-md-6 mb-4">
       			<label for="update_fecha">Fecha de nacimiento</label>
       			<input type="date" class="form-control" id="update_fecha" name="update_fecha" required>
+			</div>
+			<div class="col-md-6 mb-4">
+      			<label for="update_telefono">Teléfono</label>
+      			<input type="text" class="form-control" id="update_telefono" name="update_telefono" minlength="8" maxlength="8" required>
     		</div>
 			<div class="col-md-6 mb-4">
 				<label>Especialidad</label>
-				<select id="update_especialidad" name="update_especialidad">
+				<select class="custom-select" id="update_especialidad" name="update_especialidad">
 				</select>
 			</div>
 				<div class="file-field input-field col s12 m6">

@@ -96,6 +96,9 @@ class public_helper
 					<!-- Topbar Navbar Right-->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
+							<a class="nav-link" href="../../core/reportes/private/reporteExpediente.php?id='.$_SESSION['idPaciente'].'">Ver expediente<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="citas.php">Ver citas <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item">

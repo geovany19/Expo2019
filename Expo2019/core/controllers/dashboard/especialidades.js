@@ -84,37 +84,6 @@ function showTable()
     });
 }
 
-// Función para mostrar los resultados de una búsqueda
-$('#form-search').submit(function()
-{
-    event.preventDefault();
-    $.ajax({
-        url: api + 'search',
-        type: 'post',
-        data: $('#form-search').serialize(),
-        datatype: 'json'
-    })
-    .done(function(response){
-        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-        if (isJSONString(response)) {
-            const result = JSON.parse(response);
-            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-            if (result.status) {
-                fillTable(result.dataset);
-                //sweetAlert(1, result.message, null);
-            } else {
-                sweetAlert(3, result.exception, null);
-            }
-        } else {
-            console.log(response);
-        }
-    })
-    .fail(function(jqXHR){
-        // Se muestran en consola los posibles errores de la solicitud AJAX
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-    });
-})
-
 // Función para crear un nuevo registro
 $('#form-create').submit(function()
 {
@@ -133,9 +102,9 @@ $('#form-create').submit(function()
             if (result.status) {
                 $('#form-create')[0].reset();
                 $('#modal-create').modal('hide');
-                $("#tabla-especialidades").DataTable().destroy();
+                $("#table-body").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, 'especialidades.php');
+                sweetAlert(1, result.message, null);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -205,6 +174,8 @@ function modalUpdate(id)
                 $('#update_nombre').val(result.dataset.nombre_especialidad);
                 $('#update_descripcion').val(result.dataset.descripcion_especialidad);
                 $('#modal-update').modal('show');
+                $("#table-body").DataTable().destroy();
+                showTable();
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -235,9 +206,9 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
-                $("#tabla-especialidades").DataTable().destroy();
+                $("#table-body").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, 'especialidades.php');
+                sweetAlert(1, result.message, null);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -278,9 +249,9 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
-                    $("#tabla-especialidades").DataTable().destroy();
+                        $("#table-body").DataTable().destroy();
                         showTable();
-                        sweetAlert(1, result.message, 'especialidades.php');
+                        sweetAlert(1, result.message, null);
                     } else {
                         sweetAlert(2, result.exception, null);
                     }

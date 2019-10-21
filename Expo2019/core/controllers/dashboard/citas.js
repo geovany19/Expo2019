@@ -81,7 +81,7 @@ function showTable()
             if (!result.status) {
                 sweetAlert(4, result.exception, null);
             }
-            $("#tabla-body").DataTable().destroy();
+            $("#table-body").DataTable().destroy();
             fillTable(result.dataset);
         } else {
             console.log(response);
@@ -153,8 +153,9 @@ $('#form-create').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-create').modal('hide');
+                $("#table-body").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, 'citas.php');
+                sweetAlert(1, result.message, null);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -194,6 +195,8 @@ function modalUpdate(id)
                 fillSelect(anexopaci + 'fillpaciente', 'update_paciente',result.dataset.id_paciente);
                 fillSelect(estados + 'fill', 'update_estado',result.dataset.id_estado);
                 $('#modal-update').modal('show');
+                $("#table-body").DataTable().destroy();
+                showTable();
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -227,6 +230,7 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
+                $("#table-body").DataTable().destroy();
                 showTable();
                 sweetAlert(1, result.message, null);
             } else {
@@ -304,6 +308,7 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
+                        $("#table-body").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {

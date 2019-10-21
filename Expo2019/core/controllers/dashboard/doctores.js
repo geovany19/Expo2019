@@ -34,7 +34,7 @@ function fillTable(rows)
         `;
     });
     $('#tabla-doctores').html(content);
-    $("#table-body").DataTable({
+    $('#table-body').DataTable({
         "oLanguage":{
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -160,9 +160,9 @@ $('#form-create').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-create').modal('hide');
-                $("#tabla-doctores").DataTable().destroy();
+                $("#table-body").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, 'doctores.php');
+                sweetAlert(1, result.message, null);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -206,7 +206,7 @@ function modalUpdate(id)
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');
-                $("#tabla-doctores").DataTable().destroy();
+                $("#table-body").DataTable().destroy();
                 showTable();
             } else {
                 sweetAlert(2, result.exception, null);
@@ -241,9 +241,9 @@ $('#form-update').submit(function()
             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-update').modal('hide');
-                $("#tabla-doctores").DataTable().destroy();
+                $("#table-body").DataTable().destroy();
                 showTable();
-                sweetAlert(1, result.message, 'doctores.php');
+                sweetAlert(1, result.message, null);
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -319,7 +319,7 @@ function confirmDelete(id)
                     const result = JSON.parse(response);
                     // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                     if (result.status) {
-                        $("#tabla-doctores").DataTable().destroy();
+                        $("#table-body").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {

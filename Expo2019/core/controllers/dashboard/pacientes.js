@@ -105,36 +105,6 @@ function showTable() {
         });
 }
 
-// Función para mostrar formulario con registro a modificar
-$('#form-search').submit(function () {
-    event.preventDefault();
-    $.ajax({
-        url: apiPacientes + 'search',
-        type: 'post',
-        data: $('#form-search').serialize(),
-        datatype: 'json'
-    })
-        .done(function (response) {
-            // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
-            if (isJSONString(response)) {
-                const result = JSON.parse(response);
-                // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
-                if (result.status) {
-                    fillTable(result.dataset);
-                    sweetAlert(1, result.message, null);
-                } else {
-                    sweetAlert(3, result.exception, null);
-                }
-            } else {
-                console.log(response);
-            }
-        })
-        .fail(function (jqXHR) {
-            // Se muestran en consola los posibles errores de la solicitud AJAX
-            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-        });
-})
-
 // Función para crear un nuevo registro
 $('#form-create').submit(function () {
     event.preventDefault();
@@ -157,6 +127,7 @@ $('#form-create').submit(function () {
                         $('#modal-create').modal('hide');
                         $("#table-body").DataTable().destroy();
                         $('#form-create')[0].reset();
+                        $("#table-body").DataTable().destroy();
                         showTable();
                         sweetAlert(1, result.message, null);
                     } else {
@@ -207,6 +178,8 @@ function modalUpdate(id) {
                         $('#update_telefono').val(result.dataset.telefono_paciente);
                         (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                         $('#modal-update').modal('show');
+                        $("#table-body").DataTable().destroy();
+                        showTable();
                     } else {
                         sweetAlert(2, result.exception, null);
                     }
@@ -247,7 +220,7 @@ $('#form-update').submit(function () {
                         $('#modal-update').modal('hide');
                         $("#table-body").DataTable().destroy();
                         showTable();
-                        sweetAlert(1, result.message, 'pacientes.php');
+                        sweetAlert(1, result.message, null);
                     } else {
                         sweetAlert(2, result.exception, null);
                     }
@@ -292,9 +265,9 @@ function confirmDelete(id) {
                             // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
                             if (result.session) {
                                 if (result.status) {
-                                    $("#tabla-pacientes").DataTable().destroy();
+                                    $("#table-body").DataTable().destroy();
                                     showTable();
-                                    sweetAlert(1, result.message, 'pacientes.php');
+                                    sweetAlert(1, result.message, null);
                                 } else {
                                     sweetAlert(2, result.exception, null);
                                 }

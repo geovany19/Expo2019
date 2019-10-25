@@ -57,7 +57,7 @@ $('#form-sesion').submit(function()
                 sweetAlert(3, 'Debe autenticar su cuenta','autenticar.php');
 
             } else if(dataset.status == 5){
-                sweetAlert(3, dataset.exception,'recuperar.php');
+                sweetAlert(3, dataset.exception,'recuperar1.php');
 
             }else if(dataset.status == 4){
                 sweetAlert(3, 'Cuenta bloqueada',null);

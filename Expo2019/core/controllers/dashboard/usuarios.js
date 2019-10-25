@@ -188,6 +188,8 @@ function modalUpdate(id) {
                     $('#foto_usuario').val(result.dataset.foto_usuario);
                     (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                     $('#modal-update').modal('show');
+                    $("#tabla-usuarios").DataTable().destroy();
+                    showTable();
                 } else {
                     sweetAlert(2, result.exception, null);
                 }

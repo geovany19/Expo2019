@@ -38,7 +38,7 @@ class private_helper
 	{
 		if (isset($_SESSION['idDoctor'])) {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticar.php'  && $filename != 'claves.php'  && $filename != 'correo.php') {
+			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticar.php' && $filename != 'autenticacion.php' && $filename != 'claves.php'  && $filename != 'correo.php') {
 				
 				self::modals();
 				print('

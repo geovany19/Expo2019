@@ -130,12 +130,10 @@ class Cita extends Validator
 		$sql = 'SELECT id_cita, id_doctor, id_paciente, fecha_cita, hora_cita, id_estado FROM cita WHERE id_cita = ?';
 		$params = array($this->id_cita);
 		$data = Database::executeRow($sql, $params);
-		$fecha_actual = strtotime(date('d-m-Y H:i:00',time()));
-		$fecha_maxima = strtotime(date($data['fecha_cita'].'- 1 hour'));
-		$hora_actual = strtotime(date('G:i:s'));
-        $hora_maxima = strtotime($data['hora_cita'].'- 2 hours');
-		$estado_cita = $data['id_estado'];
-		if ($fecha_actual <= $fecha_maxima) {
+		//$fecha_actual = strtotime(date('d-m-Y H:i:00',time()));
+		$fecha_actual = date('Y-m-d');
+		$fecha_maxima = strtotime(date($data['fecha_cita'].'+ 3 days'));
+		if ($fecha_maxima > $fecha_actual) {
 			return 1;
 		} else {
 			return 0;
@@ -155,6 +153,20 @@ class Cita extends Validator
         } else {
             return 1;
         }*/
+	}
+
+	public function getFechaCita()
+	{
+		$sql = 'SELECT fecha_cita FROM cita WHERE id_cita = ?';
+		$params = array($this->id_cita);
+		return Database::getRows($sql, $params);
+	}
+
+	public function getHoraCita()
+	{
+		$sql = 'SELECT hora_cita FROM cita WHERE id_cita = ?';
+		$params = array($this->id_cita);
+		return Database::getRows($sql, $params);
 	}
 
 	public function getCitaByPaciente()

@@ -16,7 +16,7 @@ $mail = new PHPMailer(true);
 if (isset($_GET['action'])) {
     session_start();
     $usuario = new Usuarios;
-    $cita = new Citas;
+    $cita = new Cita;
     $result = array('status' => 0, 'exception' => '');
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     //dentro del if va todo lo que se puede hacer mientras se inicia sesion 
@@ -115,11 +115,21 @@ if (isset($_GET['action'])) {
 
             case 'cancelCita':
                 if ($usuario->setId($_POST['id_cita'])) {
-                    if ($usuario->cancelCita()) {
+                    if ($usuario->getFechaCita() >= date('Y-m-d')) {
+                        if ($usuario->cancelCita()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = 'Operación fallida';
+                        }
+                    } else {
+                        $result['status'] = 0;
+                        $result['exception'] = 'No es posible cancelar la cita, ha excedido el tiempo para hacerlo';
+                    }
+                    /*if ($usuario->cancelCita()) {
                         $result['status'] = 1;
                     } else {
                         $result['exception'] = 'Operación fallida';
-                    }
+                    }*/
                 } else {
                     $result['exception'] = 'cita incorrecto';
                 }
@@ -416,7 +426,11 @@ if (isset($_GET['action'])) {
                                         $result['status'] = 5;
                                         break;
                                     case 2:
-                                        $token_autenticacion = mt_rand(100000, 999999);
+                                        $result['status'] = 1;
+                                        $_SESSION['ultimoAcceso'] = time();
+                                        $_SESSION['idDoctor'] = $usuario->getId();
+                                        $_SESSION['aliasDoctor'] = $usuario->getAlias();
+                                        /*$token_autenticacion = mt_rand(100000, 999999);
                                         if ($usuario->setToken($token_autenticacion)) {
                                             if ($usuario->setTokenAutenticacion()) {
                                                 if ($usuario->getTokenAutenticacion()) {
@@ -452,7 +466,7 @@ if (isset($_GET['action'])) {
                                             }
                                         } else {
                                             $result['exception'] = 'Error al setear el token';
-                                        }
+                                        }*/
                                         break;
                                     case 3:
                                         $result['exception'] = 'El usuario ya posee una sesión iniciada';

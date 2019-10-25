@@ -108,7 +108,7 @@ $('#login-1').submit(function()
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status == 1) {
-                sweetAlert(1, 'Paso 1, Completo', 'autenticacion.php');
+                sweetAlert(1, 'Inicio de sesión correcto', 'agenda.php');
             } else if(dataset.status == 2){
                 sweetAlert(1, 'Logueo correcto','autenticar.php');
 

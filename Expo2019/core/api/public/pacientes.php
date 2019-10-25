@@ -478,7 +478,7 @@ if (isset($_GET['action'])) {
                                                 $result['status'] = 1;
                                                 $_SESSION['ultimoAccesoPaciente'] = time();
                                                 $_SESSION['idPaciente'] = $usuario->getId();
-                                                $_SESSION['aliasPaciente'] = $usuario->getUsuario();
+                                                $_SESSION['usuarioPaciente'] = $usuario->getUsuario();
                                             break;
                                         case 3:
                                             $result['exception'] = 'El usuario ya posee una sesión iniciada';

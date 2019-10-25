@@ -1,5 +1,5 @@
 <?php
-class Citass extends Validator
+class Citas extends Validator
 {
     private $idcita = null;
     private $nombre = null;

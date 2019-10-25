@@ -50,7 +50,7 @@ public_helper::nav();
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputDate">Fecha</label>
-                                <input type="date" class="form-control" id="inputDate" required>
+                                <input type="date" class="form-control" id="inputDate" min=<?php echo date('Y-m-d') ?> required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputTime">Hora</label>

@@ -416,6 +416,13 @@ public function setReceta($value)
 		return Database::getRows($sql, $params);
 	}
 
+	public function getFechaCita()
+	{
+		$sql = 'SELECT fecha_cita FROM cita WHERE id_cita = ?';
+		$params = array($this->id_cita);
+		return Database::getRows($sql, $params);
+	}
+
 	public function cancelCita()
 	{
 		$sql = 'UPDATE cita SET id_estado = 3 WHERE  id_cita = ?';

@@ -27,10 +27,14 @@ if (isset($_GET['action'])) {
                     if ($cita->setFecha($_POST['inputDate'])) {
                         if ($cita->setHora($_POST['inputTime'])) {
                             if ($cita->setIdestado(2)) {
-                                if ($cita->createCita()) {
-                                    $result['status'] = 1;
+                                if ($_POST['inputDate'] > date('Y-m-d')) {
+                                    if ($cita->createCita()) {
+                                        $result['status'] = 1;
+                                    } else {
+                                        $result['exception'] = 'Error al crear cita';
+                                    }
                                 } else {
-                                    $result['exception'] = 'Error al crear cita';
+                                    $result['exception'] = 'Fecha inválida para la cita.';
                                 }
                             } else {
                                 $result['exception'] = 'Error en el estado';
@@ -71,58 +75,19 @@ if (isset($_GET['action'])) {
         case 'cancelarCita':
             if ($cita->setIdestado(3)) {
                 if ($cita->setIdcita($_POST['id_cita'])) {
-                    /*if ($cita->updateEstado()) {
-                        $result['status'] = 1;
-                        $result['exception'] = 'Operación fallida';
+                    if ($cita->getFechaCita() >= date('Y-m-d')) {
+                        if ($cita->updateEstado()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = 'Operación fallida';
+                        }
                     } else {
-                        $result['exception'] = 'Operación fallida';
-                    }*/
-                    switch ($cita->checkCita()) {
-                        case 0:
-                            $result['status'] = 0;
-                            $result['exception'] = 'No es posible cancelar la cita debido a que ha excedido el tiempo permitido par hacerlo';
-                            break;
-                        case 1:
-                            if ($cita->updateEstado()) {
-                                $result['status'] = 1;
-                            } else {
-                                $result['exception'] = 'Operación fallida';
-                            }
-                            break;
-                            /*
-                        case 2:
-                            $result['status'] = 2;
-                            $result['exception'] = 'La cita ha sido aceptada anteriormente';
-                            break;
-                        case 3:
-                            $result['status'] = 3;
-                            $result['exception'] = 'La cita ha sido cancelada anteriormente y no puede 
-                            ser modificada debido a que excedió el tiempo permitido';
-                            break;
-                        case 4:
-                            $result['status'] = 4;
-                            $result['exception'] = 'La cita ya fue realizada';
-                            break;
-                        case 5:
-                            $result['status'] = 5;
-                            $result['exception'] = 'Se ha agotado el horario permitido para cancelar la cita';
-                            break;
-                        case 6:
-                            $result['status'] = 6;
-                            $result['exception'] = 'Se ha agotado el periodo permitido para cancelar la cita';
-                            break;
-                        case 7:
-                            //print_r($fecha_maxima = strtotime(date('d-m-Y',time()).'- 1 day'));
-                            $result['status'] = 7;
-                            $result['exception'] = 'Ya no es posible cancelar la cita';
-                            break;
-                    }*/
+                        $result['status'] = 0;
+                        $result['exception'] = 'No es posible cancelar la cita, ha excedido el tiempo para hacerlo';
                     }
-                } else {
-                    $result['exception'] = 'Cita incorrecta';
                 }
             } else {
-                $result['exception'] = 'Estado incorrecto';
+                $result['exception'] = 'Cita incorrecta';
             }
             break;
         default:

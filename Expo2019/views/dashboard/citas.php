@@ -3,7 +3,6 @@ include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Citas");
 dashboardHelper::nav();
 ?>
-<main>
     <h1 class="text-center">Historial de citas</h1>
             <div class="float-right">
 			<button type="button" class="btn btn-outline-success" onclick="modalCreate()" data-placement="top" title="Agregar Cita">

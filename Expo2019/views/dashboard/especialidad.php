@@ -3,7 +3,6 @@ include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Especialidad");
 dashboardHelper::nav();
 ?>
-<main>
 	<h1 class="text-center">Especialidades</h1>
 	<div  class="float-right">
 		<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-success"  class="btn btn-outline-success" data-placement="top" title="Agregar Especialidad">

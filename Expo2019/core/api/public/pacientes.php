@@ -16,7 +16,7 @@ $mail = new PHPMailer(true);
 if (isset($_GET['action'])) {
     session_start();
     $usuario = new Pacientes;
-    $result = array('status' => 0, 'message' => null, 'exception' => null);
+    $result = array('status' => 0, 'message' => null, 'exception' => null, 'sesion' => 1);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     if (isset($_SESSION['idPaciente'])) {
         switch ($_GET['action']) {
@@ -476,6 +476,8 @@ if (isset($_GET['action'])) {
                                                 $result['exception'] = 'Error al setear el token';
                                             }*/
                                                 $result['status'] = 1;
+                                                $_SESSION['ultimoAccesoPaciente'] = time();
+                                                $_SESSION['idPaciente'] = $usuario->getId();
                                                 $_SESSION['aliasPaciente'] = $usuario->getUsuario();
                                             break;
                                         case 3:

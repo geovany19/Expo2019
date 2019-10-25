@@ -1,7 +1,7 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/public/citas.php');}
+require_once('../../models/public/citas.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -16,7 +16,7 @@ $mail = new PHPMailer(true);
 if (isset($_GET['action'])) {
     ini_set('date.timezone', 'America/El_Salvador');
     session_start();
-    $cita = new Citas;
+    $cita = new Cita;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
     switch ($_GET['action']) {
@@ -28,32 +28,6 @@ if (isset($_GET['action'])) {
                         if ($cita->setHora($_POST['inputTime'])) {
                             if ($cita->setIdestado(2)) {
                                 if ($cita->createCita()) {
-                                    $correo = $cita->getCorreo();
-                                    $fecha = $cita->getFecha();
-                                    $hora = $cita->getHora();
-                                    //$mail = new PHPMailer(true);
-                                    $mail->charSet = "UTF-8";
-                                    try {
-                                        $mail->isSMTP();                                            // Set mailer to use SMTP
-                                        $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
-                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
-                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
-                                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                                                        $mail->Port       = 587;
-                                                        //Recipients
-                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
-                                                        $mail->addAddress($correo);
-                                                        // Content
-                                                        $mail->CharSet = "UTF-8";
-                                                        $mail->isHTML(true);                                  // Set email format to HTML
-                                                        $mail->Subject = 'Confirmación de solicitud de cita';
-                                                        $mail->Body    = 'Tu cita agendada para el día ' . $fecha . ' a las ' . $hora . ' ha sido procesada correctamente. Espera a recibir la confirmación del doctor encargado.';
-                                                        $mail->send();
-                                                        $result['status'] = 1;
-                                                    } catch (Exception $e) {
-                                                        $result['exception'] = "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
-                                                    }
                                     $result['status'] = 1;
                                 } else {
                                     $result['exception'] = 'Error al crear cita';

@@ -3,41 +3,40 @@ include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Pacientes");
 dashboardHelper::nav();
 ?>
-<main>
-	<h1 class="text-center">Pacientes</h1>
-	<div class="float-right">
-		<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-success" data-placement="top" title="Agregar Paciente">
-			<i class="fas fa-plus-circle"></i>
-		</button>
-	</div>
-	<div class="float-left">
-		<button type="button" data-toggle="modal" data-target="#reportes" class="btn btn-outline-warning" class="btn btn-outline-success" data-placement="top" title="Generar Reporte">
-			<i class="material-icons prefix">assignment</i>
-		</button>
-	</div>
-	<div>
-		<table class="table table-responsive table-hover" id="table-body">
-			<thead class="thead-dark">
-				<!--Agregando los campos fijos a la tabla-->
-				<tr>
-					<th scope="col">Código</th>
-					<th scope="col">Foto</th>
-					<th scope="col">Nombres</th>
-					<th scope="col">Apellidos</th>
-					<th scope="col">Correo</th>
-					<th scope="col">Usuario</th>
-					<th scope="col">Sesión</th>
-					<th scope="col">Fecha de nacimiento</th>
-					<th scope="col">Peso(kg)</th>
-					<th scope="col">Estatura(cm)</th>
-					<th scope="col">Teléfono</th>
-					<th scope="col">Estado</th>
-					<th scope="col">Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="tabla-pacientes" class="col col-sm-12"></tbody>
-		</table>
-	</div>
+<h1 class="text-center">Pacientes</h1>
+<div class="float-right">
+	<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-success" data-placement="top" title="Agregar Paciente">
+		<i class="fas fa-plus-circle"></i>
+	</button>
+</div>
+<div class="float-left">
+	<button type="button" data-toggle="modal" data-target="#reportes" class="btn btn-outline-warning" class="btn btn-outline-success" data-placement="top" title="Generar Reporte">
+		<i class="material-icons prefix">assignment</i>
+	</button>
+</div>
+<div>
+	<table class="table table-responsive table-hover" id="table-body">
+		<thead class="thead-dark">
+			<!--Agregando los campos fijos a la tabla-->
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Foto</th>
+				<th scope="col">Nombres</th>
+				<th scope="col">Apellidos</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Usuario</th>
+				<th scope="col">Sesión</th>
+				<th scope="col">Fecha de nacimiento</th>
+				<th scope="col">Peso(kg)</th>
+				<th scope="col">Estatura(cm)</th>
+				<th scope="col">Teléfono</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Acciones</th>
+			</tr>
+		</thead>
+		<tbody id="tabla-pacientes" class="col col-sm-12"></tbody>
+	</table>
+</div>
 
 </main>
 <!-- Ventana para crear un registro existente -->
@@ -83,13 +82,14 @@ dashboardHelper::nav();
 							<label for="create_telefono">Teléfono</label>
 							<input type="number" class="form-control" id="create_telefono" name="create_telefono" minlength="8" maxlength="8" placeholder="Teléfono">
 						</div>
-						<div class="file-field input-field col s12 m6">
-							<div class="btn waves-effect">
-								<label for="create_archivo">Foto:</label>
-								<input type="file" id="create_archivo" name="create_archivo" class="file-input">
+						<div class="col-sm-12">
+							<label>Foto</label>
+							<div class="custom-file">
+								<input type="file" id="create_archivo" name="create_archivo" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+								<label class="custom-file-label" for="inputGroupFile01">Escoja un archivo</label>
 							</div>
 						</div>
-						<div class="col s12 m6">
+						<div class="col-mb-6 mb-4">
 							<p>
 								<div class="switch">
 									<span>Estado:</span>
@@ -147,9 +147,12 @@ dashboardHelper::nav();
 						<label for="update_fecha">Fecha de nacimiento</label>
 						<input type="date" class="form-control" id="update_fecha" name="update_fecha" max=<?php echo date('Y-m-d') ?> placeholder="Fecha de nacimiento">
 					</div>
-					<div class="form-group">
-						<label for="update_archivo">Foto</label>
-						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
+					<div class="col-sm-12">
+						<label>Foto</label>
+						<div class="custom-file">
+							<input type="file" id="update_archivo" name="update_archivo" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+							<label class="custom-file-label" for="inputGroupFile01">Escoja un archivo</label>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="update_peso">Peso del paciente (kg)</label>
@@ -161,9 +164,9 @@ dashboardHelper::nav();
 					</div>
 					<div class="form-group">
 						<label for="update_telefono">Teléfono</label>
-						<input type="number" class="form-control" id="update_telefono" name="update_telefono" minlength="8" maxlength="8"  placeholder="Teléfono">
+						<input type="number" class="form-control" id="update_telefono" name="update_telefono" minlength="8" maxlength="8" placeholder="Teléfono">
 					</div>
-					<div class="col s12 m6">
+					<div class="col-md-6 mb-4">
 						<p>
 							<div class="checked">
 								<span>Estado:</span>

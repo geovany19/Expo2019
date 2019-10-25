@@ -3,7 +3,6 @@ include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Editar perfil");
 dashboardHelper::nav();
 ?>
-<main>
     <div class="container">
         <h2 class="text-center">Configuración del perfil</h2>
         <button type="button" class="btn btn-outline-info btn-lg btn-block" onclick="modalProfile()" data-target="#modal-profile">

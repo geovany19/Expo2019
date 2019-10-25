@@ -3,38 +3,37 @@ include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Usuarios");
 dashboardHelper::nav();
 ?>
-<main>
-	<h1 class="text-center">Usuarios</h1>
-	<div class="float-right">
-		<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-success">
-			<i class="fas fa-plus-circle"></i>
-		</button>
-	</div>
-	<div class="float-left">
-		<a href='../../core/reportes/reporteusuario.php' class="btn btn-outline-warning" class="btn btn-outline-success" data-placement="top" title="Generar Reporte" target="_blank">
-			<i class="material-icons prefix">assignment</i>
-		</a>
-	</div>
-	<div>
-		<table class="display responsive no-wrap dtr-inline collapsed table table-responsive table-hover" id="tabla-usuarios" width="100%">
-			<thead class="thead-dark">
-				<!--Agregando los campos fijos a la tabla-->
-				<tr role="row">
-					<th scope="col">Código</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Apellido</th>
-					<th scope="col">Correo</th>
-					<th scope="col">Usuario</th>
-					<th scope="col">Fecha de nacimiento</th>
-					<th scope="col">Foto</th>
-					<th scope="col">Sesión</th>
-					<th scope="col">Estado</th>
-					<th scope="col">Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="table-body"></tbody>
-		</table>
-	</div>
+<h1 class="text-center">Usuarios</h1>
+<div class="float-right">
+	<button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-outline-success">
+		<i class="fas fa-plus-circle"></i>
+	</button>
+</div>
+<div class="float-left">
+	<a href='../../core/reportes/reporteusuario.php' class="btn btn-outline-warning" class="btn btn-outline-success" data-placement="top" title="Generar Reporte" target="_blank">
+		<i class="material-icons prefix">assignment</i>
+	</a>
+</div>
+<div>
+	<table class="display responsive no-wrap dtr-inline collapsed table table-responsive table-hover" id="tabla-usuarios" width="100%">
+		<thead class="thead-dark">
+			<!--Agregando los campos fijos a la tabla-->
+			<tr role="row">
+				<th scope="col">Código</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Usuario</th>
+				<th scope="col">Fecha de nacimiento</th>
+				<th scope="col">Foto</th>
+				<th scope="col">Sesión</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Acciones</th>
+			</tr>
+		</thead>
+		<tbody id="table-body"></tbody>
+	</table>
+</div>
 </main>
 <!--Copias este modal-->
 <!-- Ventana para Crear un registro  -->
@@ -78,15 +77,17 @@ dashboardHelper::nav();
 							<label for="create_fecha">Fecha de nacimiento</label>
 							<input type="date" class="form-control" id="create_fecha" name="create_fecha" required>
 						</div>
-						<div class="file-field input-field col s12 m6">
-							<div class="btn">
-								<input id="create_archivo" type="file" name="create_archivo" />
+						<div class="col-sm-12">
+							<label>Foto</label>
+							<div class="custom-file">
+								<input type="file" id="create_archivo" name="create_archivo" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+								<label class="custom-file-label" for="inputGroupFile01">Escoja un archivo</label>
 							</div>
 						</div>
-						<div class="col s12 m6">
+						<div class="col-md-6 mb-4">
 							<p>
 								<div class="switch">
-									<span>Estado:</span>
+									<span>Estado</span>
 									<label>
 										<i class="material-icons">visibility_off</i>
 										<input id="create_estado" type="checkbox" name="create_estado" />
@@ -119,33 +120,36 @@ dashboardHelper::nav();
 					<input type="hidden" id="id_usuario" name="id_usuario">
 					<input type="hidden" id="foto_usuario" name="foto_usuario">
 					<div class="form-group">
-						<label for="update_nombres">Nombre:</label>
-						<input type="text" class="form-control" class="form-control is-valid" id="update_nombres" name="update_nombres" aria-describedby="emailHelp" placeholder="Nombre:">
+						<label for="update_nombres">Nombre</label>
+						<input type="text" class="form-control" class="form-control is-valid" id="update_nombres" name="update_nombres" aria-describedby="emailHelp" placeholder="Nombre">
 					</div>
 					<div class="form-group">
-						<label for="update_apellidos">Apellido:</label>
-						<input type="text" class="form-control" id="update_apellidos" name="update_apellidos" placeholder="Apellido:">
+						<label for="update_apellidos">Apellido</label>
+						<input type="text" class="form-control" id="update_apellidos" name="update_apellidos" placeholder="Apellido">
 					</div>
 					<div class="form-group">
-						<label for="update_correo">Correo:</label>
-						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo:">
+						<label for="update_correo">Correo</label>
+						<input type="text" class="form-control" id="update_correo" name="update_correo" placeholder="Correo">
 					</div>
 					<div class="form-group">
-						<label for="update_usuario">Usuario:</label>
-						<input type="text" class="form-control" id="update_usuario" name="update_usuario" placeholder="Usuario:">
+						<label for="update_usuario">Usuario</label>
+						<input type="text" class="form-control" id="update_usuario" name="update_usuario" placeholder="Usuario">
 					</div>
 					<div class="form-group">
-						<label for="update_fecha">Fecha:</label>
-						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha:">
+						<label for="update_fecha">Fecha</label>
+						<input type="date" class="form-control" id="update_fecha" name="update_fecha" placeholder="Fecha">
 					</div>
-					<div class="form-group">
-						<label for="update_archivo">Foto:</label>
-						<input type="file" id="update_archivo" name="update_archivo" class="file-input">
+					<div class="col-sm-12">
+						<label>Foto</label>
+						<div class="custom-file">
+							<input type="file" id="update_archivo" name="update_archivo" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+							<label class="custom-file-label" for="inputGroupFile01">Escoja un archivo</label>
+						</div>
 					</div>
-					<div class="col s12 m6">
+					<div class="col-md-6 mb-4">
 						<p>
 							<div class="checked">
-								<span>Estado:</span>
+								<span>Estado</span>
 								<label>
 									<i class="material-icons">visibility_off</i>
 									<input id="update_estado" type="checkbox" data-toggle="toggle" name="update_estado" />

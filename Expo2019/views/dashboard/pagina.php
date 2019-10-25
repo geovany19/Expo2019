@@ -3,7 +3,6 @@ include "../../core/helpers/dashboardHelper.php";
 dashboardHelper::head("Dashboard");
 dashboardHelper::nav();
 ?>
-<main>
 	<div>
 		<h2 class="text-center">¡Bienvenido!</h2>
 		<div id="chart-dashboard">

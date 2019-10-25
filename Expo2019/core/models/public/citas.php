@@ -1,5 +1,5 @@
 <?php
-class Citas extends Validator
+class Cita extends Validator
 {
     //Declaración de variables a utilizar
     private $id_cita = null;
@@ -8,7 +8,7 @@ class Citas extends Validator
     private $fecha = null;
     private $hora = null;
 	private $id_estado = null;
-	private $correo = null;
+	private $fechamaxima = null;
 
 
 	//Métodos para la sobre carga de propiedades
@@ -102,19 +102,19 @@ class Citas extends Validator
 		return $this->id_estado;
 	}
 
-	public function setCorreo($value)
+	public function setFechaMaxima($value)
 	{
-		if ($this->validateId($value)) {
-			$this->id_estado = $value;
+		if ($this->validateDate($value)) {
+			$this->fechamaxima = $value;
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public function getCorreo()
+	public function getFechaMaxima()
 	{
-		return $this->id_estado;
+		return $this->fechamaxima;
 	}
 
 	//Métodos para manejar el CRUD
@@ -166,10 +166,8 @@ class Citas extends Validator
 	
 	public function createCita()
 	{
-		// $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		//$sql = 'INSERT INTO cita(id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES(?,?,?,?,?)';
-		$sql = 'INSERT INTO cita( id_doctor, id_paciente, fecha_cita, hora_cita, id_estado) VALUES (?,?,?,?,?)';
-		$params = array($this->id_doctor, $this->id_paciente, $this->fecha, $this->hora, $this->id_estado);
+		$sql = 'INSERT INTO cita(id_doctor, id_paciente, fecha_cita, hora_cita, id_estado, fecha_maxima) VALUES (?,?,?,?,?,?)';
+		$params = array($this->id_doctor, $this->id_paciente, $this->fecha, $this->hora, $this->id_estado, ($this->fecha - 1));
 		return Database::executeRow($sql, $params);
 	}
 	

@@ -60,8 +60,6 @@ function fillTable(rows) {
         },
         responsive: true,
         retrieve: true,
-        colReorder: false,
-        rowReorder: false,
     });
     $('.tooltipped').tooltip();
 }

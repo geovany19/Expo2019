@@ -52,7 +52,7 @@ $('#form-sesion').submit(function()
             const dataset = JSON.parse(response);
             //Se comprueba si la respuesta es satisfactoria, sino se muestra la excepción
             if (dataset.status == 1) {
-                sweetAlert(1, 'Paso 1 completo', 'autenticacion.php');
+                sweetAlert(1, 'Inicio de sesión correcto', 'home.php');
             } else if(dataset.status == 2){
                 sweetAlert(3, 'Debe autenticar su cuenta','autenticar.php');
 

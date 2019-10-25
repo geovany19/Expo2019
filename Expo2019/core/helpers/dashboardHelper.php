@@ -27,14 +27,7 @@ class dashboardHelper
 				<link rel="stylesheet" type="text/css" href="../../resources/css/prism.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/style-horizontal.css">
 				<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css">
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.bootstrap4.min.css">-->
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/colReorder.bootstrap4.min.css">-->
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/scroller.bootstrap4.min.css">
-				<link rel="stylesheet" type="text/css" href="../../resources/css/buttons.bootstrap4.min.css">-->
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/fixedColumns.bootstrap4.min.css">-->
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/fixedHeader.bootstrap4.min.css">-->
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/rowReorder.bootstrap4.min.css">-->
-				<!--<link rel="stylesheet" type="text/css" href="../../resources/css/select.bootstrap4.min.css">-->
+				<link rel="stylesheet" type="text/css" href="../../resources/css/responsive.bootstrap4.min.css">
                 <title>SISMED - ' . $title . '</title>
             </head>
         ');
@@ -121,24 +114,20 @@ class dashboardHelper
 	{
 		print('
 				<footer class="page-footer">
-					<div class="container text-center text-md-left">
+					<div class="container-fluid text-center text-md-left">
 						<div class="row">
-						<div class="col-md-6 mt-md-0 mt-6">
-							<h5 class="text-uppercase">Técnicos de mantenimiento</h5>
-							<p class="footer-text">Bryan Amaya | bryan_amaya@gmail.com</p>
-							<p class="footer-text">María Campos | maria_campos@gmail.com</p>
-							<p class="footer-text">Geovany Pineda | geovany_pineda@gmail.com</p>
-							<p class="footer-text">Federico Ramírez | federico_ramirez@gmail.com</p>
-						</div>
-						<hr class="clearfix w-100 d-md-none pb-3">
-						<div class="col-md-6 mb-md-0 mb-6">
-						</div>
-						<!-- Grid column -->
+							<div class="col-md-6 mt-md-0 mt-6">
+								<h5 class="text-uppercase">Técnicos de mantenimiento</h5>
+								<p class="footer-text">Bryan Amaya | bryaleama@gmail.com</p>
+								<p class="footer-text">María Campos | maria_campos84@hotmail.com</p>
+								<p class="footer-text">Geovany Pineda | geofuentes.gf@gmail.com</p>
+								<p class="footer-text">Federico Ramírez | federicoramirez0050@gmail.com</p>
+							</div>
 						</div>
 					</div>
 					<!-- Copyright -->
-					<div class="footer-copyright text-center py-3">© 2019 Copyright:
-						<a href="#"> influencers</a>
+					<div class="footer-copyright text-center py-3">© 2019 Copyright
+						<a href="#"> SISMED</a>
 					</div>
 				</footer>
 				</div>		
@@ -155,14 +144,14 @@ class dashboardHelper
 				<script type="text/javascript" src="../../resources/js/inicializacion.js"></script>
 				<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 				<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
-				<!--<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
+				<script type="text/javascript" src="../../resources/js/responsive.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/select.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/colReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/scroller.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/buttons.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/rowReorder.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/fixedColumns.bootstrap4.min.js"></script>
-				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>-->
+				<script type="text/javascript" src="../../resources/js/fixedHeader.bootstrap4.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/pdfmake.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/vfs_fonts.js"></script>
 				<script src="https://www.google.com/recaptcha/api.js" async defer></script>

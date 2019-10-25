@@ -62,8 +62,6 @@ function fillTable(rows)
         },
         responsive: true,
         retrieve: true,
-        colReorder: false,
-        rowReorder: false,
     });
     $('.tooltipped').tooltip();
 }
@@ -204,6 +202,7 @@ function modalUpdate(id)
                 $('#update_correo').val(result.dataset.correo_doctor);
                 $('#update_usuario').val(result.dataset.usuario_doctor);
                 $('#update_fecha').val(result.dataset.fecha_nacimiento);
+                $('#update_telefono').val(result.dataset.telefono_doctor);
                 (result.dataset.id_estado == 1) ? $('#update_estado').prop('checked', true) : $('#update_estado').prop('checked', false);
                 fillSelect(especialidad + 'read', 'update_especialidad', result.dataset.id_especialidad);
                 $('#modal-update').modal('show');

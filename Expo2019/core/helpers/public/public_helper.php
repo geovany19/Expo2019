@@ -80,7 +80,7 @@ class public_helper
 		if (isset($_SESSION['idPaciente'])) {
 			include ('../../core/api/public/sesion.php');
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registro.php') {
+			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticacion.php') {
 				print('
 					<body>
 					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -133,7 +133,7 @@ class public_helper
 			}
 		} else {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registro.php') {
+			if ($filename != 'index.php' && $filename != 'registro.php' && $filename != 'autenticacion.php') {
 				header('location: index.php');
 			} 
 		}

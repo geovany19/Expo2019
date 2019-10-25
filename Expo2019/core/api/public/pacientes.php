@@ -415,7 +415,7 @@ if (isset($_GET['action'])) {
             case 'login':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setUsuario($_POST['usuario'])) {
-                    switch($usuario->checkPaciente()){
+                    switch($usuario->checkPaciente()) {
                         case 0:
                             if($usuario->checkTipo()) {
                                 $result['exception'] = 'El tipo de usuario es diferente';
@@ -440,7 +440,7 @@ if (isset($_GET['action'])) {
                                         //$_SESSION['apellidosPaciente'] = $usuario->getApellido();
                                         //$_SESSION['ultimoAccesoPaciente'] = time();
                                         //$result['status'] = 1;
-                                        $token_autenticacion = mt_rand(100000, 999999);
+                                        /*$token_autenticacion = mt_rand(100000, 999999);
                                         if($usuario->setToken($token_autenticacion)) {
                                             if($usuario->setTokenAutenticacion()) {
                                                 if($usuario->getTokenAutenticacion()) {
@@ -474,13 +474,17 @@ if (isset($_GET['action'])) {
                                                 }
                                             } else {
                                                 $result['exception'] = 'Error al setear el token';
-                                            }
+                                            }*/
+                                                $result['status'] = 1;
+                                                $_SESSION['aliasPaciente'] = $usuario->getUsuario();
                                             break;
                                         case 3:
                                             $result['exception'] = 'El usuario ya posee una sesión iniciada';
                                             break;
-                                        case 4:   
-                                        $token_autenticacion = mt_rand(100000, 999999);
+                                        case 4:
+                                            $result['status'] = 2;
+                                            $_SESSION['aliasPaciente'] = $usuario->getUsuario();   
+                                        /*$token_autenticacion = mt_rand(100000, 999999);
                                         if($usuario->setToken($token_autenticacion)) {
                                             if($usuario->setTokenAutenticacion()) {
                                                 if($usuario->getTokenAutenticacion()) {
@@ -515,7 +519,7 @@ if (isset($_GET['action'])) {
                                                 }
                                             } else {
                                                 $result['exception'] = 'Error al setear el token';
-                                            }
+                                            }*/
                                             break;
                                     }
                                     } else {

@@ -1,7 +1,16 @@
 <?php
 require_once('../../helpers/database.php');
 require_once('../../helpers/validator.php');
-require_once('../../models/public/citas.php');
+require_once('../../models/public/citas.php');}
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../../libraries/PHPMailer/src/Exception.php';
+require '../../../libraries/PHPMailer/src/PHPMailer.php';
+require '../../../libraries/PHPMailer/src/SMTP.php';
+
+$mail = new PHPMailer(true);
 
 //Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
 if (isset($_GET['action'])) {
@@ -19,7 +28,32 @@ if (isset($_GET['action'])) {
                         if ($cita->setHora($_POST['inputTime'])) {
                             if ($cita->setIdestado(2)) {
                                 if ($cita->createCita()) {
-
+                                    $correo = $cita->getCorreo();
+                                    $fecha = $cita->getFecha();
+                                    $hora = $cita->getHora();
+                                    //$mail = new PHPMailer(true);
+                                    $mail->charSet = "UTF-8";
+                                    try {
+                                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                                        $mail->Host       = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+                                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                        $mail->Username   = 'sismedtecnico@gmail.com';                             // SMTP username
+                                                        $mail->Password   = 'Soportesismed123';                             // SMTP password
+                                                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+                                                        $mail->Port       = 587;
+                                                        //Recipients
+                                                        $mail->setFrom('sismedtecnico@gmail.com', 'SISMED');
+                                                        $mail->addAddress($correo);
+                                                        // Content
+                                                        $mail->CharSet = "UTF-8";
+                                                        $mail->isHTML(true);                                  // Set email format to HTML
+                                                        $mail->Subject = 'Confirmación de solicitud de cita';
+                                                        $mail->Body    = 'Tu cita agendada para el día ' . $fecha . ' a las ' . $hora . ' ha sido procesada correctamente. Espera a recibir la confirmación del doctor encargado.';
+                                                        $mail->send();
+                                                        $result['status'] = 1;
+                                                    } catch (Exception $e) {
+                                                        $result['exception'] = "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
+                                                    }
                                     $result['status'] = 1;
                                 } else {
                                     $result['exception'] = 'Error al crear cita';
@@ -63,21 +97,25 @@ if (isset($_GET['action'])) {
         case 'cancelarCita':
             if ($cita->setIdestado(3)) {
                 if ($cita->setIdcita($_POST['id_cita'])) {
-                    if ($cita->updateEstado()) {
+                    /*if ($cita->updateEstado()) {
                         $result['status'] = 1;
                         $result['exception'] = 'Operación fallida';
                     } else {
                         $result['exception'] = 'Operación fallida';
-                    }
-                    /*switch ($cita->checkCita()) {
+                    }*/
+                    switch ($cita->checkCita()) {
+                        case 0:
+                            $result['status'] = 0;
+                            $result['exception'] = 'No es posible cancelar la cita debido a que ha excedido el tiempo permitido par hacerlo';
+                            break;
                         case 1:
                             if ($cita->updateEstado()) {
                                 $result['status'] = 1;
-                                $result['message'] = 'Cita cancelada correctamente';
                             } else {
                                 $result['exception'] = 'Operación fallida';
                             }
                             break;
+                            /*
                         case 2:
                             $result['status'] = 2;
                             $result['exception'] = 'La cita ha sido aceptada anteriormente';
@@ -105,6 +143,7 @@ if (isset($_GET['action'])) {
                             $result['exception'] = 'Ya no es posible cancelar la cita';
                             break;
                     }*/
+                    }
                 } else {
                     $result['exception'] = 'Cita incorrecta';
                 }

@@ -26,9 +26,10 @@ dashboardHelper::nav();
 					<th scope="col">Apellido</th>
 					<th scope="col">Correo</th>
 					<th scope="col">Usuario</th>
-					<th scope="col">Fecha de nacimiento</th>
 					<th scope="col">Teléfono</th>
+					<th scope="col">Sesión</th>
 					<th scope="col">Especialidad</th>
+					<th scope="col">Fecha de nacimiento</th>
 					<th scope="col">Estado</th>
 					<th scope="col">Acciones</th>
 				</tr>
@@ -76,7 +77,7 @@ dashboardHelper::nav();
     		</div>
 			<div class="col-md-6 mb-4">
       			<label for="create_fecha">Fecha de nacimiento</label>
-      			<input type="date" class="form-control" id="create_fecha" name="create_fecha" required>
+      			<input type="date" class="form-control" id="create_fecha" name="create_fecha" min="2000-01-01" max=<?php echo date('Y-m-d') ?> required>
 			</div>
 			<div class="col-md-6 mb-4">
       			<label for="create_fecha">Teléfono</label>

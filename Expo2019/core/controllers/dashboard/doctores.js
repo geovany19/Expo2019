@@ -22,10 +22,11 @@ function fillTable(rows)
                 <td>${row.apellido_doctor}</td> 
                 <td>${row.correo_doctor}</td>
                 <td>${row.usuario_doctor}</td>
-                <td>${row.fecha_nacimiento}</td>
                 <td>${row.telefono_doctor}</td>
+                <td><img src="../../resources/img/sesion/${row.id_sesion}.png" height="32" class="tooltipped" data-tooltip="Estado de sesión"></td></td>
                 <td>${row.nombre_especialidad}</td>
-                <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>//
+                <td>${row.fecha_nacimiento}</td>
+                <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_doctor})" data-toggle="tooltip" data-placement="top" title="Editar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="confirmDelete(${row.id_doctor})"data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="material-icons">delete</i></a>

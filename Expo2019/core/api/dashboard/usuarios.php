@@ -550,7 +550,6 @@ if (isset($_GET['action'])) {
                             }
                             break;
                         case 1:
-                        
                         if ($usuario->setClave($_POST['clave'])) {
                                 switch ($usuario->checkPassword()) {
                                     case 0:
@@ -562,6 +561,11 @@ if (isset($_GET['action'])) {
                                         $result['status'] = 5;
                                         break;
                                     case 2:
+                                        $result['status'] = 1;
+                                        $_SESSION['ultimoAcceso'] = time();
+                                        $_SESSION['idUsuario'] = $usuario->getId();
+                                        $_SESSION['aliasUsuario'] = $usuario->getUsuario();
+                                        /*
                                         //generamos un codigo ramdom de 6 digitos que sera nuestro acceso de verificacion
                                         $token_autenticacion = mt_rand(100000, 999999);
                                         if ($usuario->setToken($token_autenticacion)) {
@@ -601,13 +605,9 @@ if (isset($_GET['action'])) {
                                             }
                                         } else {
                                             $result['exception'] = 'Error al setear el token';
-                                        }
+                                        }*/
                                         break;
                                     case 3:
-                                        $result['exception'] = 'El usuario ya posee una sesión iniciada previamente.';
-                                        // Si deseas restablecer la sesión, haz click en "Restablecer sesion" ubicado en este sitio
-                                        break;
-                                    case 4:
                                         $token_autenticacion = mt_rand(100000, 999999);
                                         if ($usuario->setToken($token_autenticacion)) {
                                             if ($usuario->setTokenAutenticacion()) {
@@ -628,10 +628,11 @@ if (isset($_GET['action'])) {
                                                         // Content
                                                         $mail->CharSet = "UTF-8";
                                                         $mail->isHTML(true);                                  // Set email format to HTML
-                                                        $mail->Subject = 'Código de inicio de sesión';
+                                                        $mail->Subject = 'Código de verificación';
                                                         $mail->Body    = 'Tu código de activación es: ' . $token_autenticacion;
                                                         $mail->send();
-                                                        $result['status'] = 1;
+                                                        $result['status'] = 7;
+                                                        $result['exception'] = 'Debes autenticar tu cuenta antes de iniciar sesión por primera vez.';
                                                     } catch (Exception $e) {
                                                         $result['exception'] = "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
                                                     }

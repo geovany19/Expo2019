@@ -26,6 +26,7 @@ dashboardHelper::nav();
 					<th scope="col">Apellidos</th>
 					<th scope="col">Correo</th>
 					<th scope="col">Usuario</th>
+					<th scope="col">Sesión</th>
 					<th scope="col">Fecha de nacimiento</th>
 					<th scope="col">Peso(kg)</th>
 					<th scope="col">Estatura(cm)</th>

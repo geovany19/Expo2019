@@ -22,6 +22,10 @@ SET time_zone = "+00:00";
 -- Base de datos: `sismed`
 --
 
+CREATE DATABASE `sismed`;
+
+USE `sismed`;
+
 DELIMITER $$
 --
 -- Procedimientos

@@ -7,7 +7,8 @@ class Citas extends Validator
     private $id_paciente = null;
     private $fecha = null;
     private $hora = null;
-    private $id_estado = null;
+	private $id_estado = null;
+	private $correo = null;
 
 
 	//Métodos para la sobre carga de propiedades
@@ -101,6 +102,21 @@ class Citas extends Validator
 		return $this->id_estado;
 	}
 
+	public function setCorreo($value)
+	{
+		if ($this->validateId($value)) {
+			$this->id_estado = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getCorreo()
+	{
+		return $this->id_estado;
+	}
+
 	//Métodos para manejar el CRUD
 	public function readCitas()
 	{
@@ -115,11 +131,16 @@ class Citas extends Validator
 		$params = array($this->id_cita);
 		$data = Database::executeRow($sql, $params);
 		$fecha_actual = strtotime(date('d-m-Y H:i:00',time()));
-		$fecha_maxima = strtotime(date($data['fecha_cita']));
+		$fecha_maxima = strtotime(date($data['fecha_cita'].'- 1 hour'));
 		$hora_actual = strtotime(date('G:i:s'));
         $hora_maxima = strtotime($data['hora_cita'].'- 2 hours');
-        $estado_cita = $data['id_estado'];
-		if ($hora_actual > $hora_maxima) {
+		$estado_cita = $data['id_estado'];
+		if ($fecha_actual <= $fecha_maxima) {
+			return 1;
+		} else {
+			return 0;
+		}
+		/*if ($hora_actual > $hora_maxima) {
 			return 7;
 		} else if ($fecha_actual > $fecha_maxima) {
 			return 6;
@@ -133,7 +154,7 @@ class Citas extends Validator
             return 2;
         } else {
             return 1;
-        }
+        }*/
 	}
 
 	public function getCitaByPaciente()

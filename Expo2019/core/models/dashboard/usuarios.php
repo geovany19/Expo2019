@@ -257,12 +257,10 @@ class Usuario extends Validator
 			if ($fecha_actual>$nueva_fecha) {
 				return 1;
 			} else {
-				if ($data['id_sesion'] == 2 && $data['id_estado'] == 1) {
+				if ($data['id_estado'] == 1) {
 					return 2;
-				} else if ($data['id_sesion'] == 1) {
-					return 3;
 				} else if ($data['id_estado'] == 0) {
-					return 4;
+					return 3;
 				}
 			}	
 		} else {
@@ -381,7 +379,7 @@ class Usuario extends Validator
 
 	public function readUsuarios()
 	{
-		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado FROM usuarios_a ORDER BY apellido_usuario';
+		$sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, usuario_usuario, fecha_nacimiento, foto_usuario, id_estado, id_sesion FROM usuarios_a ORDER BY apellido_usuario';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}

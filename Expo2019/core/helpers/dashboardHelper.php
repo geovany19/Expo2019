@@ -44,7 +44,7 @@ class dashboardHelper
 	{
 		if (isset($_SESSION['idUsuario'])) {
 			$filename = basename($_SERVER['PHP_SELF']);
-			if ($filename != 'index.php' && $filename != 'registrarse.php') {
+			if ($filename != 'index.php' && $filename != 'registrarse.php' && $filename != 'verificacion2pasos.php') {
 				print('
 					<body>
 						<div class="wrapper">

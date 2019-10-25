@@ -95,12 +95,15 @@ $(document).ready(function() {
 									swal({
 										title: 'Enhorabuena',
 										text: 'Se ha cancelado la cita',
-										icon: 'success',
+										icon: 'info',
 										button: 'Aceptar',
 										closeOnClickOutside: false,
 										closeOnEsc: false
 								});
-							} else if (result.status == 2) {
+							}  else if (result.status == 0) {
+								sweetAlert(3, result.exception, null);
+							}
+							/*else if (result.status == 2) {
 								sweetAlert(3, 'La cita ha sido aceptada anteriormente', null);
 							} else if (result.status == 3) {
 								sweetAlert(3, 'La cita ha sido cancelada anteriormente y no puede ser modificada debido a que excedió el tiempo permitido', null);
@@ -112,7 +115,7 @@ $(document).ready(function() {
 								sweetAlert(3, 'Se ha agotado el periodo permitido para cancelar la cita', null);
 							} else if (result.status == 7) {
 								sweetAlert(3, 'Ya no es posible cancelar la cita', null);
-							}
+							}*/
 						} else {
 							console.log(response);
 						}

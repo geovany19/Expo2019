@@ -12,6 +12,7 @@ public_helper::head("Autenticar cuenta");
 							<img src="../../resources/img/dashboard/img4.jpg" class="rounded-circle" alt="Avatar" width="30" height="65">
 						</div>
 						<h2 class="text-center">Autenticar cuenta</h2>
+						<p class="text-center">Ingrese el pin que se le envió al correo electrónico que utilizó al momento de registrarse</p>
 						<div class="form-row">
 							<div class="form-group col-md-12">
 								<label for="codigo">Código</label>

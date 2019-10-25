@@ -21,6 +21,7 @@ function fillTable(rows)
                 <td>${row.usuario_usuario}</td>
                 <td>${row.fecha_nacimiento}</td>
                 <td><img src="../../resources/img/dashboard/usuarios/${row.foto_usuario}" height="75"></td>
+                <td><img src="../../resources/img/sesion/${row.id_sesion}.png" height="32" class="tooltipped" data-tooltip="Estado de sesión"></td></td>
                 <td><img src="../../resources/img/estado/${row.id_estado}.png" height="25"></td></td>
                 <td>
                     <a href="#" onclick="modalUpdate(${row.id_usuario})" class="blue-text tooltipped" data-target="#modal-update" data-tooltip="Modificar"><i class="material-icons">mode_edit</i></a>

@@ -19,6 +19,7 @@ function fillTable(rows) {
                 <td>${row.apellido_paciente}</td> 
                 <td>${row.correo_paciente}</td>
                 <td>${row.usuario_paciente}</td>
+                <td><img src="../../resources/img/sesion/${row.id_sesion}.png" height="32" class="tooltipped" data-tooltip="Estado de sesión"></td></td>
                 <td>${row.fecha_nacimiento}</td>
                 <td>${row.peso_paciente}</td>
                 <td>${row.estatura_paciente}</td>

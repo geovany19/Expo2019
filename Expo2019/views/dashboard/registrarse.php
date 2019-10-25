@@ -47,7 +47,7 @@ dashboardHelper::head("Registrarse");
 							</div>
 							<div class="form-group col-sm-12 col-md-6">
 								<label for="fecha">Fecha de nacimiento</label>
-								<input type="date" class="form-control" id="fecha" name="fecha" min="1939-01-01" max=<?php echo date('Y-m-d') ?> placeholder="Fecha de nacimiento" required>
+								<input type="date" class="form-control" id="fecha" name="fecha" min="1919-01-01" max=<?php echo date('Y-m-d')?> placeholder="Fecha de nacimiento" required>
 								<div class="invalid-feedback">Ingrese una fecha válida</div>
 							</div>
 							<!--<div class="form-group col-sm-12 col-md-6">

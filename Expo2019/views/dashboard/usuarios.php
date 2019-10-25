@@ -27,6 +27,7 @@ dashboardHelper::nav();
 					<th scope="col">Usuario</th>
 					<th scope="col">Fecha de nacimiento</th>
 					<th scope="col">Foto</th>
+					<th scope="col">Sesión</th>
 					<th scope="col">Estado</th>
 					<th scope="col">Acciones</th>
 				</tr>

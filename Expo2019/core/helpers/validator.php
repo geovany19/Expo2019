@@ -40,7 +40,7 @@ class Validator
 	{
 		foreach ($fields as $index => $value) {
             //HTML ENTITIES 
-			$value = htmlentities(trim($value));
+			$value = trim($value);
 			$fields[$index] = $value;
 		}
 		return $fields;
